@@ -31,3 +31,13 @@ button,input{font-family:inherit}button:focus-visible,a:focus-visible,input:focu
 @media(max-width:1100px){.hero{min-height:480px}.hero-art{min-height:430px}.poster{height:180px}}
 @media(max-width:760px){.topbar{height:66px}.sidebar{top:66px}.scrim{inset-top:66px}.main{padding-inline:18px}.hero-copy{padding-top:48px}.hero h1{font-size:clamp(54px,14vw,76px)}.hero-art{min-height:330px;margin:0 0 18px}.section{padding-top:44px}.poster{height:clamp(130px,35vw,190px)}.community-banner{margin-top:42px}.page{padding-top:38px}.footer{line-height:1.8}}
 @media(max-width:420px){.main{padding-inline:14px}.brand{font-size:16px}.hero h1{font-size:53px}.hero-buttons{gap:9px}.primary,.secondary{font-size:12px;padding:11px 13px}.poster{height:132px}.anime-info{padding:11px}.anime-info h3{font-size:18px}}
+
+/* Live community interactions */
+.compose textarea{flex:1;min-width:0;min-height:74px;resize:vertical;background:transparent;border:0;outline:0;color:var(--text);font:13px/1.6 Manrope;padding:8px}
+.compose textarea::placeholder{color:var(--muted)}.compose .primary:disabled{opacity:.5;cursor:not-allowed}
+.community-post-body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;color:var(--text)}
+.reply-thread{margin-top:16px;padding:15px;background:var(--panel2);border-left:2px solid var(--gold);display:grid;gap:12px}
+.reply-row{display:grid;gap:4px;font-size:12px}.reply-row b{color:var(--gold)}.reply-row span{color:var(--text);line-height:1.6;overflow-wrap:anywhere}
+.reply-compose{display:flex;gap:8px}.reply-compose input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);color:var(--text);padding:10px}
+.inbox-panel{margin:0 0 20px}.inbox-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:12px}.inbox-row .text-btn{margin-left:auto;white-space:nowrap}.read-dot,.unread-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}.unread-dot{background:var(--red)}
+@media(max-width:600px){.compose{flex-wrap:wrap}.compose textarea{flex-basis:calc(100% - 60px);order:2}.compose .primary{margin-left:auto}.reply-compose{flex-wrap:wrap}.reply-compose input{flex-basis:100%}}
