@@ -507,3 +507,93 @@ button{transition:background .18s,border-color .18s,color .18s,transform .18s}
  .anime-info h3{font-size:15px!important}
  .anime-info p{font-size:10px!important}
 }
+
+
+/* Mobile navigation, spacing and viewport corrections */
+.app{width:100%;min-height:100dvh;overflow-x:clip}
+.main{min-width:0;width:auto}
+.topbar{min-width:0;gap:clamp(10px,2vw,26px)}
+.brand{min-width:0;white-space:nowrap}
+.brand>span:last-child{line-height:1.2}
+.brand small{display:block;margin-top:4px}
+.top-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.iconbtn,.account-avatar{flex:0 0 auto;min-width:42px;min-height:42px}
+.account-menu-wrap{z-index:72}
+.account-popover{z-index:90;max-height:min(72dvh,560px);overflow-y:auto}
+.sidebar{z-index:45;overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(24px,env(safe-area-inset-bottom))}
+.scrim{z-index:40;touch-action:pan-y}
+.mobile-search{display:none}
+.auth-page{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.88fr);align-items:stretch;gap:clamp(20px,4vw,56px);max-width:1180px;margin:0 auto}
+.auth-art,.auth-panel{min-width:0}
+.auth-art{position:relative;overflow:hidden;border-radius:20px;min-height:600px;background:radial-gradient(ellipse at 50% 40%,#3c2a83,#10172e 68%)}
+.auth-art img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.auth-art>span{position:absolute;left:clamp(20px,4vw,48px);bottom:clamp(20px,4vw,48px);font:600 clamp(20px,3vw,32px) Orbitron,sans-serif;line-height:1.35;text-shadow:0 3px 18px #000}
+.auth-panel{width:100%;max-width:560px;margin-inline:auto;padding:clamp(22px,3.2vw,38px)}
+.auth-panel form{display:grid;gap:10px}
+.auth-panel form>label{margin-top:8px;color:#c4cce5;font-size:13px}
+.auth-panel form>input{width:100%;min-width:0;height:48px;padding:0 14px;border:1px solid #3b4b78;border-radius:10px;background:#080e20;color:#f5f6ff;font:14px 'Space Grotesk',sans-serif;outline:none}
+.auth-panel form>input:focus{border-color:#55eaff;box-shadow:0 0 0 3px #55eaff20}
+.auth-show-password{display:flex;align-items:center;gap:9px;font-size:12px;color:#aab5d4}
+.auth-show-password input{width:17px;height:17px;accent-color:#55eaff}
+.auth-message{padding:12px 14px;border-radius:10px;background:#17233d;border:1px solid #3b4b78;line-height:1.55;font-size:13px}
+.auth-message.error{border-color:#ff668b66;color:#ffb6c8}
+.auth-message.success{border-color:#4de0b166;color:#9ff2d3}
+.auth-submit{width:100%;min-height:48px;justify-content:center;margin-top:8px}
+.auth-discord{width:100%;min-height:48px;justify-content:center}
+.auth-legal{display:block;line-height:1.65;color:#9da8c9;margin-top:18px}
+.explore-page,.page{min-width:0}
+.explore-search,.community-composer,.streaming-panel{min-width:0;max-width:100%}
+.explore-search input,.community-composer textarea,.streaming-panel input,.streaming-panel select{max-width:100%;min-width:0}
+.feature-anime-grid,.seasonal-rail,.feature-tiles{min-width:0}
+.feature-anime-grid>*{min-width:0}
+@media(max-width:760px){
+ .topbar{height:68px!important;min-height:68px;padding:0 12px!important;gap:9px!important}
+ .brand{font-size:clamp(10px,3.1vw,13px)!important;letter-spacing:.7px!important;gap:8px!important}
+ .brandmark{width:39px!important;height:39px!important;flex:0 0 39px}
+ .brand small{font-size:7px!important;letter-spacing:2px!important}
+ .top-actions{gap:6px!important}
+ .iconbtn,.account-avatar{width:39px!important;height:39px!important;min-width:39px;min-height:39px;padding:8px}
+ .sidebar{position:fixed!important;top:68px!important;left:0!important;bottom:0!important;width:min(310px,84vw)!important;height:calc(100dvh - 68px)!important;transform:translateX(-105%);transition:transform .24s cubic-bezier(.2,.75,.25,1)!important;visibility:hidden;box-shadow:18px 0 50px #000b!important}
+ .sidebar.open{transform:translateX(0);visibility:visible}
+ .scrim{position:fixed!important;inset:68px 0 0!important;z-index:40!important}
+ .topbar{z-index:50!important}
+ .main{margin:0!important;width:100%;padding:0 16px!important}
+ .mobile-search{display:flex!important;position:relative;z-index:2;align-items:center;gap:11px;width:100%;margin:0;padding:14px 0 16px;color:#aab5d4;border-bottom:1px solid #283354}
+ .mobile-search input{width:100%;min-width:0;height:40px;font-size:14px}
+ .home-v2{width:100%;padding-top:16px}
+ .hero-v2{width:100%;min-height:clamp(650px,calc(100dvh - 100px),790px)!important}
+ .home-section-v2{padding-block:42px!important}
+ .section-v2-head{gap:14px;align-items:flex-start;flex-wrap:wrap}
+ .section-v2-head h2,.intro-strip h2,.crew-feature-copy h2,.home-bottom-cta h2{font-size:clamp(27px,7vw,42px)!important;line-height:1.12!important}
+ .feature-anime-grid,.seasonal-rail{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .anime-card .poster{height:clamp(190px,54vw,280px)!important}
+ .anime-info{padding:12px!important}
+ .anime-info h3{font-size:clamp(14px,4vw,18px)!important}
+ .anime-info p{font-size:12px!important;min-height:0!important}
+ .feature-tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .feature-tiles>button{min-height:190px;padding:16px!important}
+ .auth-page{display:flex;flex-direction:column;gap:16px;padding-top:24px!important}
+ .auth-art{min-height:220px;height:260px;max-height:34dvh}
+ .auth-art img{object-position:center 38%}
+ .auth-panel{padding:22px!important}
+ .footer{gap:10px;line-height:1.7}
+}
+@media(max-width:390px){
+ .topbar{padding-inline:9px!important;gap:6px!important}
+ .brand{font-size:9.5px!important;gap:6px!important;letter-spacing:.35px!important}
+ .brandmark{width:34px!important;height:34px!important;flex-basis:34px}
+ .brand small{font-size:6px!important;letter-spacing:1.5px!important}
+ .top-actions{gap:4px!important}
+ .iconbtn,.account-avatar{width:35px!important;height:35px!important;min-width:35px;min-height:35px;padding:7px}
+ .main{padding-inline:13px!important}
+ .feature-tiles{grid-template-columns:1fr!important}
+ .feature-anime-grid,.seasonal-rail{gap:9px!important}
+ .anime-card .poster{height:190px!important}
+}
+@media(min-width:761px){
+ .sidebar{z-index:12}
+ .main{margin-left:245px}
+ .mobile-search{display:none!important}
+ .auth-page{padding-block:55px}
+}
+@media(prefers-reduced-motion:reduce){.sidebar{transition:none!important}}
