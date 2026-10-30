@@ -1,0 +1,23 @@
+# Straw Hat Studio
+
+A responsive anime community experience built with React, Vite and an optional Supabase backend.
+
+## Run locally
+```bash
+npm install
+npm run dev
+```
+
+Copy `.env.example` to `.env.local` and configure a Supabase project to enable backend connectivity. The public anon key is intended for browser use only; secure all tables with Row Level Security.
+
+## Deploy on Vercel
+Import this GitHub repository into Vercel. Framework: Vite. Build: `npm run build`. Output: `dist`. Add the two Supabase public environment variables only after configuring Supabase policies.
+
+## Current implementation
+- Responsive landing page, explore, community, streaming activity guide, marketplace, membership, profile, settings and admin preview.
+- Local demo preferences and watchlist; these are not a secure account or wallet.
+- Discord Rich Presence companion starter is documented under `companion/`.
+
+## Important boundaries
+A website cannot keep a desktop Discord Rich Presence alive after the browser closes on its own. The companion desktop app must remain running and Discord must be open. The companion is a starter and needs a registered Discord application ID before it can publish activity. It does not modify Discord custom status.
+Streaming copyrighted anime requires appropriate distribution rights. No unlicensed video sources are included. Payments, rewarded ads, coin balances and admin actions must be verified server-side before production.
