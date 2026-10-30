@@ -3,7 +3,7 @@ import{NavLink,Routes,Route,useNavigate}from'react-router-dom';
 import{Anchor,ArrowUpRight,Bell,BookOpen,Check,ChevronRight,Compass,Crown,Flame,Heart,Home,Menu,MessageCircle,Search,Settings,Shield,ShoppingBag,Sparkles,Star,Users,X,Play,Plus,Sun,Moon,ExternalLink,Radio,Ship,LogIn,User,MonitorPlay}from'lucide-react';
 import{backendReady,supabase}from'./lib/supabase.js';
 const safeGet=(key,fallback=null)=>{try{return window.localStorage.getItem(key)??fallback}catch{return fallback}};
-const safeSet=(key,value)=>{try{window.safeSet(key,value)}catch{}};
+const safeSet=(key,value)=>{try{window.localStorage.setItem(key,value)}catch{}};
 const safeSaved=()=>{try{const value=JSON.parse(safeGet('sh-saved','[]'));return Array.isArray(value)?value:[]}catch{return[]}};
 const AUTH_RETURN_URL='https://straw-hat-signal-git-studio-development-pandaankit2007-8884.vercel.app/auth/callback';
 const authRedirect=()=>AUTH_RETURN_URL;
