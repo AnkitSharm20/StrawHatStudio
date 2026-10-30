@@ -56,7 +56,7 @@ function Community({notify,user}){
  const sendReply=async post=>{
   if(!user){notify('Sign in with Discord to reply');return}const text=(replyText[post.id]||'').trim();if(!text)return;
   const {error}=await supabase.from('community_replies').insert({post_id:post.id,author_id:user.id,body:text});
-  if(error){notify('Reply failed: '+error.message);return}setReplyText(v=>({...v,[post.id]:''}));notify('Reply posted');openReplies(post);setPosts(v=>v.map(p=>p.id===post.id?{...p,replies:p.replies+1}:p));
+  if(error){notify('Reply failed: '+error.message);return}setReplyText(v=>({...v,[post.id]:''}));notify('Reply posted');const {data:createdReply}=await supabase.from('community_replies').select('id,author_id,body,created_at').eq('post_id',post.id).eq('author_id',user.id).order('created_at',{ascending:false}).limit(1).maybeSingle();if(createdReply){const {data:profileData}=await supabase.from('profiles').select('username,avatar_url').eq('id',user.id).maybeSingle();setReplies(v=>({...v,[post.id]:[...(v[post.id]||[]),{...createdReply,profile:profileData||{username:'You'}}]}))}setPosts(v=>v.map(p=>p.id===post.id?{...p,replies:p.replies+1}:p));
  };
  const report=async post=>{
   if(!user){notify('Sign in to report a post');return}
