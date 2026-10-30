@@ -338,3 +338,68 @@ button{transition:background .18s,border-color .18s,color .18s,transform .18s}
  .live-anime-grid .anime-info p{font-size:11px!important}
 }
 @media(prefers-reduced-motion:reduce){.hero-v2-art{animation:none!important}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* NEON 2.0 — sharper composition, image-led sections and real mobile polish */
+.hero-v2{min-height:min(860px,calc(100svh - 76px));border-radius:24px}
+.hero-v2-bg{background:radial-gradient(ellipse at 78% 45%,#6e3cff3a,transparent 40%),linear-gradient(90deg,#050817 0%,#050817e8 33%,#05081765 73%,#050817a0),linear-gradient(0deg,#050817 0%,transparent 42%)}
+.hero-banner-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 34%;z-index:-2;opacity:.38;filter:saturate(1.22) contrast(1.1)}
+.hero-v2:after{content:"";position:absolute;inset:12px;border:1px solid #70eaff1c;border-radius:17px;pointer-events:none;z-index:0}
+.hero-v2-copy{max-width:59%;padding-top:clamp(75px,9vw,138px)}
+.hero-kicker{font-size:10px!important}
+.hero-v2 h1{font-size:clamp(58px,8.3vw,120px)!important;line-height:.91!important;letter-spacing:-3px!important}
+.hero-v2-art{right:3%!important;width:48%!important;height:90%!important;bottom:0!important}
+.hero-v2-art>img{max-width:100%;object-fit:contain!important;object-position:center bottom!important;filter:drop-shadow(0 20px 42px #000d) drop-shadow(0 0 30px #7546ff77)!important}
+.anime-art-loading{min-width:100%;min-height:250px;border:1px solid #4b51a4;border-radius:18px;background:radial-gradient(ellipse at 50% 40%,#5b35c855,transparent 65%),linear-gradient(145deg,#101d3d,#050917)}
+.hero-v2-art .anime-art-loading{width:100%;height:100%;min-height:0;background:radial-gradient(ellipse at 50% 40%,#6b42ff55,#00d9ff12 55%,transparent 75%)}
+.crew-feature-image>img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 0 28px #7546ff66)}
+.cta-art>img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 0 24px #00d9ff44)}
+.seasonal-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.seasonal-rail .poster{height:clamp(240px,24vw,340px)!important}
+.feature-anime-grid .poster img,.seasonal-rail .poster img{image-rendering:auto}
+.feature-anime-grid .anime-card,.seasonal-rail .anime-card{min-width:0}
+.poster img{background:#0b1227}
+.poster-fallback{border:1px solid #36477b}
+.anime-card .poster{position:relative}
+.anime-card .poster:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 50px #04071655}
+.poster-index,.poster-tag,.save-btn{z-index:2}
+.home-section-v2{padding-block:clamp(68px,8vw,116px)}
+.section-v2-head{margin-bottom:32px}
+.section-v2-head h2{font-size:clamp(36px,5vw,68px)!important}
+.section-v2-head p{max-width:520px;font-size:14px;line-height:1.8}
+.feature-tiles>button{min-height:245px!important;position:relative}
+.feature-tiles>button>svg:last-child{position:absolute;right:22px;bottom:22px;color:#62eaff}
+.feature-tiles>button:after{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,#8a4cff,#00e5ff,#ff3b9c);opacity:.7}
+.account-popover{background:#0c1228!important;border-color:#43528a!important;box-shadow:0 22px 80px #000c,0 0 25px #703cff22!important}
+.account-popover>button:hover{background:#182344!important;color:#65edff!important}
+.auth-panel,.profile-about,.profile-editor,.profile-detail-grid>div{background:linear-gradient(145deg,#111a34,#080e20)!important;border-color:#2e416f!important}
+.auth-panel h2{font-family:Orbitron!important;color:#f6f8ff}
+.auth-panel form input,.profile-editor input,.profile-about textarea{background:#070d1e!important;border-color:#354978!important;color:#f7f8ff!important}
+.auth-tabs button.active{color:#63edff!important;border-color:#63edff!important}
+.auth-submit{background:linear-gradient(100deg,#783bff,#e83e9a,#00c9ef)!important}
+.profile-cover{background:radial-gradient(ellipse at 50% 0%,#7845ff88,transparent 60%),linear-gradient(110deg,#0c1730,#15264a 55%,#092b3c)!important;border:1px solid #3a4b81!important;overflow:hidden}
+.profile-avatar{box-shadow:0 0 0 5px #0b1125,0 0 30px #00d9ff77!important;border:2px solid #5beaff!important}
+.profile-row h2{color:#f6f8ff!important}
+.profile-detail-grid>div{border-radius:12px}
+.settings-list>div:first-child{padding:20px!important}
+.notice{color:#929fbd!important}
+@media(max-width:1100px){.seasonal-rail{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-v2-copy{max-width:63%}}
+@media(max-width:760px){
+ .hero-v2{min-height:760px!important;border-radius:16px}
+ .hero-banner-image{object-position:60% center;opacity:.27}
+ .hero-v2-copy{max-width:100%;padding:48px 24px 0}
+ .hero-v2 h1{font-size:clamp(54px,13vw,82px)!important}
+ .hero-v2-art{width:100%!important;height:50%!important;bottom:0!important;right:0!important;opacity:.92}
+ .hero-v2-art>img{object-position:center bottom!important}
+ .seasonal-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .seasonal-rail .poster{height:clamp(200px,55vw,300px)!important}
+ .crew-feature-image{min-height:360px}
+}
+@media(max-width:430px){
+ .hero-v2{min-height:730px!important}
+ .hero-v2-copy{padding:40px 18px 0}
+ .hero-v2 h1{font-size:54px!important}
+ .hero-v2-art{height:45%!important}
+ .seasonal-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .seasonal-rail .anime-info{padding:12px!important}
+ .seasonal-rail .anime-info h3{font-size:16px!important}
+}
