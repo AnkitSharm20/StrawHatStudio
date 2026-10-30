@@ -222,3 +222,13 @@ button{transition:background .18s,border-color .18s,color .18s,transform .18s}
  .hero-v2-art img{object-position:bottom right;object-fit:contain;width:100%;height:100%}
 }
 @media(max-width:430px){.live-anime-grid{grid-template-columns:1fr}.live-anime-grid .poster{height:300px}}
+
+.settings-group{padding:22px;background:var(--panel);border:1px solid var(--line);margin-top:14px}
+.settings-group>.eyebrow{margin-bottom:8px}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 0;border-bottom:1px solid var(--line)}
+.setting-row:last-child{border-bottom:0}
+.setting-row span{display:block;min-width:0}.setting-row b,.setting-row small{display:block}
+.setting-row b{font-size:13px;color:var(--text)}.setting-row small{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6}
+.setting-switch{min-width:65px;border:1px solid var(--line);background:var(--bg);color:var(--muted);padding:8px 12px;font-size:11px;cursor:pointer}
+.setting-switch.on{background:#29493f;border-color:#638a72;color:#d8f0dc}
+@media(max-width:520px){.setting-row{align-items:flex-start;gap:10px}.setting-row .setting-switch{flex-shrink:0}.settings-group{padding:16px}}
