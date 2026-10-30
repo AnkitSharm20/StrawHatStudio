@@ -403,3 +403,6 @@ button{transition:background .18s,border-color .18s,color .18s,transform .18s}
  .seasonal-rail .anime-info{padding:12px!important}
  .seasonal-rail .anime-info h3{font-size:16px!important}
 }
+
+.hero-banner-image{z-index:-2}
+.hero-v2-bg{z-index:-1!important;background:linear-gradient(90deg,#050817f2 0%,#050817d9 31%,#05081755 70%,#05081770 100%),linear-gradient(0deg,#050817 0%,transparent 42%)!important}
