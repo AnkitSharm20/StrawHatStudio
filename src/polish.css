@@ -1,0 +1,65 @@
+/* Straw Hat Studio — layout, image and Streaming Luffy polish */
+.app{overflow-x:clip}
+*,*::before,*::after{box-sizing:border-box}
+img,video{max-width:100%}
+button,input,textarea,select{font:inherit}
+.main,.page,.home-v2,.home-section-v2,.section-v2-head,.stream-layout,.stream-editor,.discord-preview{min-width:0}
+.page{width:100%;max-width:1500px;margin-inline:auto}
+.section-head,.section-v2-head{min-width:0}
+.section-head>div,.section-v2-head>div{min-width:0}
+.section-head h2,.page h2,.section-v2-head h2{overflow-wrap:anywhere}
+.anime-grid,.feature-anime-grid,.seasonal-rail,.shop-grid,.feature-tiles{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));align-items:stretch}
+.anime-card,.shop-item,.feature-tiles>button{min-width:0;max-width:100%}
+.poster,.shop-artwork{aspect-ratio:3/4;height:auto;min-height:0;overflow:hidden}
+.poster img,.shop-artwork img{width:100%;height:100%;object-fit:cover;display:block}
+.poster img{object-position:center 20%}
+.anime-info,.shop-item-copy{min-width:0}
+.anime-info h3,.shop-item-copy h3,.anime-info p,.shop-item-copy p{overflow-wrap:anywhere}
+.hero-v2{display:block!important;position:relative!important;width:100%;min-height:0!important;height:auto!important;aspect-ratio:16/9!important;max-height:850px!important;padding:0!important;overflow:hidden!important;border-radius:clamp(10px,1.6vw,22px)!important}
+.hero-v2-bg,.hero-v2-copy,.hero-v2-bottom,.hero-banner-image{display:none!important}
+.hero-v2-art,.hero-video-stage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;margin:0!important;border:0!important;border-radius:inherit!important;overflow:hidden!important}
+.hero-loop-video{width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;object-fit:cover!important;object-position:center!important}
+.hero-video-placeholder{padding:clamp(12px,3vw,40px)!important}
+.hero-video-placeholder b{font-size:clamp(13px,2vw,24px)!important}
+.home-v2{max-width:1600px}
+.home-section-v2{min-width:0}
+.stream-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 22px}
+.stream-mode-switch button{min-height:44px;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--muted);cursor:pointer;font:700 11px 'DM Mono',monospace;letter-spacing:1.5px}
+.stream-mode-switch button.active{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 13%,var(--panel));color:var(--gold);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 20%,transparent)}
+.stream-editor{min-width:0;display:flex;flex-direction:column;gap:10px}
+.stream-editor label{display:block;margin-top:8px;color:var(--text);font-size:12px;font-weight:700}
+.stream-editor input{width:100%;min-width:0;max-width:100%;height:46px;padding:0 13px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);outline:none}
+.stream-editor input:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 16%,transparent)}
+.stream-editor .field-help{margin:0;color:var(--muted);font-size:11px;line-height:1.7}
+.activity-gif{width:75px;height:75px;flex:0 0 75px;object-fit:cover;border-radius:6px;background:var(--panel2)}
+.saved-activity-state{display:flex;align-items:center;gap:8px;color:#54d6a0;font-size:11px;padding:10px 12px;border:1px solid #54d6a055;border-radius:8px;background:#54d6a00d}
+.stream-profile-result,.membership-activity,.profile-streaming-card{display:flex;align-items:center;justify-content:space-between;gap:22px;margin:28px 0;padding:clamp(18px,3vw,28px);border:1px solid var(--line);border-radius:14px;background:linear-gradient(130deg,var(--panel),var(--panel2));min-width:0}
+.stream-profile-result>div:first-child,.membership-activity>div:first-child{min-width:0}
+.stream-profile-result h3,.membership-activity h3,.profile-streaming-card h3{margin:8px 0;font:700 clamp(19px,2.5vw,27px) 'Space Grotesk'}
+.stream-profile-result p,.membership-activity p,.profile-streaming-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.7;max-width:54ch}
+.stream-result-card,.member-activity-preview{min-width:190px;max-width:42%;padding:16px;border:1px solid var(--gold);border-radius:10px;background:var(--bg);display:grid;gap:9px;justify-items:start;overflow:hidden}
+.stream-result-card span,.member-activity-preview b{overflow-wrap:anywhere;font-size:13px}
+.stream-result-card img,.member-activity-preview img{width:100%;max-height:130px;object-fit:cover;border-radius:6px}
+.stream-result-card small,.member-activity-preview small{font:9px 'DM Mono';letter-spacing:1.2px;color:var(--gold)}
+.profile-streaming-card{display:block}
+.profile-streaming-card .secondary{margin-top:15px}
+.membership-activity{align-items:flex-start}
+.membership-activity .member-activity-preview{max-width:38%}
+@media(max-width:760px){
+ .hero-v2{aspect-ratio:16/9!important;min-height:0!important;height:auto!important}
+ .hero-video-stage{height:100%!important}
+ .stream-layout{grid-template-columns:minmax(0,1fr)!important}
+ .stream-profile-result,.membership-activity{align-items:stretch;flex-direction:column}
+ .stream-result-card,.membership-activity .member-activity-preview{max-width:100%;width:100%}
+ .anime-grid,.feature-anime-grid,.seasonal-rail,.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .poster,.shop-artwork{aspect-ratio:3/4!important;height:auto!important;min-height:0!important}
+ .feature-anime-grid .poster,.anime-card .poster{height:auto!important}
+}
+@media(max-width:420px){
+ .anime-grid,.feature-anime-grid,.seasonal-rail,.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .anime-info{padding:10px!important}
+ .anime-info h3{font-size:14px!important}
+ .anime-info p{font-size:10px!important}
+ .stream-profile-result,.membership-activity{padding:15px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
