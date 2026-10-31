@@ -428,3 +428,9 @@ button,input,textarea,select{font:inherit}
 
 .notification-bell{position:relative}
 .notification-badge{position:absolute;top:2px;right:1px;min-width:16px;height:16px;padding:0 4px;display:grid;place-items:center;border:2px solid var(--bg);border-radius:99px;background:#b94b40;color:#fff;font:800 8px 'DM Mono',monospace;line-height:1}
+
+
+/* Community follow controls */
+.community-follow-button{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--gold);font-size:10px}
+.community-follow-button:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 9%,transparent)}
+.post-top{min-width:0;flex-wrap:wrap}
