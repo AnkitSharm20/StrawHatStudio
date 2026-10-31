@@ -1,0 +1,10 @@
+{
+  "name": "luffy-status-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lightweight Windows Discord Rich Presence companion for Straw Hat Studio",
+  "type": "module",
+  "scripts": {
+    "start": "node companion.mjs"
+  }
+}
