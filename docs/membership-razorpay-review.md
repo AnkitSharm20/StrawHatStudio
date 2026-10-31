@@ -39,7 +39,7 @@ Do not advertise any item as available until the corresponding feature and entit
 ## Proposed server-side data model
 
 - `membership_plans`: stable plan key, label, amount in paise, currency, interval, active flag, benefits version. Public reads only for active display plans; writes restricted to server/admin.
-- `membership_subscriptions`: user ID, plan key, Razorpay customer/subscription IDs, status, period start/end, cancel-at-period-end, timestamps. Users may read only their own rows; no browser writes.
+- `membership_subscriptions`: user ID, plan key, Razorpay order ID and payment ID; no recurring subscription ID is needed for the yearly one-time plan, status, period start/end, cancel-at-period-end, timestamps. Users may read only their own rows; no browser writes.
 - `membership_payments`: user ID, plan key, Razorpay order/payment IDs, amount, currency, state, verified timestamp, metadata. Users may read only their own rows; writes server-only.
 - `razorpay_webhook_events`: unique Razorpay event ID, event type, payload hash, processed timestamp, outcome. No client access.
 
@@ -55,7 +55,7 @@ All tables in exposed schemas must have RLS. Client roles receive no INSERT/UPDA
 
 ## Review and activation gates
 
-- Confirm whether yearly membership is a one-time 12-month purchase or an automatically renewing annual subscription. Current UI copy proposes one annual payment for 12 months, not auto-renewal.
+- **Confirmed:** Yearly Nakama is a one-time ₹799 payment for 12 months. It does not auto-renew. Members must manually purchase another 12-month term after expiry.
 - Confirm exact benefit list and which perks are implemented on launch.
 - Confirm refund/cancellation policy, renewal reminders, taxes/invoice details and customer support contact.
 - Configure Razorpay plans/product records and webhook endpoint in the Razorpay Dashboard.
