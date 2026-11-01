@@ -434,3 +434,24 @@ button,input,textarea,select{font:inherit}
 .community-follow-button{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--gold);font-size:10px}
 .community-follow-button:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 9%,transparent)}
 .post-top{min-width:0;flex-wrap:wrap}
+
+
+/* Public member profiles */
+.public-profile-page{display:grid;gap:16px;min-width:0}
+.public-profile-cover{background:linear-gradient(135deg,#1b3439,#11191b)}
+.public-profile-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.public-profile-stats>div,.public-profile-stats>button{min-width:0;display:grid;gap:7px;justify-items:center;padding:17px 10px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--text)}
+.public-profile-stats>button{cursor:pointer}
+.public-profile-stats b{font:700 23px 'DM Mono',monospace;color:var(--gold)}
+.public-profile-stats span{font:9px 'DM Mono',monospace;letter-spacing:1px;color:var(--muted)}
+.public-follow-list{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.public-follow-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.public-follow-member{display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:0;border-top:1px solid var(--line);background:transparent;color:var(--text);text-align:left;cursor:pointer}
+.public-follow-member .avatar{width:34px;height:34px;flex-basis:34px;overflow:hidden}
+.public-follow-member img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.public-profile-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line)}
+.public-profile-tabs button{padding:11px 16px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);cursor:pointer}
+.public-profile-tabs button.active{border-color:var(--gold);color:var(--gold)}
+.community-author-link{display:inline-block;color:var(--text);font-weight:700;text-decoration:none}
+.community-author-link:hover{color:var(--gold)}
+@media(max-width:560px){.public-profile-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.public-profile-cover{aspect-ratio:16/7}.public-profile-page .profile-row{align-items:flex-start}}
