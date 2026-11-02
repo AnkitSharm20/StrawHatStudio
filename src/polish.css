@@ -639,3 +639,133 @@ button,input,textarea,select{font:inherit}
   .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .admin-workspace{padding-inline:10px!important}
 }
+
+
+/* Crew feature artwork now follows the same landscape treatment as the final CTA. */
+.crew-feature{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:stretch!important;min-height:0!important;height:auto!important;
+  border-radius:20px!important;overflow:hidden!important;
+}
+.crew-feature-image{
+  display:block!important;position:relative!important;align-self:stretch!important;
+  width:100%!important;min-width:0!important;min-height:0!important;height:auto!important;
+  aspect-ratio:16/9!important;overflow:hidden!important;background:#0b1426!important;
+}
+.crew-feature-image img{
+  display:block!important;width:100%!important;height:100%!important;
+  min-height:0!important;max-height:none!important;max-width:none!important;
+  aspect-ratio:16/9!important;object-fit:cover!important;object-position:center!important;
+  transform:none!important;filter:none!important;
+}
+.crew-feature-copy{
+  display:flex!important;flex-direction:column!important;justify-content:center!important;
+  align-self:stretch!important;min-width:0!important;padding:clamp(22px,4vw,54px)!important;
+}
+.crew-feature-copy h2{max-width:100%!important;font-size:clamp(32px,4.2vw,58px)!important;line-height:1.02!important;overflow-wrap:normal!important}
+.crew-feature-copy>p{max-width:48ch!important;line-height:1.75!important}
+.crew-feature-copy .primary{align-self:flex-start!important}
+.crew-signature{margin-top:24px!important}
+
+/* Membership page: consistent hierarchy, compact benefit cards and readable tier cards. */
+.membership-page{display:grid!important;gap:clamp(22px,3vw,34px)!important;min-width:0!important}
+.membership-intro{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(170px,.36fr)!important;
+  align-items:center!important;gap:24px!important;padding:clamp(22px,4vw,42px)!important;
+  border:1px solid var(--line)!important;border-radius:18px!important;
+  background:radial-gradient(ellipse at 90% 15%,#f1bd5617,transparent 48%),var(--panel)!important;
+  min-width:0!important;
+}
+.membership-intro>div:first-child{min-width:0!important}
+.membership-intro h2{font:700 clamp(30px,4vw,48px)/1.05 'Space Grotesk',sans-serif!important;letter-spacing:-.045em!important;margin:12px 0!important}
+.membership-intro h2 em{font-family:Newsreader,serif!important;color:var(--gold)!important}
+.membership-intro p{max-width:60ch!important;color:var(--muted)!important;line-height:1.75!important}
+.membership-mark{
+  display:grid!important;justify-items:center!important;align-content:center!important;gap:10px!important;
+  min-height:170px!important;padding:18px!important;border:1px solid #d6b66d55!important;
+  border-radius:14px!important;background:linear-gradient(145deg,#d6b66d12,#0b1124)!important;
+  color:var(--gold)!important;text-align:center!important;
+}
+.membership-mark b{font:800 16px 'DM Mono',monospace!important;letter-spacing:2px!important}
+.membership-mark small{font:9px 'DM Mono',monospace!important;letter-spacing:2px!important;color:var(--muted)!important}
+.membership-perks,.membership-plans,.membership-flow,.membership-activity{
+  min-width:0!important;padding:clamp(18px,3vw,28px)!important;
+  border:1px solid var(--line)!important;border-radius:16px!important;background:var(--panel)!important;
+}
+.membership-perk-grid{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;margin-top:16px!important;
+}
+.membership-perk-grid article{
+  display:grid!important;align-content:start!important;gap:9px!important;min-width:0!important;
+  padding:16px!important;border:1px solid var(--line)!important;border-radius:12px!important;
+  background:var(--bg)!important;
+}
+.membership-perk-grid .perk-icon{
+  display:grid!important;place-items:center!important;width:38px!important;height:38px!important;
+  border:1px solid #50d7e944!important;border-radius:10px!important;color:#61dced!important;
+  background:#50d7e912!important;
+}
+.membership-perk-grid .perk-icon svg{width:19px!important;height:19px!important}
+.membership-perk-grid article>b{font-size:14px!important;line-height:1.3!important}
+.membership-perk-grid article>p{margin:0!important;color:var(--muted)!important;font-size:12px!important;line-height:1.65!important}
+.membership-plans-head h2{font:700 clamp(25px,3vw,36px)/1.1 'Space Grotesk',sans-serif!important;margin:9px 0!important}
+.membership-plans-head p{color:var(--muted)!important;line-height:1.65!important}
+.billing-toggle-large{margin:18px auto 22px!important;max-width:440px!important;background:var(--bg)!important;border:1px solid var(--line)!important}
+.membership-plan-grid:not(.single-plan){
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch!important;gap:14px!important;margin-top:0!important;
+}
+.membership-plan-grid>article{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  min-width:0!important;min-height:0!important;padding:clamp(17px,2.2vw,25px)!important;
+  border:1px solid var(--line)!important;border-radius:14px!important;background:var(--bg)!important;
+  overflow:hidden!important;
+}
+.membership-plan-grid>article.tier-featured{border-color:#d6b66d!important;box-shadow:0 0 0 1px #d6b66d22!important}
+.membership-plan-grid>article h3{font:700 clamp(21px,2.3vw,27px)/1.2 'Space Grotesk',sans-serif!important;margin:10px 0 14px!important}
+.membership-plan-grid .plan-price{font:700 clamp(25px,3vw,36px)/1.2 'DM Mono',monospace!important;color:var(--gold)!important;overflow-wrap:anywhere!important}
+.membership-plan-grid .plan-price small{font:400 12px 'DM Sans',sans-serif!important;color:var(--muted)!important}
+.membership-plan-grid>article>p{color:var(--muted)!important;font-size:13px!important;line-height:1.7!important;min-height:0!important}
+.membership-plan-grid>article ul{display:grid!important;gap:9px!important;padding-left:18px!important;margin:15px 0!important;min-height:0!important;flex:1 1 auto!important;color:var(--muted)!important;font-size:12px!important;line-height:1.55!important}
+.membership-plan-grid .plan-billing-detail{margin:10px 0 14px!important;padding:13px!important}
+.membership-plan-grid .membership-disabled-cta{margin-top:auto!important;white-space:normal!important;line-height:1.35!important;padding:10px!important}
+.membership-plan-grid .plan-status{display:block!important;margin-top:9px!important;font:9px 'DM Mono',monospace!important;letter-spacing:1px!important;color:var(--muted)!important;text-align:center!important}
+.membership-safety-note{display:flex!important;align-items:flex-start!important;gap:9px!important;color:var(--muted)!important;font-size:11px!important;line-height:1.65!important;margin:14px 0 0!important}
+.membership-safety-note svg{flex:0 0 16px!important;margin-top:2px!important}
+.membership-flow-steps{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin-top:16px!important}
+.membership-flow-steps>div{display:grid!important;align-content:start!important;gap:8px!important;min-width:0!important;padding:15px!important;border:1px solid var(--line)!important;border-radius:10px!important;background:var(--bg)!important}
+.membership-flow-steps>div>b{color:var(--gold)!important;font:700 12px 'DM Mono',monospace!important}
+.membership-flow-steps strong{font-size:13px!important}
+.membership-flow-steps small{color:var(--muted)!important;font-size:11px!important;line-height:1.6!important}
+.membership-activity{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important}
+.membership-activity>div:first-child{min-width:0!important}
+.membership-activity h3{margin:8px 0!important}
+.member-activity-preview{display:grid!important;gap:8px!important;justify-items:center!important;min-width:140px!important;max-width:240px!important;padding:14px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:var(--bg)!important;text-align:center!important}
+.member-activity-preview img{width:100%!important;aspect-ratio:16/9!important;object-fit:cover!important;border-radius:8px!important}
+.member-activity-preview small{font:9px 'DM Mono',monospace!important;color:var(--muted)!important;letter-spacing:1px!important}
+@media(max-width:760px){
+  .crew-feature{grid-template-columns:minmax(0,1fr)!important;margin:28px 0!important}
+  .crew-feature-image{width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:16/9!important}
+  .crew-feature-image img{width:100%!important;height:100%!important;aspect-ratio:16/9!important;object-fit:cover!important;object-position:center!important}
+  .crew-feature-copy{padding:22px 18px!important}
+  .crew-feature-copy h2{font-size:clamp(34px,9vw,46px)!important;margin:14px 0!important}
+  .crew-feature-copy>p{font-size:13px!important;margin-bottom:18px!important}
+  .crew-signature{margin-top:16px!important}
+  .membership-intro{grid-template-columns:minmax(0,1fr)!important;padding:20px!important;gap:15px!important}
+  .membership-mark{min-height:110px!important;grid-template-columns:auto auto!important;justify-content:center!important}
+  .membership-mark small{grid-column:1/-1!important}
+  .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .membership-perk-grid article{padding:12px!important}
+  .membership-plan-grid:not(.single-plan){grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  .membership-plan-grid>article{padding:18px!important}
+  .membership-plan-grid>article>p{min-height:0!important}
+  .membership-flow-steps{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .membership-activity{align-items:stretch!important;flex-direction:column!important}
+  .member-activity-preview{width:100%!important;max-width:none!important}
+}
+@media(max-width:390px){
+  .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}
+  .membership-flow-steps{grid-template-columns:minmax(0,1fr)!important}
+  .membership-intro h2{font-size:30px!important}
+}
