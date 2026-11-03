@@ -1102,3 +1102,86 @@ button,input,textarea,select{font:inherit}
 .seasonal-rail::-webkit-scrollbar{height:5px}
 .seasonal-rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
 @media(max-width:620px){.seasonal-rail{gap:12px!important}.seasonal-rail>.anime-card{flex-basis:68vw!important}}
+
+
+/* EXPLORE refresh — use the same confident, image-led card language as Home. */
+.explore-page{gap:22px!important}
+.explore-page .explore-hero{padding:clamp(22px,4vw,40px)!important;border-radius:18px!important}
+.explore-page .explore-toolbar{gap:14px!important}
+.explore-page .explore-genres{padding:5px 1px 10px!important;gap:9px!important}
+.explore-page .explore-genres button{padding:9px 15px!important;font-size:11px!important;letter-spacing:.01em!important}
+.explore-anime-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(13px,2vw,20px)!important;align-items:stretch!important}
+.explore-anime-grid>.anime-card{display:flex!important;flex-direction:column!important;min-width:0!important;height:100%!important;overflow:hidden!important;border:1px solid var(--line)!important;border-radius:17px!important;background:var(--panel)!important;cursor:pointer!important;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important}
+.explore-anime-grid>.anime-card:hover{transform:translateY(-3px)!important;border-color:var(--gold)!important;box-shadow:0 14px 35px #0003!important}
+.explore-anime-grid>.anime-card .poster{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:4/5!important;min-height:0!important;max-height:none!important;flex:none!important;overflow:hidden!important;background:#090f1d!important}
+.explore-anime-grid>.anime-card .poster img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 30%!important;transition:transform .45s ease!important}
+.explore-anime-grid>.anime-card:hover .poster img{transform:scale(1.035)!important}
+.explore-anime-grid>.anime-card .poster-tag{backdrop-filter:blur(9px)!important}
+.explore-anime-grid>.anime-card .anime-info{display:flex!important;flex:1!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important;min-width:0!important;padding:clamp(12px,1.7vw,19px)!important}
+.explore-anime-grid>.anime-card .anime-info .eyebrow{font-size:9px!important;letter-spacing:1.6px!important;color:var(--gold)!important}
+.explore-anime-grid>.anime-card .anime-info h3{margin:0!important;font:700 clamp(15px,1.6vw,21px)/1.22 'Space Grotesk',sans-serif!important;letter-spacing:-.025em!important;color:var(--text)!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important}
+.explore-anime-grid>.anime-card .anime-info p{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important;margin:0!important;color:var(--muted)!important;font:400 11px/1.7 'DM Sans',sans-serif!important}
+.explore-anime-grid>.anime-card .card-link{margin-top:auto!important;padding-top:8px!important;color:var(--gold)!important;font-size:11px!important}
+.explore-page .catalog-more{margin:12px 0 25px!important}
+@media(max-width:390px){.explore-anime-grid{gap:10px!important}.explore-anime-grid>.anime-card .anime-info{padding:10px!important;gap:6px!important}.explore-anime-grid>.anime-card .anime-info h3{font-size:13px!important}.explore-anime-grid>.anime-card .anime-info p{font-size:10px!important;line-height:1.55!important;-webkit-line-clamp:3!important}.explore-anime-grid>.anime-card .card-link{font-size:10px!important}}
+@media(min-width:900px){.explore-anime-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}.explore-anime-grid>.anime-card .poster{aspect-ratio:4/5!important}}
+@media(min-width:1250px){.explore-anime-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+
+/* Anime feature page — art becomes atmosphere, never a muddy text backdrop. */
+.anime-detail-page{gap:18px!important}
+.anime-detail-hero{position:relative!important;isolation:isolate!important;grid-template-columns:minmax(130px,205px) minmax(0,1fr)!important;gap:clamp(20px,4vw,48px)!important;min-height:330px!important;padding:clamp(22px,4vw,46px)!important;background-color:#070c18!important;background-size:cover!important;background-position:center 32%!important;border:1px solid #ffffff20!important;border-radius:20px!important}
+.anime-detail-hero:before{content:"";position:absolute;z-index:-2;inset:-12px;background:inherit;background-size:cover;background-position:center 32%;filter:blur(8px);opacity:.52;transform:scale(1.04)}
+.anime-detail-hero:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#070b16f5 0%,#070b16df 48%,#070b16a8 100%),linear-gradient(0deg,#070b1680,transparent 70%);pointer-events:none}
+.anime-detail-hero>*{position:relative;z-index:1}
+.detail-cover{width:100%!important;max-width:205px!important;aspect-ratio:2/3!important;border-radius:15px!important;border:1px solid #ffffff40!important;box-shadow:0 22px 55px #0009!important}
+.detail-cover img{object-fit:cover!important;object-position:center!important}
+.detail-heading{max-width:760px!important}
+.detail-heading h1{font-size:clamp(32px,5vw,64px)!important;line-height:1.02!important;letter-spacing:-.05em!important;margin:12px 0!important}
+.detail-heading .eyebrow{color:#e6c982!important;letter-spacing:2px!important}
+.detail-heading .primary{margin-top:8px!important}
+.detail-trailer-below{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important;padding:clamp(16px,2.8vw,26px)!important}
+.detail-trailer-heading{display:grid!important;gap:5px!important}
+.detail-trailer-heading h2{font-size:clamp(22px,3vw,30px)!important;margin:3px 0!important}
+.detail-trailer-below iframe,.detail-trailer-below .detail-trailer-poster,.detail-trailer-below .detail-no-trailer{width:100%!important;max-width:100%!important;aspect-ratio:16/9!important;max-height:560px!important;border-radius:14px!important}
+.detail-trailer-below .detail-trailer-poster{background-size:cover!important;background-position:center 35%!important}
+.detail-trailer-below .detail-trailer-poster b{font:700 16px 'Space Grotesk',sans-serif!important}
+.detail-content-grid{grid-template-columns:minmax(0,1.4fr) minmax(250px,.8fr)!important;gap:16px!important}
+.detail-about,.detail-watch{padding:clamp(18px,3vw,28px)!important;border-radius:16px!important}
+.detail-about h2,.detail-watch h2{font-size:clamp(21px,2.5vw,27px)!important;letter-spacing:-.03em!important}
+.detail-about p{font-size:13px!important;line-height:1.9!important}
+.detail-viewing-facts{display:grid;gap:9px;margin-top:16px}
+.detail-viewing-facts span{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted)}
+.detail-viewing-facts b{color:var(--text);text-align:right}
+@media(max-width:650px){.anime-detail-hero{grid-template-columns:96px minmax(0,1fr)!important;gap:14px!important;min-height:0!important;padding:15px!important}.detail-cover{max-width:96px!important;border-radius:10px!important}.detail-heading h1{font-size:clamp(23px,7vw,35px)!important}.detail-heading .detail-meta{gap:5px!important;margin:9px 0!important}.detail-heading .detail-meta span{font-size:9px!important;padding:6px 7px!important}.detail-heading .detail-genres{gap:5px!important;margin:8px 0!important}.detail-heading .detail-genres span{font-size:9px!important;padding:5px 7px!important}.detail-trailer-below{padding:13px!important}.detail-content-grid{grid-template-columns:minmax(0,1fr)!important}}
+
+/* Membership page hierarchy: plans first, then story, perks and how it works. */
+.membership-page{gap:18px!important}
+.membership-page>.membership-plans{order:1!important;margin-top:0!important;padding:clamp(17px,3vw,30px)!important;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--gold) 4%,var(--panel)))!important;border-radius:19px!important}
+.membership-page>.membership-intro{order:2!important}
+.membership-page>.membership-perks{order:3!important}
+.membership-page>.membership-flow{order:4!important}
+.membership-page>.membership-activity{order:5!important}
+.membership-page>.membership-plans .membership-section-head{text-align:center!important;max-width:720px!important;margin:0 auto 18px!important}
+.membership-page>.membership-plans .membership-section-head h2{font:700 clamp(26px,3.4vw,40px)/1.08 'Space Grotesk',sans-serif!important;letter-spacing:-.04em!important}
+.membership-page .membership-billing-switch{margin:18px auto 22px!important}
+.membership-page .membership-period-head{display:flex!important;align-items:flex-end!important;justify-content:space-between!important;gap:16px!important;margin-bottom:17px!important}
+.membership-page .membership-period-head h2{font:700 clamp(23px,3vw,31px)/1.1 'Space Grotesk',sans-serif!important;letter-spacing:-.035em!important}
+.membership-page .tier-plan-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+.membership-page .tier-plan-grid>article{display:flex!important;flex-direction:column!important;min-width:0!important;padding:clamp(16px,2vw,24px)!important;border:1px solid var(--line)!important;border-radius:15px!important;background:var(--bg)!important;box-shadow:0 10px 28px #0002!important}
+.membership-page .tier-plan-grid>article.tier-featured{border-color:#d6b66d99!important;box-shadow:0 12px 35px #d6b66d12!important}
+.membership-page .tier-plan-grid h3{font:700 23px 'Space Grotesk',sans-serif!important}
+.membership-page .tier-plan-grid .plan-price{font:700 clamp(26px,3vw,36px) 'Space Grotesk',sans-serif!important;color:var(--text)!important}
+.membership-page .tier-plan-grid .plan-price small{font:400 11px 'DM Sans',sans-serif!important;color:var(--muted)!important}
+.membership-page .tier-plan-grid article>p{min-height:50px!important;color:var(--muted)!important;font-size:11px!important;line-height:1.65!important}
+.membership-page .tier-plan-grid ul{display:grid!important;gap:9px!important;padding:13px 0!important;margin:8px 0!important;border-top:1px solid var(--line)!important}
+.membership-page .tier-plan-grid li{font-size:11px!important;line-height:1.5!important;color:var(--text)!important}
+.membership-page .plan-billing-detail{margin-top:auto!important;padding-top:12px!important}
+.membership-page .plan-billing-detail p{font-size:10px!important;line-height:1.6!important;color:var(--muted)!important}
+.membership-page .membership-disabled-cta{width:100%!important;margin-top:10px!important;padding:12px!important;border-radius:9px!important;font:600 11px 'Space Grotesk',sans-serif!important}
+.membership-page .plan-status{display:block!important;margin-top:8px!important;text-align:center!important;font:8px 'DM Mono',monospace!important;letter-spacing:.8px!important;color:var(--muted)!important}
+.membership-page .membership-intro{order:2!important}
+.membership-page .membership-intro-art{aspect-ratio:16/9!important;min-height:220px!important;overflow:hidden!important;border-radius:14px!important}
+.membership-page .membership-perks{order:3!important}
+.membership-page .membership-perk-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:760px){.membership-page .tier-plan-grid{grid-template-columns:minmax(0,1fr)!important}.membership-page .tier-plan-grid>article{padding:18px!important}.membership-page .tier-plan-grid article>p{min-height:0!important}.membership-page .membership-period-head{align-items:flex-start!important;flex-direction:column!important}.membership-page .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:420px){.membership-page .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}.membership-page .membership-billing-switch{width:100%!important}.membership-page .membership-intro{grid-template-columns:minmax(0,1fr)!important}.membership-page .membership-intro-art{min-height:190px!important}}
