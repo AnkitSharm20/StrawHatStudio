@@ -1055,3 +1055,50 @@ button,input,textarea,select{font:inherit}
 .community-layout .empty,.community-layout .panel{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
 @media(max-width:900px){.community-layout{grid-template-columns:minmax(0,1fr)}.community-side{grid-template-columns:repeat(2,minmax(0,1fr))}.community-side .panel:last-child{display:none}}
 @media(max-width:620px){.community-welcome{align-items:flex-start;flex-direction:column}.community-prompt-row{grid-template-columns:minmax(0,1fr)}.community-side{grid-template-columns:minmax(0,1fr)}.community-feed-toolbar{align-items:flex-start}.community-feed-tabs{width:100%}.community-feed-tabs button{flex:1}.community-layout .post{padding:13px!important}.community-layout .post-actions button{font-size:9px;padding:7px}.community-compose-box textarea{font-size:12px!important}}
+
+
+/* Corrected discovery composition: one wide One Piece feature, four standard portrait cards. */
+.feature-anime-grid-five{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;align-items:start!important}
+.feature-anime-grid-five>.anime-card{width:100%!important;min-width:0!important;height:100%!important;align-self:stretch!important;cursor:pointer!important;overflow:hidden!important}
+.feature-anime-grid-five>.anime-card:first-child{grid-column:1/-1!important;grid-row:auto!important}
+.feature-anime-grid-five>.anime-card:first-child .poster{width:100%!important;aspect-ratio:16/9!important;height:auto!important;max-height:none!important}
+.feature-anime-grid-five>.anime-card:not(:first-child) .poster{width:100%!important;aspect-ratio:4/5!important;height:auto!important;max-height:none!important}
+.feature-anime-grid-five .poster img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+.feature-anime-grid-five>.anime-card:first-child .anime-info{padding:clamp(14px,2vw,22px)!important}
+.feature-anime-grid-five>.anime-card:first-child .anime-info h3{font-size:clamp(20px,3vw,30px)!important}
+.feature-anime-grid-five>.anime-card:first-child .anime-info p{max-width:70ch!important;-webkit-line-clamp:2!important}
+.feature-anime-grid-five>.anime-card:not(:first-child) .anime-info{padding:12px!important}
+.feature-anime-grid-five .anime-info h3{font-size:clamp(12px,1.3vw,16px)!important;line-height:1.35!important}
+.feature-anime-grid-five .anime-info p{font-size:11px!important;line-height:1.6!important;-webkit-line-clamp:3!important}
+.feature-anime-grid-five .anime-card{transition:transform .2s ease,border-color .2s ease!important}
+.feature-anime-grid-five .anime-card:hover{transform:translateY(-3px)!important;border-color:var(--gold)!important}
+@media(max-width:620px){.feature-anime-grid-five{gap:12px!important}.feature-anime-grid-five>.anime-card:first-child .poster{aspect-ratio:16/9!important}.feature-anime-grid-five>.anime-card:not(:first-child) .poster{aspect-ratio:4/5!important}.feature-anime-grid-five .anime-info p{font-size:10px!important}.feature-anime-grid-five>.anime-card:first-child .anime-info h3{font-size:19px!important}}
+@media(max-width:360px){.feature-anime-grid-five{gap:8px!important}.feature-anime-grid-five .anime-info{padding:9px!important}.feature-anime-grid-five .anime-info h3{font-size:11px!important}}
+
+/* Membership: a single intentional artwork panel and a cleaner plan-to-benefit sequence. */
+.membership-artwork{position:relative;width:100%;height:100%;min-height:220px;overflow:hidden;border-radius:inherit;background:#080e1d}
+.membership-artwork>img,.membership-artwork>.membership-luffy-fallback{display:block;width:100%;height:100%;min-height:220px;object-fit:cover;object-position:center 30%}
+.membership-art-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;padding:clamp(16px,3vw,28px);background:linear-gradient(0deg,#050914ee 0%,#05091477 42%,transparent 85%);color:#fff;pointer-events:none}
+.membership-art-overlay span{font:10px 'DM Mono',monospace;letter-spacing:2px;color:#e3c681}
+.membership-art-overlay b{font:700 clamp(20px,3vw,34px)/1.05 'Space Grotesk',sans-serif;letter-spacing:-.03em}
+.membership-art-overlay small{font:9px 'DM Mono',monospace;letter-spacing:1px;color:#d5d9e5}
+.membership-intro{align-items:stretch!important;gap:clamp(18px,3vw,34px)!important}
+.membership-intro-art{min-height:260px!important;aspect-ratio:16/9!important}
+.membership-perks{margin:22px 0 30px!important}
+.membership-plans{padding:clamp(16px,3vw,28px)!important;border:1px solid var(--line)!important;border-radius:17px!important;background:var(--panel)!important}
+.membership-billing-switch{max-width:430px!important;margin:18px auto 20px!important}
+.membership-period{margin-top:0!important}
+.membership-period .membership-plan-grid>article{display:flex!important;flex-direction:column!important;min-height:100%!important}
+.membership-period .plan-billing-detail{margin-top:auto!important}
+.membership-flow{margin-top:28px!important}
+@media(max-width:900px){.membership-intro-art{min-height:220px!important}}
+@media(max-width:620px){.membership-intro-art{min-height:190px!important}.membership-plans{padding:13px!important}.membership-period .membership-plan-grid>article{min-height:0!important}}
+
+/* Make the longer trending watchlist rail swipeable without shrinking the posters. */
+.seasonal-rail{display:flex!important;gap:16px!important;overflow-x:auto!important;overscroll-behavior-inline:contain!important;scroll-snap-type:x mandatory!important;padding:4px 2px 16px!important}
+.seasonal-rail>.anime-card{flex:0 0 clamp(190px,23vw,260px)!important;min-width:0!important;scroll-snap-align:start!important;cursor:pointer!important}
+.seasonal-rail>.anime-card .poster{aspect-ratio:4/5!important;height:auto!important}
+.seasonal-rail>.anime-card .poster img{width:100%!important;height:100%!important;object-fit:cover!important}
+.seasonal-rail::-webkit-scrollbar{height:5px}
+.seasonal-rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
+@media(max-width:620px){.seasonal-rail{gap:12px!important}.seasonal-rail>.anime-card{flex-basis:68vw!important}}
