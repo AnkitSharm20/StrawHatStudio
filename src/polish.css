@@ -947,3 +947,18 @@ button,input,textarea,select{font:inherit}
 .crew-feature-copy .primary{margin-top:12px!important}
 @media(max-width:760px){.crew-feature{grid-template-columns:minmax(0,1fr)!important;gap:15px!important;padding:18px!important}.crew-feature-image{width:100%!important;max-width:none!important;aspect-ratio:16/9!important;margin:0 auto!important}.crew-feature-copy{padding:6px 4px 10px!important}.crew-feature-copy h2{font-size:clamp(32px,9vw,44px)!important}}
 @media(max-width:420px){.membership-billing-switch{gap:7px!important;padding:5px!important}.membership-billing-switch>button{padding:12px 10px!important}.membership-billing-switch>button>span{font-size:13px!important}}
+
+
+/* Live catalogue and marketplace controls */
+.catalog-loading{display:grid;justify-items:center;gap:10px;min-height:260px;align-content:center;color:var(--muted);text-align:center}
+.catalog-loading b{color:var(--text);font:600 15px 'Space Grotesk',sans-serif}
+.catalog-loading small,.catalog-more small{font-size:11px;color:var(--muted)}
+.loading-orbit{width:34px;height:34px;border:2px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:catalogSpin .8s linear infinite}
+@keyframes catalogSpin{to{transform:rotate(360deg)}}
+.catalog-more{display:flex;flex-direction:column;align-items:center;gap:9px;margin:26px 0 12px}
+.marketplace-tools{display:flex;align-items:center;gap:14px;margin:22px 0 12px}
+.marketplace-tools .searchbar{flex:1;min-width:0}
+.marketplace-categories{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}
+.marketplace-categories button{padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--muted);font-size:11px;transition:background .18s,border-color .18s,color .18s}
+.marketplace-categories button.active{border-color:var(--gold);background:#d6b66d18;color:var(--gold)}
+@media(max-width:620px){.marketplace-tools{align-items:stretch;flex-direction:column}.marketplace-tools .explore-sort{justify-content:space-between}.catalog-more{margin:20px 0}.catalog-more button{width:100%;justify-content:center}}
