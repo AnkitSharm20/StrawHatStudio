@@ -32,7 +32,7 @@ function Explore({query,setQuery,shows,saved,toggleSave}){const navigate=useNavi
  const [hasMore,setHasMore]=useState(true);
  const [catalogError,setCatalogError]=useState(false);
  const genres=['All','Action','Adventure','Fantasy','Drama','Comedy','Romance','Sci-Fi','Mystery','Sports'];
- const mapAnime=item=>({name:item.title?.english||item.title?.romaji||'Untitled anime',tag:[item.format,item.seasonYear].filter(Boolean).join(' · ').toUpperCase()||'ANIME',desc:(item.description||'Discover a new anime adventure.').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,150),img:item.coverImage?.extraLarge||'',score:item.averageScore?item.averageScore/10:null,malId:item.id,genres:item.genres||[]});
+ const mapAnime=item=>({name:item.title?.english||item.title?.romaji||'Untitled anime',tag:[item.format,item.seasonYear].filter(Boolean).join(' · ').toUpperCase()||'ANIME',desc:(item.description||'Discover a new anime adventure.').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,150),img:item.coverImage?.extraLarge||'',bannerImg:item.bannerImage||'',score:item.averageScore?item.averageScore/10:null,malId:item.id,genres:item.genres||[]});
  const fetchPage=async(pageNumber,term,append=false)=>{
   if(append)setMoreLoading(true);else{setLoading(true);setCatalogError(false)}
   try{
