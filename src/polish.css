@@ -1978,3 +1978,57 @@ button,input,textarea,select{font:inherit}
   .shop-grid, .marketplace-page .shop-grid { grid-template-columns: minmax(0, 1fr) !important; }
   .profile-quick-grid, .profile-detail-grid { grid-template-columns: minmax(0, 1fr) !important; }
 }
+
+
+/* Community phase: practical discovery controls and calmer reading rhythm. */
+.community-page .community-result-count {
+  display: inline-flex;
+  margin: 7px 0 0 10px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.community-page .community-search {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  min-height: 48px;
+  margin: 16px 0 18px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  color: var(--muted);
+}
+.community-page .community-search:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 12%, transparent);
+}
+.community-page .community-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+.community-page .community-search input::placeholder { color: var(--muted); opacity: .8; }
+.community-page .community-search button { flex: 0 0 auto; }
+.community-page .community-empty-state {
+  display: grid;
+  justify-items: start;
+  gap: 9px;
+  padding: clamp(22px, 3vw, 34px) !important;
+}
+.community-page .community-empty-state h3 { margin: 0; font-size: 19px; }
+.community-page .community-empty-state p { max-width: 52ch; margin: 0 0 8px; line-height: 1.75; }
+@media (pointer: coarse) and (hover: none) and (max-device-width: 1100px) {
+  .community-page .community-search { min-height: 44px; margin: 12px 0 14px; padding-inline: 11px; }
+  .community-page .community-search input { font-size: 12px; }
+  .community-page .community-result-count { display: block; margin: 5px 0 0; }
+}
