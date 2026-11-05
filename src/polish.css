@@ -1313,3 +1313,186 @@ button,input,textarea,select{font:inherit}
   .membership-page .tier-plan-grid > article:last-child { grid-column: 1 / -1 !important; }
   .anime-detail-hero { grid-template-columns: minmax(140px, 190px) minmax(0, 1fr) !important; }
 }
+
+
+/* Desktop finishing pass — consistent page rhythm and readable hierarchy across every route. */
+@media (min-width: 761px) {
+  .main {
+    min-height: calc(100vh - 78px) !important;
+    background: radial-gradient(ellipse at 88% 2%, #b9955010 0, transparent 34%) !important;
+  }
+  .main > .page {
+    max-width: 1500px !important;
+    padding: clamp(42px, 4vw, 68px) 0 clamp(66px, 6vw, 92px) !important;
+  }
+  .main > .home-v2 {
+    max-width: 1560px !important;
+    margin-inline: auto !important;
+    padding-bottom: 54px !important;
+  }
+  .page > .section-head {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 28px !important;
+    margin-bottom: clamp(28px, 3vw, 42px) !important;
+  }
+  .page > .section-head h2 {
+    font: 700 clamp(38px, 3.1vw, 52px)/1.04 'DM Sans', sans-serif !important;
+    letter-spacing: -.045em !important;
+    margin: 9px 0 10px !important;
+  }
+  .page > .section-head p {
+    max-width: 66ch !important;
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+  .page .eyebrow, .page .intro-number {
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+    letter-spacing: 1.8px !important;
+  }
+  .page button, .page input, .page select, .page textarea {
+    min-width: 0;
+  }
+  .page button { transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease; }
+  .page button:focus-visible, .page a:focus-visible, .home-v2 button:focus-visible {
+    outline: 2px solid var(--gold) !important;
+    outline-offset: 3px !important;
+  }
+
+  /* Explore */
+  .explore-page { max-width: 1500px !important; }
+  .explore-page .explore-hero {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 32px !important;
+    min-height: 175px !important;
+    margin-bottom: 24px !important;
+  }
+  .explore-page .explore-hero h1 {
+    font: 700 clamp(34px, 3.4vw, 48px)/1.04 'DM Sans', sans-serif !important;
+    letter-spacing: -.04em !important;
+  }
+  .explore-page .explore-toolbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px) !important;
+    align-items: center !important;
+    gap: 18px !important;
+    margin: 22px 0 !important;
+  }
+  .explore-page .searchbar { min-width: 0 !important; margin: 0 !important; min-height: 54px !important; border-radius: 10px !important; }
+  .explore-page .explore-sort { display: flex !important; align-items: center !important; gap: 12px !important; min-width: 0 !important; }
+  .explore-page .explore-sort select { flex: 1 !important; min-width: 0 !important; min-height: 48px !important; border-radius: 9px !important; padding: 0 13px !important; }
+  .explore-page .explore-genres { display: flex !important; flex-wrap: wrap !important; gap: 9px !important; margin: 18px 0 24px !important; }
+  .explore-page .explore-anime-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 20px !important; }
+  .explore-page .explore-anime-grid .anime-info { gap: 10px !important; padding: 18px !important; }
+  .explore-page .explore-anime-grid .anime-info h3 { font-size: 17px !important; }
+  .explore-page .explore-anime-grid .anime-info p { font-size: 12px !important; line-height: 1.75 !important; }
+
+  /* Community feed and sidebar */
+  .community-page { max-width: 1450px !important; }
+  .community-page .community-welcome {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: end !important;
+    gap: 30px !important;
+    min-height: 190px !important;
+    border-radius: 16px !important;
+  }
+  .community-page .community-welcome h1 {
+    font: 700 clamp(38px, 3.6vw, 54px)/1.02 'DM Sans', sans-serif !important;
+    letter-spacing: -.05em !important;
+  }
+  .community-page .community-prompt-row { margin: 24px 0 !important; }
+  .community-page .community-layout {
+    grid-template-columns: minmax(0, 1.65fr) minmax(280px, .75fr) !important;
+    gap: clamp(22px, 2.5vw, 38px) !important;
+  }
+  .community-page .community-feed-toolbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 18px !important;
+    margin-bottom: 6px !important;
+  }
+  .community-page .community-feed-tabs { display: flex !important; flex-wrap: wrap !important; gap: 8px !important; }
+  .community-page .community-compose-box,
+  .community-page .post,
+  .community-page .community-side-card {
+    border-radius: 13px !important;
+    padding: clamp(20px, 2vw, 28px) !important;
+  }
+  .community-page .post { display: flex !important; flex-direction: column !important; gap: 10px !important; }
+  .community-page .post-top { min-width: 0 !important; gap: 13px !important; }
+  .community-page .post h3 { font: 700 clamp(19px, 1.7vw, 25px)/1.25 'DM Sans', sans-serif !important; letter-spacing: -.025em !important; margin: 12px 0 4px !important; }
+  .community-page .post p { font-size: 13px !important; line-height: 1.85 !important; overflow-wrap: anywhere !important; }
+  .community-page .post-actions { flex-wrap: wrap !important; gap: 20px !important; }
+  .community-page .community-side { gap: 16px !important; align-content: start !important; }
+
+  /* Marketplace cards */
+  .marketplace-page .marketplace-tools {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 290px) !important;
+    gap: 18px !important;
+    align-items: center !important;
+    margin: 24px 0 !important;
+  }
+  .marketplace-page .marketplace-tools .searchbar { margin: 0 !important; min-height: 52px !important; border-radius: 10px !important; }
+  .marketplace-page .marketplace-categories { display: flex !important; flex-wrap: wrap !important; gap: 9px !important; margin-bottom: 24px !important; }
+  .marketplace-page .shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 20px !important; }
+  .marketplace-page .shop-item { overflow: hidden !important; border-radius: 14px !important; padding: 0 !important; }
+  .marketplace-page .shop-item-copy { padding: 20px !important; }
+  .marketplace-page .shop-item-copy h3 { font: 700 19px/1.25 'DM Sans', sans-serif !important; letter-spacing: -.02em !important; }
+  .marketplace-page .shop-item-copy p { font-size: 12px !important; line-height: 1.75 !important; }
+
+  /* Profile and Settings */
+  .profile-quick-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 16px !important; }
+  .profile-quick-grid > * { min-height: 150px !important; padding: 22px !important; border-radius: 13px !important; }
+  .profile-cover { min-height: 220px !important; border-radius: 15px !important; }
+  .profile-row { padding: 46px 8px 26px !important; }
+  .profile-row h2 { font: 700 30px/1.15 'DM Sans', sans-serif !important; letter-spacing: -.03em !important; }
+  .profile-detail-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 16px !important; }
+  .settings-page { max-width: 1280px !important; }
+  .settings-page .settings-hero { display: grid !important; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .8fr) !important; gap: 20px !important; align-items: stretch !important; margin: 22px 0 28px !important; }
+  .settings-page .settings-hero-art { min-height: 230px !important; padding: clamp(24px, 3vw, 38px) !important; border-radius: 15px !important; }
+  .settings-page .settings-account-card { display: flex !important; align-items: center !important; gap: 17px !important; min-width: 0 !important; padding: 24px !important; border-radius: 15px !important; }
+  .settings-page .settings-list { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 18px !important; align-items: start !important; }
+  .settings-page .settings-group { min-width: 0 !important; padding: 23px !important; border-radius: 14px !important; }
+  .settings-page .settings-group:last-child { grid-column: 1 / -1 !important; }
+  .settings-page .setting-row { gap: 18px !important; padding: 17px 0 !important; }
+  .settings-page .setting-row small { max-width: 48ch !important; line-height: 1.65 !important; }
+
+  /* Membership cards and information blocks */
+  .membership-page .membership-plans { margin-bottom: 4px !important; }
+  .membership-page .membership-intro { display: grid !important; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr) !important; gap: 26px !important; align-items: center !important; }
+  .membership-page .membership-intro-art { width: 100% !important; min-height: 300px !important; border-radius: 15px !important; }
+  .membership-page .membership-intro-points { display: grid !important; gap: 13px !important; }
+  .membership-page .membership-perks { padding: 26px 0 !important; }
+  .membership-page .membership-perk-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 16px !important; }
+  .membership-page .membership-flow-steps { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 16px !important; }
+  .membership-page .membership-activity { padding: 26px !important; border-radius: 15px !important; }
+
+  /* Shared text and footer alignment */
+  .main .notice { border-radius: 10px !important; padding: 15px 18px !important; line-height: 1.7 !important; }
+  .footer { max-width: none !important; min-height: 68px !important; font-size: 10px !important; }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .explore-page .explore-anime-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .community-page .community-layout { grid-template-columns: minmax(0, 1fr) !important; }
+  .community-page .community-side { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .marketplace-page .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .settings-page .settings-list { grid-template-columns: minmax(0, 1fr) !important; }
+  .settings-page .settings-group:last-child { grid-column: auto !important; }
+  .membership-page .tier-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .membership-page .tier-plan-grid > article:last-child { grid-column: 1 / -1 !important; }
+}
+@media (min-width: 761px) and (max-width: 900px) {
+  .explore-page .explore-toolbar,
+  .marketplace-page .marketplace-tools { grid-template-columns: minmax(0, 1fr) !important; }
+  .settings-page .settings-hero { grid-template-columns: minmax(0, 1fr) !important; }
+  .membership-page .membership-intro { grid-template-columns: minmax(0, 1fr) !important; }
+  .membership-page .membership-intro-art { min-height: 240px !important; }
+  .membership-page .membership-flow-steps { grid-template-columns: minmax(0, 1fr) !important; }
+}
