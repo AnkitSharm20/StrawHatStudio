@@ -1834,3 +1834,147 @@ button,input,textarea,select{font:inherit}
 @media (max-device-width: 650px) {.anime-detail-hero{grid-template-columns:96px minmax(0,1fr)!important;gap:14px!important;min-height:0!important;padding:15px!important}.detail-cover{max-width:96px!important;border-radius:10px!important}.detail-heading h1{font-size:clamp(23px,7vw,35px)!important}.detail-heading .detail-meta{gap:5px!important;margin:9px 0!important}.detail-heading .detail-meta span{font-size:9px!important;padding:6px 7px!important}.detail-heading .detail-genres{gap:5px!important;margin:8px 0!important}.detail-heading .detail-genres span{font-size:9px!important;padding:5px 7px!important}.detail-trailer-below{padding:13px!important}.detail-content-grid{grid-template-columns:minmax(0,1fr)!important}}
 @media (max-device-width: 760px) {.membership-page .tier-plan-grid{grid-template-columns:minmax(0,1fr)!important}.membership-page .tier-plan-grid>article{padding:18px!important}.membership-page .tier-plan-grid article>p{min-height:0!important}.membership-page .membership-period-head{align-items:flex-start!important;flex-direction:column!important}.membership-page .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media (max-device-width: 420px) {.membership-page .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}.membership-page .membership-billing-switch{width:100%!important}.membership-page .membership-intro{grid-template-columns:minmax(0,1fr)!important}.membership-page .membership-intro-art{min-height:190px!important}}
+
+
+/* STRAW HAT — touch-device responsive recovery.
+   Android in-app browsers can expose a desktop-sized CSS viewport; coarse-pointer
+   detection keeps the phone layout usable even when width media queries misfire. */
+@media (pointer: coarse) and (hover: none) and (max-device-width: 1100px) {
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body, #root, .app {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+  body { font-size: 14px !important; }
+  .topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 120 !important;
+    display: flex !important;
+    width: 100% !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    padding: 0 12px !important;
+    gap: 10px !important;
+  }
+  .topbar .mobile { display: grid !important; flex: 0 0 36px !important; }
+  .topbar .brand { flex: 0 1 auto !important; min-width: 0 !important; font-size: 11px !important; }
+  .topbar .brand small { font-size: 7px !important; }
+  .topbar .toplinks, .topbar .sign { display: none !important; }
+  .topbar .top-actions { display: flex !important; flex: 0 0 auto !important; margin-left: auto !important; gap: 6px !important; }
+  .topbar .iconbtn, .topbar .avatar { width: 36px !important; height: 36px !important; min-width: 36px !important; }
+  .sidebar {
+    position: fixed !important;
+    top: 62px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 115 !important;
+    width: min(280px, 84vw) !important;
+    max-width: 84vw !important;
+    height: calc(100dvh - 62px) !important;
+    overflow-y: auto !important;
+    transform: translateX(-110%) !important;
+    transition: transform .22s ease !important;
+    box-shadow: 18px 0 45px #0009 !important;
+  }
+  .sidebar.open { transform: translateX(0) !important; left: 0 !important; }
+  .scrim { display: block !important; position: fixed !important; inset: 62px 0 0 !important; z-index: 110 !important; }
+  .main {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 15px 28px !important;
+    overflow: clip !important;
+  }
+  .mobile-search { display: flex !important; width: 100% !important; min-width: 0 !important; }
+  .main > .page, .main > .home-v2 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    padding: 24px 0 42px !important;
+  }
+  .page > .section-head { display: block !important; margin: 0 0 22px !important; }
+  .page .section-head h1, .page .section-head h2 { font-size: clamp(28px, 8vw, 38px) !important; line-height: 1.08 !important; }
+  .page .section-head p { font-size: 12px !important; line-height: 1.7 !important; }
+  .home-v2 { padding-top: 0 !important; }
+  .home-section-v2 { padding-block: 26px !important; }
+  .section-v2-head { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 9px !important; margin-bottom: 17px !important; }
+  .section-v2-head h2 { font-size: clamp(24px, 7vw, 32px) !important; line-height: 1.12 !important; }
+  .feature-anime-grid-five, .explore-anime-grid, .anime-grid {
+    display: grid !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  .feature-anime-grid-five > .anime-card:first-child { grid-column: 1 / -1 !important; }
+  .feature-anime-grid-five > .anime-card:first-child .poster { aspect-ratio: 16 / 9 !important; height: auto !important; }
+  .feature-anime-grid-five > .anime-card:not(:first-child) .poster,
+  .explore-anime-grid .poster, .anime-grid .poster { aspect-ratio: 4 / 5 !important; height: auto !important; }
+  .anime-card { width: 100% !important; min-width: 0 !important; overflow: hidden !important; }
+  .anime-card .poster { width: 100% !important; overflow: hidden !important; }
+  .anime-card .poster img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+  .anime-card .anime-info { min-width: 0 !important; padding: 12px !important; gap: 7px !important; }
+  .anime-card .anime-info h3 { font-size: clamp(13px, 3.8vw, 16px) !important; line-height: 1.25 !important; overflow-wrap: anywhere !important; }
+  .anime-card .anime-info p { font-size: 10px !important; line-height: 1.55 !important; }
+  .explore-page .explore-toolbar, .marketplace-page .marketplace-tools {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .explore-page .explore-genres, .marketplace-page .marketplace-categories { display: flex !important; flex-wrap: wrap !important; gap: 7px !important; }
+  .community-page .community-layout, .community-layout, .stream-layout, .detail-content-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    gap: 14px !important;
+  }
+  .community-page .community-welcome { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; padding: 20px !important; }
+  .community-page .community-welcome h1 { font-size: clamp(28px, 8vw, 38px) !important; }
+  .community-side, .community-page .community-side { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; }
+  .community-page .post, .community-page .community-compose-box, .community-page .community-side-card { min-width: 0 !important; padding: 15px !important; }
+  .community-page .post p { overflow-wrap: anywhere !important; line-height: 1.7 !important; }
+  .shop-grid, .marketplace-page .shop-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 11px !important; }
+  .shop-item { min-width: 0 !important; padding: 12px !important; }
+  .shop-item-copy { min-width: 0 !important; padding: 12px !important; }
+  .shop-item-copy h3 { font-size: 14px !important; }
+  .membership-page { width: 100% !important; min-width: 0 !important; gap: 20px !important; }
+  .membership-page .membership-plans { width: 100% !important; padding: 15px !important; }
+  .membership-page .tier-plan-grid, .membership-page .membership-period .membership-plan-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+  .membership-page .tier-plan-grid > article { min-width: 0 !important; padding: 18px !important; }
+  .membership-page .membership-intro { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; padding: 17px !important; gap: 14px !important; }
+  .membership-page .membership-intro-art { width: 100% !important; min-height: 0 !important; aspect-ratio: 16 / 9 !important; }
+  .membership-page .membership-perk-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 9px !important; }
+  .membership-page .membership-flow-steps { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 9px !important; }
+  .anime-detail-page { width: 100% !important; min-width: 0 !important; gap: 15px !important; }
+  .anime-detail-hero { display: grid !important; grid-template-columns: 100px minmax(0, 1fr) !important; gap: 13px !important; padding: 14px !important; min-height: 0 !important; }
+  .detail-cover { width: 100% !important; max-width: 100px !important; }
+  .detail-heading h1 { font-size: clamp(23px, 7vw, 34px) !important; overflow-wrap: anywhere !important; }
+  .detail-trailer-below { padding: 12px !important; }
+  .detail-trailer-below iframe { width: 100% !important; aspect-ratio: 16 / 9 !important; }
+  .profile-quick-grid, .profile-detail-grid, .stats-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 9px !important; }
+  .profile-cover { height: 145px !important; }
+  .profile-row { display: flex !important; flex-wrap: wrap !important; gap: 12px !important; padding: 38px 5px 20px !important; }
+  .settings-page .settings-hero, .settings-page .settings-list { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 12px !important; }
+  .settings-page .settings-group { min-width: 0 !important; padding: 15px !important; }
+  .footer { display: flex !important; flex-wrap: wrap !important; width: 100% !important; margin: 0 !important; padding: 18px 0 !important; }
+}
+@media (pointer: coarse) and (hover: none) and (max-device-width: 390px) {
+  .main { padding-inline: 11px !important; }
+  .feature-anime-grid-five, .explore-anime-grid, .anime-grid { gap: 9px !important; }
+  .anime-card .anime-info { padding: 9px !important; }
+  .membership-page .membership-perk-grid, .membership-page .membership-flow-steps { grid-template-columns: minmax(0, 1fr) !important; }
+  .shop-grid, .marketplace-page .shop-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .profile-quick-grid, .profile-detail-grid { grid-template-columns: minmax(0, 1fr) !important; }
+}
