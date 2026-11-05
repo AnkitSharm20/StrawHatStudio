@@ -63,7 +63,7 @@ function Explore({query,setQuery,shows,saved,toggleSave}){const navigate=useNavi
  </div>
 }
 function Community({notify,user}){
- const [posts,setPosts]=useState([]),[loading,setLoading]=useState(true),[body,setBody]=useState(''),[spoiler,setSpoiler]=useState(false),[busy,setBusy]=useState(false),[expanded,setExpanded]=useState(''),[replies,setReplies]=useState({}),[replyText,setReplyText]=useState({}),[myLikes,setMyLikes]=useState({}),[feedMode,setFeedMode]=useState('all'),[followedAuthors,setFollowedAuthors]=useState({},[feedSearch,setFeedSearch]=useState('');
+ const [posts,setPosts]=useState([]),[loading,setLoading]=useState(true),[body,setBody]=useState(''),[spoiler,setSpoiler]=useState(false),[busy,setBusy]=useState(false),[expanded,setExpanded]=useState(''),[replies,setReplies]=useState({}),[replyText,setReplyText]=useState({}),[myLikes,setMyLikes]=useState({}),[feedMode,setFeedMode]=useState('all'),[followedAuthors,setFollowedAuthors]=useState({}),[feedSearch,setFeedSearch]=useState('');
  const loadPosts=async()=>{
   if(!supabase){setLoading(false);notify('Supabase is not configured for this deployment');return}
   setLoading(true);
