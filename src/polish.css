@@ -1496,3 +1496,341 @@ button,input,textarea,select{font:inherit}
   .membership-page .membership-intro-art { min-height: 240px !important; }
   .membership-page .membership-flow-steps { grid-template-columns: minmax(0, 1fr) !important; }
 }
+
+/* Physical-device fallback: some Android in-app browsers report a desktop-sized CSS viewport.
+   Apply the mobile layout using the actual device width as well as the normal viewport query. */
+@media (max-device-width: 760px) {
+  .topbar { height:62px !important; padding:0 16px !important; gap:12px !important; }
+  .mobile { display:block !important; }
+  .toplinks,.sign { display:none !important; }
+  .top-actions { margin-left:auto !important; gap:7px !important; }
+  .sidebar { top:62px !important; left:-270px !important; width:255px !important; }
+  .sidebar.open { left:0 !important; }
+  .main { margin:0 !important; width:100% !important; max-width:none !important; padding:0 18px !important; }
+  .footer { margin:0 !important; padding:20px 18px !important; }
+  .main > .page,.main > .home-v2 { width:100% !important; max-width:none !important; }
+}
+@media (max-device-width: 760px) {.topbar{height:62px;padding:0 16px;gap:12px}.mobile{display:block}.brand{font-size:12px;letter-spacing:1px;gap:8px}.brandmark{width:32px;height:32px}.brandmark svg{width:17px}.toplinks,.sign{display:none}.top-actions{margin-left:auto;gap:7px}.sidebar{top:62px;left:-270px;width:255px;transition:left .25s;box-shadow:10px 0 30px #0005}.sidebar.open{left:0}.scrim{display:block;position:fixed;inset:62px 0 0;background:#0008;z-index:9}.main{margin:0;padding:0 18px}.mobile-search{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:12px 0;color:var(--muted)}.hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:48px 0 34px}.hero h1{font-size:56px}.hero-proof{margin-top:30px}.hero-art{margin:0 0 20px;min-height:310px}.sun-disc{width:210px;height:210px;top:45px}.hero-ship{font-size:105px;top:83px}.section{padding-top:40px}.section-head h2,.page h2{font-size:27px}.anime-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.poster{height:150px}.anime-info{padding:12px}.anime-info h3{font-size:17px}.anime-info p{font-size:11px}.community-banner{padding:20px;gap:14px;margin-top:40px}.community-banner h2{font-size:21px}.community-banner .primary{margin:0}.lower-grid{grid-template-columns:1fr;gap:20px;padding-bottom:40px}.quote-card{min-height:190px}.page{padding:38px 0}.page .section-head h2{font-size:34px}.community-layout,.stream-layout{grid-template-columns:1fr}.community-side{grid-template-columns:1fr 1fr}.stream-editor,.discord-preview{padding:18px}.footer{flex-wrap:wrap;font-size:8px}.footer span:last-child{width:100%}.profile-row{align-items:flex-start;gap:10px}.profile-row .secondary{padding:9px;font-size:11px}.settings-list>div{gap:12px}.theme-toggle button{padding:7px}.steps{padding-left:20px}}
+@media (max-device-width: 420px) {.anime-grid{grid-template-columns:1fr 1fr}.poster{height:125px}.anime-info p{min-height:54px}.community-side{grid-template-columns:1fr}.hero h1{font-size:49px}.hero-buttons{flex-wrap:wrap}.profile-row h2{font-size:20px}.stats-grid>div{padding:15px 5px}.stats-grid b{font-size:21px}}
+@media (max-device-width: 760px) {.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-device-width: 430px) {.shop-grid{grid-template-columns:1fr}}
+@media (max-device-width: 760px) {.settings-connection{grid-template-columns:1fr;gap:12px;padding:16px}.setting-row{align-items:flex-start;gap:10px}.profile-row{align-items:flex-start;gap:14px;flex-wrap:wrap}.profile-detail-grid{grid-template-columns:1fr}.account-popover{right:-4px}}
+@media (max-device-width: 760px) {
+ .hero-v2{aspect-ratio:16/9!important;min-height:0!important;height:auto!important}
+ .hero-video-stage{height:100%!important}
+ .stream-layout{grid-template-columns:minmax(0,1fr)!important}
+ .stream-profile-result,.membership-activity{align-items:stretch;flex-direction:column}
+ .stream-result-card,.membership-activity .member-activity-preview{max-width:100%;width:100%}
+ .anime-grid,.feature-anime-grid,.seasonal-rail,.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .poster,.shop-artwork{aspect-ratio:3/4!important;height:auto!important;min-height:0!important}
+ .feature-anime-grid .poster,.anime-card .poster{height:auto!important}
+}
+@media (max-device-width: 420px) {
+ .anime-grid,.feature-anime-grid,.seasonal-rail,.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .anime-info{padding:10px!important}
+ .anime-info h3{font-size:14px!important}
+ .anime-info p{font-size:10px!important}
+ .stream-profile-result,.membership-activity{padding:15px}
+}
+@media (max-device-width: 700px) {.admin-quality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-asset-row{flex-wrap:wrap}.asset-active,.asset-inactive{margin-left:90px}}
+@media (max-device-width: 760px) {.membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.membership-flow-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.membership-intro{align-items:flex-start}.membership-mark{width:94px;height:94px;flex-basis:94px}.membership-mark svg{width:26px;height:26px}.membership-mark b{font-size:10px}.membership-mark small{font-size:7px}}
+@media (max-device-width: 520px) {.membership-intro{display:block}.membership-mark{display:none}.membership-plans-head{align-items:flex-start;flex-direction:column}.membership-plan-grid{grid-template-columns:1fr}.membership-activity{align-items:stretch;flex-direction:column}.member-activity-preview{max-width:none}.membership-perk-grid{grid-template-columns:1fr}}
+@media (max-device-width: 760px) {
+ .hero-v2{aspect-ratio:16/9!important;min-height:0!important;height:auto!important;max-height:none!important}
+ .hero-v2-art,.hero-video-stage{inset:0!important;width:100%!important;height:100%!important;min-height:0!important}
+ .crew-feature{grid-template-columns:1fr;gap:0}
+ .crew-feature-image{aspect-ratio:16/9;height:auto;max-height:none}
+ .crew-feature-copy{padding:25px 18px}
+ .home-bottom-cta{grid-template-columns:1fr;gap:18px}
+ .cta-art{aspect-ratio:16/9;height:auto;max-height:none}
+ .feature-anime-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .profile-cover{aspect-ratio:16/7;max-height:210px}
+ .profile-row{padding-top:34px;align-items:flex-start}
+ .profile-row>.secondary{max-width:100%;white-space:nowrap}
+ .profile-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .settings-connection{grid-template-columns:1fr}
+ .settings-connection>div:first-child{grid-column:auto}
+ .admin-dashboard{width:calc(100% + 32px);margin-inline:-16px;max-width:calc(100vw)}
+ .admin-rail{position:relative;top:auto;z-index:2}
+ .admin-workspace{width:100%;min-width:0}
+ .admin-home-grid{grid-template-columns:1fr}
+ .admin-slot-grid{grid-template-columns:1fr}
+}
+@media (max-device-width: 480px) {
+ .profile-detail-grid{grid-template-columns:1fr 1fr}
+ .profile-cover{aspect-ratio:16/8}
+ .profile-row{gap:10px}
+ .profile-row>.secondary{width:100%;justify-content:center}
+ .profile-about textarea{width:100%;min-width:0}
+ .setting-row{align-items:flex-start}
+ .setting-row>.secondary{max-width:45%;white-space:normal}
+ .theme-toggle{width:100%}
+ .theme-toggle button{flex:1}
+ .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .admin-topline h1{overflow-wrap:anywhere}
+ .admin-slot-grid{grid-template-columns:1fr}
+ .admin-media-grid{grid-template-columns:1fr}
+ .admin-media-card>img,.admin-media-card>video{height:auto;aspect-ratio:16/9;object-fit:cover}
+ .membership-flow-steps{grid-template-columns:1fr 1fr}
+}
+@media (max-device-width: 600px) {.tier-plan-grid{grid-template-columns:1fr}.tier-plan-grid article:last-child{grid-column:auto}.tier-plan-grid .plan-price{font-size:30px}}
+@media (max-device-width: 760px) {
+ .main{overflow:clip!important}
+ .hero-v2{aspect-ratio:auto!important;min-height:760px!important;height:auto!important;padding:0!important}
+ .hero-v2-copy{width:100%!important;max-width:100%!important;min-height:0!important;padding:38px 20px 0!important;justify-content:flex-start!important}
+ .hero-v2-copy h1{font-size:clamp(48px,12vw,76px)!important;margin:22px 0 16px!important;line-height:.98!important}
+ .hero-v2-copy>p{max-width:42ch!important;font-size:13px!important}
+ .hero-v2-meta{margin-top:18px!important;flex-wrap:wrap!important}
+ .hero-v2-art.hero-video-stage{top:auto!important;bottom:24px!important;left:16px!important;right:16px!important;
+   transform:none!important;width:calc(100% - 32px)!important;height:auto!important;min-height:0!important;
+   aspect-ratio:16/9!important;max-height:none!important}
+ .hero-v2-bottom{display:none!important}
+ .crew-feature{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+ .crew-feature-image,.cta-art{aspect-ratio:16/9!important;height:auto!important;min-height:0!important}
+ .crew-feature-copy{padding:24px 18px!important}
+ .home-bottom-cta{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+ .feature-anime-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .feature-anime-grid .poster{aspect-ratio:16/9!important;height:auto!important}
+ .tier-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .tier-plan-grid article:last-child{grid-column:1/-1}
+ .admin-dashboard{width:calc(100% + 32px)!important;max-width:calc(100vw)!important;margin-inline:-16px!important;grid-template-columns:minmax(0,1fr)!important}
+ .admin-rail{position:relative!important;top:auto!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;gap:6px!important;padding:12px!important;min-height:0!important}
+ .admin-brand{width:100%;padding:0 5px 8px!important}
+ .admin-rail-label,.admin-rail-bottom{display:none!important}
+ .admin-rail>button{flex:1 1 calc(50% - 6px)!important;justify-content:flex-start!important;min-width:0!important}
+ .admin-workspace{width:100%!important;padding:20px 14px!important}
+ .admin-welcome{align-items:flex-start!important;flex-direction:column!important}
+ .admin-home-grid{grid-template-columns:minmax(0,1fr)!important}
+ .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .admin-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .admin-slot-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .admin-topline{align-items:flex-start!important;flex-direction:column!important}
+ .admin-topline h1{overflow-wrap:anywhere}
+ .admin-upload-panel label,.admin-upload-panel input,.admin-upload-panel select{max-width:100%;min-width:0}
+ .profile-cover{aspect-ratio:16/7!important;max-height:none!important}
+ .profile-row{padding-top:36px!important;flex-wrap:wrap!important}
+ .profile-row>div{min-width:0;width:100%}
+ .profile-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .settings-connection{grid-template-columns:minmax(0,1fr)!important}
+ .settings-connection>div:first-child{grid-column:auto!important}
+ .settings-list{grid-template-columns:minmax(0,1fr)!important}
+ .setting-row{align-items:flex-start!important;gap:12px!important}
+ .theme-toggle{flex-wrap:wrap;max-width:100%}
+ .membership-intro{display:flex!important;align-items:flex-start!important;gap:16px!important}
+ .membership-mark{flex:0 0 84px!important;width:84px!important;height:84px!important}
+ .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .membership-flow-steps{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media (max-device-width: 560px) {
+ .tier-plan-grid{grid-template-columns:minmax(0,1fr)!important}
+ .tier-plan-grid article:last-child{grid-column:auto!important}
+ .admin-media-grid,.admin-slot-grid{grid-template-columns:minmax(0,1fr)!important}
+ .admin-media-card>img,.admin-media-card>video{aspect-ratio:16/9!important}
+ .membership-intro{display:block!important}
+ .membership-mark{display:none!important}
+ .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}
+ .membership-flow-steps{grid-template-columns:minmax(0,1fr)!important}
+ .membership-activity{align-items:stretch!important;flex-direction:column!important}
+ .member-activity-preview{max-width:100%!important;width:100%!important;min-width:0!important}
+ .profile-detail-grid{grid-template-columns:minmax(0,1fr)!important}
+ .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .community-feed-tabs{max-width:100%;overflow-x:auto}
+ .community-feed-tabs button{white-space:nowrap}
+}
+@media (max-device-width: 650px) {.admin-report-card{padding:13px}.admin-report-top{flex-direction:column}.admin-report-actions{display:grid;grid-template-columns:1fr 1fr}.admin-report-actions button{min-height:40px}.admin-moderation-filters{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}.admin-moderation-filters button{white-space:nowrap}}
+@media (max-device-width: 560px) {.notification-heading-actions{width:100%}.notification-heading-actions button{flex:1;justify-content:center}.notification-card{padding:14px}.notification-card-actions{gap:10px}}
+@media (max-device-width: 560px) {.public-profile-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.public-profile-cover{aspect-ratio:16/7}.public-profile-page .profile-row{align-items:flex-start}}
+@media (max-device-width: 760px) {
+  .main{min-width:0;overflow-x:clip!important}
+  /* Restore the home hero copy and keep the media directly below it. */
+  .hero-v2{
+    display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+    gap:18px!important;width:100%!important;min-width:0!important;
+    min-height:0!important;height:auto!important;max-height:none!important;
+    aspect-ratio:auto!important;padding:30px 0 22px!important;
+    overflow:hidden!important;
+  }
+  .hero-v2-bg{display:block!important;position:absolute!important;inset:0!important}
+  .hero-v2-copy{
+    display:flex!important;position:relative!important;inset:auto!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    min-height:0!important;padding:8px 0 0!important;z-index:2!important;
+  }
+  .hero-v2-copy h1{max-width:100%!important;overflow-wrap:normal!important}
+  .hero-v2-copy>p{max-width:48ch!important}
+  .hero-v2-meta{display:flex!important;flex-wrap:wrap!important;margin-top:20px!important}
+  .hero-v2-art.hero-video-stage{
+    position:relative!important;inset:auto!important;transform:none!important;
+    width:100%!important;height:auto!important;min-height:0!important;
+    max-height:none!important;aspect-ratio:16/9!important;margin:0!important;
+    border-radius:10px!important;overflow:hidden!important;
+  }
+  .hero-loop-video,.hero-video-placeholder{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important}
+  .hero-v2-bottom{display:flex!important;position:relative!important;inset:auto!important;margin-top:4px!important}
+  /* Every featured anime card uses the same footprint. */
+  .feature-anime-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;gap:12px!important}
+  .feature-anime-grid .anime-card:first-child{grid-column:auto!important}
+  .feature-anime-grid .anime-card:first-child .poster,
+  .feature-anime-grid .poster,.anime-grid .poster{
+    height:auto!important;min-height:0!important;aspect-ratio:16/10!important;
+  }
+  .feature-anime-grid .anime-card,.anime-grid .anime-card{display:flex!important;flex-direction:column!important;min-width:0!important}
+  .feature-anime-grid .anime-info,.anime-grid .anime-info{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;min-width:0!important;padding:12px!important}
+  .feature-anime-grid .anime-info p,.anime-grid .anime-info p{
+    display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;
+    overflow:hidden!important;min-height:0!important;max-height:5.1em!important;line-height:1.7!important;
+    overflow-wrap:anywhere!important;
+  }
+  .feature-anime-grid .anime-info h3,.anime-grid .anime-info h3{font-size:clamp(14px,3.8vw,18px)!important;line-height:1.25!important;overflow-wrap:anywhere!important}
+  .feature-anime-grid .card-link,.anime-grid .card-link{margin-top:auto!important;padding-top:12px!important}
+  /* Theme choices must sit below their label, not beside a full-width control. */
+  .setting-theme-row{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;align-items:stretch!important}
+  .setting-theme-row>span{display:block!important;width:100%!important;min-width:0!important}
+  .setting-theme-row .theme-toggle{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;max-width:100%!important;min-width:0!important}
+  .setting-theme-row .theme-toggle button{width:100%!important;min-width:0!important;justify-content:center!important;white-space:nowrap!important}
+  .setting-row:not(.setting-theme-row){align-items:center!important}
+  .setting-row:not(.setting-theme-row)>span{flex:1 1 auto!important;min-width:0!important}
+  .settings-group{width:100%!important;min-width:0!important}
+  .settings-list{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  /* Tighter profile spacing without clipping the avatar. */
+  .profile-cover{aspect-ratio:16/7!important;height:auto!important;max-height:240px!important}
+  .profile-row{gap:12px!important;padding:42px 0 14px!important}
+  .profile-row>div{width:auto!important;flex:1 1 180px!important;min-width:0!important}
+  .profile-row h2{overflow-wrap:anywhere!important}
+  .profile-about{margin-top:10px!important}
+  /* Keep membership cards readable without oversized empty regions. */
+  .tier-plan-grid{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  .tier-plan-grid article{padding:18px!important;min-height:0!important}
+  .tier-plan-grid article:last-child{grid-column:auto!important}
+  .tier-plan-grid article>ul{min-height:0!important;margin:10px 0 14px!important}
+  .tier-plan-grid .plan-billing-detail{margin-top:12px!important}
+  .tier-plan-grid .plan-price{font-size:clamp(25px,7vw,34px)!important;line-height:1.2!important;overflow-wrap:anywhere!important}
+}
+@media (max-device-width: 390px) {
+  .feature-anime-grid,.anime-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .feature-anime-grid .anime-info,.anime-grid .anime-info{padding:10px!important}
+  .feature-anime-grid .anime-info h3,.anime-grid .anime-info h3{font-size:14px!important}
+  .feature-anime-grid .anime-info p,.anime-grid .anime-info p{font-size:10px!important}
+  .setting-theme-row .theme-toggle button{padding:9px 6px!important;font-size:11px!important}
+  .tier-plan-grid article{padding:15px!important}
+}
+@media (max-device-width: 760px) {
+ .explore-hero{align-items:flex-start;flex-direction:column;gap:16px;padding:20px}
+ .explore-stats{width:100%}
+ .explore-stats>span{flex:1}
+ .explore-toolbar{grid-template-columns:minmax(0,1fr);gap:10px}
+ .explore-toolbar .searchbar{padding:11px 12px}
+ .explore-sort{justify-content:space-between;width:100%}
+ .explore-sort select{flex:1;max-width:none}
+}
+@media (max-device-width: 760px) {
+  .hero-video-only{width:100%!important;aspect-ratio:16/9!important;min-height:0!important;height:auto!important;padding:0!important;margin:0 0 24px!important}
+  .hero-video-only .hero-v2-art.hero-video-stage{inset:0!important;width:100%!important;height:100%!important}
+  .topbar{position:sticky!important;top:0!important;z-index:120!important}
+  .sidebar{z-index:110!important;max-height:calc(100dvh - 62px)!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+  .scrim{z-index:105!important}
+  .main{position:relative!important;z-index:1!important;max-width:100vw!important}
+  .footer{min-width:0!important;overflow-wrap:anywhere!important}
+  .home-v2,.home-section-v2,.home-bottom-cta,.crew-feature,.feature-tiles{min-width:0!important;max-width:100%!important}
+  .home-bottom-cta{grid-template-columns:minmax(0,1fr)!important;gap:18px!important;padding:18px!important}
+  .home-bottom-cta>div{min-width:0!important}
+  .home-bottom-cta h2{font-size:clamp(28px,8vw,40px)!important;line-height:1.1!important;overflow-wrap:normal!important}
+  .home-bottom-cta p{font-size:14px!important;line-height:1.65!important}
+  .cta-art{width:100%!important;aspect-ratio:16/9!important}
+  .feature-tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .feature-tiles>button{min-width:0!important;min-height:170px!important;padding:15px!important}
+  .feature-tiles>button b,.feature-tiles>button small{overflow-wrap:anywhere!important}
+  .crew-feature{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+  .crew-feature-copy{padding:18px 4px!important}
+  .section-v2-head{align-items:flex-start!important;flex-direction:column!important;gap:14px!important}
+  .section-v2-head>button{max-width:100%!important;white-space:normal!important}
+  .admin-dashboard{display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:100%!important;max-width:100%!important;margin:0!important;gap:0!important}
+  .admin-rail{position:sticky!important;top:62px!important;z-index:20!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;width:100%!important;min-width:0!important;padding:12px!important;border-radius:0 0 14px 14px!important}
+  .admin-brand{grid-column:1/-1!important;width:100%!important;display:flex!important;align-items:center!important}
+  .admin-rail-label,.admin-rail-bottom{display:none!important}
+  .admin-rail>button{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;min-width:0!important;width:100%!important;flex:initial!important;padding:11px 9px!important;font-size:11px!important;white-space:normal!important}
+  .admin-rail>button svg{flex:0 0 17px!important}
+  .admin-workspace{min-width:0!important;width:100%!important;padding:18px 12px 28px!important;overflow:hidden!important}
+  .admin-topline{display:flex!important;align-items:flex-start!important;flex-direction:column!important;gap:12px!important;width:100%!important}
+  .admin-topline>div,.admin-topline h1{min-width:0!important;max-width:100%!important;overflow-wrap:anywhere!important}
+  .admin-topline>.secondary{max-width:100%!important}
+  .admin-welcome,.admin-panel,.admin-home-grid,.admin-metrics,.admin-slot-grid,.admin-media-grid,.admin-upload-panel,.admin-report-list{min-width:0!important;max-width:100%!important}
+  .admin-home-grid{grid-template-columns:minmax(0,1fr)!important}
+  .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .admin-metrics>article{min-width:0!important;padding:13px!important}
+  .admin-slot-grid{grid-template-columns:minmax(0,1fr)!important}
+  .admin-slot-grid button{min-width:0!important;grid-template-columns:minmax(0,1fr) auto!important}
+  .admin-media-grid{grid-template-columns:minmax(0,1fr)!important}
+  .admin-media-row,.admin-asset-row{min-width:0!important;max-width:100%!important}
+  .admin-upload-panel input,.admin-upload-panel select,.admin-upload-panel textarea{width:100%!important;max-width:100%!important;min-width:0!important}
+}
+@media (max-device-width: 390px) {
+  .feature-tiles{grid-template-columns:minmax(0,1fr)!important}
+  .home-bottom-cta{padding:14px!important}
+  .admin-rail{grid-template-columns:minmax(0,1fr)!important}
+  .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .admin-workspace{padding-inline:10px!important}
+}
+@media (max-device-width: 760px) {
+  .crew-feature{grid-template-columns:minmax(0,1fr)!important;margin:28px 0!important}
+  .crew-feature-image{width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:16/9!important}
+  .crew-feature-image img{width:100%!important;height:100%!important;aspect-ratio:16/9!important;object-fit:cover!important;object-position:center!important}
+  .crew-feature-copy{padding:22px 18px!important}
+  .crew-feature-copy h2{font-size:clamp(34px,9vw,46px)!important;margin:14px 0!important}
+  .crew-feature-copy>p{font-size:13px!important;margin-bottom:18px!important}
+  .crew-signature{margin-top:16px!important}
+  .membership-intro{grid-template-columns:minmax(0,1fr)!important;padding:20px!important;gap:15px!important}
+  .membership-mark{min-height:110px!important;grid-template-columns:auto auto!important;justify-content:center!important}
+  .membership-mark small{grid-column:1/-1!important}
+  .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .membership-perk-grid article{padding:12px!important}
+  .membership-plan-grid:not(.single-plan){grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  .membership-plan-grid>article{padding:18px!important}
+  .membership-plan-grid>article>p{min-height:0!important}
+  .membership-flow-steps{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .membership-activity{align-items:stretch!important;flex-direction:column!important}
+  .member-activity-preview{width:100%!important;max-width:none!important}
+}
+@media (max-device-width: 390px) {
+  .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}
+  .membership-flow-steps{grid-template-columns:minmax(0,1fr)!important}
+  .membership-intro h2{font-size:30px!important}
+}
+@media (max-device-width: 620px) {
+ .membership-period-head{align-items:flex-start!important;flex-direction:column!important}
+ .membership-period .membership-plan-grid{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ .membership-period{padding:15px!important;margin-top:16px!important}
+ .membership-period .membership-plan-grid>article{padding:19px!important}
+ .membership-period .plan-billing-detail{min-height:0!important}
+ .membership-intro-art{aspect-ratio:16/9!important}
+ .membership-intro-points{display:grid!important;grid-template-columns:1fr!important}
+}
+@media (max-device-width: 600px) {
+ .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}
+ .membership-perk-grid article{min-height:0!important}
+ .settings-hero-art{min-height:160px!important}
+ .admin-workspace{padding:13px!important}
+ .admin-topline,.admin-welcome{align-items:flex-start!important;flex-direction:column!important}
+ .admin-rail{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:12px!important}
+ .admin-brand{grid-column:1/-1!important}
+ .admin-rail>button{font-size:11px!important;padding:10px!important}
+ .admin-home-grid,.admin-slot-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media (max-device-width: 760px) {.crew-feature{grid-template-columns:minmax(0,1fr)!important;gap:0!important}.crew-feature-image{width:100%!important;aspect-ratio:16/9!important}.profile-quick-grid{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-device-width: 760px) {.crew-feature{grid-template-columns:minmax(0,1fr)!important;gap:15px!important;padding:18px!important}.crew-feature-image{width:100%!important;max-width:none!important;aspect-ratio:16/9!important;margin:0 auto!important}.crew-feature-copy{padding:6px 4px 10px!important}.crew-feature-copy h2{font-size:clamp(32px,9vw,44px)!important}}
+@media (max-device-width: 420px) {.membership-billing-switch{gap:7px!important;padding:5px!important}.membership-billing-switch>button{padding:12px 10px!important}.membership-billing-switch>button>span{font-size:13px!important}}
+@media (max-device-width: 620px) {.marketplace-tools{align-items:stretch;flex-direction:column}.marketplace-tools .explore-sort{justify-content:space-between}.catalog-more{margin:20px 0}.catalog-more button{width:100%;justify-content:center}}
+@media (max-device-width: 420px) {.feature-anime-grid-five{gap:9px!important}.feature-anime-grid-five .anime-info{padding:10px!important}.feature-anime-grid-five .anime-info h3{font-size:12px!important}.feature-anime-grid-five .anime-info p{font-size:10px!important;line-height:1.5!important;-webkit-line-clamp:3!important}}
+@media (max-device-width: 650px) {.anime-detail-hero{grid-template-columns:105px minmax(0,1fr);gap:14px;padding:15px}.detail-cover{max-width:105px}.detail-heading h1{font-size:clamp(23px,7vw,34px)}.detail-meta span,.detail-genres span{font-size:9px;padding:6px 8px}.detail-content-grid,.detail-trailer{grid-template-columns:minmax(0,1fr)}}
+@media (max-device-width: 700px) {.membership-after-plans .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-device-width: 430px) {.membership-after-plans .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-device-width: 620px) {.community-welcome{align-items:flex-start;flex-direction:column}.community-prompt-row{grid-template-columns:minmax(0,1fr)}.community-side{grid-template-columns:minmax(0,1fr)}.community-feed-toolbar{align-items:flex-start}.community-feed-tabs{width:100%}.community-feed-tabs button{flex:1}.community-layout .post{padding:13px!important}.community-layout .post-actions button{font-size:9px;padding:7px}.community-compose-box textarea{font-size:12px!important}}
+@media (max-device-width: 620px) {.feature-anime-grid-five{gap:12px!important}.feature-anime-grid-five>.anime-card:first-child .poster{aspect-ratio:16/9!important}.feature-anime-grid-five>.anime-card:not(:first-child) .poster{aspect-ratio:4/5!important}.feature-anime-grid-five .anime-info p{font-size:10px!important}.feature-anime-grid-five>.anime-card:first-child .anime-info h3{font-size:19px!important}}
+@media (max-device-width: 360px) {.feature-anime-grid-five{gap:8px!important}.feature-anime-grid-five .anime-info{padding:9px!important}.feature-anime-grid-five .anime-info h3{font-size:11px!important}}
+@media (max-device-width: 620px) {.membership-intro-art{min-height:190px!important}.membership-plans{padding:13px!important}.membership-period .membership-plan-grid>article{min-height:0!important}}
+@media (max-device-width: 620px) {.seasonal-rail{gap:12px!important}.seasonal-rail>.anime-card{flex-basis:68vw!important}}
+@media (max-device-width: 390px) {.explore-anime-grid{gap:10px!important}.explore-anime-grid>.anime-card .anime-info{padding:10px!important;gap:6px!important}.explore-anime-grid>.anime-card .anime-info h3{font-size:13px!important}.explore-anime-grid>.anime-card .anime-info p{font-size:10px!important;line-height:1.55!important;-webkit-line-clamp:3!important}.explore-anime-grid>.anime-card .card-link{font-size:10px!important}}
+@media (max-device-width: 650px) {.anime-detail-hero{grid-template-columns:96px minmax(0,1fr)!important;gap:14px!important;min-height:0!important;padding:15px!important}.detail-cover{max-width:96px!important;border-radius:10px!important}.detail-heading h1{font-size:clamp(23px,7vw,35px)!important}.detail-heading .detail-meta{gap:5px!important;margin:9px 0!important}.detail-heading .detail-meta span{font-size:9px!important;padding:6px 7px!important}.detail-heading .detail-genres{gap:5px!important;margin:8px 0!important}.detail-heading .detail-genres span{font-size:9px!important;padding:5px 7px!important}.detail-trailer-below{padding:13px!important}.detail-content-grid{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-device-width: 760px) {.membership-page .tier-plan-grid{grid-template-columns:minmax(0,1fr)!important}.membership-page .tier-plan-grid>article{padding:18px!important}.membership-page .tier-plan-grid article>p{min-height:0!important}.membership-page .membership-period-head{align-items:flex-start!important;flex-direction:column!important}.membership-page .membership-perk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-device-width: 420px) {.membership-page .membership-perk-grid{grid-template-columns:minmax(0,1fr)!important}.membership-page .membership-billing-switch{width:100%!important}.membership-page .membership-intro{grid-template-columns:minmax(0,1fr)!important}.membership-page .membership-intro-art{min-height:190px!important}}
