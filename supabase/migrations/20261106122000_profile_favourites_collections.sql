@@ -1,0 +1,1 @@
+alter table public.profiles add column if not exists favorite_anime text[] not null default '{}'::text[], add column if not exists favorite_characters text[] not null default '{}'::text[], add column if not exists favorite_genres text[] not null default '{}'::text[];
