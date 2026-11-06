@@ -2061,3 +2061,27 @@ button,input,textarea,select{font:inherit}
  .profile-page .profile-header-actions{grid-template-columns:minmax(0,1fr)}
  .profile-page .profile-section-note{font-size:10px}
 }
+
+
+/* Grand Line boot experience */
+.voyage-loader{
+ position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:12px;padding:28px;text-align:center;color:#f4f0e7;
+ background:radial-gradient(ellipse at 50% 38%,rgba(24,54,78,.72),transparent 42%),linear-gradient(145deg,#050914 0%,#0b1426 54%,#071c27 100%);
+ opacity:1;visibility:visible;transition:opacity .42s ease,visibility .42s ease;
+}
+.voyage-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.voyage-loader-mark{width:76px;height:76px;display:grid;place-items:center;border:1px solid rgba(225,190,111,.6);border-radius:24px;background:linear-gradient(145deg,#ecb94c,#bd477f);color:#fff;box-shadow:0 0 55px rgba(221,170,78,.2);animation:loader-sway 2.6s ease-in-out infinite}
+.voyage-loader-kicker{margin-top:12px;color:#73d9d0;font-size:9px;letter-spacing:.34em;font-weight:800}
+.voyage-loader h1{margin:0;font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,7vw,42px);letter-spacing:.12em}
+.voyage-loader p{margin:0;color:#c3ccdc;font-size:13px}
+.voyage-loader-track{width:min(230px,65vw);height:3px;margin-top:12px;overflow:hidden;border-radius:9px;background:rgba(255,255,255,.13)}
+.voyage-loader-track i{display:block;width:38%;height:100%;border-radius:9px;background:linear-gradient(90deg,#52d6ca,#e7b95e,#db6d9f);animation:loader-sail 1.35s ease-in-out infinite}
+.voyage-loader>small{margin-top:3px;color:#71839d;font-size:8px;letter-spacing:.22em}
+@keyframes loader-sail{0%{transform:translateX(-110%)}100%{transform:translateX(270%)}}
+@keyframes loader-sway{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+html[data-reduced-motion="true"] *,html[data-reduced-motion="true"] *::before,html[data-reduced-motion="true"] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+html[data-compact-layout="true"] .page{gap:clamp(14px,2vw,22px)}
+html[data-compact-layout="true"] .panel,html[data-compact-layout="true"] .settings-group,html[data-compact-layout="true"] .community-post{padding:clamp(12px,1.8vw,18px)!important}
+@media(max-width:600px){.voyage-loader-mark{width:68px;height:68px;border-radius:21px}.voyage-loader h1{font-size:30px}}
+@media(prefers-reduced-motion:reduce){.voyage-loader-mark,.voyage-loader-track i{animation:none}.voyage-loader{transition:none}}
