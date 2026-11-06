@@ -2133,3 +2133,32 @@ html[data-compact-layout="true"] .panel,html[data-compact-layout="true"] .settin
 .app .anime-info p,.app .setting-row small,.app .settings-account-card small{overflow-wrap:anywhere}
 @media(min-width:1100px){.app .page{width:min(100% - 64px,1320px);margin-inline:auto}.app .home-v2{width:min(100% - 64px,1440px);margin-inline:auto}}
 @media(max-width:680px){.app .page{width:100%;min-width:0}.app .home-v2{width:100%;min-width:0}.app button,.app a{touch-action:manipulation}}
+
+
+/* Profile editor and public crew profile finishing pass */
+.profile-editor-favourites{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.profile-editor-favourites label{display:grid;gap:7px;color:var(--ink,#1c2635);font-size:12px;font-weight:700;letter-spacing:.025em}
+.profile-editor-favourites label:first-child{grid-column:1/-1}
+.profile-editor-favourites input{width:100%;min-width:0;min-height:44px;padding:11px 13px;border:1px solid var(--line,rgba(30,40,55,.16));border-radius:12px;background:var(--surface,#fff);color:var(--ink,#1c2635);font:inherit;font-weight:400;letter-spacing:0}
+.profile-editor-favourites input:focus{border-color:#bd9454;box-shadow:0 0 0 3px rgba(189,148,84,.13);outline:0}
+.profile-editor-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.public-profile-page{max-width:1040px}
+.public-profile-page .profile-cover{min-height:clamp(170px,26vw,280px);border-radius:22px;overflow:hidden;background-position:center 42%;background-size:cover}
+.public-profile-page .profile-row{align-items:center;gap:18px;margin:22px 0}
+.public-profile-page .profile-row h2{font-family:'Lora',Georgia,serif;font-size:clamp(26px,4vw,38px);letter-spacing:-.035em}
+.public-profile-page .profile-about{padding:22px 24px;margin:14px 0;border:1px solid var(--line,rgba(30,40,55,.12));border-radius:18px;background:var(--surface,rgba(255,255,255,.72))}
+.public-profile-page .profile-about p{line-height:1.75;overflow-wrap:anywhere}
+.public-profile-page .public-profile-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
+.public-profile-page .public-profile-stats>div,.public-profile-page .public-profile-stats>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:84px;padding:14px;border:1px solid var(--line,rgba(30,40,55,.12));border-radius:15px;background:var(--surface,rgba(255,255,255,.72));color:var(--ink,#1c2635)}
+.public-profile-page .public-profile-stats b{font-size:22px;font-variant-numeric:tabular-nums}
+.public-profile-page .public-profile-stats span{font-size:9px;letter-spacing:.14em;color:var(--muted,#7b8491)}
+.public-profile-page .public-profile-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line,rgba(30,40,55,.14));margin:22px 0 14px}
+.public-profile-page .public-profile-tabs button{padding:12px 18px;color:var(--muted,#7b8491);background:transparent;border-bottom:2px solid transparent}
+.public-profile-page .public-profile-tabs button.active{color:var(--ink,#1c2635);border-color:#bd9454}
+.public-follow-list{padding:16px;border:1px solid var(--line,rgba(30,40,55,.12));border-radius:16px;background:var(--surface,#fff)}
+.public-follow-head,.public-follow-member{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.public-follow-member{width:100%;justify-content:flex-start;padding:10px;border-radius:10px;background:transparent;color:var(--ink,#1c2635)}
+.public-follow-member:hover{background:rgba(189,148,84,.09)}
+.public-follow-member .avatar{width:34px;height:34px;overflow:hidden;border-radius:50%}
+.public-follow-member img{width:100%;height:100%;object-fit:cover}
+@media(max-width:640px){.profile-editor-favourites{grid-template-columns:1fr}.profile-editor-favourites label:first-child{grid-column:auto}.public-profile-page .public-profile-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.public-profile-page .profile-about{padding:17px}.public-profile-page .profile-row{align-items:flex-start;flex-direction:column}.public-profile-page .profile-row>button{width:100%;justify-content:center}}
