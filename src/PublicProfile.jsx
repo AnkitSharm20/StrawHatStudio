@@ -13,7 +13,7 @@ export default function PublicProfile({user,notify}){
   if(!supabase){setError('The profile service is unavailable.');setLoading(false);return}
   const name=decodeURIComponent(routeUsername||'').trim().toLowerCase();
   if(!/^[a-z0-9_]{3,24}$/.test(name)){setError('This profile address is not valid.');setLoading(false);return}
-  const{data:p,error:e}=await supabase.from('profiles').select('id,username,avatar_url,banner_url,bio,created_at').eq('username',name).maybeSingle();
+  const{data:p,error:e}=await supabase.from('profiles').select('id,username,avatar_url,banner_url,bio,created_at,favorite_anime,favorite_characters,favorite_genres,is_public,show_watchlist').eq('username',name).maybeSingle();
   if(!active)return;
   if(e){setError(e.message);setLoading(false);return}
   if(!p){setError('This crew member could not be found.');setLoading(false);return}
@@ -50,7 +50,7 @@ export default function PublicProfile({user,notify}){
   <button className="text-btn" onClick={()=>navigate('/community')}><ArrowLeft size={15}/> Back to community</button>
   <div className="profile-cover public-profile-cover" style={profile.banner_url?{backgroundImage:'linear-gradient(90deg,#07131d66,#07131d22),url("'+profile.banner_url+'")'}:undefined}><div className="profile-avatar">{avatar?<img src={avatar} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}}/>:(profile.username||'N').slice(0,1).toUpperCase()}</div></div>
   <div className="profile-row"><div><h2>{profile.username}</h2><p>CREW MEMBER · JOINED {new Date(profile.created_at).toLocaleDateString(undefined,{month:'long',year:'numeric'})}</p></div>{user?.id!==profile.id&&<button className="primary" onClick={toggleFollow} disabled={busy}>{following?<UserCheck size={15}/>:<UserPlus size={15}/>} {busy?'Please wait…':following?'Following':'Follow'}</button>}</div>
-  <section className="profile-about"><span className="eyebrow">ABOUT THIS MEMBER</span><p>{profile.bio||'This crew member has not added a bio yet.'}</p></section>
+  <section className="profile-about"><span className="eyebrow">ABOUT THIS MEMBER</span><p>{profile.bio||'This crew member has not added a bio yet.'}</p></section>{(profile.favorite_anime?.length>0||profile.favorite_characters?.length>0||profile.favorite_genres?.length>0)&&<section className="profile-about"><span className="eyebrow">THE CAPTAIN'S FAVOURITES</span>{profile.favorite_anime?.length>0&&<p><b>Anime</b> · {profile.favorite_anime.join(' · ')}</p>}{profile.favorite_characters?.length>0&&<p><b>Characters</b> · {profile.favorite_characters.join(' · ')}</p>}{profile.favorite_genres?.length>0&&<p><b>Genres</b> · {profile.favorite_genres.join(' · ')}</p>}</section>}
   <div className="public-profile-stats">
    <div><b>{stats.posts}</b><span>POSTS</span></div><div><b>{stats.replies}</b><span>REPLIES</span></div>
    <button onClick={()=>openList('followers')}><b>{stats.followers}</b><span>FOLLOWERS</span></button>
