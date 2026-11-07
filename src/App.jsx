@@ -103,13 +103,10 @@ function Community({notify,user}){
   finally{setBusy(false)}
  };
  const toggleFollow=async authorId=>{
-  if(!user){notify('Sign in with Discord to follow crew members');return}
-  if(authorId===user.id)return;
+  if(!user){notify('Sign in with Discord to follow crew members');return}if(!supabase||authorId===user.id)return;
   const following=!!followedAuthors[authorId];
-  const result=following?await supabase.from('community_follows').delete().eq('follower_id',user.id).eq('followed_id',authorId):await supabase.from('community_follows').insert({follower_id:user.id,followed_id:authorId});
-  if(result.error){notify('Could not update follow: '+result.error.message);return}
-  setFollowedAuthors(current=>({...current,[authorId]:!following}));
-  notify(following?'You unfollowed this crew member':'You are now following this crew member');
+  try{const result=following?await supabase.from('community_follows').delete().eq('follower_id',user.id).eq('followed_id',authorId):await supabase.from('community_follows').insert({follower_id:user.id,followed_id:authorId});if(result.error)throw result.error;setFollowedAuthors(current=>({...current,[authorId]:!following}));notify(following?'You unfollowed this crew member':'You are now following this crew member')}
+  catch(error){console.error('Community follow update failed:',error);notify('Could not update this follow. Please try again.')}
  };
  const openReplies=async post=>{
   if(expanded===post.id){setExpanded('');return}setExpanded(post.id);
@@ -135,7 +132,7 @@ function Community({notify,user}){
   }catch(error){console.error('Community reply failed:',error);notify('Reply could not be completed. Refresh the conversation before retrying.')}
  };
  const submitReport=async(target,kind)=>{
-  if(!user){notify('Sign in to report community content');return}
+  if(!user){notify('Sign in to report community content');return}if(!supabase){notify('Reporting is unavailable because the backend is not configured.');return}
   const raw=window.prompt('Choose one reason: spam, harassment, spoiler, copyright, other');
   if(!raw)return;
   const reason=raw.trim().toLowerCase(),allowed=['spam','harassment','spoiler','copyright','other'];
@@ -143,8 +140,8 @@ function Community({notify,user}){
   const details=(window.prompt('Add details for the moderators (optional, max 1000 characters)')||'').trim().slice(0,1000);
   const payload={reporter_id:user.id,reason,details:details||null};
   if(kind==='post')payload.post_id=target.id;else payload.reply_id=target.id;
-  const{error}=await supabase.from('community_reports').insert(payload);
-  if(error)notify('Report failed: '+error.message);else notify('Report submitted privately for moderator review');
+  try{const{error}=await supabase.from('community_reports').insert(payload);if(error)throw error;notify('Report submitted privately for moderator review')}
+  catch(error){console.error('Community report failed:',error);notify('Your report could not be submitted. Please try again.')}
  };
  const report=post=>submitReport(post,'post');
  const reportReply=reply=>submitReport(reply,'reply');
