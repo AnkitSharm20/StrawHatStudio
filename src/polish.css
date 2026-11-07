@@ -2243,3 +2243,15 @@ html[data-compact-layout="true"] .panel,html[data-compact-layout="true"] .settin
 @media(max-width:900px){.community-layout{grid-template-columns:minmax(0,1fr)!important}.community-rail{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}.community-rail .panel:first-child{grid-column:1/-1}}
 @media(max-width:680px){.community-page,.about-page{width:100%!important;padding-inline:16px!important}.community-hero{min-height:220px;padding:24px!important;align-items:flex-start;flex-direction:column}.community-count{min-width:0;padding:10px 14px}.community-count b{font-size:24px}.community-starters{grid-template-columns:1fr!important}.community-starters button{min-height:48px}.community-toolbar{padding:15px!important}.community-post-card{padding:16px!important}.community-rail{grid-template-columns:1fr}.community-rail .panel:first-child{grid-column:auto}.about-hero{grid-template-columns:1fr}.about-hero-copy{padding:28px 22px}.about-hero-art{min-height:260px}.about-pillars{grid-template-columns:1fr}.about-pillars article{min-height:0}.about-pillars h3{margin-top:18px}.about-promise{grid-template-columns:1fr}.about-end{padding:30px 20px}}
 @media(prefers-reduced-motion:reduce){.community-starters button,.community-post-card{transition:none}}
+
+
+/* Admin monetization planning surface — integrations stay disabled until verified */
+.admin-revenue-panel>p{max-width:760px;color:var(--muted);font-size:13px;line-height:1.8}
+.admin-revenue-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}
+.admin-revenue-grid article{display:grid;align-content:start;gap:10px;min-width:0;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--bg)}
+.admin-revenue-grid article h3{margin:0;font:700 21px 'Lora',Georgia,serif}
+.admin-revenue-grid article p{margin:0;color:var(--muted);font-size:12px;line-height:1.8}
+.admin-revenue-status{justify-self:start;margin-top:8px;padding:7px 10px;border:1px solid rgba(190,148,84,.35);border-radius:999px;color:#b98b4e;font:10px 'DM Mono',monospace;letter-spacing:.08em}
+.admin-revenue-checklist{padding:20px;border:1px solid var(--line);border-radius:15px;background:var(--panel)}
+.admin-revenue-checklist ul{padding-left:20px;color:var(--muted);font-size:12px;line-height:1.9}
+@media(max-width:650px){.admin-revenue-grid{grid-template-columns:1fr}}
