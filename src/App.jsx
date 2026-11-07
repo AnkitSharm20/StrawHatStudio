@@ -269,8 +269,7 @@ function SettingsPage({theme,setTheme,notify,user,persistPreferences}){const[pre
  if(onErr){setUploading(false);setStatus('Saved as draft. The previous live artwork is still active.');notify('Could not publish the new asset: '+onErr.message);load();return}
  const{error:offErr}=await supabase.from('media_assets').update({is_published:false}).eq('is_published',true).contains('placement',{slot}).neq('id',newAsset.id);
  setUploading(false);if(offErr){setStatus('New artwork is live, but older versions could not be unpublished. Review the media library.');notify('New asset published; older versions still need cleanup: '+offErr.message);load();return}
- setStatus('Published successfully. The new artwork is now active.');notify('Asset published');setSelectedFile(null);setTitle('');load()}
- };
+ setStatus('Published successfully. The new artwork is now active.');notify('Asset published');setSelectedFile(null);setTitle('');load()};
  const toggle=async asset=>{if(!supabase)return;const{error}=await supabase.from('media_assets').update({is_published:!asset.is_published}).eq('id',asset.id);if(error)notify(error.message);else{notify(asset.is_published?'Asset unpublished':'Asset published');load()}};
  if(!user)return <div className="admin-gate"><Shield/><h1>Studio control centre</h1><p>Sign in with the authorised Discord admin account to continue.</p></div>;
  if(!isAdmin)return <div className="admin-gate"><Shield/><h1>Access restricted</h1><p>This account does not have the trusted admin role. Admin access is never granted from a browser-side setting.</p></div>;
