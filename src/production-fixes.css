@@ -46,3 +46,16 @@
 @media(max-width:1100px){.topbar{gap:12px}.brand{letter-spacing:1px}.toplinks{gap:12px}.toplinks a{font-size:10px}.main{min-width:0}.hero-v2{gap:18px}.hero-v2-art{min-width:0}.home-bottom-cta{grid-template-columns:minmax(0,.8fr) minmax(0,1fr)}}
 @media(max-width:760px){.hero-v2{grid-template-columns:minmax(0,1fr);gap:18px}.hero-video-stage{height:clamp(280px,75vw,440px);min-height:0}.hero-loop-video{height:100%;min-height:0}.crew-feature{grid-template-columns:minmax(0,1fr)}.home-bottom-cta{grid-template-columns:minmax(0,1fr)}.shop-artwork{height:190px;min-height:190px}.topbar .brand{max-width:calc(100vw - 170px)}.toplinks{display:none}}
 @media(max-width:430px){.hero-v2 h1{font-size:clamp(54px,15vw,68px);letter-spacing:-.07em}.crew-feature h2{font-size:clamp(42px,12vw,54px)}.home-bottom-cta h2{font-size:clamp(38px,11vw,50px)}.shop-artwork{height:160px;min-height:160px}.admin-media-row{align-items:flex-start;flex-direction:column}}
+
+
+/* Admin audit history */
+.admin-audit-panel{min-width:0}
+.admin-audit-list{display:grid;gap:14px;margin-top:18px}
+.admin-audit-card{min-width:0}
+.admin-audit-details{margin-top:14px;border-top:1px solid var(--line,rgba(255,255,255,.1));padding-top:12px}
+.admin-audit-details summary{cursor:pointer;color:var(--gold,#d7b56d);font-size:13px;font-weight:700;letter-spacing:.04em}
+.admin-audit-diff{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.admin-audit-diff>div{min-width:0;border:1px solid var(--line,rgba(255,255,255,.1));border-radius:12px;padding:12px;background:rgba(0,0,0,.12)}
+.admin-audit-diff b{display:block;margin-bottom:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.admin-audit-diff pre{max-width:100%;max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;color:inherit;opacity:.82}
+@media(max-width:700px){.admin-audit-diff{grid-template-columns:minmax(0,1fr)}}
