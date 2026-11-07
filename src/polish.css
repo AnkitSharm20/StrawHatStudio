@@ -2255,3 +2255,75 @@ html[data-compact-layout="true"] .panel,html[data-compact-layout="true"] .settin
 .admin-revenue-checklist{padding:20px;border:1px solid var(--line);border-radius:15px;background:var(--panel)}
 .admin-revenue-checklist ul{padding-left:20px;color:var(--muted);font-size:12px;line-height:1.9}
 @media(max-width:650px){.admin-revenue-grid{grid-template-columns:1fr}}
+
+
+/* Premium global finish — consistent depth, motion and responsive surfaces */
+.app{
+ background:
+  radial-gradient(ellipse at 82% 2%,rgba(190,148,84,.075),transparent 32rem),
+  radial-gradient(ellipse at 4% 45%,rgba(38,139,151,.055),transparent 34rem),
+  var(--bg,#101116);
+}
+.app .topbar{
+ background:color-mix(in srgb,var(--panel,#171a20) 88%,transparent);
+ border-bottom:1px solid color-mix(in srgb,var(--line,#ffffff18) 80%,transparent);
+ backdrop-filter:blur(18px) saturate(145%);
+}
+.app .brandmark{box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.app .toplinks a,.app .sidebar a{transition:color .2s ease,background .2s ease,transform .2s ease}
+.app .sidebar a:hover{transform:translateX(3px)}
+.app .main{scroll-margin-top:88px}
+.app .page,.app .home-v2{animation:page-arrive .48s cubic-bezier(.2,.7,.2,1) both}
+.app .section-head h2,.app .page>h1,.app .page>h2{letter-spacing:-.035em}
+.app .panel,.app .settings-group,.app .anime-card,.app .shop-item,.app .membership-card{
+ box-shadow:0 12px 36px rgba(0,0,0,.055);
+ transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.app .anime-card:hover,.app .shop-item:hover{
+ transform:translateY(-4px);
+ box-shadow:0 20px 46px rgba(0,0,0,.13);
+}
+.app .primary,.app button.primary,.app .sign{
+ box-shadow:0 7px 20px rgba(174,129,64,.16);
+ transition:transform .18s ease,filter .18s ease,box-shadow .18s ease;
+}
+.app .primary:hover,.app button.primary:hover,.app .sign:hover{
+ transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 12px 28px rgba(174,129,64,.22)
+}
+.app input,.app textarea,.app select{
+ transition:border-color .18s ease,box-shadow .18s ease,background .18s ease
+}
+.app input:focus,.app textarea:focus,.app select:focus{
+ border-color:rgba(198,157,91,.72);
+ box-shadow:0 0 0 3px rgba(198,157,91,.12)
+}
+.app .footer{border-top:1px solid var(--line);margin-top:clamp(36px,6vw,76px)}
+.voyage-loader{
+ padding-top:max(28px,env(safe-area-inset-top));
+ padding-bottom:max(28px,env(safe-area-inset-bottom));
+}
+.voyage-loader-mark{backdrop-filter:blur(14px)}
+.voyage-loader-track{height:7px;border-radius:99px}
+.voyage-loader-track i{
+ display:block;height:100%;border-radius:inherit;
+ background:linear-gradient(90deg,#5dd9ce 0%,#e9c47f 58%,#d66c8b 100%);
+ box-shadow:0 0 18px rgba(93,217,206,.38);
+}
+.voyage-loader-meta{font-variant-numeric:tabular-nums}
+.voyage-loader-stage{transition:opacity .2s ease}
+.loader-sea{filter:drop-shadow(0 -12px 30px rgba(34,169,185,.12))}
+.community-hero,.about-hero,.admin-welcome{box-shadow:0 24px 70px rgba(0,0,0,.14)}
+.community-post-card,.community-toolbar,.community-composer,.community-rail .panel{
+ backdrop-filter:blur(12px)
+}
+@keyframes page-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){
+ .app{background:var(--bg,#101116)}
+ .app .page,.app .home-v2{animation-duration:.3s}
+ .app .anime-card:hover,.app .shop-item:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .app .page,.app .home-v2{animation:none}
+ .app .panel,.app .settings-group,.app .anime-card,.app .shop-item,.app .membership-card,
+ .app .primary,.app button.primary,.app .sign,.app .sidebar a{transition:none}
+}
