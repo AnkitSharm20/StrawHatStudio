@@ -2327,3 +2327,31 @@ html[data-compact-layout="true"] .panel,html[data-compact-layout="true"] .settin
  .app .panel,.app .settings-group,.app .anime-card,.app .shop-item,.app .membership-card,
  .app .primary,.app button.primary,.app .sign,.app .sidebar a{transition:none}
 }
+
+
+/* Premium voyage-wide visual pass — layered atmosphere, restrained motion and tactile controls */
+.app{position:relative;isolation:isolate;background-color:var(--bg);background-image:radial-gradient(ellipse at 78% 0%,rgba(194,151,83,.075),transparent 34%),radial-gradient(ellipse at 0% 48%,rgba(45,112,133,.07),transparent 38%)}
+.app::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.18;background-image:radial-gradient(rgba(226,203,160,.17) .55px,transparent .55px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 78%)}
+.app .topbar{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.app .sidebar{background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.app .page,.app .home-v2{animation:sh-page-arrive .48s cubic-bezier(.2,.7,.2,1) both}
+.app .panel,.app .settings-group,.app .community-post,.app .anime-card,.app .shop-item,.app .admin-panel,.app .profile-card,.app .notification-card{transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease,background-color .24s ease}
+.app .panel:hover,.app .settings-group:hover,.app .community-post:hover,.app .anime-card:hover,.app .shop-item:hover,.app .admin-panel:hover,.app .profile-card:hover,.app .notification-card:hover{border-color:color-mix(in srgb,var(--gold,#d6b66d) 36%,var(--line));box-shadow:0 16px 38px rgba(0,0,0,.12)}
+.app button,.app a{ -webkit-tap-highlight-color:transparent}
+.app .primary,.app .secondary,.app .sign{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease,border-color .18s ease}
+.app .primary:hover,.app .secondary:hover,.app .sign:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.16);filter:brightness(1.04)}
+.app .primary:active,.app .secondary:active,.app .sign:active{transform:translateY(0) scale(.985)}
+.app img,.app video{background:linear-gradient(110deg,rgba(255,255,255,.035) 8%,rgba(255,255,255,.09) 18%,rgba(255,255,255,.035) 33%);background-size:220% 100%}
+.voyage-loader{padding-top:max(28px,env(safe-area-inset-top));padding-bottom:max(28px,env(safe-area-inset-bottom))}
+.voyage-loader-track{height:7px;border-radius:99px;overflow:hidden}
+.voyage-loader-track i{display:block;height:100%;border-radius:inherit;position:relative;will-change:width}
+.voyage-loader-track i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:loader-progress-glint 1.35s linear infinite}
+.voyage-loader-meta b{font-variant-numeric:tabular-nums;min-width:3ch;text-align:center}
+.voyage-loader-stage{transition:opacity .2s ease}
+.voyage-loader-mark{box-shadow:0 0 0 9px rgba(244,210,151,.045),0 18px 70px rgba(0,0,0,.28),0 0 70px rgba(75,201,197,.12),inset 0 1px rgba(255,255,255,.16)}
+.loader-sea{filter:drop-shadow(0 -8px 22px rgba(50,198,203,.1))}
+@keyframes sh-page-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes loader-progress-glint{from{transform:translateX(-120%)}to{transform:translateX(120%)}}
+@media(hover:none){.app .panel:hover,.app .settings-group:hover,.app .community-post:hover,.app .anime-card:hover,.app .shop-item:hover,.app .admin-panel:hover,.app .profile-card:hover,.app .notification-card:hover{transform:none;box-shadow:none}}
+@media(max-width:680px){.app::before{opacity:.11}.app .topbar{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.app .page,.app .home-v2{animation-duration:.32s}}
+@media(prefers-reduced-motion:reduce){.app .page,.app .home-v2{animation:none!important}.app .panel,.app .settings-group,.app .community-post,.app .anime-card,.app .shop-item,.app .admin-panel,.app .profile-card,.app .notification-card,.app .primary,.app .secondary,.app .sign{transition:none!important}.voyage-loader-track i::after{animation:none!important}}
