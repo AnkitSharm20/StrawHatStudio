@@ -6,7 +6,7 @@ import{supabase}from'./lib/supabase.js';
 export default function PublicProfile({user,notify}){
  const{username:routeUsername}=useParams(),navigate=useNavigate();
  const[profile,setProfile]=useState(null),[stats,setStats]=useState({posts:0,replies:0,followers:0,following:0});
- const[posts,setPosts]=useState([]),[tab,setTab]=useState('posts'),[busy,setBusy]=useState(false),[following,setFollowing]=useState(false);
+ const[posts,setPosts]=useState([]),[watchlist,setWatchlist]=useState([]),[tab,setTab]=useState('posts'),[busy,setBusy]=useState(false),[following,setFollowing]=useState(false);
  const[list,setList]=useState(''),[members,setMembers]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState('');
  useEffect(()=>{let active=true;(async()=>{
   setLoading(true);setError('');setProfile(null);
