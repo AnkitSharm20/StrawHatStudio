@@ -166,17 +166,19 @@ function Notifications({notify,user}){
  const load=async()=>{
   if(!user||!supabase){setItems([]);setLoading(false);return}
   setLoading(true);
-  const{data,error}=await supabase.from('studio_notifications').select('id,kind,entity_type,entity_id,message,read_at,created_at').eq('recipient_id',user.id).order('created_at',{ascending:false}).limit(100);
-  if(error){notify('Notifications could not load: '+error.message);setItems([])}else setItems(data||[]);
-  setLoading(false);
+  try{const{data,error}=await supabase.from('studio_notifications').select('id,kind,entity_type,entity_id,message,read_at,created_at').eq('recipient_id',user.id).order('created_at',{ascending:false}).limit(100);if(error)throw error;setItems(data||[])}
+  catch(error){console.error('Notifications load failed:',error);notify('Notifications could not load. Check your connection and try again.');setItems([])}
+  finally{setLoading(false)}
  };
  useEffect(()=>{
   let active=true;
   if(!user||!supabase){setItems([]);setLoading(false);return}
   load();
-  const channel=supabase.channel('studio-notifications-'+user.id).on('postgres_changes',{event:'INSERT',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
+  const channel=supabase.channel('studio-notifications-'+user.id).on('postgres_changes',{event:'*',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
    if(!active)return;
-   setItems(current=>[payload.new,...current.filter(item=>item.id!==payload.new.id)].slice(0,100));
+   if(payload.eventType==='INSERT'&&payload.new){setItems(current=>[payload.new,...current.filter(item=>item.id!==payload.new.id)].slice(0,100));return}
+   if(payload.eventType==='UPDATE'&&payload.new){setItems(current=>current.map(item=>item.id===payload.new.id?payload.new:item));return}
+   if(payload.eventType==='DELETE'&&payload.old?.id){setItems(current=>current.filter(item=>item.id!==payload.old.id))}
   }).subscribe();
   return()=>{active=false;supabase.removeChannel(channel)};
  },[user?.id]);
@@ -279,7 +281,7 @@ function SettingsPage({theme,setTheme,notify,user,persistPreferences}){const[pre
  const upload=async()=>{if(!selectedFile||!supabase||!user)return;const file=selectedFile,video=slot==='home_hero_video';setUploading(true);setStatus('Uploading file…');const ext=file.name.split('.').pop()?.toLowerCase()||(video?'mp4':'webp'),path='site/'+slot+'/'+user.id+'/'+Date.now()+'.'+ext;const{error:upErr}=await supabase.storage.from('studio-media').upload(path,file,{contentType:file.type,upsert:false,cacheControl:'31536000'});if(upErr){setUploading(false);setStatus('Upload failed: '+upErr.message);notify(upErr.message);return}
  const placement={slot,aspect_ratio:'16:9',fit,object_position:position};
  const{data:newAsset,error:dbErr}=await supabase.from('media_assets').insert({title:title.trim()||file.name,media_type:video?'video':'image',storage_path:path,mime_type:file.type,file_size_bytes:file.size,placement,is_default:false,is_published:false,uploaded_by:user.id}).select('id').single();
- if(dbErr){setUploading(false);setStatus('File uploaded but not registered: '+dbErr.message);notify('Database registration failed: '+dbErr.message);return}
+ if(dbErr){await supabase.storage.from('studio-media').remove([path]);setUploading(false);setStatus('The database rejected this asset. The temporary upload was cleaned up.');notify('Asset registration failed. The uploaded file was cleaned up.');return}
  const{error:onErr}=await supabase.from('media_assets').update({is_published:true}).eq('id',newAsset.id);
  if(onErr){setUploading(false);setStatus('Saved as draft. The previous live artwork is still active.');notify('Could not publish the new asset: '+onErr.message);load();return}
  const{error:offErr}=await supabase.from('media_assets').update({is_published:false}).eq('is_published',true).contains('placement',{slot}).neq('id',newAsset.id);
