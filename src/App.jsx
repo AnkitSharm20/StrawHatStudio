@@ -1,4 +1,4 @@
-import React,{useEffect,useMemo,useState}from'react';
+import React,{useEffect,useMemo,useRef,useState}from'react';
 import PublicProfile from './PublicProfile.jsx';
 import{NavLink,Routes,Route,useNavigate,useParams}from'react-router-dom';
 import{Trash2,Anchor,ArrowUpRight,Bell,BookOpen,Check,ChevronRight,Compass,Crown,Flame,Heart,Home,Menu,MessageCircle,Search,Settings,Shield,ShoppingBag,Sparkles,Star,Users,X,Play,Plus,Sun,Moon,ExternalLink,Radio,Ship,LogIn,User,MonitorPlay}from'lucide-react';
@@ -31,25 +31,28 @@ function Explore({query,setQuery,shows,saved,toggleSave}){const navigate=useNavi
  const [moreLoading,setMoreLoading]=useState(false);
  const [hasMore,setHasMore]=useState(true);
  const [catalogError,setCatalogError]=useState(false);
+ const requestSequence=useRef(0);
  const genres=['All','Action','Adventure','Fantasy','Drama','Comedy','Romance','Sci-Fi','Mystery','Sports'];
  const mapAnime=item=>({name:item.title?.english||item.title?.romaji||'Untitled anime',tag:[item.format,item.seasonYear].filter(Boolean).join(' · ').toUpperCase()||'ANIME',desc:(item.description||'Discover a new anime adventure.').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,150),img:item.coverImage?.extraLarge||'',bannerImg:item.bannerImage||'',score:item.averageScore?item.averageScore/10:null,malId:item.id,genres:item.genres||[]});
  const fetchPage=async(pageNumber,term,append=false)=>{
+  const requestId=++requestSequence.current;
   if(append)setMoreLoading(true);else{setLoading(true);setCatalogError(false)}
   try{
    const gql='query($page:Int!,$search:String){Page(page:$page,perPage:18){pageInfo{hasNextPage}media(search:$search,type:ANIME,sort:POPULARITY_DESC,isAdult:false){id title{english romaji} description(asHtml:false) seasonYear format averageScore coverImage{extraLarge} bannerImage genres}}}';
    const response=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query:gql,variables:{page:pageNumber,search:term||null}})});
    if(!response.ok)throw new Error('Catalogue unavailable');
    const payload=await response.json();
+   if(requestId!==requestSequence.current)return;
    if(payload.errors?.length)throw new Error('Catalogue query failed');
    const result=payload.data?.Page;
    const rows=(result?.media||[]).map(mapAnime);
    setCatalog(current=>append?[...current,...rows.filter(row=>!current.some(existing=>existing.malId===row.malId))]:rows);
    setPage(pageNumber);
    setHasMore(!!result?.pageInfo?.hasNextPage);
-  }catch(error){setCatalogError(true);if(!append)setCatalog([])}
-  finally{setLoading(false);setMoreLoading(false)}
+  }catch(error){if(requestId===requestSequence.current){setCatalogError(true);if(!append)setCatalog([])}}
+  finally{if(requestId===requestSequence.current){setLoading(false);setMoreLoading(false)}}
  };
- useEffect(()=>{let active=true;const timer=setTimeout(()=>{if(active)fetchPage(1,query.trim(),false)},280);return()=>{active=false;clearTimeout(timer)}},[query]);
+ useEffect(()=>{let active=true;const timer=setTimeout(()=>{if(active)fetchPage(1,query.trim(),false)},280);return()=>{active=false;requestSequence.current+=1;clearTimeout(timer)}},[query]);
  const visible=useMemo(()=>{let list=(catalog.length?catalog:(!loading&&!query?shows:[])).filter(show=>genre==='All'||(show.genres||[]).some(g=>g.toLowerCase()===genre.toLowerCase()));if(sort==='title')list=[...list].sort((a,b)=>a.name.localeCompare(b.name));if(sort==='rating')list=[...list].sort((a,b)=>(b.score||0)-(a.score||0));return list},[catalog,shows,genre,sort,loading,query]);
  return <div className="page explore-page">
   <div className="explore-hero"><div><span className="eyebrow">THE GRAND LINE CATALOGUE</span><h1>Explore the <em>unknown.</em></h1><p>Search a live anime catalogue, filter by genre, save discoveries and build a watchlist worth sharing.</p></div><div className="explore-stats"><span><b>{catalog.length||shows.length}</b><small>LOADED TITLES</small></span><span><b>18</b><small>PER PAGE</small></span></div></div>
