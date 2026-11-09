@@ -82,7 +82,8 @@ function requireRazorpayTestConfig() {
   const enabled = Deno.env.get("RAZORPAY_ENABLED") === "true";
   const keyId = Deno.env.get("RAZORPAY_KEY_ID");
   const keySecret = Deno.env.get("RAZORPAY_KEY_SECRET");
-  if (!enabled || mode !== "test" || !keyId?.startsWith("rzp_test_") || !keySecret) {
+  const webhookSecret = Deno.env.get("RAZORPAY_WEBHOOK_SECRET");
+  if (!enabled || mode !== "test" || !keyId?.startsWith("rzp_test_") || !keySecret || !webhookSecret) {
     throw new Error("Razorpay test checkout is not configured. Live payments are disabled.");
   }
   return { keyId, keySecret };
@@ -171,7 +172,8 @@ Deno.serve(async (req: Request) => {
       const available = Deno.env.get("RAZORPAY_ENABLED") === "true"
         && (Deno.env.get("RAZORPAY_MODE") ?? "disabled") === "test"
         && keyId.startsWith("rzp_test_")
-        && Boolean(Deno.env.get("RAZORPAY_KEY_SECRET"));
+        && Boolean(Deno.env.get("RAZORPAY_KEY_SECRET"))
+        && Boolean(Deno.env.get("RAZORPAY_WEBHOOK_SECRET"));
       return json(200, { test_checkout_available: available, mode: "test" }, h);
     }
     if (action === "create_order") {
@@ -179,6 +181,13 @@ Deno.serve(async (req: Request) => {
       const planKey = String(body.plan_key ?? "");
       const plan = PLAN_CATALOG[planKey];
       if (!plan) return json(400, { error: "Choose a valid membership plan." }, h);
+      const { data: activeMemberships, error: activeError } = await service.from("membership_entitlements")
+        .select("tier_key,ends_at").eq("user_id", user.id).eq("status", "active")
+        .gt("ends_at", new Date().toISOString()).order("ends_at", { ascending: false }).limit(1);
+      if (activeError) return json(503, { error: "Could not verify your current membership." }, h);
+      if (activeMemberships?.[0] && activeMemberships[0].tier_key !== plan.tier) {
+        return json(409, { error: "Your " + activeMemberships[0].tier_key + " membership is still active until " + activeMemberships[0].ends_at + ". Renew that tier or wait until it expires before changing tiers." }, h);
+      }
       const receipt = "shs_" + crypto.randomUUID().replaceAll("-", "").slice(0, 24);
       const order = await razorpayRequest("/orders", "POST", keyId, keySecret, {
         amount: plan.amount, currency: "INR", receipt,
@@ -237,6 +246,9 @@ Deno.serve(async (req: Request) => {
         return json(400, { error: "Payment is not refundable or the refund amount is invalid." }, h);
       }
       const { data: prior } = await service.from("membership_refunds").select("*").eq("idempotency_key", idempotencyKey).maybeSingle();
+      if (prior && (prior.payment_id !== paymentId || Number(prior.amount_paise) !== refundAmount)) {
+        return json(409, { error: "This idempotency key is already bound to a different refund request." }, h);
+      }
       if (prior?.razorpay_refund_id) return json(200, { success: true, refund: prior, duplicate: true }, h);
       if (!prior) {
         const { error: insertError } = await service.from("membership_refunds").insert({
