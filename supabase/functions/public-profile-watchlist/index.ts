@@ -3,6 +3,8 @@ import { createClient } from "npm:@supabase/supabase-js@2.57.0";
 const allowedOrigins = new Set([
   "https://straw-hat-signal.vercel.app",
   "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:4173",
 ]);
 function cors(origin: string | null) {
   const allowed = origin && (allowedOrigins.has(origin) || /^https:\/\/straw-hat-studio-[a-z0-9-]+-pandaankit2007-8884\.vercel\.app$/.test(origin));
