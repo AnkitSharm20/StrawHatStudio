@@ -2,7 +2,7 @@ import React,{useEffect,useState}from'react';
 import{useParams,useNavigate}from'react-router-dom';
 import{ArrowLeft,Users,MessageCircle,Calendar,UserPlus,UserCheck}from'lucide-react';
 import{supabase}from'./lib/supabase.js';
-const resolvePrivateBannerUrl=async value=>{if(!value||!supabase)return '';let path=value;const marker='/storage/v1/object/public/profile-banners/';if(value.includes(marker)){path=decodeURIComponent(value.split(marker)[1].split('?')[0])}const{data,error}=await supabase.storage.from('profile-banners').createSignedUrl(path,300);return error?'':data?.signedUrl||''};
+const resolvePrivateBannerUrl=async value=>{if(!value||!supabase)return '';let path=value;const marker='/storage/v1/object/public/profile-banners-private/';if(value.includes(marker)){path=decodeURIComponent(value.split(marker)[1].split('?')[0])}const{data,error}=await supabase.storage.from('profile-banners-private').createSignedUrl(path,300);return error?'':data?.signedUrl||''};
 
 export default function PublicProfile({user,notify}){
  const{username:routeUsername}=useParams(),navigate=useNavigate();
