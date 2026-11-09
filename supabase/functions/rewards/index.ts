@@ -24,6 +24,32 @@ function newCode() {
   return "SHS-" + raw.match(/.{1,4}/g)!.join("-");
 }
 
+async function recordAdminAudit(
+  service: ReturnType<typeof createClient>,
+  actorId: string,
+  action: string,
+  targetTable: string,
+  targetId: string,
+  afterData: Record<string, unknown> = {},
+) {
+  const { error } = await service.from("admin_audit_logs").insert({
+    actor_id: actorId,
+    actor_role: "admin",
+    action,
+    target_table: targetTable,
+    target_id: targetId,
+    after_data: afterData,
+  });
+  if (error) {
+    console.error("Admin audit logging failed", {
+      action,
+      targetTable,
+      targetId,
+      message: error.message,
+    });
+  }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json(405, { error: "Method not allowed" });
@@ -94,14 +120,19 @@ Deno.serve(async (req: Request) => {
           expiresAt = d.toISOString();
         }
         const code = newCode();
-        const { error } = await service.from("redeem_codes").insert({
+        const { data: codeRow, error } = await service.from("redeem_codes").insert({
           code_hash: await sha256(code),
           reward_coins: rewardCoins,
           max_redemptions: maxRedemptions,
           expires_at: expiresAt,
           created_by: user.id,
+        }).select("id").single();
+        if (error || !codeRow) return json(500, { error: "Could not create the code. Try again." });
+        await recordAdminAudit(service, user.id, "generate_redeem_code", "redeem_codes", String(codeRow.id), {
+          reward_coins: rewardCoins,
+          max_redemptions: maxRedemptions,
+          expires_at: expiresAt,
         });
-        if (error) return json(500, { error: "Could not create the code. Try again." });
         return json(200, { success: true, code, reward_coins: rewardCoins, max_redemptions: maxRedemptions, expires_at: expiresAt, note: "Copy this code now; the raw code is not stored and cannot be shown again." });
       }
       case "grant_coins": {
@@ -112,10 +143,15 @@ Deno.serve(async (req: Request) => {
         if (!/^[0-9a-f-]{36}$/i.test(targetUserId) || !Number.isInteger(amount) || amount < 1 || amount > 100000) {
           return json(400, { error: "Provide a valid user ID and a coin amount between 1 and 100,000." });
         }
-        const { error } = await service.from("coin_ledger").insert({
+        const { data: ledgerRow, error } = await service.from("coin_ledger").insert({
           user_id: targetUserId, amount, reason, reference_type: "admin_grant", created_by: user.id,
+        }).select("id").single();
+        if (error || !ledgerRow) return json(400, { error: "Could not grant coins. Check the user ID and try again." });
+        await recordAdminAudit(service, user.id, "grant_coins", "coin_ledger", String(ledgerRow.id), {
+          user_id: targetUserId,
+          amount,
+          reason,
         });
-        if (error) return json(400, { error: "Could not grant coins. Check the user ID and try again." });
         return json(200, { success: true, amount, user_id: targetUserId });
       }
       case "create_ad_slot": {
@@ -134,6 +170,11 @@ Deno.serve(async (req: Request) => {
           placement, is_enabled: false, updated_at: new Date().toISOString(),
         }, { onConflict: "slot_key" }).select().single();
         if (error) return json(400, { error: "Could not save the ad slot." });
+        await recordAdminAudit(service, user.id, "create_or_update_ad_slot", "ad_slots", String(data.id), {
+          slot_key: slotKey,
+          label,
+          is_enabled: false,
+        });
         return json(200, { success: true, ad_slot: data });
       }
       case "init_storage": {
@@ -157,6 +198,10 @@ Deno.serve(async (req: Request) => {
           });
           if (error && !/already exists/i.test(error.message)) return json(500, { error: "Could not initialize custom GIF storage." });
         }
+        await recordAdminAudit(service, user.id, "initialize_storage", "storage.buckets", "studio-media,user-gifs", {
+          studio_media_public: true,
+          user_gifs_public: false,
+        });
         return json(200, { success: true, buckets: ["studio-media", "user-gifs"], video_max_file_size_mb: 100, gif_max_file_size_mb: 20 });
       }
       default:
