@@ -162,10 +162,20 @@ function Notifications({notify,user}){
   let active=true;
   if(!user||!supabase){setItems([]);setLoading(false);return}
   load();
-  const channel=supabase.channel('studio-notifications-'+user.id).on('postgres_changes',{event:'INSERT',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
-   if(!active)return;
-   setItems(current=>[payload.new,...current.filter(item=>item.id!==payload.new.id)].slice(0,100));
-  }).subscribe();
+  const channel=supabase.channel('studio-notifications-'+user.id)
+   .on('postgres_changes',{event:'INSERT',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
+    if(!active)return;
+    setItems(current=>[payload.new,...current.filter(item=>item.id!==payload.new.id)].slice(0,100));
+   })
+   .on('postgres_changes',{event:'UPDATE',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
+    if(!active)return;
+    setItems(current=>current.map(item=>item.id===payload.new.id?{...item,...payload.new}:item));
+   })
+   .on('postgres_changes',{event:'DELETE',schema:'public',table:'studio_notifications'},payload=>{
+    if(!active)return;
+    const deletedId=payload.old?.id;
+    if(deletedId)setItems(current=>current.filter(item=>item.id!==deletedId));
+   }).subscribe();
   return()=>{active=false;supabase.removeChannel(channel)};
  },[user?.id]);
  const markRead=async id=>{
