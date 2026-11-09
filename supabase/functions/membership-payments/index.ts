@@ -135,16 +135,28 @@ async function handleWebhook(req: Request, h: Record<string,string>) {
     } else if (eventType === "refund.failed") {
       const refund = payload?.payload?.refund?.entity;
       if (refund?.id) {
-        await service.from("membership_refunds").update({ status: "failed", updated_at: new Date().toISOString() })
-          .eq("razorpay_refund_id", refund.id);
+        const { data: pendingRefunds } = await service.from("membership_refunds").select("id")
+          .eq("payment_id", refund.payment_id).eq("amount_paise", Number(refund.amount))
+          .eq("status", "requested").is("razorpay_refund_id", null).order("created_at", { ascending: true }).limit(1);
+        if (pendingRefunds?.[0]) {
+          await service.from("membership_refunds").update({ razorpay_refund_id: refund.id, status: "failed", updated_at: new Date().toISOString() }).eq("id", pendingRefunds[0].id);
+        } else {
+          await service.from("membership_refunds").update({ status: "failed", updated_at: new Date().toISOString() }).eq("razorpay_refund_id", refund.id);
+        }
       }
     } else if (eventType === "refund.processed" || eventType === "payment.refunded") {
       const refund = payload?.payload?.refund?.entity;
       const paymentEntity = payload?.payload?.payment?.entity;
       const paymentId = String(refund?.payment_id ?? paymentEntity?.id ?? "");
       if (refund?.id) {
-        await service.from("membership_refunds").update({ status: "processed", updated_at: new Date().toISOString() })
-          .eq("razorpay_refund_id", refund.id);
+        const { data: pendingRefunds } = await service.from("membership_refunds").select("id")
+          .eq("payment_id", refund.payment_id).eq("amount_paise", Number(refund.amount))
+          .eq("status", "requested").is("razorpay_refund_id", null).order("created_at", { ascending: true }).limit(1);
+        if (pendingRefunds?.[0]) {
+          await service.from("membership_refunds").update({ razorpay_refund_id: refund.id, status: "processed", updated_at: new Date().toISOString() }).eq("id", pendingRefunds[0].id);
+        } else {
+          await service.from("membership_refunds").update({ status: "processed", updated_at: new Date().toISOString() }).eq("razorpay_refund_id", refund.id);
+        }
       }
       if (paymentId) {
         const payment = await razorpayRequest("/payments/" + encodeURIComponent(paymentId), "GET", keyId, keySecret);
