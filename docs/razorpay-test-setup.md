@@ -25,6 +25,7 @@ Use the same webhook secret configured above. Subscribe to:
 - `payment.captured`
 - `payment.failed`
 - `refund.processed`
+- `refund.failed`
 - `payment.refunded`
 
 The function validates the HMAC against the raw request body, deduplicates by Razorpay event ID, fetches the payment from Razorpay and checks order, amount and currency before activating a membership. Full refunds revoke the linked entitlement. Admin-initiated refunds are restricted to a trusted `app_metadata.role=admin` session and are written to the admin audit log.
