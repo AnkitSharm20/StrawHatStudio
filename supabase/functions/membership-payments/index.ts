@@ -251,6 +251,12 @@ Deno.serve(async (req: Request) => {
       await service.from("membership_refunds").update({
         razorpay_refund_id: refund.id, status: refund.status === "processed" ? "processed" : "requested", updated_at: new Date().toISOString(),
       }).eq("idempotency_key", idempotencyKey);
+      const { error: auditError } = await service.from("admin_audit_logs").insert({
+        actor_id: user.id, actor_role: "admin", action: "issue_membership_refund",
+        target_table: "membership_orders", target_id: String(order.id),
+        after_data: { payment_id: paymentId, refund_id: refund.id, amount_paise: refundAmount, status: refund.status },
+      });
+      if (auditError) console.error("Membership refund audit logging failed", { order_id: order.id, message: auditError.message });
       return json(200, { success: true, refund: { id: refund.id, status: refund.status, amount: refund.amount } }, h);
     }
     return json(400, { error: "Unknown membership payment action." }, h);
