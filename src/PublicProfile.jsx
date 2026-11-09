@@ -26,14 +26,14 @@ export default function PublicProfile({user,notify}){
    supabase.from('community_follows').select('followed_id',{count:'exact',head:true}).eq('follower_id',p.id),
    supabase.from('community_posts').select('id,body,created_at,spoiler').eq('author_id',p.id).eq('status','published').order('created_at',{ascending:false}).limit(30),
    user?.id&&user.id!==p.id?supabase.from('community_follows').select('follower_id').eq('follower_id',user.id).eq('followed_id',p.id).maybeSingle():Promise.resolve({data:null}),
-   p.is_public&&p.show_watchlist?supabase.rpc('get_public_profile_watchlist',{p_username:name}):Promise.resolve({data:[]}),
+   p.is_public&&p.show_watchlist?supabase.functions.invoke('public-profile-watchlist',{body:{username:name}}):Promise.resolve({data:[]}),
    user?.id&&user.id!==p.id?supabase.from('community_blocks').select('blocked_id').eq('blocker_id',user.id).eq('blocked_id',p.id).maybeSingle():Promise.resolve({data:null})
   ]);
   if(!active)return;
   setStats({posts:postCount.count||0,replies:replyCount.count||0,followers:followerCount.count||0,following:followingCount.count||0});
   setBlocked(!!blockRow.data);setPosts(blockRow.data?[]:postRows.data||[]);setFollowing(!!followRow.data);
   if(watchlistRow.error)notify('Could not load this member’s public watchlist.');
-  setWatchlist(Array.isArray(watchlistRow.data)?watchlistRow.data:[]);
+  setWatchlist(Array.isArray(watchlistRow.data?.watchlist)?watchlistRow.data.watchlist:[]);
   setLoading(false);
  })();return()=>{active=false}},[routeUsername,user?.id]);
  const toggleFollow=async()=>{if(!user){notify('Sign in with Discord to follow crew members.');return}if(!profile||busy)return;setBusy(true);
