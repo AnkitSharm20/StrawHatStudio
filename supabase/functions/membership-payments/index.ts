@@ -8,7 +8,7 @@ const PLAN_CATALOG: Record<string, { tier: string; period: "monthly" | "yearly";
   yonko_monthly: { tier: "yonko", period: "monthly", amount: 39900, label: "Yonko Monthly" },
   yonko_yearly: { tier: "yonko", period: "yearly", amount: 299900, label: "Yonko Yearly" },
 };
-const ALLOWED_ORIGINS = new Set(["https://straw-hat-signal.vercel.app", "http://localhost:5173"]);
+const ALLOWED_ORIGINS = new Set(["https://straw-hat-signal.vercel.app", "http://localhost:5173", "http://127.0.0.1:5173", "http://127.0.0.1:4173"]);
 function headers(origin: string | null) {
   const allowed = origin && (ALLOWED_ORIGINS.has(origin) || /^https:\/\/straw-hat-studio-[a-z0-9-]+-pandaankit2007-8884\.vercel\.app$/.test(origin));
   return {
