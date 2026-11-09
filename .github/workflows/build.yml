@@ -1,4 +1,4 @@
-name: Build verification
+name: Build and browser verification
 
 on:
   pull_request:
@@ -10,10 +10,10 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Install, audit and build
+  build-and-e2e:
+    name: Install, audit, build and responsive browser tests
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -21,9 +21,14 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
+          cache: npm
       - name: Install dependencies
         run: npm install --no-fund
       - name: Report dependency vulnerabilities
         run: npm audit --audit-level=moderate
       - name: Build production bundle
         run: npm run build
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
+      - name: Run desktop, Android-sized and iOS-WebKit browser tests
+        run: npm run test:e2e
