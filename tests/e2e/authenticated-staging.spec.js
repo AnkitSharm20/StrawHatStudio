@@ -46,7 +46,7 @@ test.describe('authenticated staging acceptance', () => {
     await postB.getByRole('button', { name: 'Reply' }).click();
 
     await pageA.goto('/notifications');
-    await expect(pageA.locator('.notification-feed')).toContainText(replyMarker, { timeout: 20_000 });
+    await expect(pageA.locator('.notification-feed')).toContainText('Someone replied to your post.', { timeout: 20_000 });
     await contextB.close();
     await contextA.close();
   });
