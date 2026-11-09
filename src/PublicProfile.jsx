@@ -18,17 +18,21 @@ export default function PublicProfile({user,notify}){
   if(e){setError(e.message);setLoading(false);return}
   if(!p){setError('This crew member could not be found.');setLoading(false);return}
   setProfile(p);
-  const[postCount,replyCount,followerCount,followingCount,postRows,followRow]=await Promise.all([
+  const[postCount,replyCount,followerCount,followingCount,postRows,followRow,watchlistRow]=await Promise.all([
    supabase.from('community_posts').select('id',{count:'exact',head:true}).eq('author_id',p.id).eq('status','published'),
    supabase.from('community_replies').select('id',{count:'exact',head:true}).eq('author_id',p.id).eq('status','published'),
    supabase.from('community_follows').select('follower_id',{count:'exact',head:true}).eq('followed_id',p.id),
    supabase.from('community_follows').select('followed_id',{count:'exact',head:true}).eq('follower_id',p.id),
    supabase.from('community_posts').select('id,body,created_at,spoiler').eq('author_id',p.id).eq('status','published').order('created_at',{ascending:false}).limit(30),
-   user?.id&&user.id!==p.id?supabase.from('community_follows').select('follower_id').eq('follower_id',user.id).eq('followed_id',p.id).maybeSingle():Promise.resolve({data:null})
+   user?.id&&user.id!==p.id?supabase.from('community_follows').select('follower_id').eq('follower_id',user.id).eq('followed_id',p.id).maybeSingle():Promise.resolve({data:null}),
+   p.is_public&&p.show_watchlist?supabase.rpc('get_public_profile_watchlist',{p_username:name}):Promise.resolve({data:[]})
   ]);
   if(!active)return;
   setStats({posts:postCount.count||0,replies:replyCount.count||0,followers:followerCount.count||0,following:followingCount.count||0});
-  setPosts(postRows.data||[]);setFollowing(!!followRow.data);setLoading(false);
+  setPosts(postRows.data||[]);setFollowing(!!followRow.data);
+  if(watchlistRow.error)notify('Could not load this member’s public watchlist.');
+  setWatchlist(Array.isArray(watchlistRow.data)?watchlistRow.data:[]);
+  setLoading(false);
  })();return()=>{active=false}},[routeUsername,user?.id]);
  const toggleFollow=async()=>{if(!user){notify('Sign in with Discord to follow crew members.');return}if(!profile||busy)return;setBusy(true);
   const result=following?await supabase.from('community_follows').delete().eq('follower_id',user.id).eq('followed_id',profile.id):await supabase.from('community_follows').insert({follower_id:user.id,followed_id:profile.id});
@@ -50,7 +54,8 @@ export default function PublicProfile({user,notify}){
   <button className="text-btn" onClick={()=>navigate('/community')}><ArrowLeft size={15}/> Back to community</button>
   <div className="profile-cover public-profile-cover" style={profile.banner_url?{backgroundImage:'linear-gradient(90deg,#07131d66,#07131d22),url("'+profile.banner_url+'")'}:undefined}><div className="profile-avatar">{avatar?<img src={avatar} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}}/>:(profile.username||'N').slice(0,1).toUpperCase()}</div></div>
   <div className="profile-row"><div><h2>{profile.username}</h2><p>CREW MEMBER · JOINED {new Date(profile.created_at).toLocaleDateString(undefined,{month:'long',year:'numeric'})}</p></div>{user?.id!==profile.id&&<button className="primary" onClick={toggleFollow} disabled={busy}>{following?<UserCheck size={15}/>:<UserPlus size={15}/>} {busy?'Please wait…':following?'Following':'Follow'}</button>}</div>
-  <section className="profile-about"><span className="eyebrow">ABOUT THIS MEMBER</span><p>{profile.bio||'This crew member has not added a bio yet.'}</p></section>{(profile.favorite_anime?.length>0||profile.favorite_characters?.length>0||profile.favorite_genres?.length>0)&&<section className="profile-about"><span className="eyebrow">THE CAPTAIN'S FAVOURITES</span>{profile.favorite_anime?.length>0&&<p><b>Anime</b> · {profile.favorite_anime.join(' · ')}</p>}{profile.favorite_characters?.length>0&&<p><b>Characters</b> · {profile.favorite_characters.join(' · ')}</p>}{profile.favorite_genres?.length>0&&<p><b>Genres</b> · {profile.favorite_genres.join(' · ')}</p>}</section>}
+  <section className="profile-about"><span className="eyebrow">ABOUT THIS MEMBER</span><p>{profile.bio||'This crew member has not added a bio yet.'}</p></section>
+  {profile.is_public&&profile.show_watchlist&&<section className="profile-about"><span className="eyebrow">PUBLIC WATCHLIST</span>{watchlist.length?<p>{watchlist.join(' · ')}</p>:<p>This member has not added titles to their watchlist yet.</p>}</section>}{(profile.favorite_anime?.length>0||profile.favorite_characters?.length>0||profile.favorite_genres?.length>0)&&<section className="profile-about"><span className="eyebrow">THE CAPTAIN'S FAVOURITES</span>{profile.favorite_anime?.length>0&&<p><b>Anime</b> · {profile.favorite_anime.join(' · ')}</p>}{profile.favorite_characters?.length>0&&<p><b>Characters</b> · {profile.favorite_characters.join(' · ')}</p>}{profile.favorite_genres?.length>0&&<p><b>Genres</b> · {profile.favorite_genres.join(' · ')}</p>}</section>}
   <div className="public-profile-stats">
    <div><b>{stats.posts}</b><span>POSTS</span></div><div><b>{stats.replies}</b><span>REPLIES</span></div>
    <button onClick={()=>openList('followers')}><b>{stats.followers}</b><span>FOLLOWERS</span></button>
