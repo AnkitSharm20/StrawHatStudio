@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    name: Install and build
+    name: Install, audit and build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm install --no-fund
+      - name: Report dependency vulnerabilities
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
       - name: Build production bundle
         run: npm run build
