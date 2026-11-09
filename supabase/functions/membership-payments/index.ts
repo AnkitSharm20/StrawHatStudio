@@ -232,7 +232,7 @@ Deno.serve(async (req: Request) => {
       const { data: order, error } = await service.from("membership_orders").select("*").eq("razorpay_payment_id", paymentId).maybeSingle();
       if (error || !order) return json(404, { error: "Membership payment not found." }, h);
       const payment = await razorpayRequest("/payments/" + encodeURIComponent(paymentId), "GET", keyId, keySecret);
-      const refundAmount = amount ?? Number(payment.amount);
+      const refundAmount = amount ?? (Number(payment.amount) - Number(payment.amount_refunded ?? 0));
       if (payment.status !== "captured" || !Number.isInteger(refundAmount) || refundAmount < 1 || refundAmount > Number(payment.amount) - Number(payment.amount_refunded ?? 0)) {
         return json(400, { error: "Payment is not refundable or the refund amount is invalid." }, h);
       }
