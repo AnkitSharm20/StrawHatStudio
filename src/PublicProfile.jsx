@@ -2,10 +2,11 @@ import React,{useEffect,useState}from'react';
 import{useParams,useNavigate}from'react-router-dom';
 import{ArrowLeft,Users,MessageCircle,Calendar,UserPlus,UserCheck}from'lucide-react';
 import{supabase}from'./lib/supabase.js';
+const resolvePrivateBannerUrl=async value=>{if(!value||!supabase)return '';let path=value;const marker='/storage/v1/object/public/profile-banners/';if(value.includes(marker)){path=decodeURIComponent(value.split(marker)[1].split('?')[0])}const{data,error}=await supabase.storage.from('profile-banners').createSignedUrl(path,300);return error?'':data?.signedUrl||''};
 
 export default function PublicProfile({user,notify}){
  const{username:routeUsername}=useParams(),navigate=useNavigate();
- const[profile,setProfile]=useState(null),[stats,setStats]=useState({posts:0,replies:0,followers:0,following:0});
+ const[profile,setProfile]=useState(null),[bannerDisplayUrl,setBannerDisplayUrl]=useState(''),[stats,setStats]=useState({posts:0,replies:0,followers:0,following:0});
  const[posts,setPosts]=useState([]),[watchlist,setWatchlist]=useState([]),[tab,setTab]=useState('posts'),[busy,setBusy]=useState(false),[following,setFollowing]=useState(false);
  const[list,setList]=useState(''),[members,setMembers]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState('');
  useEffect(()=>{let active=true;(async()=>{
@@ -17,7 +18,7 @@ export default function PublicProfile({user,notify}){
   if(!active)return;
   if(e){setError(e.message);setLoading(false);return}
   if(!p){setError('This crew member could not be found.');setLoading(false);return}
-  setProfile(p);
+  setProfile(p);if(p.banner_url)resolvePrivateBannerUrl(p.banner_url).then(url=>{if(active)setBannerDisplayUrl(url)});
   const[postCount,replyCount,followerCount,followingCount,postRows,followRow,watchlistRow]=await Promise.all([
    supabase.from('community_posts').select('id',{count:'exact',head:true}).eq('author_id',p.id).eq('status','published'),
    supabase.from('community_replies').select('id',{count:'exact',head:true}).eq('author_id',p.id).eq('status','published'),
@@ -52,7 +53,7 @@ export default function PublicProfile({user,notify}){
  const avatar=profile.avatar_url;
  return <div className="page public-profile-page">
   <button className="text-btn" onClick={()=>navigate('/community')}><ArrowLeft size={15}/> Back to community</button>
-  <div className="profile-cover public-profile-cover" style={profile.banner_url?{backgroundImage:'linear-gradient(90deg,#07131d66,#07131d22),url("'+profile.banner_url+'")'}:undefined}><div className="profile-avatar">{avatar?<img src={avatar} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}}/>:(profile.username||'N').slice(0,1).toUpperCase()}</div></div>
+  <div className="profile-cover public-profile-cover" style={bannerDisplayUrl?{backgroundImage:'linear-gradient(90deg,#07131d66,#07131d22),url("'+bannerDisplayUrl+'")'}:undefined}><div className="profile-avatar">{avatar?<img src={avatar} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}}/>:(profile.username||'N').slice(0,1).toUpperCase()}</div></div>
   <div className="profile-row"><div><h2>{profile.username}</h2><p>CREW MEMBER · JOINED {new Date(profile.created_at).toLocaleDateString(undefined,{month:'long',year:'numeric'})}</p></div>{user?.id!==profile.id&&<button className="primary" onClick={toggleFollow} disabled={busy}>{following?<UserCheck size={15}/>:<UserPlus size={15}/>} {busy?'Please wait…':following?'Following':'Follow'}</button>}</div>
   <section className="profile-about"><span className="eyebrow">ABOUT THIS MEMBER</span><p>{profile.bio||'This crew member has not added a bio yet.'}</p></section>
   {profile.is_public&&profile.show_watchlist&&<section className="profile-about"><span className="eyebrow">PUBLIC WATCHLIST</span>{watchlist.length?<p>{watchlist.join(' · ')}</p>:<p>This member has not added titles to their watchlist yet.</p>}</section>}{(profile.favorite_anime?.length>0||profile.favorite_characters?.length>0||profile.favorite_genres?.length>0)&&<section className="profile-about"><span className="eyebrow">THE CAPTAIN'S FAVOURITES</span>{profile.favorite_anime?.length>0&&<p><b>Anime</b> · {profile.favorite_anime.join(' · ')}</p>}{profile.favorite_characters?.length>0&&<p><b>Characters</b> · {profile.favorite_characters.join(' · ')}</p>}{profile.favorite_genres?.length>0&&<p><b>Genres</b> · {profile.favorite_genres.join(' · ')}</p>}</section>}
