@@ -11,7 +11,7 @@
 1. Keep Discord OAuth as the only sign-in method exposed by this application.
 2. Do not add password sign-up, password login, or password reset UI while native leaked-password protection is unavailable.
 3. Do not rely on a browser-only HIBP check as a substitute: users could bypass it by calling Supabase Auth directly.
-4. Supabase's Free/Pro Before User Created hook does not receive the submitted password, so it cannot perform a reliable Pwned Passwords check. The Password Verification Attempt hook is restricted to higher plans.
+4. The Free/Pro Before User Created hook receives request metadata and the prospective user record, not the submitted password. The Password Verification Attempt hook is Teams/Enterprise-only and receives only the user ID plus a valid/invalid result; it also cannot inspect a candidate password for HIBP.
 5. When the project is upgraded to Pro, enable Supabase Auth's native leaked-password protection and rerun the Security Advisor.
 
 The Security Advisor warning is therefore a known plan limitation, not evidence that an existing Straw Hat Studio user password has leaked. The current database has no password credentials.
