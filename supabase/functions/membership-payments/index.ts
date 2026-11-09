@@ -132,6 +132,12 @@ async function handleWebhook(req: Request, h: Record<string,string>) {
         await service.from("membership_orders").update({ status: "failed", updated_at: new Date().toISOString() })
           .eq("razorpay_order_id", payment.order_id).eq("status", "created");
       }
+    } else if (eventType === "refund.failed") {
+      const refund = payload?.payload?.refund?.entity;
+      if (refund?.id) {
+        await service.from("membership_refunds").update({ status: "failed", updated_at: new Date().toISOString() })
+          .eq("razorpay_refund_id", refund.id);
+      }
     } else if (eventType === "refund.processed" || eventType === "payment.refunded") {
       const refund = payload?.payload?.refund?.entity;
       const paymentEntity = payload?.payload?.payment?.entity;
