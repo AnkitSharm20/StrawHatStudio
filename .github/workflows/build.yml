@@ -14,6 +14,15 @@ jobs:
     name: Install, audit, build and responsive browser tests
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      E2E_SUPABASE_URL: ${{ secrets.E2E_SUPABASE_URL }}
+      E2E_SUPABASE_ANON_KEY: ${{ secrets.E2E_SUPABASE_ANON_KEY }}
+      E2E_USER_A_SESSION_JSON: ${{ secrets.E2E_USER_A_SESSION_JSON }}
+      E2E_USER_B_SESSION_JSON: ${{ secrets.E2E_USER_B_SESSION_JSON }}
+      E2E_ADMIN_SESSION_JSON: ${{ secrets.E2E_ADMIN_SESSION_JSON }}
+      E2E_ALLOW_MUTATING_TESTS: ${{ vars.E2E_ALLOW_MUTATING_TESTS }}
+      VITE_SUPABASE_URL: ${{ secrets.E2E_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.E2E_SUPABASE_ANON_KEY }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
