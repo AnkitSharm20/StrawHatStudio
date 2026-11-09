@@ -73,18 +73,20 @@ function Community({notify,user}){
  const loadPosts=async()=>{
   if(!supabase){setLoading(false);notify('Supabase is not configured for this deployment');return}
   setLoading(true);
+  let blockedIds=new Set();
+  if(user?.id){const{data:blocks,error:blockError}=await supabase.from('community_blocks').select('blocked_id').eq('blocker_id',user.id);if(blockError){notify('Your block list could not be loaded: '+blockError.message);setLoading(false);return}blockedIds=new Set((blocks||[]).map(row=>row.blocked_id))}
   const {data,error}=await supabase.from('community_posts').select('id,author_id,body,image_url,spoiler,created_at').eq('status','published').order('created_at',{ascending:false}).limit(40);
   if(error){notify('Could not load community posts: '+error.message);setPosts([]);setLoading(false);return}
-  const rows=data||[], ids=[...new Set(rows.map(p=>p.author_id))], postIds=rows.map(p=>p.id);
+  const rows=(data||[]).filter(p=>!blockedIds.has(p.author_id)), ids=[...new Set(rows.map(p=>p.author_id))], postIds=rows.map(p=>p.id);
   const [profilesRes,reactionsRes,repliesRes,followsRes]=await Promise.all([
    ids.length?supabase.from('profiles').select('id,username,avatar_url').in('id',ids):Promise.resolve({data:[]}),
    postIds.length?supabase.from('community_post_reactions').select('post_id,user_id').in('post_id',postIds):Promise.resolve({data:[]}),
-   postIds.length?supabase.from('community_replies').select('post_id').eq('status','published').in('post_id',postIds):Promise.resolve({data:[]}),
+   postIds.length?supabase.from('community_replies').select('post_id,author_id').eq('status','published').in('post_id',postIds):Promise.resolve({data:[]}),
    user?.id?supabase.from('community_follows').select('followed_id').eq('follower_id',user.id):Promise.resolve({data:[]})
   ]);
   if(profilesRes.error||reactionsRes.error||repliesRes.error)notify('Some community details could not be loaded. '+[profilesRes.error,reactionsRes.error,repliesRes.error].filter(Boolean).map(e=>e.message).join(' '));
   const profileMap=Object.fromEntries((profilesRes.data||[]).map(p=>[p.id,p]));
-  const reactionRows=reactionsRes.data||[], replyRows=repliesRes.data||[];
+  const reactionRows=reactionsRes.data||[], replyRows=(repliesRes.data||[]).filter(r=>!blockedIds.has(r.author_id));
   setMyLikes(Object.fromEntries(reactionRows.filter(r=>r.user_id===user?.id).map(r=>[r.post_id,true])));
   setFollowedAuthors(Object.fromEntries((followsRes.data||[]).map(r=>[r.followed_id,true])));
   setPosts(rows.map(p=>({...p,profile:profileMap[p.author_id]||{},likes:reactionRows.filter(r=>r.post_id===p.id).length,replies:replyRows.filter(r=>r.post_id===p.id).length})));
