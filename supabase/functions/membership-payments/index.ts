@@ -98,6 +98,39 @@ async function activate(service: ReturnType<typeof createClient>, orderId: strin
   if (error) throw new Error(error.message);
   return data;
 }
+async function recordRefundWebhook(service: ReturnType<typeof createClient>, refund: any, status: "failed" | "processed") {
+  if (!refund?.id) return;
+  const refundKey = String(refund?.notes?.shs_ref_key ?? "");
+  const patch = { razorpay_refund_id: String(refund.id), status, updated_at: new Date().toISOString() };
+
+  if (refundKey) {
+    const { data, error } = await service.from("membership_refunds")
+      .update(patch).eq("idempotency_key", refundKey).select("id");
+    if (error) throw new Error("Could not update the matching refund attempt: " + error.message);
+    if (data?.length) return;
+  }
+
+  const { data: matched, error: matchError } = await service.from("membership_refunds")
+    .update(patch).eq("razorpay_refund_id", String(refund.id)).select("id");
+  if (matchError) throw new Error("Could not match the Razorpay refund: " + matchError.message);
+  if (matched?.length) return;
+
+  // Compatibility fallback for older refund events that predate the correlation note.
+  if (!refundKey && refund.payment_id && Number.isFinite(Number(refund.amount))) {
+    const { data: pending, error: pendingError } = await service.from("membership_refunds")
+      .select("id").eq("payment_id", String(refund.payment_id))
+      .eq("amount_paise", Number(refund.amount)).eq("status", "requested")
+      .is("razorpay_refund_id", null).order("created_at", { ascending: true }).limit(1);
+    if (pendingError) throw new Error("Could not find the pending refund: " + pendingError.message);
+    if (pending?.[0]) {
+      const { error } = await service.from("membership_refunds").update(patch).eq("id", pending[0].id);
+      if (error) throw new Error("Could not update the pending refund: " + error.message);
+      return;
+    }
+  }
+
+  if (refundKey) throw new Error("No refund attempt matches the Razorpay correlation key.");
+}
 async function handleWebhook(req: Request, h: Record<string,string>) {
   const webhookSecret = Deno.env.get("RAZORPAY_WEBHOOK_SECRET");
   if (!webhookSecret) return json(503, { error: "Webhook secret is not configured." }, h);
@@ -135,45 +168,31 @@ async function handleWebhook(req: Request, h: Record<string,string>) {
     } else if (eventType === "payment.failed") {
       const payment = payload?.payload?.payment?.entity;
       if (payment?.order_id) {
-        await service.from("membership_orders").update({ status: "failed", updated_at: new Date().toISOString() })
+        const { error } = await service.from("membership_orders").update({ status: "failed", updated_at: new Date().toISOString() })
           .eq("razorpay_order_id", payment.order_id).eq("status", "created");
+        if (error) throw new Error("Could not record failed payment: " + error.message);
       }
     } else if (eventType === "refund.failed") {
-      const refund = payload?.payload?.refund?.entity;
-      if (refund?.id) {
-        const { data: pendingRefunds } = await service.from("membership_refunds").select("id")
-          .eq("payment_id", refund.payment_id).eq("amount_paise", Number(refund.amount))
-          .eq("status", "requested").is("razorpay_refund_id", null).order("created_at", { ascending: true }).limit(1);
-        if (pendingRefunds?.[0]) {
-          await service.from("membership_refunds").update({ razorpay_refund_id: refund.id, status: "failed", updated_at: new Date().toISOString() }).eq("id", pendingRefunds[0].id);
-        } else {
-          await service.from("membership_refunds").update({ status: "failed", updated_at: new Date().toISOString() }).eq("razorpay_refund_id", refund.id);
-        }
-      }
+      await recordRefundWebhook(service, payload?.payload?.refund?.entity, "failed");
     } else if (eventType === "refund.processed" || eventType === "payment.refunded") {
       const refund = payload?.payload?.refund?.entity;
       const paymentEntity = payload?.payload?.payment?.entity;
       const paymentId = String(refund?.payment_id ?? paymentEntity?.id ?? "");
-      if (refund?.id) {
-        const { data: pendingRefunds } = await service.from("membership_refunds").select("id")
-          .eq("payment_id", refund.payment_id).eq("amount_paise", Number(refund.amount))
-          .eq("status", "requested").is("razorpay_refund_id", null).order("created_at", { ascending: true }).limit(1);
-        if (pendingRefunds?.[0]) {
-          await service.from("membership_refunds").update({ razorpay_refund_id: refund.id, status: "processed", updated_at: new Date().toISOString() }).eq("id", pendingRefunds[0].id);
-        } else {
-          await service.from("membership_refunds").update({ status: "processed", updated_at: new Date().toISOString() }).eq("razorpay_refund_id", refund.id);
-        }
-      }
+      if (refund?.id) await recordRefundWebhook(service, refund, "processed");
       if (paymentId) {
         const payment = await razorpayRequest("/payments/" + encodeURIComponent(paymentId), "GET", keyId, keySecret);
-        await service.rpc("apply_membership_refund", {
+        const { error } = await service.rpc("apply_membership_refund", {
           p_razorpay_payment_id: paymentId,
           p_refunded_amount_paise: Number(payment.amount_refunded ?? 0),
           p_payment_amount_paise: Number(payment.amount),
         });
+        if (error) throw new Error("Could not reconcile membership refund: " + error.message);
       }
     }
-    await service.from("razorpay_webhook_events").update({ status: "processed", processed_at: new Date().toISOString(), error_message: null }).eq("event_id", eventId);
+    const { error: processedError } = await service.from("razorpay_webhook_events")
+      .update({ status: "processed", processed_at: new Date().toISOString(), error_message: null })
+      .eq("event_id", eventId);
+    if (processedError) throw new Error("Could not mark webhook event processed: " + processedError.message);
     return json(200, { received: true }, h);
   } catch (error) {
     const message = error instanceof Error ? error.message.slice(0, 500) : "Webhook processing failed.";
@@ -303,7 +322,7 @@ Deno.serve(async (req: Request) => {
       }
 
       const refund = await razorpayRequest("/payments/" + encodeURIComponent(paymentId) + "/refund", "POST", keyId, keySecret,
-        { amount: refundAmount, notes: { reason: String(body.reason ?? "Membership refund").slice(0, 200) } },
+        { amount: refundAmount, notes: { reason: String(body.reason ?? "Membership refund").slice(0, 200), shs_ref_key: idempotencyKey } },
         { "X-Refund-Idempotency": idempotencyKey });
       await service.from("membership_refunds").update({
         razorpay_refund_id: refund.id, status: refund.status === "processed" ? "processed" : "requested", updated_at: new Date().toISOString(),
