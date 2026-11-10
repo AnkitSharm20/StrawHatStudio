@@ -167,3 +167,51 @@
   .app .spotlight-actions { width: 100%; }
   .app .spotlight-actions button { flex: 1 1 140px; justify-content: center; }
 }
+
+
+/* Community pulse — functional shortcuts into the live feed, not decorative counters. */
+.app .community-pulse {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 26px;
+}
+.app .community-pulse > button {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 17px 18px;
+  color: var(--text);
+  text-align: left;
+  border: 1px solid color-mix(in srgb, var(--gold) 17%, var(--line));
+  border-radius: 15px;
+  background: linear-gradient(145deg, var(--panel), color-mix(in srgb, var(--panel2) 70%, var(--bg)));
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+.app .community-pulse > button:hover,
+.app .community-pulse > button.active {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--orange) 65%, var(--line));
+  background: linear-gradient(145deg, color-mix(in srgb, var(--orange) 10%, var(--panel)), var(--panel));
+}
+.app .pulse-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--orange);
+  border: 1px solid color-mix(in srgb, var(--orange) 30%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--orange) 10%, var(--panel));
+}
+.app .community-pulse > button > span:nth-child(2) { display: grid; gap: 4px; min-width: 0; flex: 1; }
+.app .community-pulse b { font: 700 22px/1 var(--font-display); letter-spacing: .03em; }
+.app .community-pulse small { color: var(--muted); font: 700 8px/1.3 var(--font-body); letter-spacing: .13em; }
+.app .community-pulse > button > svg:last-child { color: var(--gold); opacity: .75; }
+@media (max-width: 760px) {
+  .app .community-pulse { grid-template-columns: 1fr; gap: 8px; margin: 16px 0 20px; }
+  .app .community-pulse > button { padding: 12px 14px; }
+}
