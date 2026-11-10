@@ -58,6 +58,10 @@ test.describe('authenticated staging acceptance', () => {
     await postB.locator('input[placeholder="Write a reply…"]').fill(replyMarker);
     await postB.getByRole('button', { name: 'Reply' }).click();
 
+    // Confirm the realtime notification arrives while member A's inbox remains open.
+    const realtimeNotification = pageA.locator('.notification-card').filter({ hasText: 'Someone replied to your post.' });
+    await expect(realtimeNotification).toBeVisible({ timeout: 20_000 });
+
     // Blocking hides the author's posts in the blocker's feed and exposes an unblock control.
     pageB.once('dialog', dialog => dialog.accept());
     await postB.getByRole('button', { name: /^Block / }).click();
@@ -79,7 +83,8 @@ test.describe('authenticated staging acceptance', () => {
     await pageA.reload();
     await expect(pageA.locator('.community-post-card').filter({ hasText: blockedPostMarker })).toBeVisible({ timeout: 15_000 });
 
-    // The notification arrives over Realtime while member A's inbox is already open.
+    // Return to the inbox to verify persisted read and delete behavior after the realtime event.
+    await pageA.goto('/notifications');
     const notification = pageA.locator('.notification-card').filter({ hasText: 'Someone replied to your post.' });
     await expect(notification).toBeVisible({ timeout: 20_000 });
     await notification.getByRole('button', { name: 'Mark as read' }).click();
