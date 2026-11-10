@@ -965,3 +965,13 @@ html[data-performance-mode="performance"] .app *::after {
 @media(max-width:650px){.app .membership-intro{grid-template-columns:1fr}.app .membership-artwork{min-height:240px}.app .membership-artwork>img{min-height:240px}.app .tier-plan-grid{gap:13px}.app .tier-plan-grid>article{padding:21px}.app .tier-plan-grid>article>p{min-height:0}.app .membership-billing-switch{display:grid;width:100%}.app .membership-billing-switch button{min-width:0}.app .membership-perk-grid{grid-template-columns:1fr 1fr}.app .membership-flow{padding:18px}.app .membership-history-list article{grid-template-columns:minmax(0,1fr) auto}}
 @media(max-width:390px){.app .membership-perk-grid{grid-template-columns:1fr}.app .membership-flow-steps{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.app .membership-account-panel,.app .tier-plan-grid>article{animation:none}.app .tier-plan-grid>article:hover,.app .membership-perk-grid article:hover{transform:none}}
+
+/* Four-rank membership grid: balanced cards on wide screens, clean stacking on phones. */
+.app .tier-plan-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;gap:15px}
+.app .tier-plan-grid>article{min-width:0}
+.app .tier-plan-grid>article.tier-featured{transform:translateY(-7px);border-color:#f4c66ac7;box-shadow:0 24px 55px #0005,0 0 36px #f4c66a18,inset 0 0 0 1px #f4c66a22}
+.app .tier-plan-grid>article.tier-featured:hover{transform:translateY(-12px)}
+.app .tier-plan-grid .plan-price{font-size:clamp(28px,2.6vw,42px)}
+.app .tier-plan-grid li{overflow-wrap:anywhere}
+@media(max-width:1120px){.app .tier-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app .tier-plan-grid>article.tier-featured{transform:none}.app .tier-plan-grid>article.tier-featured:hover{transform:translateY(-7px)}}
+@media(max-width:600px){.app .tier-plan-grid{grid-template-columns:minmax(0,1fr)}}
