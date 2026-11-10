@@ -21,7 +21,7 @@ Use two dedicated non-production Discord test accounts and one separate admin te
 1. Sign in through Discord OAuth and confirm the callback returns to the same preview origin.
 2. Confirm first-login profile creation, username save and session persistence after refresh.
 3. Upload a profile banner and avatar. Confirm the banner bucket remains private and signed URLs resolve only for allowed viewers.
-4. As member A, publish a Community post. As member B, follow the author, submit a report, reply, block the author, verify the post disappears from the feed, then unblock and verify it returns. Confirm each action is reflected correctly.
+4. As member A, publish a Community post. As member B, follow the author, submit a report, reply, and block the author. Verify posts/replies/follows/reactions are hidden in both directions, blocked replies/follows are rejected, and no new reply/follow/reaction notifications cross the block. Unblock and verify visibility returns.
 5. Keep member A's Notifications page open while member B replies. Confirm the notification arrives over Realtime, mark it read, and delete it. Confirm notification deletion is limited to the owner.
 6. As a normal member, open /admin and confirm access is denied.
 7. As the verified admin test account, open the moderation queue, hide the reported test post, and inspect the audit log. Confirm the moderation action is recorded.
