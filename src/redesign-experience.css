@@ -1068,3 +1068,17 @@ html[data-performance-mode="performance"] .app *::after {
 .app .collection-item small{font-size:9px;color:var(--gold);font-weight:700}
 @media(max-width:720px){.app .collection-grid{grid-template-columns:1fr}.app .marketplace-view-tabs{width:100%}.app .marketplace-view-tabs button{flex:1;justify-content:center}}
 @media(max-width:420px){.app .collection-item{grid-template-columns:76px minmax(0,1fr);gap:11px;padding:11px}.app .collection-item-art{min-height:90px}}
+
+
+/* Marketplace item details */
+.marketplace-detail-backdrop{position:fixed;inset:0;z-index:1200;display:grid;place-items:center;padding:20px;background:rgba(2,8,14,.78);backdrop-filter:blur(12px)}
+.marketplace-detail-dialog{position:relative;display:grid;grid-template-columns:minmax(220px,.9fr) minmax(260px,1.1fr);gap:26px;width:min(760px,100%);max-height:min(82vh,720px);overflow:auto;padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:0 30px 100px #0008}
+.marketplace-detail-dialog>.shop-artwork,.marketplace-detail-dialog>.shop-art,.marketplace-detail-dialog>img{width:100%;min-height:240px;max-height:390px;object-fit:cover;border-radius:12px}
+.marketplace-detail-close{position:absolute;top:12px;right:12px;z-index:2;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--text)}
+.marketplace-detail-copy{align-self:center;padding-right:12px}
+.marketplace-detail-copy h2{margin:8px 0 12px;font-family:var(--display-font,Georgia,serif);font-size:clamp(25px,4vw,38px)}
+.marketplace-detail-copy p{color:var(--muted);line-height:1.7}
+.marketplace-detail-meta{display:inline-flex;margin:5px 6px 5px 0;padding:6px 9px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:11px}
+.marketplace-detail-copy .shop-buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}
+.community-follow-button{white-space:nowrap}
+@media(max-width:640px){.marketplace-detail-backdrop{padding:12px}.marketplace-detail-dialog{grid-template-columns:1fr;gap:16px;padding:18px;max-height:88vh}.marketplace-detail-dialog>.shop-artwork,.marketplace-detail-dialog>.shop-art,.marketplace-detail-dialog>img{min-height:170px;max-height:230px}.marketplace-detail-copy{padding-right:0}.marketplace-detail-copy .shop-buy{flex-wrap:wrap}}
