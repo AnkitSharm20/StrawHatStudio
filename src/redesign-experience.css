@@ -311,3 +311,33 @@
   .app .profile-snapshot > div { padding: 13px 15px; }
   .app .profile-snapshot .eyebrow { grid-column: 1 / 2; }
 }
+
+
+/* Homepage voyage stats — counts are sourced from the live catalogue and current watchlist. */
+.app .home-voyage-stats {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 22px;
+  padding: 22px;
+  border: 1px solid color-mix(in srgb, var(--gold) 23%, var(--line));
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 0% 100%, color-mix(in srgb, var(--orange) 11%, transparent), transparent 45%),
+    linear-gradient(115deg, var(--panel), color-mix(in srgb, var(--panel2) 72%, var(--bg)));
+}
+.app .voyage-stat-lead { display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 4px 14px 4px 5px; }
+.app .voyage-stat-lead > b { font: 700 clamp(21px, 2.5vw, 30px)/1.02 var(--font-heading); letter-spacing: -.035em; }
+.app .voyage-stat-lead > b em { color: var(--gold); font-style: normal; }
+.app .voyage-stat { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 7px; min-width: 0; padding: 13px 16px; border-left: 1px solid var(--line); }
+.app .voyage-stat > span { color: var(--orange); font: 700 9px var(--font-body); letter-spacing: .16em; }
+.app .voyage-stat > b { color: var(--gold); font: 700 clamp(27px, 3vw, 38px)/1 var(--font-display); }
+.app .voyage-stat > small { color: var(--muted); font: 700 8px/1.4 var(--font-body); letter-spacing: .13em; }
+@media (max-width: 760px) {
+  .app .home-voyage-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; padding: 15px 12px; border-radius: 14px; }
+  .app .voyage-stat-lead { grid-column: 1 / -1; padding: 0 3px 12px; }
+  .app .voyage-stat-lead > b br { display: none; }
+  .app .voyage-stat { padding: 10px 8px; }
+  .app .voyage-stat:first-of-type { border-left: 0; }
+  .app .voyage-stat > small { font-size: 7px; letter-spacing: .06em; }
+}
