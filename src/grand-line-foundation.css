@@ -74,3 +74,10 @@
 @media (prefers-reduced-motion:reduce){
   .app *, .app *::before, .app *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Catalogue request feedback */
+.app .catalog-status{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--wanted-red) 42%,var(--line));border-radius:13px;background:color-mix(in srgb,var(--wanted-red) 7%,var(--panel));color:var(--muted);font-size:12px;line-height:1.6}
+.app .catalog-status>span{min-width:0}
+.app .catalog-status .secondary{flex:0 0 auto;min-height:40px}
+.app .catalog-status button:disabled{opacity:.65;cursor:wait}
+@media(max-width:560px){.app .catalog-status{align-items:stretch;flex-direction:column}.app .catalog-status .secondary{justify-content:center}}
