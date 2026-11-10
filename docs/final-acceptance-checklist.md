@@ -16,7 +16,7 @@ These are browser emulations, not physical-device certification. Authenticated s
 
 ## Authenticated browser acceptance
 
-Use two dedicated non-production Discord test accounts and one separate admin test account.
+The Playwright authenticated suite uses pre-created Supabase session JSON for two dedicated non-production accounts and an optional admin account. It verifies app behavior and RLS, but session injection does not exercise the Discord OAuth redirect/callback. Verify the actual Discord OAuth flow manually in the staging preview.
 
 1. Sign in through Discord OAuth and confirm the callback returns to the same preview origin.
 2. Confirm first-login profile creation, username save and session persistence after refresh.
