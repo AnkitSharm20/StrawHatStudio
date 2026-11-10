@@ -226,7 +226,7 @@ function Membership({user,notify=()=>{}}){
  {id:'yonko',name:'Yonko',level:'THE FOUR EMPERORS',monthly:399,yearly:2999,description:'The fullest supporter identity for the most dedicated members.',features:['Everything in Supernova','Exclusive premium profile frames','Signature profile and banner themes','Exclusive activity styling','Premium cosmetic bundles','Priority access to selected community events','Yonko supporter identity','Special seasonal supporter collection']},
  ];
  const refreshMembership=async()=>{
-  if(!user||!supabase){setMembership(null);setOrders([]);return}
+  if(!user||!supabase){setMembership(null);setOrders([]);setActivity(null);setHistoryLoading(false);return}
   setHistoryLoading(true);
   try{
    const [ent,ord,prefs]=await Promise.all([
@@ -246,9 +246,16 @@ function Membership({user,notify=()=>{}}){
  },[user?.id]);
  const loadCheckoutScript=()=>new Promise((resolve,reject)=>{
   if(window.Razorpay){resolve(true);return}
-  const existing=document.querySelector('script[data-razorpay-checkout="true"]');
-  if(existing){existing.addEventListener('load',()=>resolve(true),{once:true});existing.addEventListener('error',()=>reject(new Error('Razorpay checkout could not be loaded.')),{once:true});return}
-  const script=document.createElement('script');script.src='https://checkout.razorpay.com/v1/checkout.js';script.async=true;script.dataset.razorpayCheckout='true';script.onload=()=>resolve(true);script.onerror=()=>reject(new Error('Razorpay checkout could not be loaded. Check your connection and retry.'));document.body.appendChild(script)
+  let script=document.querySelector('script[data-razorpay-checkout="true"]');
+  if(script?.dataset.loaded==='true'){reject(new Error('Razorpay checkout did not initialise. Refresh the page and retry.'));return}
+  if(!script){script=document.createElement('script');script.src='https://checkout.razorpay.com/v1/checkout.js';script.async=true;script.dataset.razorpayCheckout='true'}
+  let settled=false;
+  const finish=(error)=>{if(settled)return;settled=true;window.clearTimeout(timeout);script.removeEventListener('load',onLoad);script.removeEventListener('error',onError);error?reject(error):resolve(true)};
+  const onLoad=()=>{script.dataset.loaded='true';if(window.Razorpay)finish();else finish(new Error('Razorpay loaded but checkout did not initialise. Please retry.'))};
+  const onError=()=>{script.remove();finish(new Error('Razorpay checkout could not be loaded. Check your connection and retry.'))};
+  const timeout=window.setTimeout(()=>finish(new Error('Razorpay checkout is taking too long to load. Check your connection and retry.')),15000);
+  script.addEventListener('load',onLoad,{once:true});script.addEventListener('error',onError,{once:true});
+  if(!script.isConnected)document.body.appendChild(script)
  });
  const purchasePlan=async planKey=>{
   if(!user){notify('Sign in before choosing a membership plan.');return}
