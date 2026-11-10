@@ -226,21 +226,20 @@ function Marketplace({notify,user}){
 }
 function MembershipArtwork(){const[art,setArt]=useState('');useEffect(()=>{let active=true;const query='query{Media(search:"One Piece",type:ANIME){bannerImage coverImage{extraLarge}}}';fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query})}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{if(active)setArt(d.data?.Media?.bannerImage||d.data?.Media?.coverImage?.extraLarge||'')}).catch(()=>{});return()=>{active=false}},[]);return <div className="membership-artwork">{art?<img src={art} alt="One Piece membership artwork" loading="lazy"/>:<HeroAnimeArt character="Monkey D. Luffy" className="membership-luffy-fallback"/>}<div className="membership-art-overlay"><span>THE STRAW HAT CREW</span><b>SAIL WITH YOUR NAKAMA.</b><small>MEMBERSHIP · COSMETICS · COMMUNITY</small></div></div>}
 function Membership({user,notify=()=>{}}){
- const[[billingPeriod,setBillingPeriod]=useState('monthly'),[checkoutAvailable,setCheckoutAvailable]=useState(false),[configLoading,setConfigLoading]=useState(false),[busy,setBusy]=useState(''),[membership,setMembership]=useState(null),[orders,setOrders]=useState([]),[historyLoading,setHistoryLoading]=useState(false),[checkoutError,setCheckoutError]=useState('');
+ const[billingPeriod,setBillingPeriod]=useState('monthly'),[checkoutAvailable,setCheckoutAvailable]=useState(false),[configLoading,setConfigLoading]=useState(false),[busy,setBusy]=useState(''),[membership,setMembership]=useState(null),[orders,setOrders]=useState([]),[historyLoading,setHistoryLoading]=useState(false),[checkoutError,setCheckoutError]=useState('');
  const tiers=[
- {id:'nakama',name:'Nakama',level:'THE CREW',monthly:99,yearly:799,description:'A welcoming first step for fans who want to support the crew.',features:['Nakama supporter badge','Starter profile frame','Exclusive supporter name colour','One profile theme','One banner treatment','Streaming Luffy supporter label','Access to member-only announcements','Support hosting and moderation']},
- {id:'supernova',name:'Supernova',level:'RISING LEGEND',monthly:199,yearly:1499,description:'More ways to customise your corner of the Grand Line.',features:['Everything in Nakama','Expanded profile frame collection','Premium profile themes','Animated banner cosmetics','Extra Streaming Luffy display presets','Early access to selected cosmetic drops','Supernova supporter identity','Monthly cosmetic drop when available']},
+ {id:'nakama',name:'Nakama',level:'THE CREW',monthly:99,yearly:799,description:'A welcoming first step for fans who want to support the crew.',features:['Nakama supporter badge','Starter profile frame','Exclusive supporter name colour','One profile theme','One banner treatment','Exclusive supporter profile identity','Access to member-only announcements','Support hosting and moderation']},
+ {id:'supernova',name:'Supernova',level:'RISING LEGEND',monthly:199,yearly:1499,description:'More ways to customise your corner of the Grand Line.',features:['Everything in Nakama','Expanded profile frame collection','Premium profile themes','Animated banner cosmetics','Additional profile identity styles','Early access to selected cosmetic drops','Supernova supporter identity','Monthly cosmetic drop when available']},
  {id:'yonko',name:'Yonko',level:'THE FOUR EMPERORS',monthly:399,yearly:2999,description:'The fullest supporter identity for the most dedicated members.',features:['Everything in Supernova','Exclusive premium profile frames','Signature profile and banner themes','Exclusive activity styling','Premium cosmetic bundles','Priority access to selected community events','Yonko supporter identity','Special seasonal supporter collection']},
  ];
  const refreshMembership=async()=>{
-  if(!user||!supabase){setMembership(null);setOrders([]);setActivity(null);setHistoryLoading(false);return}
+  if(!user||!supabase){setMembership(null);setOrders([]);setHistoryLoading(false);return}
   setHistoryLoading(true);
   try{
    const [ent,ord]=await Promise.all([
     supabase.from('membership_entitlements').select('id,tier_key,plan_key,status,starts_at,ends_at,created_at').eq('user_id',user.id).order('ends_at',{ascending:false}).limit(10),
     supabase.from('membership_orders').select('id,tier_key,plan_key,billing_period,amount_paise,currency,status,refunded_amount_paise,paid_at,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(10),
-    supabase.from('user_settings').select('preferences').eq('user_id',user.id).maybeSingle()
-   ]);
+    ]);
    if(ent.error)throw ent.error;if(ord.error)throw ord.error;
    const now=Date.now();setMembership((ent.data||[]).find(x=>x.status==='active'&&new Date(x.ends_at).getTime()>now)||null);
    setOrders(ord.data||[]);
