@@ -291,7 +291,7 @@ Deno.serve(async (req: Request) => {
 
       // Stable operation key for this exact order + remaining balance. A confirmed
       // failed attempt advances to a new suffix; transient retries reuse the same key.
-      const baseRefundKey = "shsrefund_" + String(order.id).replaceAll("-", "") + "_" + String(refundAmount);
+      const baseRefundKey = "shs_" + (await sha256(String(order.id) + "|" + paymentId + "|" + String(refundAmount))).slice(0, 28);
       const { data: attempts, error: attemptsError } = await service.from("membership_refunds")
         .select("id,razorpay_refund_id,idempotency_key,amount_paise,payment_id,status")
         .eq("order_id", order.id).eq("payment_id", paymentId).eq("amount_paise", refundAmount)
