@@ -258,29 +258,49 @@ Deno.serve(async (req: Request) => {
       const { keyId, keySecret } = requireRazorpayTestConfig();
       const paymentId = String(body.payment_id ?? "");
       const amount = body.amount_paise == null ? null : Number(body.amount_paise);
-      const idempotencyKey = String(body.idempotency_key ?? "");
-      if (!/^pay_[A-Za-z0-9]+$/.test(paymentId) || !/^[A-Za-z0-9_-]{10,64}$/.test(idempotencyKey)) {
-        return json(400, { error: "Provide a payment ID and stable refund idempotency key." }, h);
+      if (!/^pay_[A-Za-z0-9]+$/.test(paymentId)) {
+        return json(400, { error: "Provide a valid Razorpay payment ID." }, h);
       }
       const { data: order, error } = await service.from("membership_orders").select("*").eq("razorpay_payment_id", paymentId).maybeSingle();
       if (error || !order) return json(404, { error: "Membership payment not found." }, h);
       const payment = await razorpayRequest("/payments/" + encodeURIComponent(paymentId), "GET", keyId, keySecret);
-      const refundAmount = amount ?? (Number(payment.amount) - Number(payment.amount_refunded ?? 0));
-      if (payment.status !== "captured" || !Number.isInteger(refundAmount) || refundAmount < 1 || refundAmount > Number(payment.amount) - Number(payment.amount_refunded ?? 0)) {
+      const remainingBeforeRefund = Number(payment.amount) - Number(payment.amount_refunded ?? 0);
+      const refundAmount = amount ?? remainingBeforeRefund;
+      if (payment.status !== "captured" || !Number.isInteger(refundAmount) || refundAmount < 1 || refundAmount > remainingBeforeRefund) {
         return json(400, { error: "Payment is not refundable or the refund amount is invalid." }, h);
       }
-      const { data: prior } = await service.from("membership_refunds").select("*").eq("idempotency_key", idempotencyKey).maybeSingle();
-      if (prior && (prior.payment_id !== paymentId || Number(prior.amount_paise) !== refundAmount)) {
-        return json(409, { error: "This idempotency key is already bound to a different refund request." }, h);
+
+      // Stable operation key for this exact order + remaining balance. A confirmed
+      // failed attempt advances to a new suffix; transient retries reuse the same key.
+      const baseRefundKey = "shsrefund_" + String(order.id).replaceAll("-", "") + "_" + String(refundAmount);
+      const { data: attempts, error: attemptsError } = await service.from("membership_refunds")
+        .select("id,razorpay_refund_id,idempotency_key,amount_paise,payment_id,status")
+        .eq("order_id", order.id).eq("payment_id", paymentId).eq("amount_paise", refundAmount)
+        .like("idempotency_key", baseRefundKey + "%")
+        .order("created_at", { ascending: true });
+      if (attemptsError) return json(503, { error: "Could not inspect prior refund attempts." }, h);
+      const prior = attempts?.[attempts.length - 1] ?? null;
+
+      if (prior?.status === "processed" || (prior?.status === "requested" && prior.razorpay_refund_id)) {
+        return json(200, { success: true, refund: { id: prior.razorpay_refund_id, status: prior.status, amount: prior.amount_paise }, duplicate: true }, h);
       }
-      if (prior?.razorpay_refund_id) return json(200, { success: true, refund: prior, duplicate: true }, h);
-      if (!prior) {
+
+      const idempotencyKey = prior?.status === "failed"
+        ? baseRefundKey + "_r" + String((attempts?.length ?? 1) + 1)
+        : prior?.idempotency_key ?? baseRefundKey;
+
+      if (!prior || prior.status === "failed") {
         const { error: insertError } = await service.from("membership_refunds").insert({
           user_id: order.user_id, order_id: order.id, payment_id: paymentId,
           idempotency_key: idempotencyKey, amount_paise: refundAmount, status: "requested",
         });
-        if (insertError) return json(409, { error: "This refund request key has already been used." }, h);
+        if (insertError) {
+          const { data: existing } = await service.from("membership_refunds").select("razorpay_refund_id,status,amount_paise").eq("idempotency_key", idempotencyKey).maybeSingle();
+          if (existing?.razorpay_refund_id) return json(200, { success: true, refund: { id: existing.razorpay_refund_id, status: existing.status, amount: existing.amount_paise }, duplicate: true }, h);
+          return json(409, { error: "A refund attempt with this operation key is already being created. Refresh the order before retrying." }, h);
+        }
       }
+
       const refund = await razorpayRequest("/payments/" + encodeURIComponent(paymentId) + "/refund", "POST", keyId, keySecret,
         { amount: refundAmount, notes: { reason: String(body.reason ?? "Membership refund").slice(0, 200) } },
         { "X-Refund-Idempotency": idempotencyKey });
@@ -290,7 +310,7 @@ Deno.serve(async (req: Request) => {
       const { error: auditError } = await service.from("admin_audit_logs").insert({
         actor_id: user.id, actor_role: "admin", action: "issue_membership_refund",
         target_table: "membership_orders", target_id: String(order.id),
-        after_data: { payment_id: paymentId, refund_id: refund.id, amount_paise: refundAmount, status: refund.status },
+        after_data: { payment_id: paymentId, refund_id: refund.id, amount_paise: refundAmount, idempotency_key: idempotencyKey, status: refund.status },
       });
       if (auditError) console.error("Membership refund audit logging failed", { order_id: order.id, message: auditError.message });
       return json(200, { success: true, refund: { id: refund.id, status: refund.status, amount: refund.amount } }, h);
