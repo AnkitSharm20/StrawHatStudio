@@ -1004,3 +1004,16 @@ html[data-performance-mode="performance"] .app *::after {
  .app .auth-provider { justify-content: flex-start; padding-inline: 18px; }
 }
 @media(prefers-reduced-motion:reduce) { .app .auth-art:before,.app .auth-art:after { animation:none; } }
+
+
+/* Exact amount confirmation on each membership plan. */
+.app .membership-price-confirm{display:grid;gap:4px;margin:14px 0 12px;padding:13px 15px;border:1px solid color-mix(in srgb,var(--gold) 32%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--gold) 7%,var(--panel))}
+.app .membership-price-confirm span{font-size:9px;font-weight:800;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
+.app .membership-price-confirm strong{font:800 25px/1.1 var(--font-display);color:var(--gold)}
+.app .membership-price-confirm small{font-size:10px;color:var(--muted)}
+/* Branded social sign-in options. */
+.app .auth-providers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.app .auth-provider{min-height:50px;justify-content:flex-start;padding:12px 16px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 88%,transparent)}
+.app .auth-provider svg{width:20px;height:20px;flex-basis:20px}
+.app .auth-legal{max-width:42ch;align-self:center}
+@media(max-width:420px){.app .auth-providers{grid-template-columns:1fr}}
