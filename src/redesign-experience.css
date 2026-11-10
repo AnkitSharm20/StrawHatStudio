@@ -823,3 +823,31 @@ html[data-performance-mode="performance"] .app *::after {
  .app .seasonal-rail{grid-auto-columns:minmax(148px,48vw)}
  .app .anime-card .anime-info p{font-size:11px}
 }
+
+
+/* Membership checkout and account surfaces */
+.app .membership-account-panel{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:22px 0 30px;padding:22px 24px;border:1px solid color-mix(in srgb,var(--gold) 32%,var(--line));border-radius:18px;background:radial-gradient(ellipse at 90% 10%,rgba(205,158,78,.13),transparent 45%),linear-gradient(135deg,var(--panel),var(--panel2))}
+.app .membership-account-panel h2{margin:7px 0;font:800 clamp(19px,3vw,26px)/1.1 var(--font-display);letter-spacing:.04em}
+.app .membership-account-panel p{margin:0;color:var(--muted);font-size:12px}
+.app .membership-account-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.app .membership-active-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid rgba(218,177,98,.45);border-radius:99px;color:#e8c17a;background:rgba(218,177,98,.09);font-size:9px;font-weight:800;letter-spacing:.12em}
+.app .membership-checkout-cta,.app .membership-current-cta{width:100%;min-height:45px;margin-top:18px;border:1px solid rgba(221,179,105,.48);border-radius:11px;color:#1a160e;background:linear-gradient(115deg,#d2a45d,#f0d39a 55%,#c68e45);font-weight:850;letter-spacing:.04em;cursor:pointer;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease}
+.app .membership-checkout-cta:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 9px 25px rgba(207,157,78,.22)}
+.app .membership-checkout-cta:disabled,.app .membership-current-cta:disabled{opacity:.48;cursor:not-allowed;filter:saturate(.5)}
+.app .membership-current-cta:disabled{color:#e8c17a;background:rgba(218,177,98,.1);border-color:rgba(218,177,98,.32);opacity:1}
+.app .membership-checkout-message{display:flex;align-items:flex-start;gap:10px;margin:14px 0;padding:13px 15px;border:1px solid rgba(218,177,98,.28);border-radius:12px;color:var(--text);background:rgba(218,177,98,.07);font-size:12px;line-height:1.55}
+.app .membership-checkout-message svg{flex:0 0 auto;color:var(--gold);margin-top:1px}
+.app .membership-history{margin:36px 0;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.app .membership-history-list{display:grid;gap:9px}
+.app .membership-history-list article{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:16px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}
+.app .membership-history-list article>div{display:grid;gap:5px;min-width:0}
+.app .membership-history-list b{font-size:11px;letter-spacing:.05em}
+.app .membership-history-list small,.app .membership-history-empty span{color:var(--muted);font-size:10px}
+.app .membership-history-list strong{font-size:13px;font-variant-numeric:tabular-nums}
+.app .membership-order-status{padding:6px 9px;border-radius:99px;background:rgba(255,255,255,.06);color:var(--muted);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.app .membership-order-status.status-paid{color:#8ed6a7;background:rgba(75,175,112,.1)}
+.app .membership-order-status.status-failed,.app .membership-order-status.status-refunded{color:#e9a09a;background:rgba(194,83,73,.1)}
+.app .membership-history-empty{display:flex;align-items:center;gap:12px;padding:18px;border:1px dashed var(--line);border-radius:12px;color:var(--gold)}
+.app .membership-history-empty span{margin-left:auto;color:var(--muted)}
+.app .membership-period-head p{max-width:560px}
+@media(max-width:650px){.app .membership-account-panel{align-items:flex-start;flex-direction:column;padding:18px}.app .membership-account-actions{width:100%;justify-content:space-between}.app .membership-history{padding:16px}.app .membership-history-list article{grid-template-columns:minmax(0,1fr) auto;gap:8px}.app .membership-order-status{grid-column:1/-1;justify-self:start}.app .membership-history-empty{align-items:flex-start;flex-wrap:wrap}.app .membership-history-empty span{width:100%;margin-left:0}}
