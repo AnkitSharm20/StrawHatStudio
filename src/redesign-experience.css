@@ -134,3 +134,36 @@
  .app .page>.section-head h2{font-size:clamp(38px,11vw,52px)}.app .footer{flex-wrap:wrap;line-height:1.8}
 }
 @media(prefers-reduced-motion:reduce){.app *, .app *:before,.app *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* Discovery spotlight — a real editorial feature between the catalogue masthead and controls. */
+.app .discovery-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+  min-height: 310px;
+  margin: 28px 0 24px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, var(--line));
+  border-radius: 22px;
+  background: linear-gradient(125deg, var(--panel), color-mix(in srgb, var(--orange) 8%, var(--panel)));
+  box-shadow: 0 22px 60px rgb(0 0 0 / 17%);
+}
+.app .discovery-spotlight-art { position: relative; min-height: 310px; overflow: hidden; background: var(--panel2); }
+.app .discovery-spotlight-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--panel)); pointer-events: none; }
+.app .discovery-spotlight-art img { width: 100%; height: 100%; min-height: 310px; object-fit: cover; display: block; }
+.app .discovery-spotlight-art .poster-fallback { min-height: 310px; }
+.app .spotlight-stamp { position: absolute; left: 22px; bottom: 20px; z-index: 1; padding: 8px 11px; color: #171b25; background: var(--gold); font: 800 9px var(--font-body); letter-spacing: .15em; }
+.app .discovery-spotlight-copy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: clamp(24px, 4vw, 48px); }
+.app .discovery-spotlight-copy h2 { margin: 13px 0 10px; font: 700 clamp(28px, 3.8vw, 48px)/1.04 var(--font-heading); letter-spacing: -.04em; }
+.app .discovery-spotlight-copy p { max-width: 48ch; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.app .spotlight-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; color: var(--gold); font: 700 9px var(--font-body); letter-spacing: .12em; }
+.app .spotlight-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.app .spotlight-actions button { display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 760px) {
+  .app .discovery-spotlight { grid-template-columns: 1fr; margin: 18px 0; border-radius: 16px; }
+  .app .discovery-spotlight-art, .app .discovery-spotlight-art img, .app .discovery-spotlight-art .poster-fallback { min-height: 190px; max-height: 220px; }
+  .app .discovery-spotlight-art::after { background: linear-gradient(0deg, var(--panel), transparent 42%); }
+  .app .discovery-spotlight-copy { padding: 22px; }
+  .app .spotlight-actions { width: 100%; }
+  .app .spotlight-actions button { flex: 1 1 140px; justify-content: center; }
+}
