@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "audit:security": "npm audit --audit-level=moderate",
     "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "check:migrations": "node scripts/check-supabase-migrations.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

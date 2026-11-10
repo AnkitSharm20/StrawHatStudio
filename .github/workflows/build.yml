@@ -32,6 +32,8 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: npm install --no-fund
+      - name: Verify migration files match the live migration manifest
+        run: npm run check:migrations
       - name: Report dependency vulnerabilities
         run: npm audit --audit-level=moderate
       - name: Build production bundle
