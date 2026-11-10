@@ -8,7 +8,3 @@ verify_jwt = false
 
 [functions.membership-payments]
 verify_jwt = false
-
-[auth.hook.before_user_created]
-enabled = true
-uri = "pg-functions://postgres/private/block_non_discord_signups"
