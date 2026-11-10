@@ -276,7 +276,8 @@ Deno.serve(async (req: Request) => {
       const { data: attempts, error: attemptsError } = await service.from("membership_refunds")
         .select("id,razorpay_refund_id,idempotency_key,amount_paise,payment_id,status")
         .eq("order_id", order.id).eq("payment_id", paymentId).eq("amount_paise", refundAmount)
-        .like("idempotency_key", baseRefundKey + "%")
+        .gte("idempotency_key", baseRefundKey)
+        .lt("idempotency_key", baseRefundKey + "\uffff")
         .order("created_at", { ascending: true });
       if (attemptsError) return json(503, { error: "Could not inspect prior refund attempts." }, h);
       const prior = attempts?.[attempts.length - 1] ?? null;
