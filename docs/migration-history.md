@@ -8,4 +8,4 @@ When applying a new migration:
 3. Run `npm run check:migrations`.
 4. For a fresh-project release, replay the complete migration chain on a separate empty Supabase project before using `supabase db push` against production.
 
-Do not edit or renumber migrations already recorded in Supabase. The inventory check verifies filenames, not that every historical migration can be replayed cleanly; clean-database replay remains a release acceptance test.
+Do not edit or renumber migrations already recorded in Supabase. CI now also starts a local Supabase stack and replays the migration chain against an empty local database. The inventory check verifies version filenames against the live history; it does not prove that hosted Auth, Discord OAuth, Storage CDN behavior, or Razorpay secrets are configured correctly.
