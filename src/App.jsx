@@ -1,7 +1,7 @@
 import React,{useEffect,useMemo,useRef,useState}from'react';
 import PublicProfile from './PublicProfile.jsx';
 import{NavLink,Routes,Route,useNavigate,useParams}from'react-router-dom';
-import{Trash2,Anchor,ArrowUpRight,Bell,BookOpen,Check,ChevronRight,Compass,Crown,Flame,Heart,Home,Menu,MessageCircle,Search,Settings,Shield,ShoppingBag,Sparkles,Star,Users,X,Play,Plus,Sun,Moon,ExternalLink,Radio,Ship,LogIn,User,MonitorPlay}from'lucide-react';
+import{Trash2,Anchor,ArrowUpRight,Bell,BookOpen,Check,ChevronRight,Compass,Crown,Flame,Heart,Home,Menu,MessageCircle,Search,Settings,Shield,ShoppingBag,Sparkles,Star,Users,X,Play,Plus,Sun,Moon,ExternalLink,Radio,Ship,LogIn,User,MonitorPlay,RefreshCw,WifiOff}from'lucide-react';
 import{backendReady,supabase}from'./lib/supabase.js';
 const safeRead=(key,fallback)=>{try{return window.localStorage.getItem(key)??fallback}catch{return fallback}};
 const safeReadJson=(key,fallback)=>{try{const value=window.localStorage.getItem(key);return value?JSON.parse(value):fallback}catch{return fallback}};
