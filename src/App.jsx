@@ -339,7 +339,7 @@ function Membership({user,notify=()=>{}}){
    const checkout=new window.Razorpay({
     key:orderData.key_id,amount:orderData.amount,currency:orderData.currency||'INR',name:orderData.name||'Straw Hat Studio',
     description:orderData.description||'Straw Hat Studio Membership',order_id:orderData.order_id,
-    config:{display:{block:{upi:{name:'UPI',instruments:[{method:'upi',flows:['intent','qr']}]},cards:{name:'Cards',instruments:[{method:'card'}]},netbanking:{name:'Netbanking',instruments:[{method:'netbanking'}]},wallets:{name:'Wallets',instruments:[{method:'wallet'}]}},sequence:['block.upi','block.cards','block.netbanking','block.wallets'],preferences:{show_default_blocks:false}}},
+    config:{display:{blocks:{upi:{name:'UPI',instruments:[{method:'upi'}]},cards:{name:'Cards',instruments:[{method:'card'}]},netbanking:{name:'Netbanking',instruments:[{method:'netbanking'}]},wallets:{name:'Wallets',instruments:[{method:'wallet'}]}},sequence:['block.upi','block.cards','block.netbanking','block.wallets'],preferences:{show_default_blocks:true}}},
     prefill:{email:user.email||''},theme:{color:'#d9a653'},
     modal:{ondismiss:()=>setBusy('')},
     handler:async response=>{
