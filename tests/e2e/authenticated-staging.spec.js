@@ -90,6 +90,7 @@ test.describe('authenticated staging acceptance', () => {
       await expect(reportedCard).toContainText('resolved');
       await adminPage.getByRole('button', { name: 'Audit log' }).click();
       await expect(adminPage.getByRole('heading', { name: 'Admin audit log' })).toBeVisible();
+      await expect(adminPage.locator('.admin-audit-list')).toContainText('community_posts', { timeout: 15_000 });
       await adminContext.close();
     }
 
