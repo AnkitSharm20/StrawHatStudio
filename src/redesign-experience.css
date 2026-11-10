@@ -1082,3 +1082,17 @@ html[data-performance-mode="performance"] .app *::after {
 .marketplace-detail-copy .shop-buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}
 .community-follow-button{white-space:nowrap}
 @media(max-width:640px){.marketplace-detail-backdrop{padding:12px}.marketplace-detail-dialog{grid-template-columns:1fr;gap:16px;padding:18px;max-height:88vh}.marketplace-detail-dialog>.shop-artwork,.marketplace-detail-dialog>.shop-art,.marketplace-detail-dialog>img{min-height:170px;max-height:230px}.marketplace-detail-copy{padding-right:0}.marketplace-detail-copy .shop-buy{flex-wrap:wrap}}
+
+/* Community report dialog */
+.community-report-backdrop{position:fixed;inset:0;z-index:1250;display:grid;place-items:center;padding:18px;background:rgba(2,8,14,.8);backdrop-filter:blur(10px)}
+.community-report-dialog{position:relative;width:min(480px,100%);padding:28px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:0 28px 90px #0009}
+.community-report-dialog h2{margin:10px 0;font:700 28px var(--font-heading)}
+.community-report-dialog>p{color:var(--muted);font-size:13px;line-height:1.6}
+.community-report-dialog form{display:grid;gap:9px;margin-top:20px}
+.community-report-dialog label{font-size:12px;font-weight:700;color:var(--text)}
+.community-report-dialog label span,.community-report-dialog form>small{color:var(--muted);font-weight:400}
+.community-report-dialog select,.community-report-dialog textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text);font:inherit}
+.community-report-dialog textarea{resize:vertical;min-height:100px}
+.community-report-close{position:absolute;top:13px;right:13px;display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--text)}
+.community-report-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+@media(max-width:480px){.community-report-dialog{padding:22px 18px}.community-report-actions{flex-direction:column-reverse}.community-report-actions button{width:100%}}
