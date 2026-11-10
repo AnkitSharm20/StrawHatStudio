@@ -21,10 +21,10 @@ Use two dedicated non-production Discord test accounts and one separate admin te
 1. Sign in through Discord OAuth and confirm the callback returns to the same preview origin.
 2. Confirm first-login profile creation, username save and session persistence after refresh.
 3. Upload a profile banner and avatar. Confirm the banner bucket remains private and signed URLs resolve only for allowed viewers.
-4. As member A, publish a Community post. As member B, reply, follow, report and block. Confirm each action is reflected correctly.
-5. As member A, confirm the reply notification appears and unread state updates. Confirm notification deletion is limited to the owner.
+4. As member A, publish a Community post. As member B, follow the author, submit a report, reply, block the author, verify the post disappears from the feed, then unblock and verify it returns. Confirm each action is reflected correctly.
+5. Keep member A's Notifications page open while member B replies. Confirm the notification arrives over Realtime, mark it read, and delete it. Confirm notification deletion is limited to the owner.
 6. As a normal member, open /admin and confirm access is denied.
-7. As the verified admin test account, open the moderation queue and audit log. Perform one harmless moderation action and confirm an audit entry is recorded.
+7. As the verified admin test account, open the moderation queue, hide the reported test post, and inspect the audit log. Confirm the moderation action is recorded.
 8. Confirm no test account has been granted admin access on the production project.
 
 ## Razorpay Test Mode acceptance
