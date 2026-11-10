@@ -114,11 +114,17 @@ async function handleWebhook(req: Request, h: Record<string,string>) {
   const { service } = getClients();
   const eventType = String(payload?.event ?? "unknown").slice(0, 120);
   const payloadHash = await sha256(raw);
-  const { error: insertError } = await service.from("razorpay_webhook_events")
-    .upsert({ event_id: eventId, event_type: eventType, payload_hash: payloadHash, status: "received", error_message: null }, { onConflict: "event_id", ignoreDuplicates: true });
-  if (insertError) return json(503, { error: "Could not persist webhook event." }, h);
-  const { data: prior } = await service.from("razorpay_webhook_events").select("status").eq("event_id", eventId).maybeSingle();
-  if (prior?.status === "processed") return json(200, { received: true, duplicate: true }, h);
+  const { data: claimed, error: claimError } = await service.rpc("claim_razorpay_webhook_event", {
+    p_event_id: eventId,
+    p_event_type: eventType,
+    p_payload_hash: payloadHash,
+  });
+  if (claimError) return json(503, { error: "Could not claim webhook event for processing." }, h);
+  if (claimed !== true) {
+    const { data: prior } = await service.from("razorpay_webhook_events")
+      .select("status").eq("event_id", eventId).maybeSingle();
+    return json(200, { received: true, duplicate: true, status: prior?.status ?? "processing" }, h);
+  }
   try {
     const { keyId, keySecret } = requireRazorpayTestConfig();
     if (eventType === "payment.captured") {
