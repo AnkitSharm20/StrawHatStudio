@@ -215,3 +215,71 @@
   .app .community-pulse { grid-template-columns: 1fr; gap: 8px; margin: 16px 0 20px; }
   .app .community-pulse > button { padding: 12px 14px; }
 }
+
+
+/* Inbox overview — readable status at a glance before the live notification feed. */
+.app .inbox-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr);
+  align-items: center;
+  gap: 24px;
+  margin: 26px 0 20px;
+  padding: clamp(22px, 3.4vw, 38px);
+  border: 1px solid color-mix(in srgb, var(--gold) 25%, var(--line));
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 90% 0%, color-mix(in srgb, var(--orange) 13%, transparent), transparent 55%),
+    linear-gradient(130deg, var(--panel), color-mix(in srgb, var(--panel2) 65%, var(--bg)));
+}
+.app .inbox-overview-copy h2 { margin: 10px 0 8px; font: 700 clamp(25px, 3vw, 38px)/1.08 var(--font-heading); letter-spacing: -.035em; }
+.app .inbox-overview-copy h2 em { color: var(--gold); font-style: normal; }
+.app .inbox-overview-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.app .inbox-overview-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; }
+.app .inbox-overview-stats > div { display: grid; gap: 7px; padding: 15px 12px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--bg) 72%, transparent); }
+.app .inbox-overview-stats b { font: 700 25px/1 var(--font-display); color: var(--gold); }
+.app .inbox-overview-stats small { color: var(--muted); font: 700 8px/1.3 var(--font-body); letter-spacing: .11em; }
+
+/* Marketplace editorial hero and collectible counters. */
+.app .marketplace-intro-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, .55fr);
+  align-items: center;
+  gap: 24px;
+  min-height: 250px;
+  margin: 24px 0 25px;
+  padding: clamp(22px, 3.5vw, 40px);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--gold) 30%, var(--line));
+  border-radius: 21px;
+  background:
+    radial-gradient(ellipse at 82% 50%, color-mix(in srgb, var(--orange) 15%, transparent), transparent 40%),
+    linear-gradient(120deg, var(--panel), color-mix(in srgb, var(--panel2) 70%, var(--bg)));
+}
+.app .marketplace-intro-copy h2 { margin: 12px 0 10px; font: 700 clamp(28px, 3.8vw, 46px)/1.02 var(--font-heading); letter-spacing: -.04em; }
+.app .marketplace-intro-copy h2 em { color: var(--gold); font-style: normal; }
+.app .marketplace-intro-copy p { max-width: 48ch; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.app .marketplace-trust-line { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+.app .marketplace-trust-line span { display: inline-flex; align-items: center; gap: 7px; color: var(--gold); font: 700 9px var(--font-body); letter-spacing: .06em; }
+.app .marketplace-treasure-mark { position: relative; display: grid; place-items: center; min-height: 190px; color: var(--gold); }
+.app .treasure-orbit { position: absolute; width: 164px; height: 164px; border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent); border-radius: 50%; transform: rotate(-24deg) scaleY(.55); }
+.app .treasure-orbit-two { width: 205px; height: 205px; transform: rotate(48deg) scaleY(.48); border-color: color-mix(in srgb, var(--orange) 35%, transparent); }
+.app .treasure-emblem { position: relative; display: grid; place-items: center; gap: 2px; width: 112px; height: 112px; border: 1px solid var(--gold); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--gold) 18%, var(--panel)), var(--panel)); box-shadow: 0 0 55px color-mix(in srgb, var(--orange) 15%, transparent); }
+.app .treasure-emblem span { font: 800 10px var(--font-display); letter-spacing: .2em; }
+.app .marketplace-treasure-mark > small { position: absolute; bottom: 0; color: var(--muted); font: 700 8px var(--font-body); letter-spacing: .19em; }
+.app .marketplace-quick-stats { grid-column: 1 / -1; display: flex; gap: 28px; padding-top: 17px; border-top: 1px solid var(--line); }
+.app .marketplace-quick-stats > div { display: grid; gap: 4px; }
+.app .marketplace-quick-stats b { font: 700 19px var(--font-display); color: var(--gold); }
+.app .marketplace-quick-stats small { color: var(--muted); font: 700 8px var(--font-body); letter-spacing: .13em; }
+@media (max-width: 760px) {
+  .app .inbox-overview { grid-template-columns: 1fr; gap: 18px; border-radius: 15px; padding: 21px; }
+  .app .inbox-overview-stats { gap: 6px; }
+  .app .inbox-overview-stats > div { padding: 12px 9px; }
+  .app .marketplace-intro-panel { grid-template-columns: 1fr; gap: 10px; border-radius: 15px; padding: 22px; }
+  .app .marketplace-treasure-mark { min-height: 155px; }
+  .app .marketplace-quick-stats { gap: 18px; }
+}
+@media (max-width: 390px) {
+  .app .inbox-overview-stats small, .app .marketplace-quick-stats small { font-size: 7px; letter-spacing: .07em; }
+  .app .marketplace-quick-stats { gap: 12px; }
+}
