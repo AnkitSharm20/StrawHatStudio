@@ -648,3 +648,40 @@
   .app .explore-anime-grid .anime-card:hover { transform:none; box-shadow:none; }
   .app .explore-anime-grid .anime-card:active { transform:scale(.985); }
 }
+
+/* One-cycle, progress-led Straw Hat voyage loader. */
+.app .voyage-loader{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:28px 20px;color:#f8f1e5;background:radial-gradient(ellipse at 50% 38%,rgba(236,115,48,.15),transparent 42%),linear-gradient(180deg,#07131c,#0b202b 54%,#07131c);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .42s ease,visibility .42s ease}
+.app .voyage-loader.is-visible{opacity:1;visibility:visible;pointer-events:auto}.app .voyage-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.app .loader-sky{position:absolute;inset:0;pointer-events:none;opacity:.52;background:radial-gradient(circle at 16% 18%,#f7dfb0 0 1px,transparent 2px),radial-gradient(circle at 76% 23%,#f7dfb0 0 1px,transparent 2px),radial-gradient(circle at 88% 68%,#f7dfb0 0 1px,transparent 2px),radial-gradient(circle at 27% 72%,#f7dfb0 0 1px,transparent 2px)}
+.app .loader-sky i{position:absolute;width:3px;height:3px;border-radius:50%;background:#f5d9a0;box-shadow:0 0 12px rgba(245,217,160,.7)}
+.app .loader-sky i:nth-child(1){left:12%;top:22%}.app .loader-sky i:nth-child(2){left:83%;top:18%}.app .loader-sky i:nth-child(3){left:74%;top:67%}.app .loader-sky i:nth-child(4){left:20%;top:78%}.app .loader-sky i:nth-child(5){left:47%;top:13%}.app .loader-sky i:nth-child(6){left:91%;top:48%}
+.app .loader-moon{position:absolute;width:min(44vw,380px);aspect-ratio:1;border:1px solid rgba(239,191,115,.12);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(255,184,104,.09),rgba(255,184,104,.015) 58%,transparent 60%);box-shadow:0 0 90px rgba(235,123,54,.08)}
+.app .voyage-loader-mark{position:absolute;top:50%;display:flex;align-items:center;gap:9px;color:#f1bd6b;transform:translate(-50%,-50%);will-change:left;transition:left .06s linear;filter:drop-shadow(0 5px 12px rgba(0,0,0,.45))}
+.app .loader-hat{position:relative;display:block;width:31px;height:15px;border-radius:50%;background:#dba75c;transform:rotate(-8deg);box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+.app .loader-hat:before{content:'';position:absolute;width:41px;height:5px;left:-5px;bottom:-2px;border-radius:50%;background:#b9783b}
+.app .loader-hat i{position:absolute;width:11px;height:10px;left:10px;top:-7px;border-radius:5px 5px 2px 2px;background:#d94a36}.app .loader-hat b{position:absolute;width:6px;height:6px;left:13px;top:-5px;border-radius:50%;background:#f6e6c9}
+.app .voyage-loader-kicker{position:relative;margin-top:22px;color:#d9a95f;font:800 9px var(--font-body);letter-spacing:.24em;text-align:center}
+.app .voyage-loader h1{position:relative;margin:16px 0 8px;color:#f8f1e5;font:900 clamp(39px,7vw,78px)/.94 var(--font-display);letter-spacing:.045em;text-align:center;text-shadow:0 8px 34px rgba(0,0,0,.4)}.app .voyage-loader h1 em{color:#e9a65d;font-style:normal}
+.app .voyage-loader-stage{position:relative;min-height:20px;margin:8px 0 25px;color:rgba(248,241,229,.66);font-size:11px;letter-spacing:.08em;text-align:center}
+.app .voyage-loader-route{position:relative;width:min(540px,84vw);height:84px;margin:8px 0 10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.app .route-origin,.app .route-destination{position:relative;z-index:2;color:#c8aa7d;font:800 8px var(--font-body);letter-spacing:.13em;white-space:nowrap}
+.app .route-line{position:absolute;left:48px;right:65px;top:50%;height:2px;overflow:hidden;background:rgba(255,255,255,.15)}
+.app .route-line i{display:block;height:100%;background:linear-gradient(90deg,#d8793d,#f1d18d);box-shadow:0 0 12px rgba(241,209,141,.6);transition:width .06s linear}
+.app .voyage-loader-route .voyage-loader-mark{top:50%}
+.app .voyage-loader-track{position:relative;width:min(540px,84vw);height:5px;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.13)}
+.app .voyage-loader-track i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#d8793d,#f1d18d);box-shadow:0 0 13px rgba(241,209,141,.4);transition:width .06s linear}
+.app .voyage-loader-meta{display:flex;justify-content:space-between;align-items:center;width:min(540px,84vw);margin-top:12px;color:rgba(248,241,229,.55);font:800 8px var(--font-body);letter-spacing:.16em}
+.app .voyage-loader-meta b{color:#f4d49a;font:800 13px var(--font-display);font-variant-numeric:tabular-nums}
+.app .loader-sea{position:absolute;left:-8%;right:-8%;bottom:-32px;height:125px;opacity:.52;background:linear-gradient(180deg,transparent,rgba(13,62,76,.5));border-top:1px solid rgba(241,209,141,.15)}
+.app .loader-sea span{position:absolute;left:0;right:0;height:28px;border-top:1px solid rgba(111,178,190,.18);border-radius:50%;transform:translateY(8px)}
+.app .loader-sea span:nth-child(2){top:24px;left:8%;right:-8%}.app .loader-sea span:nth-child(3){top:49px;left:-5%;right:5%}
+.app .voyage-loader-foot{position:absolute;bottom:24px;color:rgba(248,241,229,.42);font:700 8px var(--font-body);letter-spacing:.16em;text-align:center}
+.app .voyage-loader.is-visible .loader-moon{animation:loader-moon-arrive .9s ease-out 1 both}
+.app .voyage-loader.is-visible .voyage-loader-kicker,.app .voyage-loader.is-visible h1,.app .voyage-loader.is-visible .voyage-loader-stage{animation:loader-copy-arrive .55s ease-out 1 both}
+@keyframes loader-moon-arrive{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}@keyframes loader-copy-arrive{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+/* Performance pass: reduce expensive blur/paint effects and favor compositor-friendly motion. */
+.app .topbar{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.app .toast{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.app .main::before{opacity:.12}
+.app .anime-card,.app .post,.app .panel,.app .shop-item,.app .membership-card{box-shadow:0 7px 20px rgba(0,0,0,.13)}
+.app .anime-card:hover,.app .shop-item:hover{box-shadow:0 11px 25px rgba(0,0,0,.2)}.app .anime-card .poster img{will-change:auto}.app .hero-video-stage video{transform:translateZ(0)}
+@media(max-width:760px){.app .voyage-loader-route{width:90vw}.app .route-line{left:43px;right:58px}.app .voyage-loader-mark svg{width:26px;height:26px}.app .loader-sea{height:90px}.app .voyage-loader h1{font-size:clamp(34px,10vw,58px)}.app .voyage-loader-foot{max-width:90vw;font-size:7px}.app .topbar{backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}}
+@media(prefers-reduced-motion:reduce){.app .voyage-loader.is-visible .loader-moon,.app .voyage-loader.is-visible .voyage-loader-kicker,.app .voyage-loader.is-visible h1,.app .voyage-loader.is-visible .voyage-loader-stage{animation:none}.app .voyage-loader-mark,.app .voyage-loader-track i,.app .route-line i{transition:none}}
