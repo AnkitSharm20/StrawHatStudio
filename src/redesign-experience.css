@@ -685,3 +685,63 @@
 .app .anime-card:hover,.app .shop-item:hover{box-shadow:0 11px 25px rgba(0,0,0,.2)}.app .anime-card .poster img{will-change:auto}.app .hero-video-stage video{transform:translateZ(0)}
 @media(max-width:760px){.app .voyage-loader-route{width:90vw}.app .route-line{left:43px;right:58px}.app .voyage-loader-mark svg{width:26px;height:26px}.app .loader-sea{height:90px}.app .voyage-loader h1{font-size:clamp(34px,10vw,58px)}.app .voyage-loader-foot{max-width:90vw;font-size:7px}.app .topbar{backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}}
 @media(prefers-reduced-motion:reduce){.app .voyage-loader.is-visible .loader-moon,.app .voyage-loader.is-visible .voyage-loader-kicker,.app .voyage-loader.is-visible h1,.app .voyage-loader.is-visible .voyage-loader-stage{animation:none}.app .voyage-loader-mark,.app .voyage-loader-track i,.app .route-line i{transition:none}}
+
+
+/* User-selectable rendering profiles. Keep the same layout and content in every mode. */
+.app .setting-performance-row select {
+  width: min(100%, 270px);
+  min-height: 42px;
+  padding: 9px 34px 9px 12px;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel2);
+  font: 600 11px/1.4 var(--font-body);
+}
+.app .setting-performance-row select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+html[data-performance-mode="performance"] .app .topbar,
+html[data-performance-mode="performance"] .app .toast {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html[data-performance-mode="performance"] .app .anime-card,
+html[data-performance-mode="performance"] .app .post,
+html[data-performance-mode="performance"] .app .panel,
+html[data-performance-mode="performance"] .app .shop-item,
+html[data-performance-mode="performance"] .app .membership-card,
+html[data-performance-mode="performance"] .app .feature-tiles > button {
+  box-shadow: none;
+}
+html[data-performance-mode="performance"] .app :is(.anime-card, .shop-item, .feature-tiles > button):hover {
+  box-shadow: 0 5px 14px rgb(0 0 0 / 14%);
+}
+html[data-performance-mode="performance"] .app .main::before,
+html[data-performance-mode="performance"] .app .loader-sky,
+html[data-performance-mode="performance"] .app .loader-sea {
+  opacity: .18;
+}
+html[data-performance-mode="performance"] .app .anime-card .poster img,
+html[data-performance-mode="performance"] .app .hero-video-stage video {
+  filter: none;
+}
+html[data-performance-mode="quality"] .app .topbar,
+html[data-performance-mode="quality"] .app .toast {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+html[data-performance-mode="quality"] .app :is(.anime-card, .shop-item, .feature-tiles > button):hover {
+  box-shadow: 0 16px 38px rgb(0 0 0 / 20%), 0 0 24px rgb(255 107 0 / 12%);
+}
+html[data-performance-mode="quality"] .app .main::before { opacity: .22; }
+html[data-performance-mode="performance"] .app *,
+html[data-performance-mode="performance"] .app *::before,
+html[data-performance-mode="performance"] .app *::after {
+  scroll-behavior: auto;
+}
+@media (max-width: 760px) {
+  .app .setting-performance-row { align-items: flex-start; flex-direction: column; }
+  .app .setting-performance-row select { width: 100%; }
+}
