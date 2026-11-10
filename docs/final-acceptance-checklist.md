@@ -18,14 +18,15 @@ These are browser emulations, not physical-device certification. Authenticated s
 
 The Playwright authenticated suite uses pre-created Supabase session JSON for two dedicated non-production accounts and an optional admin account. It verifies app behavior and RLS, but session injection does not exercise the Discord OAuth redirect/callback. Verify the actual Discord OAuth flow manually in the staging preview.
 
-1. Sign in through Discord OAuth and confirm the callback returns to the same preview origin.
-2. Confirm first-login profile creation, username save and session persistence after refresh.
-3. Upload a profile banner and avatar. Confirm the banner bucket remains private and signed URLs resolve only for allowed viewers.
-4. As member A, publish a Community post. As member B, follow the author, submit a report, reply, and block the author. Verify posts/replies/follows/reactions are hidden in both directions, blocked replies/follows are rejected, and no new reply/follow/reaction notifications cross the block. Unblock and verify visibility returns.
-5. Keep member A's Notifications page open while member B replies. Confirm the notification arrives over Realtime, mark it read, and delete it. Confirm notification deletion is limited to the owner.
-6. As a normal member, open /admin and confirm access is denied.
-7. As the verified admin test account, open the moderation queue, hide the reported test post, and inspect the audit log. Confirm the moderation action is recorded.
-8. Confirm no test account has been granted admin access on the production project.
+1. Add the current Vercel branch alias `https://straw-hat-studio-git-fix-production-d75d29-pandaankit2007-8884.vercel.app` to Supabase Auth's allowed redirect URLs. Keep the Discord OAuth callback URI set to `https://xlwtpysdknjzgjiecbhm.supabase.co/auth/v1/callback`.
+2. Sign in through Discord OAuth and confirm the callback returns to the same preview origin.
+3. Confirm first-login profile creation, username save and session persistence after refresh.
+4. Upload a profile banner and avatar. Confirm the banner bucket remains private and signed URLs resolve only for allowed viewers.
+5. As member A, publish a Community post. As member B, follow the author, submit a report, reply, and block the author. Verify posts/replies/follows/reactions are hidden in both directions, blocked replies/follows are rejected, and no new reply/follow/reaction notifications cross the block. Unblock and verify visibility returns.
+6. Keep member A's Notifications page open while member B replies. Confirm the notification arrives over Realtime, mark it read, and delete it. Confirm notification deletion is limited to the owner.
+7. As a normal member, open /admin and confirm access is denied.
+8. As the verified admin test account, open the moderation queue, hide the reported test post, and inspect the audit log. Confirm the moderation action is recorded.
+9. Confirm no test account has been granted admin access on the production project.
 
 ## Razorpay Test Mode acceptance
 
