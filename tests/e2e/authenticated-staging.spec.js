@@ -38,15 +38,61 @@ test.describe('authenticated staging acceptance', () => {
     const contextB = await browser.newContext();
     const pageB = await contextB.newPage();
     await useSession(pageB, process.env.E2E_USER_B_SESSION_JSON);
+    await pageA.goto('/notifications');
+    await expect(pageA.locator('.notification-feed')).toBeVisible();
+
     await pageB.goto('/community');
     const postB = pageB.locator('.community-post-card').filter({ hasText: marker });
     await expect(postB).toBeVisible({ timeout: 15_000 });
+
+    // Follow, report, and reply as the second member.
+    const followButton = postB.locator('.community-follow-button');
+    await followButton.click();
+    await expect(followButton).toContainText('Following');
+    await postB.getByRole('button', { name: 'Report', exact: true }).click();
+    await expect(pageB.getByRole('dialog', { name: /Report post/i })).toBeVisible();
+    await pageB.getByLabel('Details (optional)').fill('Automated staging moderation check: ' + marker);
+    await pageB.getByRole('button', { name: 'Submit report' }).click();
+
     await postB.locator('.post-actions button').filter({ hasText: /replies/ }).click();
     await postB.locator('input[placeholder="Write a reply…"]').fill(replyMarker);
     await postB.getByRole('button', { name: 'Reply' }).click();
 
-    await pageA.goto('/notifications');
-    await expect(pageA.locator('.notification-feed')).toContainText('Someone replied to your post.', { timeout: 20_000 });
+    // Blocking hides the author's posts in the blocker's feed and exposes an unblock control.
+    pageB.once('dialog', dialog => dialog.accept());
+    await postB.getByRole('button', { name: /^Block / }).click();
+    await expect(pageB.locator('.community-post-card').filter({ hasText: marker })).toHaveCount(0);
+    await expect(pageB.getByRole('heading', { name: 'Blocked members' })).toBeVisible();
+    const unblock = pageB.locator('button[aria-label^="Unblock "]').first();
+    await expect(unblock).toBeVisible();
+    await unblock.click();
+    await expect(pageB.locator('.community-post-card').filter({ hasText: marker })).toBeVisible({ timeout: 15_000 });
+
+    // The notification arrives over Realtime while member A's inbox is already open.
+    const notification = pageA.locator('.notification-card').filter({ hasText: 'Someone replied to your post.' });
+    await expect(notification).toBeVisible({ timeout: 20_000 });
+    await notification.getByRole('button', { name: 'Mark as read' }).click();
+    await expect(notification.locator('.notification-unread-dot')).toHaveCount(0);
+    await notification.getByRole('button', { name: 'Delete notification' }).click();
+    await expect(pageA.locator('.notification-feed')).not.toContainText('Someone replied to your post.');
+
+    // Verify admin moderation and audit access only when an isolated admin session is supplied.
+    if (process.env.E2E_ADMIN_SESSION_JSON) {
+      const adminContext = await browser.newContext();
+      const adminPage = await adminContext.newPage();
+      await useSession(adminPage, process.env.E2E_ADMIN_SESSION_JSON);
+      await adminPage.goto('/admin');
+      await expect(adminPage.getByRole('heading', { name: 'Control centre' })).toBeVisible();
+      await adminPage.getByRole('button', { name: 'Moderation' }).click();
+      const reportedCard = adminPage.locator('.admin-report-card').filter({ hasText: marker });
+      await expect(reportedCard).toBeVisible({ timeout: 20_000 });
+      await reportedCard.getByRole('button', { name: 'Hide content' }).click();
+      await expect(reportedCard).toContainText('resolved');
+      await adminPage.getByRole('button', { name: 'Audit log' }).click();
+      await expect(adminPage.getByRole('heading', { name: 'Admin audit log' })).toBeVisible();
+      await adminContext.close();
+    }
+
     await contextB.close();
     await contextA.close();
   });
