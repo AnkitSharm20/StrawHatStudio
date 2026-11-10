@@ -100,14 +100,19 @@ test.describe('authenticated staging acceptance', () => {
   test('member can upload a private profile banner', async ({ page }) => {
     await useSession(page, process.env.E2E_USER_A_SESSION_JSON);
     await page.goto('/profile');
+    await expect(page.getByRole('heading', { name: 'My profile' })).toBeVisible();
     await page.getByRole('button', { name: /Edit profile/ }).click();
+    const username = 'e2e' + Date.now().toString().slice(-8);
+    await page.locator('.profile-editor input').nth(2).fill(username);
+    await page.getByRole('button', { name: 'Save username' }).click();
+    await expect(page.locator('.profile-name-line')).toContainText(username, { timeout: 15_000 });
+
     const tinyPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/nWQAAAAASUVORK5CYII=', 'base64');
-    await page.locator('.profile-editor input[type="file"]').first().setInputFiles({
-      name: 'e2e-private-banner.png',
-      mimeType: 'image/png',
-      buffer: tinyPng,
-    });
+    const fileInputs = page.locator('.profile-editor input[type="file"]');
+    await fileInputs.nth(0).setInputFiles({ name: 'e2e-private-banner.png', mimeType: 'image/png', buffer: tinyPng });
     await expect(page.locator('.toast')).toContainText('Profile banner updated', { timeout: 20_000 });
+    await fileInputs.nth(1).setInputFiles({ name: 'e2e-avatar.png', mimeType: 'image/png', buffer: tinyPng });
+    await expect(page.locator('.toast')).toContainText('Profile avatar updated', { timeout: 20_000 });
   });
 
   test('non-admin member cannot open admin controls', async ({ page }) => {
