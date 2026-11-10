@@ -4,7 +4,7 @@ create or replace function private.block_non_discord_signups(event jsonb)
 returns jsonb
 language plpgsql
 stable
-security invoker
+security definer
 set search_path = ''
 as $function$
 declare
