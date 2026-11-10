@@ -210,17 +210,26 @@ function Notifications({notify,user}){
  const load=async()=>{
   if(!user||!supabase){setItems([]);setLoading(false);return}
   setLoading(true);
-  const{data,error}=await supabase.from('studio_notifications').select('id,kind,entity_type,entity_id,message,read_at,created_at').eq('recipient_id',user.id).order('created_at',{ascending:false}).limit(100);
-  if(error){notify('Notifications could not load: '+error.message);setItems([])}else setItems(data||[]);
-  setLoading(false);
+  try{
+   const{data,error}=await supabase.from('studio_notifications').select('id,kind,entity_type,entity_id,message,read_at,created_at').eq('recipient_id',user.id).order('created_at',{ascending:false}).limit(100);
+   if(error)throw error;
+   setItems(data||[]);
+  }catch(error){notify('Notifications could not load: '+(error?.message||'Please retry.'));setItems([])}
+  finally{setLoading(false)}
  };
  useEffect(()=>{
   let active=true;
   if(!user||!supabase){setItems([]);setLoading(false);return}
   load();
-  const channel=supabase.channel('studio-notifications-'+user.id).on('postgres_changes',{event:'INSERT',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
+  const channel=supabase.channel('studio-notifications-'+user.id).on('postgres_changes',{event:'*',schema:'public',table:'studio_notifications',filter:'recipient_id=eq.'+user.id},payload=>{
    if(!active)return;
-   setItems(current=>[payload.new,...current.filter(item=>item.id!==payload.new.id)].slice(0,100));
+   if(payload.eventType==='INSERT'){
+    setItems(current=>[payload.new,...current.filter(item=>item.id!==payload.new.id)].slice(0,100));
+   }else if(payload.eventType==='UPDATE'){
+    setItems(current=>current.map(item=>item.id===payload.new.id?{...item,...payload.new}:item));
+   }else if(payload.eventType==='DELETE'){
+    setItems(current=>current.filter(item=>item.id!==payload.old?.id));
+   }
   }).subscribe();
   return()=>{active=false;supabase.removeChannel(channel)};
  },[user?.id]);
