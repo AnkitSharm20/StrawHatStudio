@@ -17,6 +17,8 @@ jobs:
   build-and-e2e:
     name: Install, audit, build and responsive browser tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     timeout-minutes: 25
     env:
       E2E_SUPABASE_URL: ${{ secrets.E2E_SUPABASE_URL }}
@@ -34,14 +36,15 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Generate npm lockfile
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-      - name: Upload generated lockfile
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-package-lock
-          path: package-lock.json
-          retention-days: 1
+      - name: Generate and commit npm lockfile
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && !hashFiles('package-lock.json')
+        run: |
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "Add npm lockfile for reproducible installs"
+          git push origin "HEAD:${GITHUB_HEAD_REF}"
       - name: Install dependencies from lockfile
         run: npm ci --no-fund
       - name: Verify migration files match the live migration manifest
