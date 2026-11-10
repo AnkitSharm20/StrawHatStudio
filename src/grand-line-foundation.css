@@ -1,0 +1,76 @@
+/* Straw Hat Studio 2.0 — Grand Line Rebirth foundation.
+   Global tokens and accessible defaults; existing component and backend contracts stay untouched. */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+.app {
+  --ocean:#080d19;
+  --midnight:#17253a;
+  --pirate-orange:#ff6b00;
+  --treasure-gold:#ffc928;
+  --pearl-white:#f5f5f0;
+  --wanted-red:#e52b32;
+  --neon-amber:#ff9d42;
+  --bg:var(--ocean);
+  --panel:#101a2a;
+  --panel2:#17253a;
+  --text:var(--pearl-white);
+  --muted:#aeb8c8;
+  --line:#334158;
+  --gold:var(--treasure-gold);
+  --orange:var(--pirate-orange);
+  --red:var(--wanted-red);
+  --sea:#243d59;
+  --paper:var(--pearl-white);
+  --font-display:'Bebas Neue',Impact,sans-serif;
+  --font-heading:'Cinzel',Georgia,serif;
+  --font-body:'Inter',Arial,sans-serif;
+  color:var(--text);
+  background-color:var(--ocean);
+  background-image:
+    radial-gradient(ellipse at 82% -12%,#ff6b0024,transparent 40%),
+    radial-gradient(ellipse at 0% 35%,#17253a55,transparent 42%),
+    linear-gradient(180deg,#080d19 0%,#0b1423 55%,#080d19 100%);
+}
+.app.light {
+  --bg:#f5f5f0;
+  --panel:#fffefa;
+  --panel2:#eee9dc;
+  --text:#17253a;
+  --muted:#596779;
+  --line:#d6d1c4;
+  --gold:#a87300;
+  --orange:#d95700;
+  --red:#c8202a;
+  background-image:radial-gradient(ellipse at 80% -10%,#ff9d421b,transparent 42%),linear-gradient(180deg,#fbfaf5,#f0eee6);
+}
+.app :is(button,a,input,textarea,select){font-family:var(--font-body)}
+.app :is(button,a,input,textarea,select):focus-visible{outline:2px solid var(--treasure-gold);outline-offset:4px}
+.app :is(h1,h2,h3,.brand){text-wrap:balance}
+.app a{transition:color .2s ease}
+.app .topbar{background:color-mix(in srgb,var(--ocean) 88%,transparent);border-bottom-color:#ffc92838;backdrop-filter:blur(20px)}
+.app .brand{font-family:var(--font-display);letter-spacing:.09em}
+.app .brandmark{background:linear-gradient(145deg,var(--treasure-gold),var(--pirate-orange));box-shadow:0 8px 26px #ff6b0038}
+.app .toplinks a.active{color:var(--treasure-gold)}
+.app .primary,.app .sign{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+.app .primary{background:linear-gradient(110deg,var(--treasure-gold),var(--pirate-orange));color:#171b22;box-shadow:0 10px 28px #ff6b0030}
+.app .primary:hover:not(:disabled),.app .sign:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 14px 34px #ff6b0040}
+.app .secondary{border-color:var(--line)}
+.app .eyebrow,.app .side-label{letter-spacing:.18em}
+.app .section-v2-head h2,.app .page>.section-head h2{font-family:var(--font-heading)}
+.app .intro-strip h2,.app .crew-feature h2,.app .home-bottom-cta h2,.app .voyage-loader h1{font-family:var(--font-display);letter-spacing:.015em}
+.app .intro-strip h2 em,.app .crew-feature h2 em,.app .home-bottom-cta h2 em{color:var(--pirate-orange)}
+.app .anime-card,.app .compose,.app .post,.app .panel,.app .shop-item,.app .membership-card{border-color:#ffc92825}
+.app .anime-card:hover,.app .feature-tiles>button:hover{border-color:#ff6b00a8}
+.app .hero-v2{border-color:#ffc92855;box-shadow:0 28px 75px #0006,0 0 50px #ff6b0015}
+.app .voyage-loader{background:radial-gradient(ellipse at 50% 24%,#ff6b0030,transparent 38%),linear-gradient(155deg,#080d19,#17253a 62%,#080d19)}
+.app .voyage-loader h1 em{color:var(--pirate-orange)}
+.app .loader-progress>span{background:linear-gradient(90deg,var(--pirate-orange),var(--treasure-gold))}
+.app .toast{border-color:#ffc92870}
+@media (max-width:760px){
+  .app .topbar{backdrop-filter:blur(16px)}
+  .app .main{padding-inline:clamp(14px,4vw,20px)}
+  .app .hero-v2{box-shadow:0 16px 42px #0005}
+}
+@media (prefers-reduced-motion:reduce){
+  .app *, .app *::before, .app *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
