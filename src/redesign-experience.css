@@ -787,3 +787,39 @@ html[data-performance-mode="performance"] .app *::after {
 .app .voyage-loader-foot i {width:4px;height:4px;border-radius:50%;background:#d7a45e}
 @media(max-width:480px){.app .voyage-loader{padding:28px 28px 24px}.app .loader-content{transform:translateY(-1vh)}.app .loader-emblem{margin-bottom:22px}.app .voyage-loader-stage{margin-bottom:28px}.app .voyage-loader-foot{font-size:7px;letter-spacing:.1em;gap:8px}}
 @media(prefers-reduced-motion:reduce){.app .loader-progress span{transition:none}}
+
+
+/* Final composition polish: legible editorial spacing, crisp cards, and mobile-safe rails. */
+.app .home-v2,.app .explore-page,.app .community-page,.app .membership-page {min-width:0}
+.app .home-section-v2,.app .home-voyage-stats,.app .crew-feature,.app .home-bottom-cta {scroll-margin-top:90px}
+.app .feature-anime-grid-five {grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.7vw,22px)}
+.app .anime-card {min-width:0;overflow:hidden}
+.app .anime-card .poster img {display:block;width:100%;height:100%;object-fit:cover}
+.app .anime-card .anime-info h3 {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.45em}
+.app .anime-card .anime-info p {display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.app .seasonal-rail {display:grid;grid-auto-columns:minmax(190px,1fr);grid-auto-flow:column;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;padding:2px 2px 14px}
+.app .seasonal-rail>.anime-card {scroll-snap-align:start}
+.app .discovery-spotlight {min-width:0;overflow:hidden}
+.app .discovery-spotlight-art img {width:100%;height:100%;object-fit:cover}
+.app .community-layout {align-items:start}
+.app .community-main-feed,.app .community-layout>* {min-width:0}
+.app .membership-plan-grid article {position:relative;overflow:hidden}
+.app .membership-plan-grid .tier-featured:before {content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#e8bf78,transparent);pointer-events:none}
+.app .membership-plan-grid .plan-price {font-variant-numeric:tabular-nums}
+.app .membership-perk-grid article {min-width:0}
+.app :is(.community-page,.explore-page,.membership-page) button:focus-visible,
+.app .anime-card:focus-visible {outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:1100px){.app .feature-anime-grid-five{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){
+ .app .feature-anime-grid-five{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .app .seasonal-rail{grid-auto-columns:minmax(158px,44vw)}
+ .app .community-layout{grid-template-columns:minmax(0,1fr)}
+ .app .membership-plan-grid{grid-template-columns:minmax(0,1fr)}
+ .app .discovery-spotlight{grid-template-columns:minmax(0,1fr)}
+ .app .home-voyage-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:420px){
+ .app .feature-anime-grid-five{gap:9px}
+ .app .seasonal-rail{grid-auto-columns:minmax(148px,48vw)}
+ .app .anime-card .anime-info p{font-size:11px}
+}
