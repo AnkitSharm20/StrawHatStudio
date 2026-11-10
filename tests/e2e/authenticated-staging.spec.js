@@ -63,10 +63,21 @@ test.describe('authenticated staging acceptance', () => {
     await postB.getByRole('button', { name: /^Block / }).click();
     await expect(pageB.locator('.community-post-card').filter({ hasText: marker })).toHaveCount(0);
     await expect(pageB.getByRole('heading', { name: 'Blocked members' })).toBeVisible();
+    const blockedPostMarker = marker + '_BLOCKED_AUTHOR_POST';
+    await pageB.locator('.community-compose-box textarea').fill(blockedPostMarker);
+    await pageB.getByRole('button', { name: /Publish post/ }).click();
+    await expect(pageB.locator('.community-post-card').filter({ hasText: blockedPostMarker })).toBeVisible({ timeout: 15_000 });
+
+    // The block is mutual at the database policy layer: A cannot read B's posts while B blocks A.
+    await pageA.goto('/community');
+    await expect(pageA.locator('.community-post-card').filter({ hasText: blockedPostMarker })).toHaveCount(0);
+
     const unblock = pageB.locator('button[aria-label^="Unblock "]').first();
     await expect(unblock).toBeVisible();
     await unblock.click();
     await expect(pageB.locator('.community-post-card').filter({ hasText: marker })).toBeVisible({ timeout: 15_000 });
+    await pageA.reload();
+    await expect(pageA.locator('.community-post-card').filter({ hasText: blockedPostMarker })).toBeVisible({ timeout: 15_000 });
 
     // The notification arrives over Realtime while member A's inbox is already open.
     const notification = pageA.locator('.notification-card').filter({ hasText: 'Someone replied to your post.' });
