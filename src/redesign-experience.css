@@ -592,7 +592,7 @@
 .app .toast,.app .notification-item,.app .notification-card { animation:studio-notice-in .32s ease both; }
 @media(max-width:1100px) { .app .anime-grid.explore-anime-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 @media(max-width:800px) {
- .app .main::before { inset-left:0; }
+ .app .main::before { inset:0; }
  .app .anime-grid.explore-anime-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
  .app .discovery-spotlight { grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); }
  .app .community-layout { grid-template-columns:1fr; }
@@ -618,4 +618,33 @@
  .app .main::before,.app .hero-video-stage video,.app .hero-video-stage img,.app .membership-plans::before { animation:none!important; }
  .app .main > .page,.app .main > .home-v2,.app .community-post-card { animation:none!important; }
  .app * { scroll-behavior:auto!important; transition-duration:.01ms!important; }
+}
+
+
+/* Final responsive and interaction polish. */
+.app .explore-anime-grid .anime-card,
+.app .community-rail .panel,
+.app .tier-plan-grid > article,
+.app .settings-group {
+  transition: border-color .28s ease, box-shadow .28s ease, transform .28s ease, background .28s ease;
+}
+.app .explore-anime-grid .anime-card:focus-within,
+.app .community-rail .panel:focus-within,
+.app .tier-plan-grid > article:focus-within,
+.app .settings-group:focus-within {
+  border-color: color-mix(in srgb, var(--gold) 45%, var(--line));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 10%, transparent);
+}
+.app .explore-anime-grid .poster img { display:block; }
+.app .explore-anime-grid .anime-info { min-height: 88px; }
+.app .community-page .community-post-card:focus-within { border-color: color-mix(in srgb,var(--studio-purple) 48%,var(--line)); }
+.app .membership-plan-grid { align-items:stretch; }
+.app .tier-plan-grid > article { min-height:100%; }
+.app .membership-period { scroll-margin-top: 90px; }
+@media(max-width:800px) {
+  .app .main::before { inset:0; background-size:39px 39px; opacity:.16; }
+}
+@media(hover:none) {
+  .app .explore-anime-grid .anime-card:hover { transform:none; box-shadow:none; }
+  .app .explore-anime-grid .anime-card:active { transform:scale(.985); }
 }
