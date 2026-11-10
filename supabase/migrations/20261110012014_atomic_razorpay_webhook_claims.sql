@@ -1,4 +1,14 @@
--- Atomically claim webhook events and allow safe recovery after a stale processing lease.
+-- Add a processing lease and atomically claim webhook events.
+alter table public.razorpay_webhook_events
+  add column if not exists processing_started_at timestamptz;
+
+alter table public.razorpay_webhook_events
+  drop constraint if exists razorpay_webhook_events_status_check;
+
+alter table public.razorpay_webhook_events
+  add constraint razorpay_webhook_events_status_check
+  check (status = any (array['received'::text,'processing'::text,'processed'::text,'failed'::text]));
+
 create or replace function private.claim_razorpay_webhook_event(
   p_event_id text,
   p_event_type text,
@@ -54,6 +64,7 @@ begin
   return true;
 end;
 $function$;
+
 revoke all on function private.claim_razorpay_webhook_event(text,text,text) from public,anon,authenticated;
 grant usage on schema private to service_role;
 grant execute on function private.claim_razorpay_webhook_event(text,text,text) to service_role;
