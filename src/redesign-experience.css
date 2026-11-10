@@ -975,3 +975,32 @@ html[data-performance-mode="performance"] .app *::after {
 .app .tier-plan-grid li{overflow-wrap:anywhere}
 @media(max-width:1120px){.app .tier-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app .tier-plan-grid>article.tier-featured{transform:none}.app .tier-plan-grid>article.tier-featured:hover{transform:translateY(-7px)}}
 @media(max-width:600px){.app .tier-plan-grid{grid-template-columns:minmax(0,1fr)}}
+
+
+/* Auth v2 — provider-first identity, accessible password controls and responsive account flow. */
+.app .auth-page { min-height: calc(100vh - 150px); display: grid; place-items: center; }
+.app .auth-shell { border-color: color-mix(in srgb,var(--gold) 30%,var(--line)); box-shadow: 0 32px 100px #0006,0 0 55px #f4c66a0b; }
+.app .auth-art { isolation: isolate; }
+.app .auth-art:before { animation: auth-orbit 24s linear infinite; }
+.app .auth-art:after { animation: auth-orbit 19s linear infinite reverse; }
+.app .auth-panel { min-width: 0; }
+.app .auth-panel form { gap: 9px; }
+.app .auth-panel form input { box-sizing: border-box; transition: border-color .2s,box-shadow .2s,background .2s; }
+.app .auth-password-wrap { position: relative; display: flex; align-items: center; }
+.app .auth-password-wrap input { padding-right: 48px; }
+.app .auth-password-toggle { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 9px; color: var(--muted); background: transparent; cursor: pointer; }
+.app .auth-password-toggle:hover { color: var(--gold); background: color-mix(in srgb,var(--gold) 10%,transparent); }
+.app .auth-providers { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; }
+.app .auth-provider { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; min-height: 48px; padding: 10px 8px; border-radius: 12px; font-size: 12px; font-weight: 800; transition: transform .2s,border-color .2s,background .2s; }
+.app .auth-provider:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--gold); background: color-mix(in srgb,var(--gold) 8%,var(--panel)); }
+.app .auth-provider svg { flex: 0 0 19px; width: 19px; height: 19px; }
+.app .auth-provider:disabled { opacity: .55; cursor: wait; }
+.app .auth-message { overflow-wrap: anywhere; }
+@keyframes auth-orbit { to { transform: rotate(360deg); } }
+@media(max-width:760px) {
+ .app .auth-page { min-height: auto; padding: 22px 0 36px; }
+ .app .auth-shell { width: 100%; }
+ .app .auth-providers { grid-template-columns: 1fr; }
+ .app .auth-provider { justify-content: flex-start; padding-inline: 18px; }
+}
+@media(prefers-reduced-motion:reduce) { .app .auth-art:before,.app .auth-art:after { animation:none; } }
