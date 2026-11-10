@@ -277,3 +277,177 @@
   .app .home-intro-actions { gap: 9px; }
   .app .home-intro-actions :is(.primary, .secondary) { flex: 1 1 145px; }
 }
+
+
+/* 2.0 component refinement — consistent hierarchy, accessible controls and responsive rhythm. */
+.app .main { min-width: 0; }
+.app .page { padding-inline: clamp(18px, 3.2vw, 52px); }
+.app .page > .section-head {
+  align-items: flex-end;
+  gap: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 18%, var(--line));
+}
+.app .page > .section-head h2 {
+  margin: 8px 0 9px;
+  font-size: clamp(34px, 4.2vw, 52px);
+  line-height: 1.04;
+}
+.app .page > .section-head p {
+  max-width: 66ch;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.app .page .eyebrow {
+  color: var(--neon-amber);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+.app .hero-video-stage {
+  border: 1px solid color-mix(in srgb, var(--gold) 26%, var(--line));
+  border-radius: 20px;
+  box-shadow: 0 22px 65px rgb(0 0 0 / 22%), 0 0 36px rgb(255 107 0 / 7%);
+}
+.app .hero-video-only { padding-top: clamp(14px, 2.2vw, 28px); }
+.app .intro-strip {
+  grid-template-columns: minmax(110px, .55fr) minmax(0, 1.4fr) minmax(220px, .8fr);
+  gap: clamp(18px, 3vw, 44px);
+  padding-block: clamp(50px, 7vw, 92px);
+}
+.app .intro-strip > p {
+  max-width: 34ch;
+  color: var(--muted);
+  line-height: 1.85;
+  font-size: 14px;
+}
+.app .section-v2-head {
+  align-items: flex-end;
+  gap: 20px;
+}
+.app .section-v2-head h2 {
+  margin-top: 10px;
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 1.02;
+}
+.app .section-v2-head p {
+  max-width: 62ch;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.app .anime-card,
+.app .post,
+.app .panel,
+.app .compose,
+.app .shop-item,
+.app .membership-plan-grid article,
+.app .membership-perk-grid article {
+  background: linear-gradient(150deg, color-mix(in srgb, var(--panel) 96%, white), var(--panel));
+  border: 1px solid color-mix(in srgb, var(--gold) 15%, var(--line));
+}
+.app .anime-card { overflow: hidden; }
+.app .anime-card .poster img { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+.app .anime-card:hover .poster img { transform: scale(1.045); }
+.app .anime-info { padding: 16px; }
+.app .anime-info h3 { line-height: 1.25; }
+.app .anime-info p { color: var(--muted); line-height: 1.65; }
+.app :is(input, textarea, select) {
+  accent-color: var(--orange);
+}
+.app :is(.searchbar, .explore-toolbar, .marketplace-tools, .community-toolbar) {
+  border-color: color-mix(in srgb, var(--gold) 16%, var(--line));
+}
+.app .searchbar:focus-within,
+.app :is(.stream-editor input, .profile-editor input, .profile-editor textarea):focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgb(255 107 0 / 10%);
+}
+.app :is(.explore-genres, .notification-filters, .membership-billing-switch) button {
+  transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.app :is(.explore-genres, .notification-filters) button.active {
+  color: #fffaf0;
+  background: linear-gradient(115deg, var(--orange), var(--red));
+  border-color: transparent;
+}
+.app .explore-hero {
+  border-radius: 20px;
+  border-color: color-mix(in srgb, var(--gold) 24%, var(--line));
+  background:
+    radial-gradient(ellipse at 86% 15%, rgb(255 107 0 / 19%), transparent 36%),
+    radial-gradient(ellipse at 14% 100%, rgb(255 201 40 / 8%), transparent 40%),
+    linear-gradient(140deg, var(--panel), var(--bg));
+}
+.app .explore-hero h1,
+.app .community-hero h1 {
+  font-family: var(--font-heading);
+  letter-spacing: -.04em;
+}
+.app .community-hero {
+  border-radius: 20px !important;
+  border-color: color-mix(in srgb, var(--gold) 24%, var(--line)) !important;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 16%);
+}
+.app .membership-plan-grid article {
+  border-radius: 18px;
+  padding: clamp(20px, 2.2vw, 30px);
+}
+.app .membership-plan-grid article.tier-featured {
+  border-color: color-mix(in srgb, var(--gold) 62%, var(--orange));
+  box-shadow: 0 14px 42px rgb(255 107 0 / 12%);
+}
+.app .membership-billing-switch {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 5px;
+}
+.app .membership-billing-switch button.active {
+  background: linear-gradient(115deg, color-mix(in srgb, var(--orange) 20%, var(--panel)), color-mix(in srgb, var(--gold) 12%, var(--panel)));
+  border-color: color-mix(in srgb, var(--gold) 40%, var(--line));
+}
+.app .membership-safety-note {
+  border: 1px solid color-mix(in srgb, var(--gold) 22%, var(--line));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--gold) 5%, var(--panel));
+}
+.app .footer {
+  border-top-color: color-mix(in srgb, var(--gold) 20%, var(--line));
+}
+.app .home-bottom-cta {
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, var(--line));
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 10%, rgb(255 107 0 / 12%), transparent 40%),
+    var(--panel);
+}
+.app .crew-feature {
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, var(--line));
+  overflow: hidden;
+}
+.app .toast {
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+}
+@media (max-width: 900px) {
+  .app .intro-strip { grid-template-columns: 1fr 2fr; }
+  .app .intro-strip > p { grid-column: 2; }
+}
+@media (max-width: 760px) {
+  .app .page { padding-inline: 16px; }
+  .app .page > .section-head { align-items: flex-start; flex-direction: column; }
+  .app .page > .section-head h2 { font-size: clamp(32px, 9vw, 42px); }
+  .app .intro-strip { grid-template-columns: 1fr; gap: 16px; }
+  .app .intro-strip > p { grid-column: auto; max-width: 48ch; }
+  .app .section-v2-head { align-items: flex-start; flex-direction: column; }
+  .app .hero-video-stage { border-radius: 14px; }
+  .app .explore-hero { align-items: flex-start; flex-direction: column; }
+  .app .community-hero { min-height: 220px; }
+  .app .membership-intro { flex-direction: column; align-items: stretch; }
+  .app .home-bottom-cta { border-radius: 16px; }
+}
+@media (hover: none) {
+  .app .anime-card:hover .poster img { transform: none; }
+}
