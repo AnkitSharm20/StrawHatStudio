@@ -1,0 +1,28 @@
+/* Grand Line home refresh — premium responsive membership and marketplace showcase */
+.home-treasure-section{padding-top:clamp(58px,8vw,112px);padding-bottom:clamp(58px,8vw,112px)}
+.home-treasure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:30px}
+.home-treasure-card{position:relative;display:grid;grid-template-columns:minmax(125px,.72fr) minmax(0,1.28fr);min-height:310px;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.012)),var(--panel);box-shadow:0 22px 65px rgba(0,0,0,.16);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.home-treasure-card:hover{transform:translateY(-4px);border-color:rgba(214,182,109,.55);box-shadow:0 28px 75px rgba(0,0,0,.24)}
+.home-treasure-art{position:relative;display:flex;align-items:center;justify-content:center;min-height:100%;overflow:hidden;color:var(--gold);background:radial-gradient(circle at 50% 42%,rgba(255,174,66,.2),transparent 42%),linear-gradient(145deg,#1d2635,#0c111c 78%)}
+.home-marketplace-card .home-treasure-art{color:#ff8b43;background:radial-gradient(circle at 50% 42%,rgba(255,107,0,.22),transparent 42%),linear-gradient(145deg,#302018,#0c111c 78%)}
+.home-treasure-art>svg{position:relative;z-index:1;filter:drop-shadow(0 0 20px currentColor)}
+.home-treasure-orbit{position:absolute;width:142px;height:142px;border:1px solid currentColor;border-radius:50%;opacity:.35;box-shadow:0 0 0 18px rgba(255,255,255,.025),0 0 0 38px rgba(255,255,255,.018);transform:rotate(-22deg) scaleX(.72)}
+.home-treasure-stamp{position:absolute;bottom:20px;left:15px;right:15px;text-align:center;font:10px 'DM Mono',monospace;letter-spacing:2px;color:rgba(255,255,255,.62)}
+.home-treasure-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(22px,3vw,38px)}
+.home-treasure-copy .eyebrow{font-size:10px;letter-spacing:1.8px;color:var(--gold)}
+.home-treasure-copy h3{margin:12px 0 10px;font:600 clamp(24px,2.6vw,36px)/1.12 'Playfair Display',serif;letter-spacing:-.7px;color:var(--text)}
+.home-treasure-copy h3 em{color:var(--gold)}
+.home-treasure-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.8;max-width:420px}
+.home-treasure-price{display:flex;align-items:baseline;gap:10px;margin:18px 0 16px}
+.home-treasure-price b{font:700 27px 'DM Sans',sans-serif;color:var(--text)}
+.home-treasure-price span{font-size:11px;color:var(--muted)}
+.home-treasure-trust{display:flex;align-items:center;gap:8px;margin:18px 0 16px;font-size:11px;color:var(--muted)}
+.home-treasure-trust svg{color:var(--gold)}
+.home-treasure-copy .primary,.home-treasure-copy .secondary{margin-top:0;min-height:42px}
+.home-catalog-notice{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:12px}
+.home-catalog-notice>span{display:flex;align-items:center;gap:9px}
+.home-catalog-notice svg{flex:none;color:var(--gold)}
+.home-catalog-notice button{flex:none}
+@media(max-width:900px){.home-treasure-grid{grid-template-columns:1fr}.home-treasure-card{min-height:280px;grid-template-columns:minmax(115px,.55fr) minmax(0,1.45fr)}}
+@media(max-width:560px){.home-treasure-grid{gap:14px}.home-treasure-card{grid-template-columns:1fr;min-height:0}.home-treasure-art{min-height:130px}.home-treasure-orbit{width:105px;height:105px}.home-treasure-stamp{bottom:12px;font-size:9px}.home-treasure-copy{padding:22px}.home-treasure-copy h3{font-size:27px}.home-catalog-notice{align-items:flex-start;flex-direction:column}.home-catalog-notice button{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.home-treasure-card{transition:none}.home-treasure-card:hover{transform:none}}
