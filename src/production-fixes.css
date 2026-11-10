@@ -59,3 +59,9 @@
 .admin-audit-diff b{display:block;margin-bottom:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .admin-audit-diff pre{max-width:100%;max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;color:inherit;opacity:.82}
 @media(max-width:700px){.admin-audit-diff{grid-template-columns:minmax(0,1fr)}}
+
+
+/* Community member safety controls */
+.blocked-member-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:12px;color:var(--text)}
+.blocked-member-row:first-of-type{margin-top:8px}
+.blocked-member-row .text-btn{flex:0 0 auto;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:4px}

@@ -1,0 +1,10 @@
+project_id = "xlwtpysdknjzgjiecbhm"
+
+[functions.rewards]
+verify_jwt = true
+
+[functions.public-profile-watchlist]
+verify_jwt = false
+
+[functions.membership-payments]
+verify_jwt = false

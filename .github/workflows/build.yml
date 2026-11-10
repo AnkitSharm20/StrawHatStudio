@@ -1,0 +1,98 @@
+name: Build and browser verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-e2e:
+    name: Install, audit, build and responsive browser tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 25
+    env:
+      E2E_SUPABASE_URL: ${{ secrets.E2E_SUPABASE_URL }}
+      E2E_SUPABASE_ANON_KEY: ${{ secrets.E2E_SUPABASE_ANON_KEY }}
+      E2E_USER_A_SESSION_JSON: ${{ secrets.E2E_USER_A_SESSION_JSON }}
+      E2E_USER_B_SESSION_JSON: ${{ secrets.E2E_USER_B_SESSION_JSON }}
+      E2E_ADMIN_SESSION_JSON: ${{ secrets.E2E_ADMIN_SESSION_JSON }}
+      E2E_ALLOW_MUTATING_TESTS: ${{ vars.E2E_ALLOW_MUTATING_TESTS }}
+      VITE_SUPABASE_URL: ${{ secrets.E2E_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.E2E_SUPABASE_ANON_KEY }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref || github.sha }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Generate and commit npm lockfile
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && !hashFiles('package-lock.json')
+        run: |
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "Add npm lockfile for reproducible installs"
+          git push origin "HEAD:${GITHUB_HEAD_REF}"
+      - name: Install dependencies from lockfile
+        run: npm ci --no-fund
+      - name: Verify migration files match the live migration manifest
+        run: npm run check:migrations
+      - name: Report dependency vulnerabilities
+        run: npm audit --audit-level=moderate
+      - name: Build production bundle
+        run: npm run build
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
+      - name: Run desktop, Android-sized and iOS-WebKit browser tests
+        run: npm run test:e2e
+
+  migration-replay:
+    name: Rebuild Supabase schema from migrations
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SUPABASE_CLI_TELEMETRY_DISABLED: "true"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - name: Install Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Hold migrations until legacy baseline is restored
+        run: |
+          mkdir -p /tmp/strawhat-migrations
+          mv supabase/migrations/*.sql /tmp/strawhat-migrations/
+      - name: Start local Supabase services
+        run: supabase start -x studio,edge-runtime,logflare,vector,analytics
+      - name: Restore legacy profiles and settings schema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          DB_URL="$(supabase status -o env | grep '^DB_URL=' | cut -d= -f2- | tr -d '"')"
+          psql "$DB_URL" -v ON_ERROR_STOP=1 -f supabase/bootstrap/legacy-profile-schema.sql
+      - name: Replay all migrations on a clean local database
+        run: |
+          mv /tmp/strawhat-migrations/*.sql supabase/migrations/
+          supabase migration up --local
