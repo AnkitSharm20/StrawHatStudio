@@ -6,7 +6,9 @@
 - Experience: premium anime community, pirate-adventure atmosphere, balanced motion, mobile-first layouts.
 - Typography: Cinzel for editorial headings, Bebas Neue for display moments, Inter for interface text, and Lora for selected emphasis.
 - Preserve the existing React + Vite + Supabase + Discord OAuth architecture unless a measured technical reason requires a change.
-- Keep the production domain unchanged until the redesign passes preview QA and the owner approves promotion.
+- Use `main` as the single ongoing development and production source.
+- Keep `https://straw-hat-signal.vercel.app/` as the only user-facing website; do not create or switch to a replacement site/domain.
+- Validate builds before production pushes; use temporary build tooling only for internal verification, never as a second customer-facing website.
 
 ## Non-negotiable guardrails
 
@@ -21,7 +23,7 @@
 ## Phase tracking
 
 ### Phase 1 — Foundation and audit
-- [x] Create isolated branch: `redesign/straw-hat-studio-2.0`.
+- [x] Build and verify the 2.0 implementation branch for migration into `main`.
 - [x] Establish design tokens and a final-loaded design layer.
 - [x] Apply consistent colours, typography, surfaces, controls, focus states, and reduced-motion support.
 - [ ] Finish route-by-route functional inventory and record existing behavior.
@@ -35,7 +37,7 @@
 - [x] Add “THE SEA IS CALLING” campaign copy below the video hero.
 - [x] Add direct Explore and Community actions.
 - [x] Add loading skeletons for live anime artwork.
-- [ ] Complete desktop, tablet, and mobile visual QA with an authenticated preview session.
+- [ ] Complete desktop, tablet, and mobile visual QA on the canonical production website.
 - [ ] Verify admin hero upload, publish/unpublish, and fallback behavior end-to-end.
 
 ### Phase 3 — Global pages and navigation
@@ -71,15 +73,15 @@
 
 ### Phase 8 — Security, QA, and launch
 - [ ] Run dependency and secret scans; resolve confirmed vulnerabilities without blind major upgrades.
-- [ ] Test critical user journeys in preview: guest, Discord sign-in, profile, watchlist, community, notifications, marketplace, admin, and payment test mode.
+- [ ] Test critical user journeys on the canonical website: guest, Discord sign-in, profile, watchlist, community, notifications, marketplace, admin, and payment test mode.
 - [ ] Confirm no console errors, broken routes, duplicate writes, or unintended data changes.
-- [ ] Obtain owner approval before merging or promoting to production.
+- [x] Owner approved using the canonical production website as the single live development and release target.
 
 ## Current implementation notes
 
-- Latest implementation branch: `redesign/straw-hat-studio-2.0`.
+- Ongoing source of truth after migration: `main`.
 - The 2.0 CSS is isolated in `src/studio-2.0.css` and imported after the existing stylesheet layers.
 - Homepage, Explore error handling/cache, shared page styling, and document metadata have received first-pass changes.
-- Vercel preview builds have completed successfully. Preview access is protected by Vercel Authentication, so visual QA is not considered complete until the owner or an authorised browser session can inspect the preview.
+- Internal build verification is performed without asking the owner to use a separate preview website. All user-facing changes remain on the canonical production domain.
 - Build output reports two moderate npm audit findings. Identify their exact dependency paths before choosing remediation; do not run `npm audit fix --force` blindly.
-- Production remains unchanged.
+- The canonical production domain remains attached to the existing Vercel project; domain and DNS changes are out of scope.
