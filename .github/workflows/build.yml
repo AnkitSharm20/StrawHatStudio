@@ -78,7 +78,19 @@ jobs:
         uses: supabase/setup-cli@v1
         with:
           version: latest
+      - name: Hold migrations until legacy baseline is restored
+        run: |
+          mkdir -p /tmp/strawhat-migrations
+          mv supabase/migrations/*.sql /tmp/strawhat-migrations/
       - name: Start local Supabase services
         run: supabase start -x studio,edge-runtime,logflare,vector,analytics
+      - name: Restore legacy profiles and settings schema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          DB_URL="$(supabase status -o env | grep '^DB_URL=' | cut -d= -f2- | tr -d '"')"
+          psql "$DB_URL" -v ON_ERROR_STOP=1 -f supabase/bootstrap/legacy-profile-schema.sql
       - name: Replay all migrations on a clean local database
-        run: supabase db reset --local --no-seed
+        run: |
+          mv /tmp/strawhat-migrations/*.sql supabase/migrations/
+          supabase migration up --local

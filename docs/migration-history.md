@@ -1,6 +1,6 @@
 # Supabase migration history
 
-The `live-versions.txt` file is a snapshot of the connected Straw Hat Studio Supabase project's migration history. CI checks that every listed migration has exactly one matching SQL file and that no extra migration file is present.
+The `live-versions.txt` file is a snapshot of the connected Straw Hat Studio Supabase project's migration history. The original `profiles` and `user_settings` tables predate the recorded migration history, so `supabase/bootstrap/legacy-profile-schema.sql` recreates only that legacy baseline for clean local replay; it is not deployed to production. CI checks that every listed migration has exactly one matching SQL file and that no extra migration file is present.
 
 When applying a new migration:
 1. Add the SQL file using the exact version returned by Supabase.
