@@ -94,3 +94,76 @@
  .auth-provider{min-height:46px}
 }
 @media(prefers-reduced-motion:reduce){.auth-shell,.auth-provider,.auth-submit{scroll-behavior:auto;transition:none!important}}
+
+
+/* Final auth composition: compact horizontal OAuth row and a single-line divider label. */
+.auth-divider{
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  width:100%;
+  min-width:0;
+  margin:4px 0 2px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.13em;
+  line-height:1;
+  white-space:nowrap;
+}
+.auth-divider:before,.auth-divider:after{
+  content:"";
+  display:block;
+  height:1px;
+  min-width:12px;
+  flex:1 1 auto;
+  background:linear-gradient(90deg,transparent,var(--line));
+}
+.auth-divider:after{background:linear-gradient(90deg,var(--line),transparent)}
+.auth-divider span{display:block;flex:0 0 auto;white-space:nowrap}
+.auth-providers{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch;
+  gap:10px;
+  width:100%;
+  min-width:0;
+}
+.auth-provider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  min-width:0;
+  min-height:46px;
+  padding:0 9px;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.auth-provider span{
+  flex:0 1 auto;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align:center;
+}
+.auth-provider svg{width:17px;height:17px;flex:0 0 17px}
+.auth-panel{gap:11px}
+.auth-panel form{gap:10px}
+.auth-panel form input{min-height:49px}
+.auth-tabs button{min-height:43px}
+.auth-submit{display:flex;align-items:center;justify-content:center;gap:9px;width:100%}
+.auth-message{overflow-wrap:anywhere;word-break:break-word}
+@media(max-width:420px){
+ .auth-providers{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px}
+ .auth-provider{gap:5px;min-height:44px;padding:0 5px;font-size:11px}
+ .auth-provider svg{width:15px;height:15px;flex-basis:15px}
+ .auth-divider{gap:8px;font-size:9px;letter-spacing:.1em}
+}
+@media(max-width:340px){
+ .auth-provider{gap:4px;font-size:10px}
+ .auth-provider svg{width:14px;height:14px;flex-basis:14px}
+ .auth-divider{font-size:8px;letter-spacing:.07em}
+}
