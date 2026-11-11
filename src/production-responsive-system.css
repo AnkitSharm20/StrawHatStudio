@@ -295,3 +295,8 @@ body { min-width: 320px; overflow-x: hidden; }
   html { scroll-behavior: auto; }
   .app *, .app *::before, .app *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* The shared mobile search edits the catalogue query; only show it on catalogue routes. */
+@media (max-width: 1024px) {
+  .app:not(:has(.home-v2)):not(:has(.explore-page)) .mobile-search { display: none !important; }
+}
