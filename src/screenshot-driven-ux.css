@@ -1,0 +1,130 @@
+/* Evidence-led mobile and desktop corrections based on production screenshots. */
+.app .home-v2 { gap: clamp(34px, 5vw, 68px); }
+.app .home-cinematic-hero {
+  grid-template-columns: minmax(0,1.2fr) minmax(250px,.8fr);
+  min-height: clamp(480px, 43vw, 650px);
+  padding: clamp(24px,3.5vw,48px);
+}
+.app .home-cinematic-content { max-width: 660px; }
+.app .home-cinematic-content h1 { max-width: 11ch; font-size: clamp(42px,5.2vw,76px); }
+.app .home-cinematic-content p { max-width: 48ch; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.app .home-cinematic-rail { max-width: 100%; }
+.app .home-section-v2 { min-width: 0; }
+.app .feature-anime-grid-five, .app .feature-anime-grid, .app .seasonal-rail {
+  display: grid !important;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: clamp(12px,1.5vw,20px);
+  width: 100%;
+  overflow: visible;
+}
+.app .anime-card { min-width: 0; width: 100%; }
+.app .anime-card .poster { aspect-ratio: 4 / 3; }
+.app .anime-info { padding: clamp(11px,1.3vw,16px); }
+.app .anime-info h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.5em; }
+.app .anime-info p { -webkit-line-clamp: 3; }
+.app .section-v2-head { align-items: end; }
+.app .community-page { max-width: 1160px; }
+.app .community-welcome { padding: clamp(18px,2.6vw,30px); }
+.app .community-pulse { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.app .community-pulse > button { min-height: 84px; }
+.app .membership-page { max-width: 1120px; }
+.app .membership-account-panel { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:clamp(16px,2.5vw,26px); }
+.app .membership-plans { padding:clamp(16px,2.6vw,30px); }
+.app .membership-plan-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.app .tier-plan-grid > article { padding:clamp(16px,2vw,24px); }
+.app .tier-plan-grid h3 { font-size:clamp(21px,2vw,27px); }
+.app .tier-plan-grid .plan-price { font-size:clamp(29px,3vw,39px); }
+.app .tier-plan-grid > article > p { min-height:0; font-size:12px; }
+.app .tier-plan-grid ul { gap:8px; }
+.app .tier-plan-grid li { font-size:11px; }
+.app .membership-price-confirm { margin-top:12px; }
+.app .membership-checkout-cta, .app .membership-current-cta {
+  display:flex; align-items:center; justify-content:center; width:100%; min-height:48px;
+  border-radius:11px; font-size:12px; font-weight:800; letter-spacing:.02em;
+}
+.app .membership-disabled-cta:disabled, .app .membership-checkout-cta:disabled { opacity:.72; cursor:not-allowed; }
+.app .membership-checkout-message { display:flex; gap:12px; align-items:flex-start; margin:16px 0 0; padding:14px 16px; border:1px solid color-mix(in srgb,var(--orange) 42%,var(--line)); border-radius:12px; background:color-mix(in srgb,var(--orange) 7%,var(--panel)); color:var(--text); font-size:12px; line-height:1.65; }
+.app .membership-checkout-message svg { flex:0 0 auto; margin-top:2px; color:var(--gold); }
+.app .membership-checkout-message span { overflow-wrap:anywhere; }
+.app .membership-checkout-message + .membership-safety-note { margin-top:10px; }
+.app .membership-period-head { align-items:center; }
+.app .membership-period-head p { font-size:12px; }
+.app .membership-period-chip { font-size:9px; }
+.app .membership-billing-switch { width:min(100%,390px); grid-template-columns:repeat(2,minmax(0,1fr)); }
+.app .membership-billing-switch button { min-width:0; }
+.app .membership-billing-switch button span { font-size:13px; }
+.app .membership-billing-switch button small { font-size:10px; }
+.app .membership-intro { gap:clamp(18px,3vw,34px); }
+.app .membership-perk-grid { gap:12px; }
+@media (max-width: 1180px) {
+ .app .feature-anime-grid-five,.app .feature-anime-grid,.app .seasonal-rail { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .app .home-cinematic-hero { grid-template-columns:minmax(0,1fr) minmax(220px,.72fr); }
+}
+@media (max-width: 1024px) {
+ .app .home-cinematic-hero { min-height:560px; grid-template-columns:minmax(0,1fr); grid-template-rows:1fr auto; gap:20px; }
+ .app .home-cinematic-content { align-self:end; padding-top:70px; max-width:680px; }
+ .app .home-cinematic-content h1 { max-width:12ch; font-size:clamp(42px,7vw,66px); }
+ .app .home-cinematic-rail { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+ .app .home-cinematic-rail-head { grid-column:1/-1; }
+ .app .home-cinematic-pick { grid-template-columns:54px minmax(0,1fr); gap:8px; }
+ .app .home-cinematic-pick img { width:54px; height:62px; }
+ .app .home-cinematic-pick > svg { display:none; }
+ .app .membership-plan-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 760px) {
+ .app .home-v2 { gap:34px; padding-top:10px; }
+ .app .home-cinematic-hero { min-height:0; min-height:clamp(600px,82svh,740px); padding:22px 16px 50px; border-radius:18px; }
+ .app .home-cinematic-backdrop { background-position:58% center; }
+ .app .home-cinematic-hero:after { background:linear-gradient(180deg,rgba(7,8,12,.22) 0%,rgba(7,8,12,.35) 23%,rgba(7,8,12,.92) 57%,#08090d 100%); }
+ .app .home-cinematic-top { left:16px; right:16px; top:16px; }
+ .app .home-cinematic-index { font-size:8px; }
+ .app .home-cinematic-content { padding-top:clamp(190px,36svh,290px); align-self:end; }
+ .app .home-cinematic-content h1 { font-size:clamp(38px,11vw,54px); line-height:1; max-width:100%; margin:12px 0; }
+ .app .home-cinematic-content p { font-size:12px; line-height:1.65; -webkit-line-clamp:3; }
+ .app .home-cinematic-meta { gap:6px; margin-top:14px; }
+ .app .home-cinematic-meta span { font-size:8px; padding:6px 8px; }
+ .app .home-cinematic-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:16px; }
+ .app .home-cinematic-actions button { min-width:0; justify-content:center; padding-inline:9px; font-size:10px; }
+ .app .home-cinematic-rail { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; padding:9px; }
+ .app .home-cinematic-pick { display:flex; flex-direction:column; align-items:stretch; gap:5px; padding:5px; }
+ .app .home-cinematic-pick img { width:100%; height:clamp(58px,19vw,78px); }
+ .app .home-cinematic-pick span { display:grid; gap:3px; }
+ .app .home-cinematic-pick b { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; white-space:normal; font-size:9px; }
+ .app .home-cinematic-pick small { font-size:7px; }
+ .app .home-cinematic-bottom { left:16px; right:16px; bottom:13px; font-size:7px; }
+ .app .intro-strip { gap:12px; }
+ .app .intro-strip h2 { font-size:clamp(34px,10vw,48px); }
+ .app .feature-anime-grid-five,.app .feature-anime-grid,.app .seasonal-rail { grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; }
+ .app .anime-card .poster { aspect-ratio:4/3; }
+ .app .anime-info { padding:11px; }
+ .app .anime-info h3 { font-size:13px; min-height:2.5em; }
+ .app .anime-info p { font-size:10px; -webkit-line-clamp:2; }
+ .app .community-pulse { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+ .app .community-pulse > button { min-height:86px; padding:10px 8px; align-items:flex-start; flex-wrap:wrap; }
+ .app .community-pulse b { font-size:19px; }
+ .app .community-pulse small { font-size:7px; }
+ .app .membership-account-panel { align-items:flex-start; flex-direction:column; gap:13px; }
+ .app .membership-account-actions { width:100%; display:flex; justify-content:space-between; }
+ .app .membership-plan-grid { grid-template-columns:minmax(0,1fr); gap:12px; }
+ .app .tier-plan-grid > article { padding:17px; border-radius:15px; }
+ .app .tier-plan-grid ul { grid-template-columns:1fr; gap:7px; }
+ .app .tier-plan-grid li { font-size:11px; line-height:1.5; }
+ .app .membership-price-confirm { display:grid; grid-template-columns:1fr auto; align-items:center; gap:4px 10px; }
+ .app .membership-price-confirm span { grid-column:1/-1; }
+ .app .membership-price-confirm strong { font-size:24px; }
+ .app .membership-price-confirm small { text-align:right; }
+ .app .membership-checkout-message { font-size:11px; padding:12px; }
+ .app .membership-billing-switch { display:grid; width:100%; }
+ .app .membership-period-head { gap:10px; }
+ .app .membership-period-chip { white-space:normal; }
+ .app .membership-intro { grid-template-columns:minmax(0,1fr); }
+ .app .membership-intro-art { min-height:210px; }
+}
+@media (max-width: 390px) {
+ .app .home-cinematic-hero { min-height:620px; padding-inline:13px; }
+ .app .home-cinematic-content { padding-top:210px; }
+ .app .home-cinematic-content h1 { font-size:38px; }
+ .app .home-cinematic-actions { grid-template-columns:1fr; }
+ .app .home-cinematic-pick img { height:58px; }
+ .app .community-pulse > button { min-height:90px; }
+}
