@@ -82,7 +82,6 @@ function HomePage({saved,toggleSave,navigate,notify}){
   <nav className="shv4-shortcuts" aria-label="Explore Straw Hat Studio">
    <button onClick={()=>navigate('/explore')}><span><Compass size={18}/></span><b>Discover anime</b><small>Browse the catalogue</small><ArrowUpRight size={15}/></button>
    <button onClick={()=>navigate('/coming-soon')}><span><Sparkles size={18}/></span><b>Coming soon</b><small>New crew features are on the way</small><ArrowUpRight size={15}/></button>
-   <button onClick={()=>navigate('/coming-soon')}><span><Sparkles size={18}/></span><b>Coming soon</b><small>More anime tools are in the works</small><ArrowUpRight size={15}/></button>
    <button onClick={()=>navigate('/community')}><span><Users size={18}/></span><b>Community</b><small>Find your nakama</small><ArrowUpRight size={15}/></button>
   </nav>
   <section className="shv4-section">
