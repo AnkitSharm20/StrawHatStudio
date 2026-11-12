@@ -348,16 +348,69 @@ function ForYouPage({saved,toggleSave}){
 }
 
 function WatchlistPage({saved,toggleSave}){
- const navigate=useNavigate(),[items,setItems]=useState([]),[loading,setLoading]=useState(false),[failed,setFailed]=useState(false);
+ const navigate=useNavigate();
+ const [items,setItems]=useState([]);
+ const [loading,setLoading]=useState(false);
+ const [failed,setFailed]=useState(false);
+ const [retry,setRetry]=useState(0);
  const key=saved.slice(0,16).join('|');
- useEffect(()=>{let active=true;const names=saved.slice(0,16);if(!names.length){setItems([]);setLoading(false);setFailed(false);return}
-  const variables={},declarations=[],fields=[];names.forEach((name,i)=>{variables['q'+i]=name;declarations.push('$q'+i+':String');fields.push('item'+i+':Media(search:$q'+i+',type:ANIME,sort:POPULARITY_DESC){id title{english romaji}description(asHtml:false)format seasonYear averageScore coverImage{extraLarge}bannerImage genres}')});
-  setLoading(true);setFailed(false);const query='query('+declarations.join(',')+'){'+fields.join(' ')+'}';
-  fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query,variables})}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{if(d.errors?.length)throw new Error('Watchlist lookup failed');const rows=names.map((name,i)=>d.data?.['item'+i]).filter(Boolean).map(item=>({name:item.title?.english||item.title?.romaji||'Untitled',tag:[item.format,item.seasonYear].filter(Boolean).join(' · ').toUpperCase(),desc:(item.description||'Saved for your next anime session.').replace(/<[^>]*>/g,' ').replace(/\\s+/g,' ').slice(0,140),img:item.coverImage?.extraLarge||'',bannerImg:item.bannerImage||'',score:item.averageScore?item.averageScore/10:null,malId:item.id})));if(active)setItems(rows)}).catch(()=>{if(active)setFailed(true)}).finally(()=>{if(active)setLoading(false)});
+ useEffect(()=>{
+  let active=true;
+  const names=saved.slice(0,16);
+  if(!names.length){setItems([]);setLoading(false);setFailed(false);return}
+  const variables={},declarations=[],fields=[];
+  names.forEach((name,i)=>{
+   variables['q'+i]=name;
+   declarations.push('$q'+i+':String');
+   fields.push('item'+i+':Media(search:$q'+i+',type:ANIME,sort:POPULARITY_DESC){id title{english romaji}description(asHtml:false)format seasonYear averageScore coverImage{extraLarge}bannerImage genres}');
+  });
+  const query='query('+declarations.join(',')+'){'+fields.join(' ')+'}';
+  setLoading(true);setFailed(false);
+  fetch('https://graphql.anilist.co',{
+   method:'POST',
+   headers:{'Content-Type':'application/json','Accept':'application/json'},
+   body:JSON.stringify({query,variables})
+  })
+   .then(response=>response.ok?response.json():Promise.reject(new Error('Watchlist lookup failed')))
+   .then(payload=>{
+    if(payload.errors?.length)throw new Error('Watchlist lookup failed');
+    const rows=names.map((savedName,index)=>{
+     const item=payload.data?.['item'+index];
+     if(!item)return null;
+     return {
+      savedName,
+      name:item.title?.english||item.title?.romaji||savedName,
+      tag:[item.format,item.seasonYear].filter(Boolean).join(' · ').toUpperCase(),
+      desc:(item.description||'Saved for your next anime session.').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,140),
+      img:item.coverImage?.extraLarge||'',
+      bannerImg:item.bannerImage||'',
+      score:item.averageScore?item.averageScore/10:null,
+      malId:item.id
+     };
+    }).filter(Boolean);
+    if(active)setItems(rows);
+   })
+   .catch(()=>{if(active)setFailed(true)})
+   .finally(()=>{if(active)setLoading(false)});
   return()=>{active=false};
  },[key,retry]);
- return <div className="page shv4-library-page"><div className="shv4-page-hero"><span className="shv4-kicker">YOUR PERSONAL LIBRARY</span><h1>Saved for <em>later.</em></h1><p>Every story you want to come back to, gathered in one place.</p><div className="shv4-page-count"><Star size={17}/><b>{saved.length}</b><span>saved titles</span></div></div>
-  {!saved.length?<div className="shv4-empty"><Star size={30}/><h2>Your watchlist is waiting.</h2><p>Save anime from Explore or the homepage and they’ll show up here.</p><button className="shv4-primary" onClick={()=>navigate('/explore')}>Find anime <ArrowUpRight size={16}/></button></div>:loading?<div className="shv4-card-grid">{Array.from({length:Math.min(saved.length,6)},(_,i)=><div className="shv4-skeleton" key={i}/>)}</div>:failed?<div className="shv4-empty"><WifiOff/><h2>Couldn’t load your saved artwork.</h2><p>Your saved titles are still stored. Try again when the catalogue is available.</p><button className="shv4-secondary" onClick={()=>setRetry(value=>value+1)}>Try again <RefreshCw size={14}/></button></div>:<div className="shv4-card-grid">{items.map(show=><article className="shv4-anime-card" key={show.malId} onClick={()=>navigate('/anime/'+show.malId)}><div className="shv4-poster"><img src={show.bannerImg||show.img} alt={show.name} loading="lazy"/><button className="is-saved" onClick={e=>{e.stopPropagation();toggleSave(show.savedName||show.name)}} aria-label="Remove from watchlist"><Heart size={17} fill="currentColor"/></button></div><div className="shv4-anime-copy"><span>{show.tag}</span><h3>{show.name}</h3><p>{show.desc}</p><div><b>{show.score?'★ '+show.score.toFixed(1)+'/10':'SAVED TITLE'}</b><ArrowUpRight size={15}/></div></div></article>)}</div>}
+ return <div className="page shv4-library-page">
+  <div className="shv4-page-hero">
+   <span className="shv4-kicker">YOUR PERSONAL LIBRARY</span>
+   <h1>Saved for <em>later.</em></h1>
+   <p>Every story you want to come back to, gathered in one place.</p>
+   <div className="shv4-page-count"><Star size={17}/><b>{saved.length}</b><span>saved titles</span></div>
+  </div>
+  {!saved.length?
+   <div className="shv4-empty"><Star size={30}/><h2>Your watchlist is waiting.</h2><p>Save anime from Explore or the homepage and they’ll show up here.</p><button className="shv4-primary" onClick={()=>navigate('/explore')}>Find anime <ArrowUpRight size={16}/></button></div>
+   :loading?
+   <div className="shv4-card-grid">{Array.from({length:Math.min(saved.length,6)},(_,index)=><div className="shv4-skeleton" key={index}/>)}</div>
+   :failed?
+   <div className="shv4-empty"><WifiOff/><h2>Couldn’t load your saved artwork.</h2><p>Your saved titles are still stored. Try again when the catalogue is available.</p><button className="shv4-secondary" onClick={()=>setRetry(value=>value+1)}>Try again <RefreshCw size={14}/></button></div>
+   :<div className="shv4-card-grid">{items.map(show=><article className="shv4-anime-card" key={show.savedName} onClick={()=>navigate('/anime/'+show.malId)}>
+     <div className="shv4-poster"><img src={show.bannerImg||show.img} alt={show.name} loading="lazy"/><button className="is-saved" onClick={event=>{event.stopPropagation();toggleSave(show.savedName)}} aria-label="Remove from watchlist"><Heart size={17} fill="currentColor"/></button></div>
+     <div className="shv4-anime-copy"><span>{show.tag}</span><h3>{show.name}</h3><p>{show.desc}</p><div><b>{show.score?'★ '+show.score.toFixed(1)+'/10':'SAVED TITLE'}</b><ArrowUpRight size={15}/></div></div>
+    </article>)}</div>}
  </div>
 }
 function AiringSchedulePage(){
