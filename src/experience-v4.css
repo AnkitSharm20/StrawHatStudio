@@ -382,3 +382,11 @@ body{min-width:320px;background:#070b12}
  html{scroll-behavior:auto}
  .app *, .app *:before,.app *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+.app .shv4-recommendation-note{display:flex;align-items:flex-start;gap:10px;margin:0 0 18px;padding:13px 15px;border:1px solid rgba(121,216,223,.16);border-radius:12px;background:rgba(121,216,223,.045);color:#9aafc2;font-size:10px;line-height:1.65}
+.app .shv4-recommendation-note svg{flex:0 0 auto;color:#82d8df}
+.app .shv4-for-you-page .shv4-card-grid{margin-top:20px}
+.app .shv4-schedule-page .shv4-page-hero{margin-bottom:24px}
+@media(max-width:760px){
+ .app .shv4-recommendation-note{font-size:9px;padding:11px}
+}
