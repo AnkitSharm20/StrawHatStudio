@@ -120,3 +120,12 @@
  .app .earn-history-row{padding:12px}.app .earn-disclaimer{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.app *, .app *:before,.app *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+.app .home-cinematic-hero{position:relative}
+.app .studio-cinematic-media{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.app .studio-cinematic-video{width:100%;height:100%;object-fit:cover;opacity:.48;filter:saturate(1.08) contrast(1.04)}
+.app .home-cinematic-backdrop{z-index:0!important}
+.app .home-cinematic-top,.app .home-cinematic-content,.app .home-cinematic-rail,.app .home-cinematic-bottom{position:relative;z-index:2}
+.app .studio-sound-toggle{position:absolute;right:20px;top:70px;z-index:5;pointer-events:auto;display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2);background:rgba(8,12,20,.68);backdrop-filter:blur(14px);color:#fff;font:9px 'DM Mono';letter-spacing:.1em;cursor:pointer}
+.app .studio-sound-toggle svg{color:var(--gold)}
+@media(max-width:760px){.app .studio-cinematic-video{opacity:.34}.app .studio-sound-toggle{top:58px;right:12px;padding:8px 10px}.app .studio-sound-toggle span{display:none}}
