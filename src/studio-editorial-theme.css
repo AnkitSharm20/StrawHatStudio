@@ -188,3 +188,90 @@ body{overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){
  .app *,.app *:before,.app *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Marketplace — tangible collectible cards, with a deterministic artwork fallback */
+.app .marketplace-page{display:grid;gap:20px}
+.app .marketplace-page .section-head{margin:0 0 4px}
+.app .marketplace-page .section-head h2{font:400 clamp(38px,5vw,62px)/.98 "DM Serif Display",Georgia,serif}
+.app .marketplace-intro-panel{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(190px,.8fr);align-items:center;gap:20px;padding:clamp(18px,3vw,34px);border:1px solid var(--line);border-radius:4px;background:var(--panel);box-shadow:6px 6px 0 rgba(230,91,63,.08)}
+.app .marketplace-intro-copy h2{font:400 clamp(30px,4vw,48px)/1 "DM Serif Display",Georgia,serif}
+.app .marketplace-intro-copy h2 em{color:var(--kora-red)}
+.app .marketplace-intro-copy p{max-width:55ch;color:var(--muted);font-size:11px;line-height:1.7}
+.app .marketplace-treasure-mark{position:relative;display:grid;place-items:center;min-height:180px;overflow:hidden;background:var(--panel2);border:1px solid var(--line);border-radius:3px;color:var(--kora-red)}
+.app .treasure-orbit{border-color:currentColor;opacity:.2}
+.app .treasure-emblem{position:relative;z-index:2;display:grid;place-items:center;width:90px;height:90px;border:1px solid currentColor;border-radius:50%;background:var(--panel)}
+.app .treasure-emblem span{font:700 10px "Space Grotesk",sans-serif;letter-spacing:.18em}
+.app .marketplace-treasure-mark>small{position:absolute;bottom:12px;font:800 7px "Space Grotesk",sans-serif;letter-spacing:.2em}
+.app .marketplace-quick-stats{grid-column:1/-1;display:flex;gap:0;border-top:1px solid var(--line);padding-top:14px}
+.app .marketplace-quick-stats>div{display:grid;gap:3px;min-width:100px;padding:0 20px;border-right:1px solid var(--line)}
+.app .marketplace-quick-stats>div:first-child{padding-left:0}
+.app .marketplace-quick-stats>div:last-child{border:0}
+.app .marketplace-quick-stats b{font:600 20px "Space Grotesk",sans-serif}
+.app .marketplace-quick-stats small{font:800 7px "Space Grotesk",sans-serif;letter-spacing:.16em;color:var(--muted)}
+.app .marketplace-view-tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line)}
+.app .marketplace-view-tabs button{flex:0 0 auto;padding:12px 14px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--muted);font-size:10px;font-weight:700}
+.app .marketplace-view-tabs button.active{color:var(--kora-red);border-bottom-color:var(--kora-red)}
+.app .marketplace-tools{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.app .marketplace-tools .searchbar{flex:1;min-width:0}
+.app .marketplace-categories{display:flex;gap:7px;flex-wrap:wrap}
+.app .marketplace-categories button{padding:7px 11px;border:1px solid var(--line);border-radius:3px;background:transparent;color:var(--muted);font-size:9px}
+.app .marketplace-categories button.active{background:var(--kora-red);border-color:var(--kora-red);color:#fff}
+.app .shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.app .shop-item{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.app .shop-artwork{position:relative;display:grid;place-items:center;aspect-ratio:1.55/1;min-height:150px;overflow:hidden;background:#24241e;color:#eee8d9}
+.app .shop-artwork:before{position:absolute;inset:0;content:"";background:linear-gradient(135deg,rgba(230,91,63,.3),transparent 48%),repeating-linear-gradient(135deg,transparent 0 13px,rgba(255,255,255,.035) 13px 14px)}
+.app .shop-artwork:after{position:absolute;inset:12px;content:"";border:1px solid rgba(238,232,217,.24);pointer-events:none}
+.app .shop-artwork-theme{background:#28352c;color:#d7dfc1}
+.app .shop-artwork-badge{background:#342923;color:#f2c8a5}
+.app .shop-artwork-custom_gif{background:#282a38;color:#d8d1f1}
+.app .shop-artwork-index{position:absolute;top:12px;left:14px;z-index:2;font:800 7px "Space Grotesk",sans-serif;letter-spacing:.2em}
+.app .shop-artwork-orbit{position:absolute;width:104px;height:104px;border:1px solid currentColor;border-radius:50%;opacity:.35;box-shadow:0 0 0 15px rgba(255,255,255,.025),0 0 0 30px rgba(255,255,255,.018)}
+.app .shop-artwork-icon{position:relative;z-index:1;display:grid;place-items:center;width:68px;height:68px;border:1px solid currentColor;border-radius:50%;background:rgba(0,0,0,.15)}
+.app .shop-artwork-copy{position:absolute;bottom:15px;left:15px;right:15px;z-index:2;display:grid;gap:2px}
+.app .shop-artwork-copy small{font:800 7px "Space Grotesk",sans-serif;letter-spacing:.18em;opacity:.75}
+.app .shop-artwork-copy b{font:500 11px "Space Grotesk",sans-serif}
+.app .shop-artwork-stamp{position:absolute;right:15px;bottom:16px;z-index:2;font:800 6px "Space Grotesk",sans-serif;letter-spacing:.14em;text-align:right;opacity:.65}
+.app .shop-item-copy{display:flex;flex:1;flex-direction:column;gap:8px;padding:14px}
+.app .shop-item-copy h3{margin:0;font:600 14px "Space Grotesk",sans-serif}
+.app .shop-item-copy p{margin:0;color:var(--muted);font-size:10px;line-height:1.6}
+.app .shop-buy{display:flex;align-items:center;gap:7px;margin-top:auto;padding-top:12px}
+.app .shop-buy>b{margin-right:auto;color:var(--kora-red);font-size:13px;white-space:nowrap}
+.app .shop-buy>b span{font-size:7px;letter-spacing:.1em}
+.app .shop-buy button{min-height:34px;padding:0 10px;border-radius:3px;font-size:9px}
+.app .shop-buy .primary{background:var(--kora-red);border-color:var(--kora-red);color:white}
+.app .empty-shop{display:grid;justify-items:center;gap:10px;padding:clamp(28px,5vw,56px) 18px;border:1px dashed var(--line);background:var(--panel);text-align:center}
+.app .empty-shop h2{margin:0;font:400 26px "DM Serif Display",Georgia,serif}
+.app .empty-shop p{max-width:48ch;color:var(--muted);font-size:11px;line-height:1.7}
+.app .empty-shop .shop-emblem{display:grid;place-items:center;width:56px;height:56px;border:1px solid var(--line);border-radius:50%;color:var(--kora-red)}
+.app .shop-loading{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)}
+.app .collection-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.app .collection-item{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;padding:12px;border:1px solid var(--line);background:var(--panel)}
+.app .collection-item-art{display:grid;place-items:center;min-height:92px;background:var(--panel2);color:var(--kora-red)}
+.app .collection-item h3{font-size:12px}
+.app .collection-item p,.app .collection-item small{color:var(--muted);font-size:9px;line-height:1.5}
+.app .purchase-history-row{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.app .marketplace-detail-backdrop{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:18px;background:rgba(0,0,0,.72)}
+.app .marketplace-detail-dialog{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);width:min(760px,100%);max-height:min(85dvh,700px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:4px}
+.app .marketplace-detail-dialog>.shop-artwork{height:100%;min-height:300px;aspect-ratio:auto}
+.app .marketplace-detail-copy{display:flex;flex-direction:column;gap:12px;padding:clamp(18px,3vw,30px)}
+.app .marketplace-detail-copy h2{margin:0;font:400 30px "DM Serif Display",Georgia,serif}
+.app .marketplace-detail-copy p{color:var(--muted);font-size:11px;line-height:1.7}
+.app .marketplace-detail-close{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border:1px solid var(--line);background:var(--bg);color:var(--text)}
+@media(max-width:900px){.app .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+ .app .marketplace-intro-panel{grid-template-columns:minmax(0,1fr);gap:14px;padding:16px}
+ .app .marketplace-treasure-mark{min-height:145px}
+ .app .marketplace-quick-stats>div{min-width:0;flex:1;padding-inline:10px}
+ .app .marketplace-tools{align-items:stretch;flex-direction:column}
+ .app .marketplace-tools .searchbar{width:100%}
+ .app .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .app .shop-item-copy{padding:10px;gap:7px}
+ .app .shop-item-copy h3{font-size:11px}
+ .app .shop-item-copy p{font-size:8px}
+ .app .shop-buy{flex-wrap:wrap;gap:5px}
+ .app .shop-buy>b{width:100%;margin:0}
+ .app .shop-buy button{flex:1;min-width:0;padding-inline:5px;font-size:8px}
+ .app .collection-grid{grid-template-columns:minmax(0,1fr)}
+ .app .marketplace-detail-dialog{grid-template-columns:minmax(0,1fr);max-height:88dvh}
+ .app .marketplace-detail-dialog>.shop-artwork{min-height:180px;max-height:210px}
+}
