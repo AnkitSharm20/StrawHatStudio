@@ -275,3 +275,143 @@ body{overflow-x:hidden}
  .app .marketplace-detail-dialog{grid-template-columns:minmax(0,1fr);max-height:88dvh}
  .app .marketplace-detail-dialog>.shop-artwork{min-height:180px;max-height:210px}
 }
+
+/* KŌRA / second-pass craft: rhythm, tactile interaction, and page-family consistency */
+.app{--kora-ease:cubic-bezier(.2,.75,.25,1);--kora-shadow:0 14px 36px rgba(0,0,0,.14)}
+.app :is(.page,.shv4-home)>:not(:first-child){scroll-margin-top:84px}
+.app :is(.page,.shv4-home) :is(h1,h2,h3,p){overflow-wrap:anywhere}
+.app :is(.page,.shv4-home) :is(button,a){-webkit-tap-highlight-color:transparent}
+.app :is(.primary,.secondary,.text-btn,.shv4-primary,.shv4-secondary,.sign,.auth-provider,.shop-buy button){transition:transform .18s var(--kora-ease),background .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease}
+.app :is(.primary,.shv4-primary,.sign,.auth-submit):hover{box-shadow:0 5px 0 rgba(230,91,63,.17);transform:translateY(-2px)}
+.app :is(.primary,.secondary,.text-btn,.shv4-primary,.shv4-secondary,.sign,.auth-provider,.shop-buy button):active{transform:translateY(0) scale(.985)}
+.app :is(.panel,.community-post-card,.notification-card,.membership-plan,.plan-card,.profile-snapshot,.settings-group,.admin-panel,.anime-card,.shop-item){border-color:var(--line);box-shadow:none}
+.app :is(.panel,.community-post-card,.notification-card,.membership-plan,.profile-snapshot,.settings-group,.admin-panel,.anime-card,.shop-item){transition:border-color .2s ease,background .2s ease}
+.app :is(.panel,.community-post-card,.notification-card,.membership-plan,.profile-snapshot,.settings-group,.admin-panel,.anime-card,.shop-item):hover{border-color:color-mix(in srgb,var(--kora-red) 35%,var(--line))}
+.app .eyebrow{color:var(--kora-red);font-size:8px;letter-spacing:.2em;font-weight:800}
+.app .section-head h2{font:400 clamp(32px,4vw,48px)/1 "DM Serif Display",Georgia,serif;letter-spacing:-.035em}
+.app .page :is(.panel,.empty,.catalog-loading){border-radius:4px}
+.app .page :is(input,textarea,select){border-radius:4px!important;background:var(--panel)!important;border-color:var(--line)!important;color:var(--text)!important;min-height:42px}
+.app .page :is(input,textarea,select)::placeholder{color:var(--muted);opacity:.8}
+.app .page :is(input,textarea,select):focus{border-color:var(--kora-red)!important;box-shadow:0 0 0 3px rgba(230,91,63,.1)!important;outline:0}
+.app .explore-page{display:grid;gap:20px}
+.app .explore-hero{padding:clamp(20px,3vw,34px);border:1px solid var(--line);border-radius:4px;background:var(--panel);box-shadow:5px 5px 0 rgba(230,91,63,.07)}
+.app .explore-hero h1{font:400 clamp(36px,5vw,60px)/.98 "DM Serif Display",Georgia,serif}
+.app .explore-stats{display:flex;flex-wrap:wrap;gap:10px}
+.app .explore-stats>*{flex:1 1 110px;min-width:0;padding:12px;border:1px solid var(--line);background:var(--panel2)}
+.app .discovery-spotlight{border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:none}
+.app .discovery-spotlight-copy{padding:clamp(16px,2.5vw,28px)}
+.app .explore-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.app .explore-toolbar .searchbar{flex:1 1 240px;min-width:0}
+.app .explore-genres{display:flex;gap:7px;flex-wrap:wrap}
+.app .explore-genres button{border-radius:3px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:7px 10px;font-size:9px}
+.app .explore-genres button.active{background:var(--kora-red);border-color:var(--kora-red);color:white}
+.app .anime-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.5vw,18px)}
+.app .anime-card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.app .anime-card .poster{aspect-ratio:3/4;overflow:hidden}
+.app .anime-card .poster img{width:100%;height:100%;object-fit:cover;transition:transform .35s var(--kora-ease)}
+.app .anime-card:hover .poster img{transform:scale(1.035)}
+.app .anime-info{padding:12px}
+.app .anime-info h3{font-size:12px;line-height:1.35}
+.app .anime-detail-page{display:grid;gap:20px}
+.app .anime-detail-hero{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel)}
+.app .detail-heading{padding:clamp(16px,3vw,30px)}
+.app .detail-heading h1{font:400 clamp(32px,4.6vw,56px)/.98 "DM Serif Display",Georgia,serif}
+.app .detail-meta,.app .detail-genres{display:flex;flex-wrap:wrap;gap:7px}
+.app .detail-meta>* ,.app .detail-genres>*{padding:6px 9px;border:1px solid var(--line);border-radius:2px;font-size:8px}
+.app .detail-content-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(230px,.6fr);gap:16px}
+.app .detail-about,.app .detail-studio,.app .detail-watch,.app .detail-viewing-facts{padding:18px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .community-page{display:grid;gap:18px}
+.app .community-welcome{padding:clamp(20px,3vw,34px);border:1px solid var(--line);border-radius:4px;background:var(--panel);box-shadow:5px 5px 0 rgba(230,91,63,.07)}
+.app .community-welcome h1{font:400 clamp(34px,5vw,58px)/.98 "DM Serif Display",Georgia,serif}
+.app .community-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,290px);align-items:start;gap:16px}
+.app .community-main-feed,.app .community-rail{min-width:0}
+.app .community-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.app .community-compose-box{border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:16px}
+.app .community-post-card{padding:16px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .community-post-card+.community-post-card{margin-top:10px}
+.app .community-empty-state{padding:clamp(22px,4vw,42px);border:1px dashed var(--line);background:var(--panel);text-align:center}
+.app .community-side-card{padding:15px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .notifications-page{display:grid;gap:18px}
+.app .inbox-overview{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;padding:clamp(18px,3vw,30px);border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .inbox-overview-stats{display:flex;gap:10px}
+.app .inbox-overview-stats>*{min-width:85px;padding:12px;border:1px solid var(--line);background:var(--panel2)}
+.app .notification-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.app .notification-filters{display:flex;flex-wrap:wrap;gap:6px}
+.app .notification-filters button{padding:8px 11px;border:1px solid var(--line);border-radius:3px;background:transparent;color:var(--muted);font-size:9px}
+.app .notification-filters button.active{background:var(--kora-red);border-color:var(--kora-red);color:white}
+.app .notification-card{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .notification-card+.notification-card{margin-top:8px}
+.app .auth-page{min-height:calc(100dvh - 68px);display:grid;place-items:center}
+.app .auth-shell{width:min(960px,100%);overflow:hidden}
+.app .auth-providers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.app .auth-provider{min-width:0;min-height:42px;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px;border:1px solid var(--line);background:transparent;color:var(--text);font-size:10px}
+.app .auth-provider svg,.app .auth-provider img{flex:0 0 auto;width:16px;height:16px}
+.app .auth-divider{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:8px;white-space:nowrap}
+.app .auth-divider:before,.app .auth-divider:after{content:"";height:1px;flex:1;background:var(--line)}
+.app .auth-submit{width:100%;min-height:45px;border-radius:4px;background:var(--kora-red);color:#fff;font-weight:800}
+.app .membership-page{display:grid;gap:20px}
+.app .membership-intro{padding:clamp(20px,3vw,34px);border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .membership-intro h1{font:400 clamp(36px,5vw,60px)/.98 "DM Serif Display",Georgia,serif}
+.app .membership-plan-grid,.app .tier-plan-grid,.app .membership-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.app .membership-plan{min-width:0;padding:clamp(15px,2vw,22px);border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .membership-plan.featured{border-color:var(--kora-red);box-shadow:5px 5px 0 rgba(230,91,63,.1)}
+.app .membership-plan h3{font:400 25px "DM Serif Display",Georgia,serif}
+.app .membership-plan button{width:100%;min-height:42px;border-radius:3px}
+.app .membership-billing-switch{display:inline-flex;gap:3px;padding:4px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .membership-billing-switch button{padding:8px 12px;border:0;border-radius:2px;background:transparent;color:var(--muted);font-size:9px}
+.app .membership-billing-switch button.active{background:var(--kora-red);color:#fff}
+.app .earn-page{display:grid;gap:22px}
+.app .earn-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(200px,.8fr);align-items:center;gap:20px;padding:clamp(20px,3vw,36px);border:1px solid var(--line);border-radius:4px;background:var(--panel);box-shadow:6px 6px 0 rgba(230,91,63,.08)}
+.app .earn-hero h1{font:400 clamp(38px,5vw,60px)/.98 "DM Serif Display",Georgia,serif}
+.app .earn-wallet{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid var(--line);background:var(--panel2)}
+.app .earn-task-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.app .earn-task-card,.app .earn-daily-card{padding:16px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .earn-task-card:hover{border-color:var(--kora-red)}
+.app .earn-disclaimer{padding:12px 14px;border-left:3px solid var(--kora-red);background:var(--panel2);color:var(--muted);font-size:9px;line-height:1.6}
+.app .profile-page,.app .settings-page{display:grid;gap:16px}
+.app .profile-cover{min-height:170px;border:1px solid var(--line);border-radius:4px;background:linear-gradient(120deg,#29271f,#171713 70%,#503024)}
+.app .profile-snapshot,.app .profile-editor,.app .settings-hero,.app .settings-account-card,.app .settings-group{padding:clamp(15px,2.5vw,24px);border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .profile-detail-grid,.app .profile-quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.app .setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.app .setting-row:last-child{border-bottom:0}
+.app .admin-dashboard{display:grid;grid-template-columns:210px minmax(0,1fr);gap:16px}
+.app .admin-rail,.app .admin-workspace{min-width:0}
+.app .admin-panel{padding:16px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.app .admin-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.app .admin-metrics>*{min-width:0;padding:13px;border:1px solid var(--line);background:var(--panel2)}
+.app .admin-home-grid,.app .admin-slot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.app .admin-report-card,.app .admin-audit-card,.app .admin-media-card{min-width:0;border:1px solid var(--line);border-radius:3px;background:var(--panel2)}
+.app .footer{padding-top:18px;border-top:1px solid var(--line)}
+@media(max-width:1100px){
+ .app .anime-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .app .membership-plan-grid,.app .tier-plan-grid,.app .membership-plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app .earn-task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:820px){
+ .app .community-layout{grid-template-columns:minmax(0,1fr)}
+ .app .community-rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .app .detail-content-grid{grid-template-columns:minmax(0,1fr)}
+ .app .anime-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .app .earn-hero{grid-template-columns:minmax(0,1fr)}
+ .app .admin-dashboard{grid-template-columns:minmax(0,1fr)}
+ .app .admin-rail{position:static}
+ .app .admin-rail nav{display:flex;flex-wrap:wrap}
+}
+@media(max-width:560px){
+ .app .anime-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .app .membership-plan-grid,.app .tier-plan-grid,.app .membership-plans{grid-template-columns:minmax(0,1fr)}
+ .app .earn-task-grid{grid-template-columns:minmax(0,1fr)}
+ .app .community-rail{grid-template-columns:minmax(0,1fr)}
+ .app .auth-providers{gap:5px}
+ .app .auth-provider{font-size:8px;gap:4px;padding:7px 4px}
+ .app .inbox-overview{grid-template-columns:minmax(0,1fr)}
+ .app .inbox-overview-stats{width:100%}
+ .app .inbox-overview-stats>*{flex:1;min-width:0}
+ .app .profile-detail-grid,.app .profile-quick-grid{grid-template-columns:minmax(0,1fr)}
+ .app .admin-home-grid,.app .admin-slot-grid{grid-template-columns:minmax(0,1fr)}
+ .app .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(hover:none){
+ .app :is(.anime-card,.shop-item,.community-post-card):hover{transform:none}
+}
