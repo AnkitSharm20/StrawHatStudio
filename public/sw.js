@@ -1,4 +1,4 @@
-const CACHE_VERSION='straw-hat-shell-v1';
+const CACHE_VERSION='straw-hat-shell-v2';
 const SHELL_CACHE=CACHE_VERSION+'-shell';
 const STATIC_CACHE=CACHE_VERSION+'-static';
 const OFFLINE_URL='/offline.html';
