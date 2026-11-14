@@ -66,3 +66,8 @@
 }
 @media(max-width:370px){.app .moments-heading{gap:8px}.app .moments-back{font-size:0}.app .moments-back svg{width:18px;height:18px}}
 @media(prefers-reduced-motion:reduce){.app .moments-spinner{animation:none}}
+
+.app .moment-pending-item>img,.app .moment-pending-item>video{width:44px;height:58px;flex:0 0 44px;object-fit:cover;border-radius:7px;background:#111}
+.app .moment-pending-item>span:nth-of-type(1){flex:1;min-width:0}
+.app .moment-moderation-actions{display:flex;flex-direction:column;gap:5px}
+.app .moment-moderation-actions button{min-height:30px;padding:5px 8px;font-size:10px}
