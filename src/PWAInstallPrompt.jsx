@@ -17,19 +17,15 @@ export default function PWAInstallPrompt(){
   let active=true,reg=null,installing=null;
   const onControllerChange=()=>{if(refreshRequested.current)window.location.reload()};
   const onUpdateReady=()=>{if(active&&reg?.waiting&&navigator.serviceWorker.controller)setUpdateAvailable(true)};
+  const onUpdateFound=()=>{installing=reg?.installing;installing?.addEventListener('statechange',()=>{if(active&&installing?.state==='installed'&&navigator.serviceWorker.controller)setUpdateAvailable(true)})};
   navigator.serviceWorker.addEventListener('controllerchange',onControllerChange);
   navigator.serviceWorker.ready.then(async value=>{
    if(!active)return;
    reg=value;setRegistration(value);onUpdateReady();
-   value.addEventListener('updatefound',()=>{
-    installing=value.installing;
-    installing?.addEventListener('statechange',()=>{
-     if(active&&installing?.state==='installed'&&navigator.serviceWorker.controller)setUpdateAvailable(true);
-    });
-   });
+   value.addEventListener('updatefound',onUpdateFound);
    value.update().catch(()=>{});
   }).catch(()=>{});
-  return()=>{active=false;navigator.serviceWorker.removeEventListener('controllerchange',onControllerChange);reg?.removeEventListener('updatefound',onUpdateReady)};
+  return()=>{active=false;navigator.serviceWorker.removeEventListener('controllerchange',onControllerChange);reg?.removeEventListener('updatefound',onUpdateFound)};
  },[]);
  const install=async()=>{
   if(!installEvent||busy)return;
