@@ -16,7 +16,7 @@ export default function AnimeMoments({user}){
   const {data,error:feedError}=await supabase.from('anime_moments').select('id,creator_id,caption,media_path,media_type,created_at,published_at').eq('status','published').order('published_at',{ascending:false}).limit(30);
   if(feedError){setError('Anime Moments could not load. Please try again.');setMoments([]);setLoading(false);return}
   const rows=data||[],ids=rows.map(row=>row.id),creatorIds=[...new Set(rows.map(row=>row.creator_id))];
-  const [profilesResult,reactionsResult,myReactionsResult,pendingResult]=await Promise.all([
+  const [profilesResult,reactionsResult,myReactionsResult,pendingResult,reportsResult]=await Promise.all([
    creatorIds.length?supabase.from('profiles').select('id,username,avatar_url').in('id',creatorIds):Promise.resolve({data:[]}),
    ids.length?supabase.from('anime_moment_reactions').select('moment_id').in('moment_id',ids):Promise.resolve({data:[]}),
    user?.id&&ids.length?supabase.from('anime_moment_reactions').select('moment_id').eq('user_id',user.id).in('moment_id',ids):Promise.resolve({data:[]}),
