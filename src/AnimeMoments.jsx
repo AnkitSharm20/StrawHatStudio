@@ -1,6 +1,6 @@
 import React,{useCallback,useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Heart,Plus,RefreshCw,Upload,Video,Image as ImageIcon,Clock,ArrowLeft,Compass} from 'lucide-react';
+import {Heart,Plus,RefreshCw,Upload,Video,Image as ImageIcon,Clock,ArrowLeft,Compass,Flag} from 'lucide-react';
 import {supabase} from './lib/supabase.js';
 
 const MAX_FILE_SIZE=20*1024*1024;
@@ -8,7 +8,7 @@ const MIME_EXTENSIONS={'image/jpeg':'jpg','image/png':'png','image/webp':'webp',
 const formatDate=value=>{const date=new Date(value);return Number.isNaN(date.getTime())?'Recently':new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric'}).format(date)};
 
 export default function AnimeMoments({user}){
- const [moments,setMoments]=useState([]),[pending,setPending]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[uploading,setUploading]=useState(false),[caption,setCaption]=useState(''),[selectedFile,setSelectedFile]=useState(null),[liked,setLiked]=useState({}),[busyLike,setBusyLike]=useState({}),[moderating,setModerating]=useState({});
+ const [moments,setMoments]=useState([]),[pending,setPending]=useState([]),[reports,setReports]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[uploading,setUploading]=useState(false),[caption,setCaption]=useState(''),[selectedFile,setSelectedFile]=useState(null),[liked,setLiked]=useState({}),[busyLike,setBusyLike]=useState({}),[moderating,setModerating]=useState({}),[reportTarget,setReportTarget]=useState(null),[reportReason,setReportReason]=useState('spam'),[reportDetails,setReportDetails]=useState(''),[reportBusy,setReportBusy]=useState(false);
  const isAdmin=user?.app_metadata?.role==='admin';
  const load=useCallback(async()=>{
   if(!supabase){setError('The community service is not configured.');setLoading(false);return}
@@ -20,7 +20,8 @@ export default function AnimeMoments({user}){
    creatorIds.length?supabase.from('profiles').select('id,username,avatar_url').in('id',creatorIds):Promise.resolve({data:[]}),
    ids.length?supabase.from('anime_moment_reactions').select('moment_id').in('moment_id',ids):Promise.resolve({data:[]}),
    user?.id&&ids.length?supabase.from('anime_moment_reactions').select('moment_id').eq('user_id',user.id).in('moment_id',ids):Promise.resolve({data:[]}),
-   user?.id?(()=>{let query=supabase.from('anime_moments').select('id,caption,media_path,media_type,created_at').eq('status','pending').order('created_at',{ascending:false}).limit(isAdmin?30:5);if(!isAdmin)query=query.eq('creator_id',user.id);return query})():Promise.resolve({data:[]})
+   user?.id?(()=>{let query=supabase.from('anime_moments').select('id,caption,media_path,media_type,created_at').eq('status','pending').order('created_at',{ascending:false}).limit(isAdmin?30:5);if(!isAdmin)query=query.eq('creator_id',user.id);return query})():Promise.resolve({data:[]}),
+   isAdmin?supabase.from('anime_moment_reports').select('id,moment_id,reporter_id,reason,details,status,created_at').eq('status','open').order('created_at',{ascending:false}).limit(30):Promise.resolve({data:[]})
   ]);
   const profileMap=Object.fromEntries((profilesResult.data||[]).map(profile=>[profile.id,profile]));
   const counts={};for(const reaction of reactionsResult.data||[])counts[reaction.moment_id]=(counts[reaction.moment_id]||0)+1;
@@ -28,6 +29,7 @@ export default function AnimeMoments({user}){
   const signMedia=async item=>{const{data,error}=await supabase.storage.from('anime-moments').createSignedUrl(item.media_path,3600);return{...item,mediaUrl:data?.signedUrl||'',mediaUrlError:error?.message||''}};
   const [signedRows,signedPending]=await Promise.all([Promise.all(rows.map(signMedia)),Promise.all((pendingResult.data||[]).map(signMedia))]);
   setPending(signedPending);
+  setReports(reportsResult.data||[]);
   setMoments(signedRows.map(row=>({...row,profile:profileMap[row.creator_id]||null,likes:counts[row.id]||0})));
   setLoading(false);
  },[user?.id,isAdmin]);
@@ -60,6 +62,9 @@ export default function AnimeMoments({user}){
   else await load();
   setModerating(prev=>({...prev,[item.id]:false}));
  };
+ const openReport=moment=>{if(!user){setError('Sign in to report Anime Moments.');return}setReportReason('spam');setReportDetails('');setReportTarget(moment)};
+ const submitReport=async event=>{event.preventDefault();if(!user||!reportTarget||reportBusy)return;setReportBusy(true);const{error:reportError}=await supabase.from('anime_moment_reports').insert({moment_id:reportTarget.id,reporter_id:user.id,reason:reportReason,details:reportDetails.trim().slice(0,1000)||null});setReportBusy(false);if(reportError){setError(reportError.code==='23505'?'You have already reported this moment.':'Your report could not be submitted. Please try again.');return}setReportTarget(null);setReportDetails('');setError('');};
+ const reviewReport=async(report,status)=>{if(!isAdmin||moderating['report-'+report.id])return;setModerating(prev=>({...prev,['report-'+report.id]:true}));const{error:updateError}=await supabase.from('anime_moment_reports').update({status,reviewed_at:new Date().toISOString()}).eq('id',report.id);if(updateError)setError('Report review failed: '+updateError.message);else setReports(prev=>prev.filter(item=>item.id!==report.id));setModerating(prev=>({...prev,['report-'+report.id]:false}));};
  const toggleLike=async moment=>{
   if(!user){setError('Sign in to like Anime Moments.');return}
   if(busyLike[moment.id])return;
@@ -77,7 +82,7 @@ export default function AnimeMoments({user}){
    <div className="moments-feed-column">
     {loading?<div className="moments-state"><span className="moments-spinner"/><b>Finding moments from the crew…</b></div>:error&&!moments.length?<div className="moments-state"><b>{error}</b><button className="secondary" onClick={load}><RefreshCw size={15}/> Try again</button></div>:moments.length===0?<div className="moments-state"><Compass size={28}/><b>The feed is waiting for its first moment.</b><span>Share original fan art, edits or anime-inspired creations with the crew.</span></div>:<div className="moments-grid">{moments.map(moment=><article className="moment-card" key={moment.id}>
       <div className="moment-media">{moment.media_type==='video'?<video src={moment.mediaUrl} controls playsInline preload="metadata"/>:<img src={moment.mediaUrl} alt={moment.caption||'Community anime moment'} loading="lazy" decoding="async"/>}<span className="moment-type">{moment.media_type==='video'?<Video size={13}/>:<ImageIcon size={13}/>} {moment.media_type}</span></div>
-      <div className="moment-card-content"><div className="moment-author"><span className="moment-avatar">{moment.profile?.avatar_url?<img src={moment.profile.avatar_url} alt=""/>:(moment.profile?.username||'C').slice(0,1).toUpperCase()}</span><span><b>{moment.profile?.username||'Crew member'}</b><small>{formatDate(moment.published_at||moment.created_at)}</small></span></div>{moment.caption&&<p>{moment.caption}</p>}<button className={liked[moment.id]?'moment-like is-liked':'moment-like'} onClick={()=>toggleLike(moment)} disabled={!!busyLike[moment.id]} aria-label={liked[moment.id]?'Unlike moment':'Like moment'}><Heart size={17} fill={liked[moment.id]?'currentColor':'none'}/><span>{moment.likes}</span></button></div>
+      <div className="moment-card-content"><div className="moment-author"><span className="moment-avatar">{moment.profile?.avatar_url?<img src={moment.profile.avatar_url} alt=""/>:(moment.profile?.username||'C').slice(0,1).toUpperCase()}</span><span><b>{moment.profile?.username||'Crew member'}</b><small>{formatDate(moment.published_at||moment.created_at)}</small></span></div>{moment.caption&&<p>{moment.caption}</p>}<div className="moment-actions"><button className={liked[moment.id]?'moment-like is-liked':'moment-like'} onClick={()=>toggleLike(moment)} disabled={!!busyLike[moment.id]} aria-label={liked[moment.id]?'Unlike moment':'Like moment'}><Heart size={17} fill={liked[moment.id]?'currentColor':'none'}/><span>{moment.likes}</span></button>{user?.id&&user.id!==moment.creator_id&&<button className="moment-report" onClick={()=>openReport(moment)}><Flag size={14}/> Report</button>}</div></div>
      </article>)}</div>}
     {error&&moments.length>0&&<p className="moments-inline-error">{error}</p>}
    </div>
@@ -90,8 +95,10 @@ export default function AnimeMoments({user}){
      {!user&&<small className="moment-signin-note">Sign in to upload and react to moments.</small>}
     </form>
     {user&&pending.length>0&&<div className="moment-pending"><span className="eyebrow">{isAdmin?'CREW MODERATION':'YOUR SUBMISSIONS'}</span><h3>{isAdmin?'Review queue':'Awaiting review'}</h3>{pending.map(item=><div className="moment-pending-item" key={item.id}>{item.media_type==='video'?<video src={item.mediaUrl} muted playsInline preload="metadata"/>:<img src={item.mediaUrl} alt="Pending submission"/>}<span>{item.caption||'Untitled moment'}<small>{formatDate(item.created_at)}</small></span>{isAdmin?<span className="moment-moderation-actions"><button className="primary" disabled={!!moderating[item.id]} onClick={()=>moderate(item,'published')}>Approve</button><button className="secondary" disabled={!!moderating[item.id]} onClick={()=>moderate(item,'removed')}>Remove</button></span>:<b>Pending</b>}</div>)}</div>}
+    {isAdmin&&<div className="moment-reports"><span className="eyebrow">MODERATION</span><h3>Open reports <small>{reports.length}</small></h3>{reports.length?reports.map(report=><article key={report.id}><b>{report.reason.replaceAll('_',' ')}</b><small>Moment {report.moment_id.slice(0,8)} · reporter {report.reporter_id.slice(0,8)}</small>{report.details&&<p>{report.details}</p>}<div><button disabled={!!moderating['report-'+report.id]} onClick={()=>reviewReport(report,'reviewed')}>Review</button><button disabled={!!moderating['report-'+report.id]} onClick={()=>reviewReport(report,'resolved')}>Resolve</button><button disabled={!!moderating['report-'+report.id]} onClick={()=>reviewReport(report,'dismissed')}>Dismiss</button></div></article>):<p>No open reports.</p>}</div>}
     <div className="moment-guidelines"><b>Keep the seas welcoming.</b><p>Share content you own or have permission to distribute. No episode uploads, pirated clips, harassment or harmful material.</p></div>
    </aside>
   </div>
+  {reportTarget&&<div className="community-report-backdrop" role="presentation" onClick={event=>{if(event.target===event.currentTarget)setReportTarget(null)}}><section className="community-report-dialog" role="dialog" aria-modal="true" aria-labelledby="moment-report-title"><button type="button" className="community-report-close" onClick={()=>setReportTarget(null)} aria-label="Close report dialog">×</button><span className="eyebrow">KEEP THE CREW SAFE</span><h2 id="moment-report-title">Report this moment</h2><p>Your report is private and goes to the moderation team.</p><form onSubmit={submitReport}><label htmlFor="moment-report-reason">Reason</label><select id="moment-report-reason" value={reportReason} onChange={event=>setReportReason(event.target.value)}><option value="spam">Spam</option><option value="harassment">Harassment</option><option value="copyright">Copyright concern</option><option value="inappropriate">Inappropriate content</option><option value="misinformation">Misleading information</option><option value="other">Other</option></select><label htmlFor="moment-report-details">Details <span>(optional)</span></label><textarea id="moment-report-details" value={reportDetails} onChange={event=>setReportDetails(event.target.value.slice(0,1000))} maxLength={1000} rows={4} placeholder="Tell moderators what happened…"/><div className="community-report-actions"><button type="button" className="secondary" onClick={()=>setReportTarget(null)}>Cancel</button><button type="submit" className="primary" disabled={reportBusy}>{reportBusy?'Submitting…':'Submit report'}</button></div></form></section></div>}
  </section>;
 }
