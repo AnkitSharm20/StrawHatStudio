@@ -1,0 +1,183 @@
+/* Straw Hat Studio — quality pass v5
+   One coherent editorial system across every route. */
+:root{font-family:"Space Grotesk",Inter,system-ui,sans-serif;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+html{background:#10100e;scroll-behavior:smooth}
+body{min-width:320px;background:#10100e}
+.app{
+ --bg:#10100e;--panel:#191916;--panel2:#22221d;--surface:#191916;
+ --line:rgba(239,231,215,.14);--text:#f3eee4;--muted:#aaa69a;
+ --gold:#e65b3f;--orange:#e65b3f;--accent:#e65b3f;
+ --kora-paper:#ece5d8;--kora-ink:#1b1a17;--kora-red:#e65b3f;--kora-moss:#a7ad83;
+ --ease:cubic-bezier(.2,.75,.25,1);
+ color:var(--text);background:
+  radial-gradient(ellipse at 14% -8%,rgba(230,91,63,.095),transparent 34%),
+  radial-gradient(ellipse at 92% 18%,rgba(167,173,131,.07),transparent 32%),
+  linear-gradient(180deg,#10100e 0%,#141410 52%,#10100e 100%);
+ font-family:"Space Grotesk",Inter,system-ui,sans-serif;
+}
+.app.light{
+ --bg:#eee9de;--panel:#f8f4ec;--panel2:#e7e0d3;--surface:#f8f4ec;
+ --line:rgba(31,30,26,.15);--text:#22211d;--muted:#706c62;--gold:#c94831;--orange:#c94831;--accent:#c94831;
+ background:radial-gradient(ellipse at 10% 0%,rgba(201,72,49,.07),transparent 34%),linear-gradient(180deg,#eee9de,#e9e3d7);
+}
+.app:before{opacity:.12;background-image:radial-gradient(rgba(239,231,215,.35) .55px,transparent .65px);background-size:18px 18px;mask-image:linear-gradient(#000,transparent 75%)}
+.app.light:before{opacity:.2;background-image:radial-gradient(rgba(31,30,26,.2) .55px,transparent .65px)}
+.app *{box-sizing:border-box}
+.app :is(button,a,input,textarea,select){font-family:inherit}
+.app :is(button,a,input,textarea,select):focus-visible{outline:2px solid var(--kora-red);outline-offset:3px}
+.app :is(h1,h2,h3,h4){text-wrap:balance}
+.app p{line-height:1.7}
+.app .topbar{height:68px;min-height:68px;padding:0 clamp(14px,3vw,44px);gap:clamp(12px,2vw,28px);background:rgba(16,16,14,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.app.light .topbar{background:rgba(238,233,222,.94)}
+.app .topbar>.iconbtn.mobile{display:none!important}
+.app .brand{gap:10px;font-size:13px;letter-spacing:.12em;color:var(--text)}
+.app .brandmark{width:36px;height:36px;border-radius:10px;background:var(--kora-red);color:#fff;box-shadow:0 7px 20px rgba(230,91,63,.18)}
+.app .brand small{font-size:7px;letter-spacing:.22em;color:var(--muted)}
+.app .toplinks{gap:clamp(10px,1.6vw,24px)}
+.app .toplinks a{font-size:10px;font-weight:700;color:var(--muted);transition:color .18s ease}
+.app .toplinks a.active,.app .toplinks a:hover{color:var(--kora-red)}
+.app .top-actions{gap:8px}
+.app .top-actions .iconbtn{width:36px;height:36px;border:1px solid var(--line);border-radius:9px;color:var(--text);background:transparent}
+.app .top-actions .iconbtn:hover{background:var(--panel2);border-color:var(--kora-red)}
+.app .avatar,.app .account-avatar{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--panel2)}
+.app .sign,.app .primary,.app .secondary,.app .text-btn,.app .shv4-primary,.app .shv4-secondary{border-radius:8px;box-shadow:none;transition:transform .18s var(--ease),background .18s ease,border-color .18s ease,box-shadow .18s ease}
+.app .sign{min-height:38px;padding:0 13px;background:var(--kora-red);border:1px solid var(--kora-red);color:white;font-size:10px;font-weight:800}
+.app :is(.primary,.shv4-primary):hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(230,91,63,.18)}
+.app :is(.primary,.secondary,.shv4-primary,.shv4-secondary):active{transform:translateY(0) scale(.985)}
+.app .sidebar{top:68px;width:214px;padding:20px 13px;background:#151512;border-right:1px solid var(--line)}
+.app.light .sidebar{background:#e7e1d5}
+.app .side-label{margin:9px 10px;color:var(--muted);font-size:8px;letter-spacing:.2em}
+.app .sidebar>a{min-height:41px;padding:9px 11px;border:1px solid transparent;border-radius:8px;color:var(--muted);font-size:10px;font-weight:700;transition:background .18s ease,color .18s ease,border-color .18s ease}
+.app .sidebar>a svg{width:16px;height:16px}
+.app .sidebar>a.active{color:var(--kora-red);background:rgba(230,91,63,.09);border-color:rgba(230,91,63,.2)}
+.app .crew-card{margin:20px 2px 0;padding:14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);box-shadow:none}
+.app .crew-card b{font-size:12px}.app .crew-card p{font-size:10px;color:var(--muted)}
+.app .crew-card button{color:var(--kora-red)}
+.app .main{margin-left:214px;max-width:none;padding:clamp(20px,2.8vw,42px) clamp(16px,3vw,46px) 34px;min-height:calc(100dvh - 68px);overflow:clip}
+.app .main>.page,.app .main>.shv4-home{width:100%;max-width:1480px;margin-inline:auto}
+.app .page{width:100%;max-width:1360px;margin-inline:auto;display:grid;gap:clamp(16px,2vw,24px)}
+.app .page h1{font:400 clamp(36px,5vw,66px)/.98 "DM Serif Display",Georgia,serif;letter-spacing:-.04em}
+.app .section-head{align-items:flex-end;gap:16px;margin-bottom:22px}
+.app .section-head h2{font:400 clamp(30px,3.8vw,48px)/1 "DM Serif Display",Georgia,serif;letter-spacing:-.035em}
+.app .eyebrow{font-size:8px;font-weight:800;letter-spacing:.2em;color:var(--kora-red)}
+.app :is(.panel,.empty,.catalog-loading,.settings-group,.admin-panel,.community-post-card,.notification-card,.membership-plan,.profile-snapshot,.shop-item,.anime-card){border:1px solid var(--line);border-radius:10px;box-shadow:none}
+.app :is(.panel,.settings-group,.admin-panel,.community-post-card,.notification-card,.membership-plan,.profile-snapshot,.shop-item,.anime-card){background:var(--panel)}
+.app :is(input,textarea,select){min-height:44px;border-radius:8px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--text)!important}
+.app :is(input,textarea,select)::placeholder{color:var(--muted);opacity:.8}
+.app :is(input,textarea,select):focus{border-color:var(--kora-red)!important;box-shadow:0 0 0 3px rgba(230,91,63,.12)!important;outline:0}
+.app .mobile-search{display:none!important}
+.app .footer{max-width:1480px;margin:clamp(34px,5vw,64px) auto 0;padding:22px 0 8px;border-top:1px solid var(--line);color:var(--muted);font-size:9px;gap:14px}
+.app .footer a{color:var(--text);text-decoration:none}
+.app .footer a:hover{color:var(--kora-red)}
+/* Homepage: preserve its editorial hero and improve image framing. */
+.app .shv4-home{display:grid;gap:clamp(36px,5vw,72px);padding-bottom:28px}
+.app .shv4-hero{min-height:clamp(420px,42vw,620px);gap:clamp(20px,3.4vw,48px);padding:clamp(18px,2.6vw,34px);border-radius:12px;box-shadow:8px 8px 0 rgba(230,91,63,.1)}
+.app .shv4-hero-copy{padding:clamp(4px,1.4vw,18px);max-width:620px}
+.app .shv4-hero-copy h1{font:400 clamp(48px,6vw,88px)/.92 "DM Serif Display",Georgia,serif;letter-spacing:-.055em}
+.app .shv4-lead{font-size:clamp(13px,1.15vw,15px);line-height:1.8}
+.app .shv4-hero-media,.app .hero-media,.app .hero-video-placeholder,.app .admin-preview-frame,.app .shv4-art-frame{aspect-ratio:16/9;overflow:hidden;border-radius:10px}
+.app .shv4-hero-media img,.app .shv4-hero-media video,.app .hero-banner-image,.app .hero-loop-video,.app .admin-preview-frame img,.app .admin-preview-frame video,.app .shv4-art-frame>img,.app .shv4-art-frame>video{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.app .shv4-hero-media img,.app .shv4-hero-media video,.app .anime-card img,.app .shop-item img{backface-visibility:hidden;transform:translateZ(0)}
+.app .shv4-home :is(section,.home-section){min-width:0}
+.app .anime-grid,.app .explore-grid,.app .feature-anime-grid-five,.app .seasonal-rail{gap:clamp(10px,1.35vw,18px)}
+.app .anime-card,.app .shop-item{overflow:hidden;transition:transform .22s var(--ease),border-color .22s ease,box-shadow .22s ease}
+.app .anime-card:hover,.app .shop-item:hover{transform:translateY(-3px);border-color:rgba(230,91,63,.42);box-shadow:0 14px 32px rgba(0,0,0,.16)}
+.app .anime-card .poster{aspect-ratio:3/4;overflow:hidden;background:var(--panel2)}
+.app .anime-card .poster img,.app .anime-poster,.app .poster-frame,.app .shv4-poster img{display:block;width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;transition:transform .35s var(--ease)}
+.app .anime-card:hover .poster img{transform:scale(1.035)}
+.app .anime-info{padding:clamp(10px,1.2vw,15px)}
+.app .anime-info h3{font-size:clamp(12px,1vw,14px);line-height:1.35}
+.app .community-layout{gap:clamp(14px,2vw,22px)}
+.app .community-welcome,.app .explore-hero,.app .membership-intro,.app .earn-hero,.app .inbox-overview{border-radius:12px}
+.app .community-post-card,.app .community-compose-box,.app .community-side-card{border-radius:10px}
+.app .moments-layout{gap:clamp(16px,2vw,26px)}
+.app .moments-grid{gap:clamp(10px,1.4vw,18px)}
+.app .moment-card{border-radius:12px;overflow:hidden}
+.app .moment-media{aspect-ratio:9/16;background:#0d0d0b}
+.app .moment-media img,.app .moment-media video{width:100%;height:100%;object-fit:cover}
+.app video{max-width:100%}
+.app :is(.profile-cover,.profile-snapshot,.profile-editor,.settings-hero,.settings-account-card,.settings-group,.admin-panel){border-radius:10px}
+.app .membership-plan-grid,.app .tier-plan-grid,.app .membership-plans{gap:clamp(10px,1.3vw,16px)}
+.app .membership-plan{border-radius:10px;padding:clamp(16px,2vw,24px)}
+.app .membership-plan.featured{border-color:var(--kora-red);box-shadow:6px 6px 0 rgba(230,91,63,.1)}
+/* Single, purposeful loading experience: one entry, one exit, no looping loader art. */
+.app .voyage-loader{background:radial-gradient(ellipse at 50% 38%,rgba(230,91,63,.13),transparent 42%),linear-gradient(145deg,#10100e,#191914 58%,#10100e);transition:opacity .32s ease,visibility .32s ease}
+.app.light .voyage-loader{background:radial-gradient(ellipse at 50% 38%,rgba(201,72,49,.1),transparent 42%),linear-gradient(145deg,#eee9de,#f8f4ec 58%,#e7e1d5)}
+.app .loader-content{width:min(88vw,500px);padding:clamp(22px,4vw,38px);border:1px solid rgba(230,91,63,.24);border-radius:16px;background:rgba(25,25,22,.94);box-shadow:0 24px 80px rgba(0,0,0,.28);backdrop-filter:blur(14px);animation:quality-loader-enter .65s var(--ease) both}
+.app.light .loader-content{background:rgba(248,244,236,.96)}
+.app .loader-emblem{filter:drop-shadow(0 8px 18px rgba(230,91,63,.2));animation:none}
+.app .loader-content h1{font:400 clamp(28px,5vw,42px)/1.08 "DM Serif Display",Georgia,serif;letter-spacing:.01em}
+.app .loader-content h1 em{color:var(--kora-red)}
+.app .loader-status{font-size:9px;letter-spacing:.12em}
+.app .loader-progress{height:6px;border-radius:20px;background:rgba(255,255,255,.1);overflow:hidden}
+.app .loader-progress>span{border-radius:20px;background:linear-gradient(90deg,#b94732,#e65b3f,#f0a17d);box-shadow:0 0 16px rgba(230,91,63,.28);transition:width .18s linear}
+.app .loader-orbit,.app .loader-star,.app .emblem-wave{animation:none!important}
+.app .loader-progress-caption,.app .voyage-loader-foot{font-size:8px;letter-spacing:.13em;color:var(--muted)}
+@keyframes quality-loader-enter{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+.app .route-loading{min-height:180px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:12px}
+.app .route-loading:before{content:"";width:24px;height:24px;margin-bottom:12px;border:2px solid var(--line);border-top-color:var(--kora-red);border-radius:50%;animation:quality-route-spin .9s linear infinite}
+@keyframes quality-route-spin{to{transform:rotate(360deg)}}
+.app .coming-soon-art{border-radius:12px}
+.app .account-popover,.app .toast,.app .pwa-install-prompt,.app .pwa-update-prompt{border-radius:12px;border-color:var(--line);background:var(--panel);box-shadow:0 16px 48px rgba(0,0,0,.22)}
+.app .pwa-install-prompt,.app .pwa-update-prompt{backdrop-filter:blur(16px)}
+/* Mobile: bottom tabs are the sole compact page navigation; no duplicate hamburger or search strip. */
+@media(max-width:760px){
+ .app{--mobile-nav-height:66px;--mobile-safe-bottom:env(safe-area-inset-bottom,0px);padding-bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 8px)}
+ .app .topbar{position:sticky;top:0;z-index:80;height:58px;min-height:58px;padding:7px 13px;gap:8px}
+ .app .brand{flex:1;min-width:0}
+ .app .brandmark{width:33px;height:33px;flex-basis:33px}
+ .app .brand>span:last-child{font-size:11px}
+ .app .brand small{font-size:7px}
+ .app .toplinks,.app .topbar>.iconbtn.mobile,.app .sidebar,.app .scrim,.app .mobile-search{display:none!important}
+ .app .top-actions{gap:6px;margin-left:auto}
+ .app .top-actions>.iconbtn{width:34px;height:34px;min-width:34px}
+ .app .account-avatar{width:34px;height:34px}
+ .app .top-actions .sign{display:none}
+ .app .main{width:100%;max-width:none;margin:0;padding:16px 14px 24px;min-width:0;min-height:calc(100dvh - 58px)}
+ .app .main>.page,.app .main>.shv4-home{width:100%;max-width:none}
+ .app .shv4-home{gap:32px}
+ .app .shv4-hero{grid-template-columns:minmax(0,1fr);min-height:unset;padding:17px;gap:18px;border-radius:10px;box-shadow:4px 4px 0 rgba(230,91,63,.09)}
+ .app .shv4-hero-copy{padding:6px 2px}
+ .app .shv4-hero-copy h1{font-size:clamp(43px,12vw,64px);max-width:11ch}
+ .app .shv4-lead{font-size:13px;margin-top:14px}
+ .app .shv4-hero-media,.app .hero-media,.app .hero-video-placeholder{aspect-ratio:16/9;border-radius:8px}
+ .app .section-head{align-items:flex-start;flex-direction:column;gap:10px;margin-bottom:16px}
+ .app .section-head h2{font-size:clamp(30px,8vw,40px)}
+ .app .anime-grid,.app .explore-grid,.app .feature-anime-grid-five,.app .seasonal-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .app .anime-info{padding:9px}
+ .app .anime-info h3{font-size:12px}
+ .app .community-layout,.app .detail-content-grid,.app .moments-layout{grid-template-columns:minmax(0,1fr);gap:14px}
+ .app .community-rail{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+ .app .moments-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .app .moments-heading{align-items:flex-start;flex-direction:column;gap:10px}
+ .app .moments-heading h1{font-size:clamp(34px,9vw,48px)}
+ .app .membership-plan-grid,.app .tier-plan-grid,.app .membership-plans,.app .earn-task-grid{grid-template-columns:minmax(0,1fr)}
+ .app .auth-shell{width:100%;max-width:560px}
+ .app .auth-providers{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px}
+ .app .auth-providers button{min-width:0;font-size:10px;padding-inline:5px}
+ .app .admin-dashboard{grid-template-columns:minmax(0,1fr)}
+ .app .admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app .mobile-bottom-nav{position:fixed;z-index:1000;inset:auto 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;min-height:var(--mobile-nav-height);padding:6px 8px calc(6px + var(--mobile-safe-bottom));border-top:1px solid var(--line);background:rgba(19,19,16,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 -10px 30px rgba(0,0,0,.14)}
+ .app.light .mobile-bottom-nav{background:rgba(248,244,236,.95)}
+ .app .mobile-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:48px;padding:5px 2px;border-radius:9px;color:var(--muted);text-decoration:none;font-size:9px;font-weight:700;line-height:1}
+ .app .mobile-bottom-nav a svg{width:19px;height:19px;flex:0 0 auto}
+ .app .mobile-bottom-nav a.active{color:var(--kora-red);background:rgba(230,91,63,.1)}
+ .app .footer{display:grid;gap:9px;text-align:center;justify-content:center;padding-bottom:12px}
+ .app .pwa-install-prompt,.app .pwa-update-prompt{right:10px;left:10px;bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 10px);width:auto;padding:10px;gap:8px}
+ .app .toast{bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 12px);left:12px;right:12px;width:auto}
+ .app .loader-content{width:min(100%,440px)}
+}
+@media(max-width:390px){
+ .app .topbar{padding-inline:10px}
+ .app .main{padding-inline:11px}
+ .app .mobile-bottom-nav{padding-inline:5px}
+ .app .mobile-bottom-nav a{font-size:8px}
+ .app .moments-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(hover:none){
+ .app .anime-card:hover,.app .shop-item:hover{transform:none;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .app *, .app *:before,.app *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
