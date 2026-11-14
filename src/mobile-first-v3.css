@@ -130,3 +130,8 @@
 .app .pwa-update-prompt{position:fixed;z-index:1101;right:20px;bottom:22px;display:flex;align-items:center;gap:11px;width:min(430px,calc(100vw - 32px));padding:12px;border:1px solid var(--line);border-radius:17px;background:var(--surface,#171918);color:var(--text);box-shadow:0 18px 60px rgba(0,0,0,.28)}
 .app .pwa-update-prompt>button.primary{display:inline-flex;align-items:center;justify-content:center;min-width:74px;padding:8px 11px;min-height:36px;font-size:11px}
 @media(max-width:760px){.app .pwa-update-prompt{right:10px;left:10px;bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 10px);width:auto;padding:10px;gap:8px}.app .pwa-update-prompt .pwa-install-copy small{font-size:9px}.app .pwa-update-prompt>button.primary{padding:7px 9px}}
+
+.app .route-loading{min-height:220px;display:grid;place-items:center;padding:28px;border:1px solid var(--line,rgba(255,255,255,.1));border-radius:18px;background:var(--surface,rgba(255,255,255,.025));color:var(--muted,#9aa5b1);font-size:12px;letter-spacing:.04em}
+.app .route-loading:before{content:"";width:22px;height:22px;margin-bottom:10px;border:2px solid var(--line,rgba(255,255,255,.12));border-top-color:var(--accent,#d36a4f);border-radius:50%;animation:route-loading-spin .8s linear infinite}
+@keyframes route-loading-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.app .route-loading:before{animation:none}}
