@@ -75,15 +75,11 @@ function HomePage({saved,toggleSave,navigate,notify}){
     <div className="shv4-art-frame">
      {heroVideo?<video src={heroVideo} poster={featuredCards[0]?.bannerImg||featuredCards[0]?.img||undefined} autoPlay muted loop playsInline preload="metadata" onError={()=>setHeroVideo('')}/>:<img src={featuredCards[0]?.bannerImg||featuredCards[0]?.img||''} alt={featuredCards[0]?.name||'Featured anime artwork'} fetchPriority="high" decoding="async"/>}
      <div className="shv4-art-shade"/>
-     <div className="shv4-art-index">FEATURED STORY <span>01 / 04</span></div>
-     <div className="shv4-art-caption"><span className="shv4-feature-chip">EDITOR'S PICK</span><h2>{featuredCards[0]?.name||'One Piece'}</h2><p>{featuredCards[0]?.tag||'ADVENTURE · ANIME'}</p></div>
+     <div className="shv4-art-caption"><span className="shv4-feature-chip">OWNER PICK</span><h2>ONE PIECE</h2></div>
      <button className="shv4-art-open" onClick={()=>featuredCards[0]?.malId?navigate('/anime/'+featuredCards[0].malId):navigate('/explore')} aria-label="Open featured anime"><ArrowUpRight size={19}/></button>
     </div>
     {ambientAudio&&<audio ref={audioRef} src={ambientAudio} loop preload="none"/>}
-    <div className="shv4-media-tools">
-     <span>{heroVideo?'STUDIO MOTION REEL':'HIGH-RESOLUTION KEY ART'}</span>
-     {ambientAudio&&<button onClick={()=>setMusicOn(value=>!value)} aria-pressed={musicOn}>{musicOn?<Volume2 size={15}/>:<VolumeX size={15}/>} {musicOn?'SOUND ON':'SOUND OFF'}</button>}
-    </div>
+    
    </div>
   </section>
   <SponsoredPlacement slotKey="home_feature_sponsor"/>
