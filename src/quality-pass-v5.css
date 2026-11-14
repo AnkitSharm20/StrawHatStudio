@@ -181,3 +181,7 @@ body{min-width:320px;background:#10100e}
  html{scroll-behavior:auto}
  .app *, .app *:before,.app *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+.app .route-error{min-height:48vh;display:grid;align-content:center;justify-items:start;gap:12px;max-width:680px;margin-inline:auto;padding:clamp(22px,4vw,42px);border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.app .route-error h1{margin:0;font:400 clamp(34px,5vw,54px)/1 "DM Serif Display",Georgia,serif}
+.app .route-error p{max-width:480px;color:var(--muted);line-height:1.75}
