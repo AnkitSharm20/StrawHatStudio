@@ -1,0 +1,56 @@
+/* Straw Hat Studio 3.0 — mobile-first application shell */
+.app{--mobile-nav-height:68px;--mobile-safe-bottom:env(safe-area-inset-bottom,0px)}
+.app .mobile-bottom-nav{display:none}
+@media(max-width:760px){
+  html,body,#root{min-height:100%;width:100%;overflow-x:clip}
+  body{padding:0;margin:0}
+  .app{min-height:100dvh;overflow-x:clip;padding-bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 10px)}
+  .app .topbar{position:sticky;top:0;z-index:80;min-height:58px;padding:8px 14px;display:flex;align-items:center;gap:10px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .app .topbar>.iconbtn.mobile{display:none}
+  .app .brand{flex:1;min-width:0;justify-content:flex-start}
+  .app .brandmark{width:34px;height:34px;flex:0 0 34px}
+  .app .brand>span:last-child{font-size:12px;letter-spacing:.08em}
+  .app .brand small{font-size:8px}
+  .app .toplinks{display:none!important}
+  .app .top-actions{display:flex;align-items:center;gap:7px;margin-left:auto}
+  .app .top-actions>.iconbtn{width:38px;height:38px;min-width:38px}
+  .app .top-actions .sign{display:none}
+  .app .account-menu-wrap{display:block}
+  .app .account-avatar{width:36px;height:36px}
+  .app .sidebar,.app .scrim{display:none!important}
+  .app .main{width:100%;max-width:none;margin:0;padding:12px 14px 24px;min-width:0}
+  .app .mobile-search{width:100%;margin:0 0 16px;min-height:44px}
+  .app .mobile-search input{min-width:0;font-size:16px}
+  .app .mobile-bottom-nav{position:fixed;z-index:1000;inset:auto 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:2px;min-height:var(--mobile-nav-height);padding:7px 8px calc(7px + var(--mobile-safe-bottom));border-top:1px solid var(--line,rgba(255,255,255,.1));background:color-mix(in srgb,var(--surface,#111820) 92%,transparent);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 -10px 34px rgba(0,0,0,.14)}
+  .app .mobile-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:48px;padding:5px 2px;border-radius:12px;color:var(--muted,#9aa5b1);text-decoration:none;font-size:10px;font-weight:600;line-height:1;letter-spacing:.015em;-webkit-tap-highlight-color:transparent}
+  .app .mobile-bottom-nav a svg{width:20px;height:20px;flex:0 0 auto}
+  .app .mobile-bottom-nav a.active{color:var(--accent,#d36a4f);background:color-mix(in srgb,var(--accent,#d36a4f) 11%,transparent)}
+  .app .mobile-bottom-nav a:focus-visible{outline:2px solid var(--accent,#d36a4f);outline-offset:2px}
+  .app .footer{padding:22px 4px 10px;display:grid;gap:9px;text-align:center}
+  .app .footer>span{justify-content:center}
+  .app button,.app a{touch-action:manipulation}
+  .app button{min-height:40px}
+  .app input,.app textarea,.app select{font-size:16px}
+  .app .toast{bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 14px);left:14px;right:14px;width:auto;max-width:none}
+  .app .account-popover{position:fixed;top:58px;right:10px;left:auto;width:min(320px,calc(100vw - 20px));max-height:calc(100dvh - 100px);overflow:auto;z-index:1200}
+  .app .voyage-loader{padding:20px 14px calc(20px + var(--mobile-safe-bottom))}
+  .app .loader-content{width:min(100%,440px)}
+}
+@media(min-width:761px){
+  .app .mobile-bottom-nav{display:none!important}
+}
+@media(max-width:390px){
+  .app .topbar{padding-inline:10px;gap:7px}
+  .app .main{padding-inline:11px}
+  .app .mobile-bottom-nav{padding-inline:5px}
+  .app .mobile-bottom-nav a{font-size:9px}
+  .app .mobile-bottom-nav a svg{width:19px;height:19px}
+}
+@media(orientation:landscape) and (max-height:500px) and (max-width:900px){
+  .app{--mobile-nav-height:56px}
+  .app .mobile-bottom-nav{grid-template-columns:repeat(5,1fr);min-height:56px;padding-top:3px}
+  .app .mobile-bottom-nav a{flex-direction:row;gap:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  .app .mobile-bottom-nav,.app .mobile-bottom-nav *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
