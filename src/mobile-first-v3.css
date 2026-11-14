@@ -63,3 +63,66 @@
 .app .pwa-install-prompt>button.primary{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;min-height:36px;font-size:11px}
 .app .pwa-install-dismiss{width:28px;height:28px;min-width:28px;display:grid;place-items:center;border:0;background:transparent;color:var(--muted)}
 @media(max-width:760px){.app .pwa-install-prompt{right:10px;left:10px;bottom:calc(var(--mobile-nav-height) + var(--mobile-safe-bottom) + 10px);width:auto;padding:10px;gap:8px}.app .pwa-install-copy b{font-size:11px}.app .pwa-install-prompt>button.primary{padding:7px 9px}}
+
+/* Mobile page composition: auth, profiles, settings, community and commerce */
+@media(max-width:760px){
+ .app .auth-page{padding:4px 0 18px!important}
+ .app .auth-shell{display:block;width:100%;max-width:540px;margin-inline:auto;border-radius:18px;box-shadow:0 16px 44px rgba(0,0,0,.18)}
+ .app .auth-art{display:none}
+ .app .auth-panel{padding:clamp(18px,5vw,25px)}
+ .app .auth-panel h2{font-size:clamp(25px,7vw,34px);line-height:1.08}
+ .app .auth-panel form{gap:10px}
+ .app .auth-providers{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px}
+ .app .auth-providers button{min-width:0;min-height:48px;padding:8px 5px;font-size:11px}
+ .app .auth-divider{margin-block:14px}
+ .app .profile-page,.app .settings-page,.app .marketplace-page,.app .community-page{gap:14px}
+ .app .profile-cover{min-height:132px;height:132px;border-radius:14px}
+ .app .profile-avatar{width:68px;height:68px;left:14px;bottom:-25px}
+ .app .profile-row{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;padding-top:28px}
+ .app .profile-header-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .app .profile-header-actions>*{width:100%;justify-content:center;min-width:0}
+ .app .profile-snapshot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px}
+ .app .profile-snapshot>div{min-width:0;padding:8px 5px}
+ .app .profile-snapshot b{font-size:clamp(16px,5vw,23px);overflow-wrap:anywhere}
+ .app .profile-snapshot .eyebrow,.app .profile-snapshot small{font-size:8px;line-height:1.4;letter-spacing:.04em}
+ .app .profile-editor{padding:14px}
+ .app .settings-hero{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:12px}
+ .app .settings-hero-art{min-height:145px;padding:17px}
+ .app .settings-account-card{display:flex;align-items:center;gap:11px;padding:13px}
+ .app .settings-list{display:grid;gap:12px}
+ .app .settings-group{padding:14px}
+ .app .setting-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:13px 0}
+ .app .setting-row>span{min-width:0}
+ .app .setting-row select,.app .theme-toggle{width:100%;max-width:100%}
+ .app .theme-toggle{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app .marketplace-intro-panel{grid-template-columns:minmax(0,1fr);gap:12px;padding:16px}
+ .app .marketplace-intro-copy h2{font-size:clamp(28px,8vw,38px)}
+ .app .marketplace-treasure-mark{min-height:135px}
+ .app .marketplace-quick-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .app .marketplace-quick-stats>div{min-width:0;padding:10px 6px;text-align:center}
+ .app .marketplace-quick-stats b{font-size:19px}
+ .app .marketplace-quick-stats small{font-size:8px}
+ .app .marketplace-tools{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+ .app .marketplace-tools .searchbar{width:100%}
+ .app .marketplace-tools .explore-sort{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}
+ .app .marketplace-tools .explore-sort select{flex:1;min-width:0}
+ .app .marketplace-view-tabs{max-width:calc(100vw - 28px);scrollbar-width:none}
+ .app .marketplace-view-tabs::-webkit-scrollbar{display:none}
+ .app .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .app .shop-grid>*{min-width:0}
+ .app .community-welcome{padding:17px;gap:10px}
+ .app .community-welcome h1{font-size:clamp(32px,9vw,44px)}
+ .app .community-layout{grid-template-columns:minmax(0,1fr);gap:13px}
+ .app .community-main-feed,.app .community-rail{min-width:0;width:100%}
+ .app .community-rail{display:grid;grid-template-columns:minmax(0,1fr)}
+ .app .community-compose-box textarea{min-height:100px}
+ .app .community-post{min-width:0;padding:13px}
+}
+@media(max-width:360px){
+ .app .auth-providers{gap:5px}
+ .app .auth-providers button{font-size:10px;padding-inline:3px}
+ .app .profile-header-actions{grid-template-columns:minmax(0,1fr)}
+ .app .profile-snapshot{gap:4px;padding:7px}
+ .app .profile-snapshot .eyebrow,.app .profile-snapshot small{font-size:7px}
+ .app .shop-grid{grid-template-columns:minmax(0,1fr)}
+}
