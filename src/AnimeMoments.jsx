@@ -25,8 +25,10 @@ export default function AnimeMoments({user}){
   const profileMap=Object.fromEntries((profilesResult.data||[]).map(profile=>[profile.id,profile]));
   const counts={};for(const reaction of reactionsResult.data||[])counts[reaction.moment_id]=(counts[reaction.moment_id]||0)+1;
   setLiked(Object.fromEntries((myReactionsResult.data||[]).map(reaction=>[reaction.moment_id,true])));
-  setPending((pendingResult.data||[]).map(item=>({...item,mediaUrl:supabase.storage.from('anime-moments').getPublicUrl(item.media_path).data.publicUrl})));
-  setMoments(rows.map(row=>({...row,profile:profileMap[row.creator_id]||null,likes:counts[row.id]||0,mediaUrl:supabase.storage.from('anime-moments').getPublicUrl(row.media_path).data.publicUrl})));
+  const signMedia=async item=>{const{data,error}=await supabase.storage.from('anime-moments').createSignedUrl(item.media_path,3600);return{...item,mediaUrl:data?.signedUrl||'',mediaUrlError:error?.message||''}};
+  const [signedRows,signedPending]=await Promise.all([Promise.all(rows.map(signMedia)),Promise.all((pendingResult.data||[]).map(signMedia))]);
+  setPending(signedPending);
+  setMoments(signedRows.map(row=>({...row,profile:profileMap[row.creator_id]||null,likes:counts[row.id]||0})));
   setLoading(false);
  },[user?.id,isAdmin]);
  useEffect(()=>{load()},[load]);
