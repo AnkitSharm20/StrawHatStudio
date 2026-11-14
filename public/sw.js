@@ -38,9 +38,8 @@ self.addEventListener('fetch',event=>{
   if(/\.(?:js|css|svg|png|jpg|jpeg|webp|avif|woff2?)$/i.test(url.pathname)){
     event.respondWith((async()=>{
       const cache=await caches.open(STATIC_CACHE);
-      const cached=await cache.match(request);
       const network=fetch(request).then(response=>{if(response.ok)cache.put(request,response.clone());return response}).catch(()=>null);
-      return cached||await network||new Response('',{status:504});
+      return await network||await cache.match(request)||new Response('',{status:504});
     })());
   }
 });
