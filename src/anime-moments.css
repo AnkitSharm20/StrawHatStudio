@@ -1,0 +1,99 @@
+/* Anime Moments — responsive portrait-first media experience */
+.app .moments-page{max-width:1180px;margin-inline:auto}
+.app .moments-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:8px 0 24px}
+.app .moments-heading h1{font-size:clamp(34px,6vw,66px);line-height:.98;letter-spacing:-.055em;margin:9px 0}
+.app .moments-heading h1 em{font-family:Georgia,serif;color:var(--accent,#b84b36);font-weight:500}
+.app .moments-heading p{color:var(--muted);margin:0;line-height:1.6}
+.app .moments-back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);border:1px solid var(--line);padding:10px 13px;border-radius:999px;white-space:nowrap}
+.app .moments-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,330px);gap:24px;align-items:start}
+.app .moments-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.app .moment-card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface,rgba(255,255,255,.03))}
+.app .moment-media{position:relative;aspect-ratio:9/16;overflow:hidden;background:#111;max-height:720px}
+.app .moment-media img,.app .moment-media video{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.app .moment-media video{object-fit:contain;background:#080808}
+.app .moment-type{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;background:rgba(10,12,14,.72);color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.08em;pointer-events:none}
+.app .moment-card-content{padding:13px 14px 12px}
+.app .moment-author{display:flex;align-items:center;gap:9px;min-width:0}
+.app .moment-avatar{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;overflow:hidden;border-radius:50%;background:var(--surface-raised,#292929);font-weight:700}
+.app .moment-avatar img{width:100%;height:100%;object-fit:cover}
+.app .moment-author>span:last-child{display:grid;gap:3px;min-width:0}
+.app .moment-author b{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.app .moment-author small{font-size:10px;color:var(--muted)}
+.app .moment-card-content>p{font-size:13px;line-height:1.55;overflow-wrap:anywhere;margin:11px 0}
+.app .moment-like{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--muted);padding:8px 2px;min-height:38px}
+.app .moment-like.is-liked{color:#c9574b}
+.app .moments-side{display:grid;gap:14px;position:sticky;top:88px}
+.app .moment-compose,.app .moment-pending,.app .moment-guidelines{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface,rgba(255,255,255,.03))}
+.app .moment-compose h2{font-size:24px;margin:8px 0}
+.app .moment-compose>p,.app .moment-guidelines p{font-size:12px;line-height:1.65;color:var(--muted)}
+.app .moment-upload{display:grid;justify-items:center;gap:8px;padding:22px 12px;margin:14px 0;border:1px dashed var(--line);border-radius:14px;text-align:center;cursor:pointer;color:var(--text)}
+.app .moment-upload svg{color:var(--accent,#b84b36)}
+.app .moment-upload b{font-size:12px;overflow-wrap:anywhere}
+.app .moment-upload small,.app .moment-signin-note{font-size:10px;color:var(--muted)}
+.app #anime-moment-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.app .moment-caption-label{display:block;font-size:11px;font-weight:700;margin:8px 0}
+.app #anime-moment-caption{width:100%;resize:vertical;min-height:82px;padding:11px;border:1px solid var(--line);border-radius:12px;background:var(--background,transparent);color:var(--text)}
+.app .moment-compose-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.app .moment-compose-footer small{color:var(--muted);font-size:10px}
+.app .moment-compose-footer button{display:inline-flex;align-items:center;gap:7px}
+.app .moment-pending h3{margin:7px 0 12px}
+.app .moment-pending>div{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:11px}
+.app .moment-pending>div span{display:grid;gap:3px;min-width:0;flex:1;overflow-wrap:anywhere}
+.app .moment-pending>div small{color:var(--muted)}
+.app .moment-pending>div>b{font-size:9px;color:#b78b43}
+.app .moment-guidelines b{font-size:12px}
+.app .moments-state{min-height:220px;display:grid;place-content:center;justify-items:center;gap:12px;padding:28px;border:1px dashed var(--line);border-radius:18px;text-align:center;color:var(--muted)}
+.app .moments-state b{color:var(--text)}
+.app .moments-state>span{max-width:320px;font-size:12px;line-height:1.6}
+.app .moments-state button{display:inline-flex;align-items:center;gap:7px}
+.app .moments-inline-error{color:#c9574b;font-size:12px}
+.app .moments-spinner{width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--accent,#b84b36);border-radius:50%;animation:moment-spin .8s linear infinite}
+@keyframes moment-spin{to{transform:rotate(360deg)}}
+.app .community-moments-link{display:inline-flex;align-items:center;gap:8px;margin-top:13px}
+@media(max-width:900px){.app .moments-layout{grid-template-columns:minmax(0,1fr) 280px;gap:14px}.app .moments-grid{gap:12px}}
+@media(max-width:760px){
+ .app .moments-heading{align-items:flex-start;margin:5px 0 18px}
+ .app .moments-heading h1{font-size:clamp(36px,10vw,52px)}
+ .app .moments-heading p{font-size:12px}
+ .app .moments-layout{grid-template-columns:minmax(0,1fr);gap:16px}
+ .app .moments-side{position:static;grid-row:1}
+ .app .moment-compose{padding:15px}
+ .app .moments-grid{grid-template-columns:minmax(0,1fr);gap:15px}
+ .app .moment-card{border-radius:17px}
+ .app .moment-media{aspect-ratio:9/16;max-height: min(72dvh,720px)}
+ .app .moment-card-content{padding:12px}
+ .app .moments-back{padding:9px 11px;font-size:11px}
+}
+@media(max-width:370px){.app .moments-heading{gap:8px}.app .moments-back{font-size:0}.app .moments-back svg{width:18px;height:18px}}
+@media(prefers-reduced-motion:reduce){.app .moments-spinner{animation:none}}
+
+.app .moment-pending-item>img,.app .moment-pending-item>video{width:44px;height:58px;flex:0 0 44px;object-fit:cover;border-radius:7px;background:#111}
+.app .moment-pending-item>span:nth-of-type(1){flex:1;min-width:0}
+.app .moment-moderation-actions{display:flex;flex-direction:column;gap:5px}
+.app .moment-moderation-actions button{min-height:30px;padding:5px 8px;font-size:10px}
+
+/* Reporting and moderation controls */
+.app .moment-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.app .moment-report{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:7px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:10px}
+.app .moment-report:hover{color:var(--accent,#b84b36);border-color:var(--accent,#b84b36)}
+.app .moment-reports{padding:17px;border:1px solid var(--line);border-radius:18px;background:var(--surface,rgba(255,255,255,.03))}
+.app .moment-reports h3{display:flex;align-items:center;justify-content:space-between;margin:7px 0 12px}
+.app .moment-reports h3 small{font-size:10px;color:var(--muted)}
+.app .moment-reports article{padding:11px 0;border-top:1px solid var(--line);display:grid;gap:6px}
+.app .moment-reports article>b{font-size:12px;text-transform:capitalize}
+.app .moment-reports article>small{font-size:10px;color:var(--muted)}
+.app .moment-reports article>p{font-size:11px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+.app .moment-reports article>div{display:flex;flex-wrap:wrap;gap:6px}
+.app .moment-reports article button{min-height:30px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--text);font-size:10px}
+.app .moment-reports article button:disabled{opacity:.5}
+.app .moments-page .community-report-backdrop{position:fixed;inset:0;z-index:1500;display:grid;place-items:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(10px)}
+.app .moments-page .community-report-dialog{position:relative;width:min(100%,460px);max-height:min(88dvh,720px);overflow:auto;padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--surface,#171918);color:var(--text);box-shadow:0 24px 90px rgba(0,0,0,.4)}
+.app .moments-page .community-report-dialog h2{margin:8px 0;font-size:clamp(24px,6vw,32px)}
+.app .moments-page .community-report-dialog>p{font-size:12px;line-height:1.6;color:var(--muted)}
+.app .moments-page .community-report-dialog form{display:grid;gap:9px;margin-top:17px}
+.app .moments-page .community-report-dialog label{font-size:11px;font-weight:700}
+.app .moments-page .community-report-dialog select,.app .moments-page .community-report-dialog textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--background,transparent);color:var(--text)}
+.app .moments-page .community-report-dialog textarea{resize:vertical;min-height:100px}
+.app .moments-page .community-report-close{position:absolute;top:12px;right:12px;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--text);font-size:20px}
+.app .moments-page .community-report-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:9px}
+@media(max-width:760px){.app .moments-page .community-report-dialog{padding:19px}.app .moment-reports article>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.app .moment-reports article button{padding-inline:4px}}
