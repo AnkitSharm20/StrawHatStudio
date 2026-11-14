@@ -283,3 +283,152 @@ body{min-width:320px;background:#10100e}
  .app .shv4-art-frame{max-height:174px}
  .app .shv4-shortcuts>button{min-height:84px}
 }
+
+
+/* Grand Line visual correction v7 — app-first, high contrast, no pink wash */
+:root{color-scheme:dark}
+html,body{background:#070e19}
+.app{
+ --bg:#080f1c;--panel:#111d2d;--panel2:#192a40;--surface:#111d2d;
+ --line:rgba(204,218,235,.14);--text:#f4f0e7;--muted:#aab7c8;
+ --gold:#e7bd63;--orange:#d84b42;--accent:#d84b42;
+ --kora-red:#d84b42;--kora-moss:#75a9a0;
+ background:
+  radial-gradient(ellipse at 8% 0%,rgba(216,75,66,.13),transparent 34%),
+  radial-gradient(ellipse at 94% 24%,rgba(36,105,151,.14),transparent 32%),
+  linear-gradient(180deg,#080f1c 0%,#0b1727 54%,#080f1c 100%);
+ color:#f4f0e7;
+}
+.app:before{opacity:.13;background-image:radial-gradient(rgba(220,232,244,.3) .6px,transparent .7px);background-size:22px 22px}
+.app.light{--bg:#e9eef3;--panel:#f7f4ec;--panel2:#e7e5db;--surface:#f7f4ec;--line:rgba(20,42,62,.15);--text:#162538;--muted:#62758a;--gold:#ad7b25;--orange:#bd4038;--accent:#bd4038;--kora-red:#bd4038;--kora-moss:#347d78;background:linear-gradient(180deg,#eef2f5,#e5ebf0);color:#162538}
+.app .topbar{background:rgba(7,14,25,.96);border-bottom:1px solid rgba(231,189,99,.18);box-shadow:0 5px 22px rgba(0,0,0,.2)}
+.app.light .topbar{background:rgba(241,245,248,.96)}
+.app .brand{color:#f7f1e5}
+.app .brandmark{border-radius:50%;background:linear-gradient(145deg,#a82e35,#e4b75b);border:1px solid rgba(255,222,156,.55);box-shadow:0 0 0 3px rgba(231,189,99,.1),0 7px 22px rgba(0,0,0,.32)}
+.app .brandmark img{filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.app .top-actions .iconbtn,.app .account-avatar{background:linear-gradient(145deg,#13233a,#0c1728);border:1px solid rgba(231,189,99,.18);color:#f3ead9}
+.app .sidebar{background:#0b1727;border-right-color:rgba(231,189,99,.12)}
+.app.light .sidebar{background:#e3eaf0}
+.app .sidebar>a.active{color:#f0c76e;background:rgba(216,75,66,.12);border-color:rgba(231,189,99,.2)}
+.app .main{color:var(--text)}
+.app .page h1,.app .section-head h2,.app .shv4-section-head h2,.app .shv4-crew-copy h2{color:#f5f0e5;text-shadow:0 2px 24px rgba(0,0,0,.24)}
+.app.light .page h1,.app.light .section-head h2,.app.light .shv4-section-head h2,.app.light .shv4-crew-copy h2{color:#17283b;text-shadow:none}
+.app .shv4-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(18px,3vw,38px);align-items:center;min-height:0;padding:clamp(17px,2.2vw,28px);background:linear-gradient(145deg,rgba(14,29,48,.98),rgba(9,20,35,.98));border:1px solid rgba(231,189,99,.2);border-radius:18px;box-shadow:0 20px 48px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.04)}
+.app.light .shv4-hero{background:linear-gradient(145deg,#fff,#e9eff4);border-color:rgba(173,123,37,.2)}
+.app .shv4-hero-copy{min-width:0;padding:clamp(4px,1.1vw,12px)}
+.app .shv4-overline{color:#e7bd63;font-size:8px;letter-spacing:.16em;line-height:1.7}
+.app .shv4-kicker{color:#e7bd63;letter-spacing:.18em}
+.app .shv4-hero-copy .shv4-kicker{color:#aab7c8}
+.app .shv4-hero-copy h1{display:block!important;max-width:11ch;margin:8px 0 14px;color:#f7f0e4!important;font:400 clamp(40px,5.2vw,68px)/.98 "DM Serif Display",Georgia,serif;letter-spacing:-.035em;text-shadow:0 3px 24px rgba(0,0,0,.32);opacity:1!important;visibility:visible!important}
+.app .shv4-hero-copy h1 em{color:#df6258!important;font-style:normal}
+.app.light .shv4-hero-copy h1{color:#15283d!important;text-shadow:none}
+.app.light .shv4-hero-copy h1 em{color:#bd4038!important}
+.app .shv4-lead{max-width:44ch;color:#c1cbd7!important;font-size:clamp(12px,1.05vw,14px);line-height:1.75}
+.app.light .shv4-lead{color:#52657a!important}
+.app .shv4-primary{background:linear-gradient(120deg,#b93338,#df6553);border:1px solid rgba(255,218,161,.28);color:#fff8ed;box-shadow:0 8px 20px rgba(174,48,51,.18)}
+.app .shv4-secondary{background:rgba(231,189,99,.07);border:1px solid rgba(231,189,99,.28);color:#f3e7d0}
+.app.light .shv4-secondary{color:#25374b;background:#fff}
+.app .shv4-hero-art{width:100%;min-width:0}
+.app .shv4-art-frame{position:relative;aspect-ratio:16/9;max-height:290px;border:1px solid rgba(231,189,99,.3);border-radius:13px;overflow:hidden;background:#091321;box-shadow:0 16px 38px rgba(0,0,0,.34)}
+.app .shv4-art-frame>img,.app .shv4-art-frame>video{width:100%;height:100%;object-fit:cover;object-position:center 34%;filter:saturate(1.1) contrast(1.04)}
+.app .shv4-art-shade{background:linear-gradient(180deg,rgba(3,9,18,.03) 24%,rgba(3,9,18,.78) 100%)}
+.app .shv4-art-caption{left:16px;bottom:14px;gap:4px}
+.app .shv4-feature-chip{background:#b9383c;color:#fff4e8;border:1px solid rgba(255,224,173,.26);border-radius:4px;letter-spacing:.19em}
+.app .shv4-art-caption h2{color:#fff4e8;font:400 clamp(21px,2.8vw,31px)/1 "DM Serif Display",Georgia,serif;text-shadow:0 2px 12px #000}
+.app .shv4-art-open{width:34px;height:34px;background:rgba(8,19,32,.74);border:1px solid rgba(231,189,99,.45);color:#f6d58c}
+.app .shv4-hero-proof{display:none!important}
+.app .shv4-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.app .shv4-shortcuts>button{min-width:0;min-height:76px;padding:12px 14px;border:1px solid rgba(231,189,99,.16);border-radius:12px;background:linear-gradient(145deg,#12233a,#0e1b2d);color:#f2eadb}
+.app .shv4-shortcuts>button>span{background:rgba(216,75,66,.12);color:#e7bd63;border:1px solid rgba(231,189,99,.15)}
+.app .shv4-shortcuts>button b{font-size:11px}
+.app .shv4-shortcuts>button small{color:#aab7c8}
+.app.light .shv4-shortcuts>button{background:#fff;color:#17283b}
+.app.light .shv4-shortcuts>button small{color:#65768a}
+.app .shv4-section-head h2{color:#f5f0e5}
+.app .shv4-section-head h2 em{color:#d95b52}
+.app .shv4-section-head p{color:#aab7c8}
+.app .shv4-text-link{color:#e7bd63}
+.app .shv4-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.app .shv4-anime-card{background:linear-gradient(155deg,#14243a,#0e1a2b);border:1px solid rgba(196,213,233,.14);border-radius:13px;box-shadow:0 9px 26px rgba(0,0,0,.2)}
+.app .shv4-poster{aspect-ratio:3/4;background:#0c1726}
+.app .shv4-poster img{object-fit:cover;object-position:center 16%;filter:saturate(1.06)}
+.app .shv4-anime-copy{padding:11px 12px 13px}
+.app .shv4-anime-copy>span{color:#e7bd63;font-size:8px;letter-spacing:.13em}
+.app .shv4-anime-copy h3{color:#f5f0e5;font:500 14px/1.3 "Space Grotesk",sans-serif}
+.app .shv4-anime-copy p{color:#aab7c8;font-size:10px;line-height:1.55}
+.app .shv4-anime-copy>div{color:#e7bd63;border-top:1px solid rgba(196,213,233,.1)}
+.app .shv4-trend-item{background:linear-gradient(145deg,#14243a,#0e1a2b);border:1px solid rgba(196,213,233,.14)}
+.app .shv4-trend-item b{color:#f5f0e5}
+.app .shv4-trend-item small,.app .shv4-trend-item em{color:#e7bd63}
+.app :is(.anime-card,.shop-item,.community-post-card,.notification-card,.membership-plan,.profile-snapshot,.settings-group,.admin-panel){background:linear-gradient(155deg,#14243a,#0e1a2b);border:1px solid rgba(196,213,233,.14);border-radius:13px;color:#f5f0e5;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.app.light :is(.anime-card,.shop-item,.community-post-card,.notification-card,.membership-plan,.profile-snapshot,.settings-group,.admin-panel){background:#fff;color:#17283b}
+.app :is(.shop-item,.membership-plan,.profile-snapshot,.settings-group,.admin-panel){min-width:0;overflow:hidden}
+.app .shop-item{display:flex;flex-direction:column;gap:10px;padding:12px}
+.app .shop-item img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:9px}
+.app .shop-item :is(h2,h3,p,small,span){overflow-wrap:anywhere}
+.app .shop-item button{min-width:0;max-width:100%}
+.app .profile-cover{min-height:120px;max-height:190px;overflow:hidden;border:1px solid rgba(231,189,99,.18);border-radius:14px}
+.app .profile-header,.app .profile-hero,.app .profile-main,.app .profile-layout{min-width:0;max-width:100%}
+.app .profile-header{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.app .profile-avatar{flex:0 0 auto}
+.app .profile-header :is(h1,h2,p,span){overflow-wrap:anywhere}
+.app .profile-stats,.app .profile-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.app .profile-stats>* ,.app .profile-metrics>*{min-width:0;overflow-wrap:anywhere}
+.app .profile-stats b,.app .profile-metrics b{font-size:clamp(17px,3vw,26px)}
+.app .profile-section,.app .profile-panel{min-width:0;overflow:hidden}
+.app .account-popover{z-index:1200;max-width:min(340px,calc(100vw - 24px));max-height:min(70dvh,560px);overflow:auto;background:#101d30;border:1px solid rgba(231,189,99,.22);box-shadow:0 20px 55px rgba(0,0,0,.5)}
+.app .account-popover button{min-height:42px;display:flex;align-items:center;gap:9px}
+.app .account-popover button svg:last-child{margin-left:auto}
+.app .mobile-bottom-nav{background:rgba(7,14,25,.97);border-top:1px solid rgba(231,189,99,.16)}
+.app .mobile-bottom-nav a.active{color:#f0c76e;background:rgba(216,75,66,.15)}
+.app .voyage-loader{background:radial-gradient(ellipse at 50% 36%,rgba(216,75,66,.16),transparent 40%),radial-gradient(ellipse at 50% 100%,rgba(33,100,141,.14),transparent 40%),linear-gradient(145deg,#060d18,#11243a 58%,#080f1c)}
+.app .loader-content{background:rgba(9,20,34,.96);border:1px solid rgba(231,189,99,.3)}
+.app .loader-content h1{color:#f5eddd}
+.app .loader-content h1 em{color:#e7bd63}
+.app .loader-emblem{color:#e7bd63}
+.app .loader-progress>span{background:linear-gradient(90deg,#8b292f,#d84b42,#e7bd63)}
+.app .route-loading:before{border-top-color:#e7bd63}
+@media(max-width:760px){
+ .app .main{padding:12px 11px 18px}
+ .app .shv4-home{gap:18px}
+ .app .shv4-hero{display:flex;flex-direction:column;gap:12px;padding:13px;border-radius:15px}
+ .app .shv4-hero-copy{padding:3px 1px}
+ .app .shv4-hero-copy h1{font-size:clamp(36px,10vw,48px);line-height:1.02;max-width:12ch;margin:7px 0 10px}
+ .app .shv4-lead{font-size:11px;line-height:1.55;margin:7px 0 10px}
+ .app .shv4-hero-actions{gap:7px}
+ .app .shv4-primary,.app .shv4-secondary{min-height:36px;padding:0 10px;font-size:9px}
+ .app .shv4-art-frame{aspect-ratio:16/9;max-height:174px;border-radius:10px}
+ .app .shv4-art-caption{left:12px;bottom:10px}
+ .app .shv4-art-caption h2{font-size:20px}
+ .app .shv4-art-open{width:30px;height:30px}
+ .app .shv4-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .app .shv4-shortcuts>button{min-height:68px;padding:9px;grid-template-columns:30px minmax(0,1fr) 14px;column-gap:7px}
+ .app .shv4-shortcuts>button b,.app .shv4-shortcuts>button small{grid-column:2}
+ .app .shv4-shortcuts>button>svg{grid-column:3;grid-row:1}
+ .app .shv4-shortcuts>button>span{grid-row:1/3;width:28px;height:28px}
+ .app .shv4-section-head{flex-direction:row;align-items:flex-end}
+ .app .shv4-section-head h2{font-size:clamp(27px,7vw,34px)}
+ .app .shv4-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .app .shv4-anime-copy{padding:9px}
+ .app .shv4-anime-copy h3{font-size:12px}
+ .app .shv4-anime-copy p{font-size:9px}
+ .app .shv4-trend-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:5px}
+ .app .shv4-trend-item{flex:0 0 min(78vw,290px);scroll-snap-align:start}
+ .app .profile-stats,.app .profile-metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .app .shop-item{padding:9px;gap:7px}
+ .app .account-popover{position:fixed;top:66px;right:10px;left:auto;width:min(330px,calc(100vw - 20px))}
+}
+@media(max-width:380px){
+ .app .shv4-hero-copy h1{font-size:35px}
+ .app .shv4-shortcuts>button{grid-template-columns:26px minmax(0,1fr) 12px;padding:8px}
+ .app .shv4-shortcuts>button>span{width:25px;height:25px}
+ .app .profile-stats,.app .profile-metrics{gap:4px}
+}
+@media(prefers-reduced-motion:no-preference){
+ .app .shv4-hero-copy h1{animation:grand-line-title-in .7s cubic-bezier(.2,.75,.25,1) both}
+ .app .shv4-art-frame{animation:grand-line-art-in .85s .08s cubic-bezier(.2,.75,.25,1) both}
+ .app .shv4-feature-chip{animation:grand-line-chip-in .6s .3s both}
+ @keyframes grand-line-title-in{from{opacity:0;transform:translateY(12px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+ @keyframes grand-line-art-in{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+ @keyframes grand-line-chip-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+}
