@@ -28,7 +28,7 @@ export default function AnimeMoments({user}){
   setPending((pendingResult.data||[]).map(item=>({...item,mediaUrl:supabase.storage.from('anime-moments').getPublicUrl(item.media_path).data.publicUrl})));
   setMoments(rows.map(row=>({...row,profile:profileMap[row.creator_id]||null,likes:counts[row.id]||0,mediaUrl:supabase.storage.from('anime-moments').getPublicUrl(row.media_path).data.publicUrl})));
   setLoading(false);
- },[user?.id]);
+ },[user?.id,isAdmin]);
  useEffect(()=>{load()},[load]);
  const chooseFile=file=>{
   if(!file)return;
