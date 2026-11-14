@@ -6,9 +6,9 @@ self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
     const cache=await caches.open(SHELL_CACHE);
     await cache.addAll([OFFLINE_URL,'/manifest.webmanifest','/icons/straw-hat.svg']);
-    await self.skipWaiting();
   })());
 });
+self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting()});
 self.addEventListener('activate',event=>{
   event.waitUntil((async()=>{
     const keys=await caches.keys();
