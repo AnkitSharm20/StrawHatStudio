@@ -8,7 +8,8 @@ const MIME_EXTENSIONS={'image/jpeg':'jpg','image/png':'png','image/webp':'webp',
 const formatDate=value=>{const date=new Date(value);return Number.isNaN(date.getTime())?'Recently':new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric'}).format(date)};
 
 export default function AnimeMoments({user}){
- const [moments,setMoments]=useState([]),[pending,setPending]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[uploading,setUploading]=useState(false),[caption,setCaption]=useState(''),[selectedFile,setSelectedFile]=useState(null),[liked,setLiked]=useState({}),[busyLike,setBusyLike]=useState({});
+ const [moments,setMoments]=useState([]),[pending,setPending]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[uploading,setUploading]=useState(false),[caption,setCaption]=useState(''),[selectedFile,setSelectedFile]=useState(null),[liked,setLiked]=useState({}),[busyLike,setBusyLike]=useState({}),[moderating,setModerating]=useState({});
+ const isAdmin=user?.app_metadata?.role==='admin';
  const load=useCallback(async()=>{
   if(!supabase){setError('The community service is not configured.');setLoading(false);return}
   setLoading(true);setError('');
@@ -19,12 +20,12 @@ export default function AnimeMoments({user}){
    creatorIds.length?supabase.from('profiles').select('id,username,avatar_url').in('id',creatorIds):Promise.resolve({data:[]}),
    ids.length?supabase.from('anime_moment_reactions').select('moment_id').in('moment_id',ids):Promise.resolve({data:[]}),
    user?.id&&ids.length?supabase.from('anime_moment_reactions').select('moment_id').eq('user_id',user.id).in('moment_id',ids):Promise.resolve({data:[]}),
-   user?.id?supabase.from('anime_moments').select('id,caption,media_type,created_at').eq('creator_id',user.id).eq('status','pending').order('created_at',{ascending:false}).limit(5):Promise.resolve({data:[]})
+   user?.id?(()=>{let query=supabase.from('anime_moments').select('id,caption,media_path,media_type,created_at').eq('status','pending').order('created_at',{ascending:false}).limit(isAdmin?30:5);if(!isAdmin)query=query.eq('creator_id',user.id);return query})():Promise.resolve({data:[]})
   ]);
   const profileMap=Object.fromEntries((profilesResult.data||[]).map(profile=>[profile.id,profile]));
   const counts={};for(const reaction of reactionsResult.data||[])counts[reaction.moment_id]=(counts[reaction.moment_id]||0)+1;
   setLiked(Object.fromEntries((myReactionsResult.data||[]).map(reaction=>[reaction.moment_id,true])));
-  setPending(pendingResult.data||[]);
+  setPending((pendingResult.data||[]).map(item=>({...item,mediaUrl:supabase.storage.from('anime-moments').getPublicUrl(item.media_path).data.publicUrl})));
   setMoments(rows.map(row=>({...row,profile:profileMap[row.creator_id]||null,likes:counts[row.id]||0,mediaUrl:supabase.storage.from('anime-moments').getPublicUrl(row.media_path).data.publicUrl})));
   setLoading(false);
  },[user?.id]);
@@ -48,6 +49,14 @@ export default function AnimeMoments({user}){
   if(insertError){await supabase.storage.from('anime-moments').remove([path]);setError(insertError.message||'Your moment could not be submitted.');setUploading(false);return}
   setCaption('');setSelectedFile(null);const input=document.getElementById('anime-moment-file');if(input)input.value='';
   await load();setUploading(false);
+ };
+ const moderate=async(item,status)=>{
+  if(!isAdmin||moderating[item.id])return;
+  setModerating(prev=>({...prev,[item.id]:true}));
+  const {error:updateError}=await supabase.from('anime_moments').update({status,published_at:status==='published'?new Date().toISOString():null,updated_at:new Date().toISOString()}).eq('id',item.id);
+  if(updateError)setError('Moderation update failed: '+updateError.message);
+  else await load();
+  setModerating(prev=>({...prev,[item.id]:false}));
  };
  const toggleLike=async moment=>{
   if(!user){setError('Sign in to like Anime Moments.');return}
@@ -78,7 +87,7 @@ export default function AnimeMoments({user}){
      <div className="moment-compose-footer"><small>{caption.length}/500</small><button className="primary" type="submit" disabled={uploading||!user||!selectedFile}>{uploading?'Uploading…':<><Plus size={16}/> Submit moment</>}</button></div>
      {!user&&<small className="moment-signin-note">Sign in to upload and react to moments.</small>}
     </form>
-    {user&&pending.length>0&&<div className="moment-pending"><span className="eyebrow">YOUR SUBMISSIONS</span><h3>Awaiting review</h3>{pending.map(item=><div key={item.id}><Clock size={14}/><span>{item.caption||'Untitled moment'}<small>{formatDate(item.created_at)}</small></span><b>Pending</b></div>)}</div>}
+    {user&&pending.length>0&&<div className="moment-pending"><span className="eyebrow">{isAdmin?'CREW MODERATION':'YOUR SUBMISSIONS'}</span><h3>{isAdmin?'Review queue':'Awaiting review'}</h3>{pending.map(item=><div className="moment-pending-item" key={item.id}>{item.media_type==='video'?<video src={item.mediaUrl} muted playsInline preload="metadata"/>:<img src={item.mediaUrl} alt="Pending submission"/>}<span>{item.caption||'Untitled moment'}<small>{formatDate(item.created_at)}</small></span>{isAdmin?<span className="moment-moderation-actions"><button className="primary" disabled={!!moderating[item.id]} onClick={()=>moderate(item,'published')}>Approve</button><button className="secondary" disabled={!!moderating[item.id]} onClick={()=>moderate(item,'removed')}>Remove</button></span>:<b>Pending</b>}</div>)}</div>}
     <div className="moment-guidelines"><b>Keep the seas welcoming.</b><p>Share content you own or have permission to distribute. No episode uploads, pirated clips, harassment or harmful material.</p></div>
    </aside>
   </div>
