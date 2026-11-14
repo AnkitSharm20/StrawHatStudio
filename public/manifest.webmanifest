@@ -7,8 +7,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#11110f",
-  "theme_color": "#11110f",
+  "background_color": "#080d18",
+  "theme_color": "#080d18",
   "categories": ["entertainment", "social"],
   "icons": [
     {"src": "/icons/straw-hat.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
