@@ -1,0 +1,53 @@
+/* Roadmap v1 — premium storefront, identity and admin workspace. */
+.app .treasure-market-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:8px;border:1px solid rgba(230,189,114,.18);border-radius:13px;background:linear-gradient(135deg,rgba(10,30,44,.96),rgba(4,17,27,.96))}
+.app .treasure-market-tabs button{min-width:0;min-height:46px;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border:1px solid transparent;border-radius:8px;background:transparent;color:#aebbc5;font-size:11px;font-weight:750;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.app .treasure-market-tabs button:hover{background:rgba(230,189,114,.08);color:#f5ead8}
+.app .treasure-market-tabs button.active{border-color:rgba(230,189,114,.32);background:linear-gradient(135deg,rgba(200,59,50,.28),rgba(230,189,114,.1));color:#f4d18e;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.app .treasure-market-tabs button span{padding:3px 6px;border-radius:999px;background:rgba(230,189,114,.13);font-size:9px;color:#f0c77f}
+.app .premium-store-panel,.app .premium-store-visual{min-width:0}
+.app .premium-store-panel{overflow:hidden;border:1px solid rgba(230,189,114,.2);border-radius:16px;background:radial-gradient(ellipse at 88% 8%,rgba(200,59,50,.2),transparent 38%),linear-gradient(135deg,#102b3d,#071722);box-shadow:0 22px 55px rgba(0,0,0,.2)}
+.app .premium-store-visual{padding:clamp(22px,4vw,44px)}
+.app .premium-store-visual h2{margin:12px 0;font:400 clamp(30px,4vw,50px)/1.05 "DM Serif Display",Georgia,serif;color:#f5ead8}
+.app .premium-store-visual h2 em{color:#e6bd72}
+.app .premium-store-visual p{max-width:680px;color:#b4c0c8;font-size:13px;line-height:1.75}
+.app .premium-store-trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.app .premium-store-trust span{display:flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(230,189,114,.2);border-radius:7px;color:#e6c783;font-size:10px}
+.app .premium-store-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(230,189,114,.16);border-top:1px solid rgba(230,189,114,.16)}
+.app .premium-store-actions>div{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:22px;background:rgba(4,17,27,.8)}
+.app .premium-store-actions b{color:#f5ead8;font-size:14px}
+.app .premium-store-actions small{color:#aebbc5;font-size:11px;line-height:1.6}
+.app .premium-store-status{padding:7px 9px;border:1px solid rgba(230,189,114,.28);border-radius:5px;color:#e6bd72;font-size:9px;font-weight:800;letter-spacing:.1em}
+.app .profile-style-panel{display:grid;gap:16px;margin:22px 0;padding:clamp(16px,2.4vw,24px);border:1px solid rgba(230,189,114,.18);border-radius:14px;background:linear-gradient(135deg,rgba(15,40,56,.94),rgba(6,21,32,.96))}
+.app .profile-style-panel h3{margin:6px 0;color:#f4ead7;font:400 24px "DM Serif Display",Georgia,serif}
+.app .profile-style-panel p{margin:0;color:#aebbc5;font-size:11px}
+.app .profile-style-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.app .profile-style-options button{min-width:0;display:flex;align-items:center;gap:9px;padding:10px;border:1px solid rgba(230,189,114,.16);border-radius:9px;background:rgba(2,13,22,.45);color:#d6dfe3;text-align:left;font-size:11px}
+.app .profile-style-options button.active{border-color:#d5a957;background:rgba(200,59,50,.14);color:#f2d18e}
+.app .profile-style-swatch{width:34px;height:38px;flex:none;border:1px solid rgba(230,189,114,.3);border-radius:6px;background:linear-gradient(145deg,#e3bd78,#8c312b)}
+.app .profile-style-swatch.grand-line{background:radial-gradient(circle at 70% 20%,#e6bd72,transparent 30%),linear-gradient(145deg,#0f4b5e,#071521 60%,#9f302b)}
+.app .profile-style-swatch.wanted{background:repeating-linear-gradient(0deg,transparent 0 4px,rgba(90,54,25,.1) 4px 5px),linear-gradient(145deg,#e8d5a9,#a98755)}
+.app .profile-achievements{display:flex;flex-wrap:wrap;gap:8px}
+.app .profile-achievements span{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(230,189,114,.17);border-radius:999px;background:rgba(230,189,114,.06);color:#e8c57f;font-size:9px;font-weight:750}
+.app .admin-member-list{display:grid;gap:8px;margin-top:14px}
+.app .admin-member-list article{display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;padding:11px;border:1px solid rgba(230,189,114,.15);border-radius:9px;background:rgba(5,20,31,.55)}
+.app .admin-member-avatar{width:40px;height:40px;display:grid;place-items:center;overflow:hidden;border-radius:50%;background:linear-gradient(145deg,#dcb66e,#8e302c);color:#081722;font-weight:900}
+.app .admin-member-avatar img{width:100%;height:100%;object-fit:cover}
+.app .admin-member-list article>div:nth-child(2){min-width:0;display:grid;gap:4px}
+.app .admin-member-list b{overflow:hidden;color:#f2eadc;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.app .admin-member-list small{color:#aab7c2;font-size:9px}
+.app .admin-member-list article>span{padding:5px 7px;border-radius:5px;font-size:8px;font-weight:850;letter-spacing:.08em}
+.app .admin-member-list .enabled{background:rgba(61,148,110,.14);color:#83d3a7}
+.app .admin-member-list .disabled{background:rgba(190,151,80,.12);color:#e4bf77}
+html[data-accent="red"] .app{--sh6-gold:#ed8875}
+html[data-accent="ocean"] .app{--sh6-gold:#79d0d0}
+html[data-accent="violet"] .app{--sh6-gold:#c4a2ff}
+@media(max-width:760px){
+ .app .treasure-market-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app .treasure-market-tabs button{justify-content:flex-start;font-size:10px}
+ .app .premium-store-actions{grid-template-columns:1fr}
+ .app .profile-style-options{grid-template-columns:1fr}
+ .app .profile-style-options button{min-height:56px}
+ .app .admin-member-list article{grid-template-columns:36px minmax(0,1fr) auto;gap:8px;padding:9px}
+ .app .admin-member-avatar{width:36px;height:36px}
+}
+@media(prefers-reduced-motion:reduce){.app .treasure-market-tabs button{transition:none}}
