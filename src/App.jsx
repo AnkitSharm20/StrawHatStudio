@@ -64,7 +64,6 @@ function HomePage({saved,toggleSave,navigate,notify}){
     {heroVideo?<video src={heroVideo} poster={featuredCards[0]?.bannerImg||featuredCards[0]?.img||undefined} autoPlay muted loop playsInline preload="metadata" onError={()=>setHeroVideo('')}/>:<img src={featuredCards[0]?.bannerImg||featuredCards[0]?.img||''} alt="One Piece featured artwork" fetchPriority="high" decoding="async"/>}
     <div className="shv6-video-vignette" aria-hidden="true"/>
     <div className="shv6-video-label"><span>OWNER PICK</span><h1>ONE PIECE</h1></div>
-    <button className="shv6-video-open" onClick={()=>featuredCards[0]?.malId?navigate('/anime/'+featuredCards[0].malId):navigate('/explore')} aria-label="Explore One Piece"><ArrowUpRight size={19}/></button>
    </div>
    {ambientAudio&&<audio ref={audioRef} src={ambientAudio} loop preload="none"/>}
    <div className="shv6-home-actions">
