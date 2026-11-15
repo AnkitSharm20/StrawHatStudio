@@ -1,0 +1,128 @@
+/* Straw Hat Studio v6 — One Piece-inspired home + Explore refinement. */
+.app{--sh6-ocean:#071521;--sh6-deep:#030b12;--sh6-red:#c83b32;--sh6-gold:#e6bd72;--sh6-cream:#f2e8d4;--sh6-muted:#aab7c2}
+.app:not(.light){background:radial-gradient(ellipse at 50% -18%,rgba(20,86,112,.25),transparent 46%),radial-gradient(ellipse at 100% 38%,rgba(151,43,35,.10),transparent 36%),linear-gradient(180deg,#06131f 0%,#081925 48%,#050f18 100%)}
+.app .topbar{background:rgba(4,14,23,.92);border-bottom-color:rgba(230,189,114,.16)}
+.app .sidebar{background:linear-gradient(180deg,#081925,#06131d);border-right-color:rgba(230,189,114,.14)}
+.app .brandmark{background:linear-gradient(145deg,#e9c77f,#b77b35);color:#14202a;box-shadow:0 0 22px rgba(230,189,114,.2)}
+.app .brandmark img{filter:brightness(0) saturate(100%) invert(10%) sepia(20%) saturate(1200%) hue-rotate(165deg)}
+.app .sign,.app .shv4-primary,.app .primary{background:linear-gradient(135deg,#c94438,#922b2a);border-color:#d45b48;color:#fff8ec}
+.app .eyebrow,.app .shv4-kicker,.app .shv4-text-link{color:#e6bd72}
+.app .sidebar>a.active{color:#f0c77f;background:rgba(200,59,50,.13);border-color:rgba(230,189,114,.2)}
+.app .shv6-home{gap:clamp(34px,4.8vw,66px)}
+.app .shv6-home-feature{display:grid;gap:clamp(14px,2vw,22px);min-width:0}
+.app .shv6-video-frame{position:relative;width:100%;aspect-ratio:21/9;min-height:220px;max-height:560px;overflow:hidden;border:1px solid rgba(230,189,114,.26);border-radius:16px;background:#030b12;isolation:isolate;box-shadow:0 24px 70px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.025) inset}
+.app .shv6-video-frame>video,.app .shv6-video-frame>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block}
+.app .shv6-video-vignette{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,9,15,.18),transparent 42%,rgba(2,9,15,.12)),linear-gradient(0deg,rgba(2,8,14,.78),transparent 58%);pointer-events:none}
+.app .shv6-video-label{position:absolute;left:clamp(18px,4vw,54px);bottom:clamp(18px,3vw,42px);z-index:2;color:#fff4df;text-shadow:0 3px 24px rgba(0,0,0,.7);animation:sh6-rise .8s cubic-bezier(.2,.75,.25,1) both}
+.app .shv6-video-label>span{display:inline-flex;padding:7px 11px;border:1px solid rgba(239,205,137,.72);border-radius:4px;background:rgba(8,22,31,.56);backdrop-filter:blur(9px);font-size:9px;font-weight:900;letter-spacing:.2em;color:#f2cc82}
+.app .shv6-video-label h1{margin:10px 0 0;font:800 clamp(30px,5.5vw,76px)/.92 "Space Grotesk",sans-serif;letter-spacing:.08em;color:#fff8e9}
+.app .shv6-video-open{position:absolute;right:18px;bottom:18px;z-index:3;width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(239,205,137,.5);border-radius:50%;background:rgba(5,16,25,.65);color:#f4d18e;backdrop-filter:blur(10px);transition:transform .22s ease,background .22s ease}
+.app .shv6-video-open:hover{transform:translate(2px,-2px);background:#a9322e}
+.app .shv6-home-actions{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(2px,1vw,12px)}
+.app .shv6-home-intro{min-width:0}
+.app .shv6-home-intro p{margin:7px 0 0;color:#bdc7ce;font-size:13px;line-height:1.55}
+.app .shv6-home-buttons{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.app .shv6-home-buttons button{min-height:46px;padding:0 18px;border-radius:8px;font-size:12px;font-weight:800}
+.app .shv6-home-buttons .shv4-secondary{background:rgba(11,29,42,.8);border:1px solid rgba(230,189,114,.34);color:#f0e5d1}
+.app .shv6-home-buttons .shv4-secondary:hover{background:rgba(200,59,50,.18);border-color:#d65a4a}
+.app .shv4-section-head{align-items:flex-end;gap:18px;margin-bottom:20px}
+.app .shv4-section-head h2{color:#f4ead7}
+.app .shv4-section-head p{color:#aab7c2}
+.app .shv4-card-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.5vw,20px)}
+.app .shv4-anime-card{min-width:0;border:1px solid rgba(230,189,114,.14);border-radius:12px;background:linear-gradient(180deg,#102433,#091823);overflow:hidden;transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease}
+.app .shv4-anime-card:hover{transform:translateY(-5px);border-color:rgba(230,189,114,.5);box-shadow:0 18px 38px rgba(0,0,0,.3)}
+.app .shv4-poster{aspect-ratio:3/4;overflow:hidden;background:#0a1721}
+.app .shv4-poster img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .4s ease}
+.app .shv4-anime-card:hover .shv4-poster img{transform:scale(1.045)}
+.app .shv4-anime-copy{padding:13px 14px 15px}
+.app .shv4-anime-copy>span{color:#e6bd72;font-size:8px;letter-spacing:.13em}
+.app .shv4-anime-copy h3{margin:7px 0;color:#f8efdf;font-size:14px;line-height:1.35}
+.app .shv4-anime-copy p{color:#aab7c2;font-size:11px;line-height:1.55}
+.app .shv4-anime-copy>div{color:#e8c27e}
+.app .shv4-trending{padding:clamp(18px,2.5vw,30px);border:1px solid rgba(230,189,114,.16);border-radius:14px;background:linear-gradient(135deg,rgba(16,42,58,.88),rgba(8,23,34,.92))}
+.app .shv4-trend-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.app .shv4-trend-item{min-width:0;display:grid;grid-template-columns:64px minmax(0,1fr) 16px;align-items:center;gap:12px;padding:10px;border:1px solid rgba(230,189,114,.13);border-radius:9px;background:rgba(2,12,19,.46);color:#f5ead8;text-align:left;transition:transform .2s ease,border-color .2s ease}
+.app .shv4-trend-item:hover{transform:translateY(-2px);border-color:rgba(230,189,114,.48)}
+.app .shv4-trend-item img{width:64px;height:76px;object-fit:cover;border-radius:5px}
+.app .shv4-trend-item span{min-width:0;display:grid;gap:4px}
+.app .shv4-trend-item small{color:#e6bd72;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app .shv4-trend-item b{font-size:12px;line-height:1.3;overflow-wrap:anywhere}
+.app .shv4-trend-item em{font-size:9px;color:#aab7c2;font-style:normal}
+.app .shv4-crew,.app .shv4-support{border-color:rgba(230,189,114,.16);background:linear-gradient(135deg,#102737,#091923)}
+.app .explore-page{gap:clamp(16px,2.2vw,26px)}
+.app .explore-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:22px;padding:clamp(20px,3vw,34px);border:1px solid rgba(230,189,114,.2);border-radius:14px;background:radial-gradient(ellipse at 85% 0%,rgba(200,59,50,.16),transparent 42%),linear-gradient(135deg,#102a3b,#091925)}
+.app .explore-hero>div:first-child{min-width:0}
+.app .explore-hero h1{margin:9px 0 8px;color:#f5ead8}
+.app .explore-hero h1 em{color:#e7bd72}
+.app .explore-hero p{max-width:620px;margin:0;color:#aebbc5;font-size:13px}
+.app .explore-stats{display:grid;grid-template-columns:repeat(2,minmax(92px,1fr));gap:9px;align-self:stretch}
+.app .explore-stats>span{min-width:0;min-height:82px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:12px;border:1px solid rgba(230,189,114,.24);border-radius:9px;background:rgba(3,14,22,.55);text-align:center}
+.app .explore-stats b{font:700 clamp(22px,2.4vw,30px)/1 "Space Grotesk",sans-serif;color:#f1c979;font-variant-numeric:tabular-nums}
+.app .explore-stats small{font-size:8px;line-height:1.3;letter-spacing:.12em;color:#aebbc5}
+.app .discovery-spotlight{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(16px,2vw,26px);align-items:center;padding:14px;border:1px solid rgba(230,189,114,.18);border-radius:13px;background:linear-gradient(135deg,#102738,#091925)}
+.app .discovery-spotlight-art{position:relative;min-width:0;aspect-ratio:16/9;overflow:hidden;border-radius:9px;background:#07131d}
+.app .discovery-spotlight-art img{width:100%;height:100%;display:block;object-fit:cover}
+.app .spotlight-stamp{position:absolute;left:12px;bottom:12px;padding:7px 10px;border:1px solid rgba(230,189,114,.45);border-radius:4px;background:rgba(3,14,22,.7);color:#f0c87c;font-size:8px;letter-spacing:.14em}
+.app .discovery-spotlight-copy{min-width:0;padding:10px}
+.app .discovery-spotlight-copy h2{font:400 clamp(26px,3vw,42px)/1.05 "DM Serif Display",Georgia,serif;color:#f4ead7;overflow-wrap:anywhere}
+.app .discovery-spotlight-copy p{color:#afbbc4;font-size:12px;line-height:1.65}
+.app .spotlight-meta{display:flex;flex-wrap:wrap;gap:8px;color:#e7c17d;font-size:9px}
+.app .spotlight-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.app .explore-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px;border:1px solid rgba(230,189,114,.16);border-radius:11px;background:rgba(10,29,42,.82)}
+.app .explore-toolbar .searchbar{min-width:0;display:flex;align-items:center;gap:10px}
+.app .explore-toolbar .searchbar input{width:100%;min-width:0;min-height:44px;border:0!important;background:transparent!important;box-shadow:none!important}
+.app .explore-toolbar .searchbar>span{flex:none;color:#e6bd72;font-size:9px;font-weight:800;white-space:nowrap}
+.app .explore-sort{display:flex;align-items:center;gap:9px;color:#e6bd72;font-size:8px;letter-spacing:.12em;white-space:nowrap}
+.app .explore-sort select{min-width:145px;min-height:40px;padding:0 30px 0 10px}
+.app .explore-genres{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 9px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.app .explore-genres button{flex:0 0 auto;min-height:36px;padding:0 14px;border:1px solid rgba(230,189,114,.2);border-radius:999px;background:#0d2231;color:#b6c2ca;font-size:10px;font-weight:700;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.app .explore-genres button:hover,.app .explore-genres button.active{background:#9d302c;border-color:#e6bd72;color:#fff2db}
+.app .explore-anime-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.4vw,18px)}
+.app .explore-anime-grid .anime-card{min-width:0;overflow:hidden;border:1px solid rgba(230,189,114,.16);border-radius:11px;background:linear-gradient(180deg,#102433,#091722)}
+.app .explore-anime-grid .poster{position:relative;aspect-ratio:3/4;overflow:hidden;background:#07131d}
+.app .explore-anime-grid .poster img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.app .explore-anime-grid .anime-info{padding:11px 12px 13px}
+.app .explore-anime-grid .anime-info h3{font-size:13px;line-height:1.35;color:#f5ead8}
+.app .explore-anime-grid .anime-info p{font-size:10px;line-height:1.5;color:#aab7c2}
+.app .explore-anime-grid .poster-index{top:9px;left:9px;border-radius:5px;background:rgba(3,14,22,.74);color:#f0c87c}
+.app .explore-anime-grid .save-btn{top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:rgba(3,14,22,.78);border:1px solid rgba(230,189,114,.3);color:#f5ead8}
+.app .catalog-more{display:flex;flex-direction:column;align-items:center;gap:9px;padding:12px}
+.app .catalog-more small{color:#aab7c2;font-size:10px}
+.app .catalog-loading{min-height:220px;display:grid;place-content:center;justify-items:center;gap:9px;border:1px solid rgba(230,189,114,.15);border-radius:12px;background:rgba(8,24,36,.7);color:#f3ead9}
+.app .catalog-loading small{color:#aab7c2}
+@keyframes sh6-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1100px){.app .explore-anime-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.app .shv4-card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.app .shv4-trend-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .app .main{padding:14px 12px 92px}
+ .app .shv6-video-frame{aspect-ratio:16/9;min-height:190px;border-radius:11px}
+ .app .shv6-video-label{left:16px;bottom:16px}
+ .app .shv6-video-label h1{font-size:clamp(28px,8vw,42px)}
+ .app .shv6-video-open{right:12px;bottom:12px;width:36px;height:36px}
+ .app .shv6-home-actions{align-items:flex-start;flex-direction:column;gap:13px}
+ .app .shv6-home-intro p{font-size:11px}
+ .app .shv6-home-buttons{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+ .app .shv6-home-buttons button{justify-content:center;min-width:0;padding:0 10px;font-size:10px}
+ .app .shv4-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .app .shv4-anime-copy{padding:10px}
+ .app .shv4-anime-copy h3{font-size:12px}
+ .app .shv4-anime-copy p{font-size:10px}
+ .app .shv4-trending{padding:15px}
+ .app .shv4-trend-strip{grid-template-columns:1fr;gap:8px}
+ .app .shv4-trend-item{grid-template-columns:54px minmax(0,1fr) 15px}
+ .app .shv4-trend-item img{width:54px;height:66px}
+ .app .explore-hero{grid-template-columns:1fr;gap:14px;padding:17px}
+ .app .explore-stats{grid-template-columns:repeat(2,minmax(0,1fr));align-self:auto}
+ .app .explore-stats>span{min-height:68px}
+ .app .discovery-spotlight{grid-template-columns:1fr;gap:10px;padding:10px}
+ .app .discovery-spotlight-copy{padding:5px}
+ .app .explore-toolbar{grid-template-columns:1fr;gap:8px;padding:9px}
+ .app .explore-toolbar .searchbar{width:100%}
+ .app .explore-sort{justify-content:space-between}
+ .app .explore-sort select{flex:1;max-width:220px}
+ .app .explore-anime-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .app .explore-anime-grid .anime-info{padding:9px}
+ .app .explore-anime-grid .anime-info h3{font-size:11px}
+ .app .explore-anime-grid .anime-info p{font-size:9px}
+}
+@media(max-width:380px){.app .shv6-home-buttons{grid-template-columns:1fr}.app .explore-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.app .explore-stats>span{padding:9px}}
+@media(prefers-reduced-motion:reduce){.app .shv6-video-label{animation:none}.app .shv4-anime-card,.app .shv4-trend-item,.app .shv4-poster img{transition:none}}
