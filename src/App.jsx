@@ -58,35 +58,22 @@ function HomePage({saved,toggleSave,navigate,notify}){
   return()=>{active=false;controller.abort();window.clearTimeout(timeout)};
  },[retry]);
  const featuredCards=featured.length?featured:shows.slice(0,5),trendingCards=seasonal;
- return <div className="shv4-home">
-  <section className="shv4-hero">
-   <div className="shv4-hero-copy">
-    <div className="shv4-overline"><span className="shv4-live-dot"/> THE ANIME UNIVERSE · YOUR CREW · YOUR STORY</div>
-    <p className="shv4-kicker">WELCOME TO STRAW HAT STUDIO</p>
-    <h1>Find your next <em>world.</em></h1>
-    <p className="shv4-lead">Discover stories worth staying up for, save the anime you love, and meet people who get every reference.</p>
-    <div className="shv4-hero-actions">
+ return <div className="shv4-home shv6-home">
+  <section className="shv6-home-feature" aria-label="Owner pick: One Piece">
+   <div className="shv6-video-frame">
+    {heroVideo?<video src={heroVideo} poster={featuredCards[0]?.bannerImg||featuredCards[0]?.img||undefined} autoPlay muted loop playsInline preload="metadata" onError={()=>setHeroVideo('')}/>:<img src={featuredCards[0]?.bannerImg||featuredCards[0]?.img||''} alt="One Piece featured artwork" fetchPriority="high" decoding="async"/>}
+    <div className="shv6-video-vignette" aria-hidden="true"/>
+    <div className="shv6-video-label"><span>OWNER PICK</span><h1>ONE PIECE</h1></div>
+   </div>
+   {ambientAudio&&<audio ref={audioRef} src={ambientAudio} loop preload="none"/>}
+   <div className="shv6-home-actions">
+    <div className="shv6-home-intro"><span className="shv4-kicker">SET SAIL INTO YOUR NEXT STORY</span><p>Discover anime, collect favourites and find your crew.</p></div>
+    <div className="shv6-home-buttons">
      <button className="shv4-primary" onClick={()=>navigate('/explore')}>Explore anime <ArrowUpRight size={17}/></button>
      <button className="shv4-secondary" onClick={()=>navigate('/community')}>Meet the crew <Users size={16}/></button>
     </div>
-    <div className="shv4-hero-proof"><span><b>{featuredCards.length||0}</b> live picks</span><i/><span><b>{trendingCards.length||0}</b> trending now</span><i/><span><b>{saved.length}</b> saved titles</span></div>
-   </div>
-   <div className="shv4-hero-art">
-    <div className="shv4-art-frame">
-     {heroVideo?<video src={heroVideo} poster={featuredCards[0]?.bannerImg||featuredCards[0]?.img||undefined} autoPlay muted loop playsInline preload="metadata" onError={()=>setHeroVideo('')}/>:<img src={featuredCards[0]?.bannerImg||featuredCards[0]?.img||''} alt={featuredCards[0]?.name||'Featured anime artwork'} fetchPriority="high" decoding="async"/>}
-     <div className="shv4-art-shade"/>
-     <div className="shv4-art-caption"><span className="shv4-feature-chip">OWNER PICK</span><h2>ONE PIECE</h2></div>
-     <button className="shv4-art-open" onClick={()=>featuredCards[0]?.malId?navigate('/anime/'+featuredCards[0].malId):navigate('/explore')} aria-label="Open featured anime"><ArrowUpRight size={19}/></button>
-    </div>
-    {ambientAudio&&<audio ref={audioRef} src={ambientAudio} loop preload="none"/>}
-    
    </div>
   </section>
-  <nav className="shv4-shortcuts" aria-label="Explore Straw Hat Studio">
-   <button onClick={()=>navigate('/explore')}><span><Compass size={18}/></span><b>Discover anime</b><small>Browse the catalogue</small><ArrowUpRight size={15}/></button>
-   <button onClick={()=>navigate('/coming-soon')}><span><Sparkles size={18}/></span><b>Coming soon</b><small>New crew features are on the way</small><ArrowUpRight size={15}/></button>
-   
-  </nav>
   <section className="shv4-section">
    <div className="shv4-section-head"><div><span className="shv4-kicker">HAND-PICKED FOR THE CREW</span><h2>Stories to get <em>lost in.</em></h2><p>Popular worlds, standout seasons and titles worth adding to your list.</p></div><button className="shv4-text-link" onClick={()=>navigate('/explore')}>Full catalogue <ArrowUpRight size={16}/></button></div>
    {artLoading?<div className="shv4-card-grid">{Array.from({length:4},(_,i)=><div className="shv4-skeleton" key={i}/>)}</div>:<div className="shv4-card-grid">{featuredCards.slice(0,4).map((show,i)=><article className="shv4-anime-card" key={show.malId||show.name} onClick={()=>show.malId&&navigate('/anime/'+show.malId)}>
