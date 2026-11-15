@@ -61,7 +61,7 @@ function HomePage({saved,toggleSave,navigate,notify}){
  return <div className="shv4-home shv6-home">
   <section className="shv6-home-feature" aria-label="Owner pick: One Piece">
    <div className="shv6-video-frame">
-    {heroVideo?<video src={heroVideo} poster={featuredCards[0]?.bannerImg||featuredCards[0]?.img||undefined} autoPlay muted loop playsInline preload="metadata" onError={()=>setHeroVideo('')}/>:<img src={featuredCards.find(item=>/one piece/i.test(item.name))?.bannerImg||featuredCards.find(item=>/one piece/i.test(item.name))?.img||featuredCards[0]?.bannerImg||featuredCards[0]?.img||'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/b21-7F7G7uXj9Q0z.png'} alt="One Piece featured artwork" fetchPriority="high" decoding="async"/>}
+    {heroVideo?<video src={heroVideo} poster={featuredCards[0]?.bannerImg||featuredCards[0]?.img||undefined} autoPlay muted loop playsInline preload="metadata" onError={()=>setHeroVideo('')}/>:<img src={featuredCards.find(item=>/one piece/i.test(item.name))?.bannerImg||featuredCards.find(item=>/one piece/i.test(item.name))?.img||featuredCards[0]?.bannerImg||featuredCards[0]?.img||''} alt="One Piece featured artwork" fetchPriority="high" decoding="async"/>}
     <div className="shv6-video-vignette" aria-hidden="true"/>
     <div className="shv6-video-label"><span>OWNER PICK</span><h1>ONE PIECE</h1></div>
    </div>
