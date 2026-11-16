@@ -306,7 +306,7 @@ function AuthPage({mode='signin',notify=()=>{}}){
   {id:'lower',label:'One lowercase letter',valid:/[a-z]/.test(password)},
   {id:'upper',label:'One uppercase letter',valid:/[A-Z]/.test(password)},
   {id:'number',label:'One number',valid:/[0-9]/.test(password)},
-  {id:'symbol',label:'One special character',valid:/[!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|<>?,./`~]/.test(password)},
+  {id:'symbol',label:'One special character',valid:/[^A-Za-z0-9\\s]/.test(password)},
  ];
  const passwordPolicyValid=passwordRules.every(rule=>rule.valid);
  const friendlyAuthError=error=>{
