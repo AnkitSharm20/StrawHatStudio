@@ -1,0 +1,264 @@
+/* Straw Hat Studio — Explore and mobile interaction repair.
+   Loaded last so legacy stylesheet layers cannot stretch poster badges or undo the layout. */
+.app .explore-page{
+  width:100%;
+  max-width:1440px;
+  min-width:0;
+  margin-inline:auto;
+  padding:clamp(16px,2.8vw,36px) 0 calc(88px + var(--mobile-safe-bottom, 0px));
+  gap:clamp(18px,2.2vw,28px);
+}
+.app .explore-page .explore-hero{
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:clamp(16px,2vw,28px);
+  padding:clamp(22px,3.2vw,42px);
+  border-radius:22px;
+}
+.app .explore-page .explore-hero>div:first-child{min-width:0}
+.app .explore-page .explore-hero h1{
+  font-size:clamp(34px,5.1vw,64px);
+  line-height:1.02;
+  overflow-wrap:normal;
+}
+.app .explore-page .explore-hero p{max-width:58ch;line-height:1.7}
+.app .explore-page .explore-stats{display:flex;gap:10px;min-width:0}
+.app .explore-page .explore-stats>span{min-width:92px}
+.app .explore-page .explore-toolbar{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  margin:0;
+}
+.app .explore-page .explore-toolbar .searchbar{min-width:0;width:100%;margin:0}
+.app .explore-page .explore-toolbar .searchbar input{min-width:0;width:100%}
+.app .explore-page .explore-sort{min-width:0}
+.app .explore-page .explore-genres{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:thin;
+  padding:3px 1px 9px;
+}
+.app .explore-page .explore-anime-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:stretch;
+  gap:clamp(14px,1.8vw,22px)!important;
+  width:100%;
+  min-width:0;
+}
+.app .explore-page .explore-anime-grid>.anime-card{
+  display:flex!important;
+  flex-direction:column!important;
+  width:100%;
+  min-width:0!important;
+  height:100%;
+  overflow:hidden!important;
+  border:1px solid rgba(220,185,127,.18)!important;
+  border-radius:16px!important;
+  background:linear-gradient(160deg,#142331,#0b1420)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.16);
+}
+.app.light .explore-page .explore-anime-grid>.anime-card{
+  background:linear-gradient(160deg,#fffdf8,#f1ece2)!important;
+  border-color:rgba(126,99,54,.2)!important;
+}
+.app .explore-page .explore-anime-grid>.anime-card .poster{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:3/4!important;
+  flex:0 0 auto!important;
+  overflow:hidden!important;
+  isolation:isolate;
+  background:#08121c!important;
+}
+.app .explore-page .explore-anime-grid>.anime-card .poster:after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:45% 0 0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(3,10,17,.42));
+}
+.app .explore-page .explore-anime-grid>.anime-card .poster img{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 24%!important;
+  opacity:1!important;
+  filter:none!important;
+}
+.app .explore-page .explore-anime-grid>.anime-card .poster-index{
+  position:absolute!important;
+  z-index:4!important;
+  top:11px!important;
+  right:auto!important;
+  bottom:auto!important;
+  left:11px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:31px!important;
+  max-width:max-content!important;
+  height:auto!important;
+  min-height:25px!important;
+  max-height:32px!important;
+  padding:5px 8px!important;
+  border:1px solid rgba(230,189,114,.42)!important;
+  border-radius:7px!important;
+  background:rgba(5,15,24,.82)!important;
+  color:#f1cc83!important;
+  font:700 10px/1 'DM Mono',monospace!important;
+  letter-spacing:.08em!important;
+  writing-mode:horizontal-tb!important;
+  transform:none!important;
+  pointer-events:none;
+  backdrop-filter:blur(9px);
+}
+.app .explore-page .explore-anime-grid>.anime-card .save-btn{
+  position:absolute!important;
+  z-index:5!important;
+  top:10px!important;
+  right:10px!important;
+  bottom:auto!important;
+  left:auto!important;
+  display:grid!important;
+  place-items:center!important;
+  width:36px!important;
+  height:36px!important;
+  padding:0!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:50%!important;
+  background:rgba(5,15,24,.76)!important;
+  color:#fff!important;
+}
+.app .explore-page .explore-anime-grid>.anime-card .poster-tag{
+  position:absolute!important;
+  z-index:4!important;
+  top:auto!important;
+  right:10px!important;
+  bottom:10px!important;
+  left:auto!important;
+  width:max-content!important;
+  height:auto!important;
+  padding:6px 8px!important;
+  border:1px solid rgba(230,189,114,.28)!important;
+  border-radius:7px!important;
+  background:rgba(5,15,24,.78)!important;
+  color:#f4d69c!important;
+  font:700 9px/1 'DM Mono',monospace!important;
+  letter-spacing:.08em!important;
+  writing-mode:horizontal-tb!important;
+  backdrop-filter:blur(9px);
+}
+.app .explore-page .explore-anime-grid>.anime-card .anime-info{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:8px!important;
+  min-width:0!important;
+  padding:clamp(12px,1.5vw,17px)!important;
+}
+.app .explore-page .explore-anime-grid>.anime-card .anime-info .eyebrow{
+  max-width:100%;
+  color:var(--gold)!important;
+  font:700 9px/1.4 'DM Mono',monospace!important;
+  letter-spacing:.12em!important;
+  overflow-wrap:anywhere;
+}
+.app .explore-page .explore-anime-grid>.anime-card .anime-info h3{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  min-height:2.35em;
+  margin:0!important;
+  color:var(--text)!important;
+  font:700 clamp(15px,1.4vw,19px)/1.2 'DM Sans',sans-serif!important;
+  letter-spacing:-.025em!important;
+  overflow-wrap:anywhere;
+}
+.app .explore-page .explore-anime-grid>.anime-card .anime-info p{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:3!important;
+  overflow:hidden!important;
+  min-height:0!important;
+  max-height:5.1em;
+  margin:0!important;
+  color:var(--muted)!important;
+  font:400 11px/1.7 'DM Sans',sans-serif!important;
+  overflow-wrap:anywhere;
+}
+.app .explore-page .explore-anime-grid>.anime-card .card-link{
+  display:flex!important;
+  justify-content:space-between;
+  width:100%;
+  min-height:34px;
+  margin-top:auto!important;
+  padding-top:9px!important;
+  border-top:1px solid var(--line);
+  color:var(--gold)!important;
+  font-size:11px!important;
+}
+.app .explore-page .catalog-loading,.app .explore-page .empty-shop{
+  width:100%;
+  min-width:0;
+  margin:0;
+  border-radius:18px;
+}
+.app .explore-page .catalog-more{padding-bottom:20px}
+.app .explore-page .mobile-search,
+.app:has(.explore-page) .mobile-search{display:none!important}
+.app .main{min-width:0}
+.app .main:has(.explore-page){padding-bottom:calc(var(--mobile-nav-height,70px) + var(--mobile-safe-bottom,0px) + 28px)}
+.app .shv6-music-toggle{min-width:0;white-space:nowrap}
+.app .shv6-music-toggle:disabled{opacity:.58;cursor:not-allowed}
+@media(max-width:1100px){
+ .app .explore-page .explore-anime-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+ .app .explore-page{padding:16px 0 calc(var(--mobile-nav-height,70px) + var(--mobile-safe-bottom,0px) + 34px);gap:17px}
+ .app .explore-page .explore-hero{grid-template-columns:minmax(0,1fr);gap:16px;padding:22px 18px;border-radius:18px}
+ .app .explore-page .explore-hero h1{font-size:clamp(34px,9vw,48px)}
+ .app .explore-page .explore-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+ .app .explore-page .explore-stats>span{min-width:0;padding:11px 12px}
+ .app .explore-page .explore-toolbar{grid-template-columns:minmax(0,1fr);gap:9px;padding:10px;border-radius:14px}
+ .app .explore-page .explore-sort{justify-content:space-between;width:100%}
+ .app .explore-page .explore-sort select{flex:1;max-width:220px}
+ .app .explore-page .explore-anime-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .poster{aspect-ratio:3/4!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info{gap:7px!important;padding:11px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info h3{font-size:14px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info p{font-size:10px!important;line-height:1.55!important}
+ .app .explore-page .explore-anime-grid>.anime-card .poster-index{top:9px!important;left:9px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .save-btn{top:8px!important;right:8px!important;width:32px!important;height:32px!important}
+ .app .explore-page .pwa-install-prompt,.app .explore-page .pwa-update-prompt{max-width:460px}
+ .app .shv6-home-buttons{flex-wrap:wrap}
+}
+@media(max-width:390px){
+ .app .explore-page .explore-anime-grid{gap:10px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info{padding:9px!important;gap:6px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info h3{font-size:13px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info p{font-size:9px!important;line-height:1.5!important}
+ .app .explore-page .explore-anime-grid>.anime-card .card-link{font-size:10px!important}
+ .app .explore-page .explore-toolbar .searchbar>span{font-size:8px}
+}
+@media(min-width:761px){
+ .app .explore-page{padding-bottom:40px}
+}
+@media(prefers-reduced-motion:reduce){
+ .app .explore-page *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
