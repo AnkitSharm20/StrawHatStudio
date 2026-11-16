@@ -1,0 +1,346 @@
+/* Straw Hat Studio — unified premium visual system.
+   One canonical application, one shared visual language across every route. */
+:root{
+ --sh-ink:#07111b;
+ --sh-ocean:#0b1b29;
+ --sh-ocean-2:#102637;
+ --sh-gold:#d8b879;
+ --sh-gold-soft:#f0d9a8;
+ --sh-coral:#c86b5a;
+ --sh-line:rgba(216,184,121,.17);
+ --sh-glass:rgba(13,29,43,.82);
+ --sh-shadow:0 22px 70px rgba(0,0,0,.24);
+}
+.app{
+ --bg:#08131e;
+ --panel:#101f2c;
+ --panel2:#142838;
+ --text:#f3eee4;
+ --muted:#a6adb2;
+ --line:rgba(217,190,139,.17);
+ --gold:#d8b879;
+ --red:#c86b5a;
+ background:
+  radial-gradient(ellipse at 14% -18%,rgba(30,83,108,.24),transparent 40%),
+  radial-gradient(ellipse at 100% 10%,rgba(144,103,55,.10),transparent 33%),
+  var(--bg);
+ color:var(--text);
+}
+.app.light{
+ --bg:#f2eee5;
+ --panel:#fffdf8;
+ --panel2:#eae3d6;
+ --text:#182631;
+ --muted:#68747a;
+ --line:rgba(112,86,48,.19);
+ --gold:#9a7132;
+ --red:#a64e42;
+ background:
+  radial-gradient(ellipse at 12% -20%,rgba(195,215,211,.38),transparent 42%),
+  radial-gradient(ellipse at 100% 0%,rgba(232,210,169,.28),transparent 34%),
+  var(--bg);
+}
+.app,.app *{box-sizing:border-box}
+.app img,.app video{max-width:100%}
+.app button,.app input,.app select,.app textarea{font:inherit}
+.app button{touch-action:manipulation}
+.app a{color:inherit}
+.app .topbar{
+ height:72px!important;
+ padding:0 clamp(16px,4vw,58px)!important;
+ gap:clamp(16px,3vw,42px)!important;
+ border-bottom:1px solid var(--line)!important;
+ background:rgba(7,17,27,.84)!important;
+ -webkit-backdrop-filter:blur(22px) saturate(140%);
+ backdrop-filter:blur(22px) saturate(140%);
+ box-shadow:0 8px 30px rgba(0,0,0,.10);
+}
+.app.light .topbar{background:rgba(250,247,240,.88)!important}
+.app .brand{gap:12px!important;letter-spacing:.16em!important}
+.app .brandmark{
+ width:42px!important;height:42px!important;
+ border:1px solid rgba(216,184,121,.65)!important;
+ background:linear-gradient(145deg,rgba(216,184,121,.18),rgba(11,27,41,.5))!important;
+ box-shadow:0 0 0 4px rgba(216,184,121,.06),0 8px 22px rgba(0,0,0,.2);
+}
+.app .brand small{letter-spacing:.24em!important;font-size:8px!important}
+.app .toplinks{gap:clamp(14px,2vw,28px)!important}
+.app .toplinks a,.app .sidebar a{
+ position:relative;
+ transition:color .2s ease,background .2s ease;
+}
+.app .toplinks a{font-size:11px!important;font-weight:700!important;letter-spacing:.12em!important}
+.app .toplinks a.active{color:var(--gold)!important}
+.app .toplinks a.active:after{
+ content:"";position:absolute;left:0;right:0;bottom:-17px;height:2px;
+ background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.app .top-actions{gap:10px!important}
+.app .iconbtn,.app .theme-toggle button{
+ display:inline-flex;align-items:center;justify-content:center;
+ border:1px solid var(--line)!important;border-radius:12px!important;
+ background:rgba(255,255,255,.035)!important;color:var(--muted)!important;
+ min-width:38px;min-height:38px;
+}
+.app .iconbtn:hover,.app .theme-toggle button:hover{border-color:var(--gold)!important;color:var(--gold)!important}
+.app .avatar{width:38px!important;height:38px!important;border-radius:13px!important}
+.app .sign,.app .primary,.app .secondary,.app .text-btn{
+ border-radius:11px!important;font-weight:700!important;letter-spacing:.015em;
+ transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
+}
+.app .primary{
+ color:#17202a!important;
+ background:linear-gradient(135deg,#f0d9a8 0%,#cba25d 100%)!important;
+ border:1px solid rgba(255,232,185,.5)!important;
+ box-shadow:0 8px 22px rgba(177,132,60,.18);
+}
+.app .primary:hover{transform:translateY(-2px);box-shadow:0 13px 28px rgba(177,132,60,.25)}
+.app .secondary,.app .sign{
+ border:1px solid var(--line)!important;
+ background:rgba(255,255,255,.035)!important;
+ color:var(--text)!important;
+}
+.app .secondary:hover,.app .sign:hover{border-color:rgba(216,184,121,.58)!important;background:rgba(216,184,121,.08)!important}
+.app .sidebar{
+ top:72px!important;width:248px!important;
+ padding:30px 18px 22px 22px!important;
+ border-right:1px solid var(--line)!important;
+ background:rgba(7,17,27,.76)!important;
+ -webkit-backdrop-filter:blur(22px);
+ backdrop-filter:blur(22px);
+}
+.app.light .sidebar{background:rgba(250,247,240,.82)!important}
+.app .sidebar>a{
+ min-height:44px;padding:11px 13px!important;border-radius:11px!important;
+ font-size:12px!important;font-weight:600;
+}
+.app .sidebar>a:hover{background:rgba(216,184,121,.075)!important;color:var(--text)!important}
+.app .sidebar>a.active{background:linear-gradient(100deg,rgba(216,184,121,.16),rgba(216,184,121,.035))!important;color:var(--gold)!important}
+.app .crew-card{
+ border:1px solid var(--line)!important;border-radius:16px!important;
+ background:linear-gradient(145deg,rgba(216,184,121,.09),rgba(12,29,43,.8))!important;
+ padding:18px!important;
+}
+.app.light .crew-card{background:linear-gradient(145deg,#f6edda,#fffdf8)!important}
+.app .main{
+ margin-left:248px!important;
+ width:calc(100% - 248px)!important;
+ max-width:none!important;
+ min-width:0!important;
+ padding:0 clamp(22px,4vw,58px)!important;
+}
+.app .main:has(.explore-page){padding-bottom:32px}
+.app .mobile-search{
+ border-bottom:1px solid var(--line)!important;
+ padding:12px 0!important;
+ color:var(--muted)!important;
+}
+.app .mobile-search input,.app .searchbar input,.app input,.app textarea,.app select{
+ min-width:0;
+ color:var(--text);
+}
+.app .mobile-search input,.app .searchbar,.app .community-search{
+ border-color:var(--line)!important;
+}
+.app .page{
+ width:100%!important;max-width:1440px!important;min-width:0!important;
+ margin:0 auto!important;padding:clamp(30px,4vw,58px) 0 70px!important;
+}
+.app .section-head{gap:18px;margin-bottom:25px!important;align-items:flex-end}
+.app .section-head h2,.app .page h1,.app .page h2{
+ color:var(--text);
+ letter-spacing:-.045em;
+}
+.app .section-head h2{font-size:clamp(28px,3.1vw,40px)!important;line-height:1.08!important}
+.app .eyebrow,.app .side-label{
+ font-size:9px!important;letter-spacing:.2em!important;font-weight:700!important;
+}
+.app .panel,.app .settings-group,.app .community-post,.app .community-post-card,
+.app .anime-card,.app .shop-item,.app .admin-panel,.app .profile-card,
+.app .notification-card,.app .membership-account-panel,.app .settings-account-card,
+.app .marketplace-intro-panel,.app .earn-wallet,.app .earn-daily-card,
+.app .earn-task-card,.app .purchase-history-panel,.app .collection-panel{
+ border:1px solid var(--line)!important;
+ border-radius:17px!important;
+ background:linear-gradient(155deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),var(--panel)!important;
+ box-shadow:0 12px 34px rgba(0,0,0,.10);
+}
+.app.light .panel,.app.light .settings-group,.app.light .community-post,
+.app.light .community-post-card,.app.light .anime-card,.app.light .shop-item,
+.app.light .admin-panel,.app.light .profile-card,.app.light .notification-card,
+.app.light .membership-account-panel,.app.light .settings-account-card,
+.app.light .marketplace-intro-panel,.app.light .earn-wallet,.app.light .earn-daily-card,
+.app.light .earn-task-card,.app.light .purchase-history-panel,.app.light .collection-panel{
+ background:linear-gradient(155deg,rgba(255,255,255,.95),rgba(255,255,255,.65)),var(--panel)!important;
+}
+.app .anime-card,.app .shop-item,.app .community-post-card,.app .notification-card{
+ overflow:hidden;border-radius:16px!important;
+}
+.app .anime-card:hover,.app .shop-item:hover,.app .community-post-card:hover{
+ transform:translateY(-3px);border-color:rgba(216,184,121,.42)!important;
+ box-shadow:0 20px 46px rgba(0,0,0,.18);
+}
+.app .anime-info{padding:16px!important}
+.app .anime-info h3{font-size:clamp(15px,1.4vw,19px)!important;line-height:1.22!important}
+.app .anime-info p{line-height:1.65!important}
+.app .searchbar{
+ min-height:48px!important;padding:0 14px!important;
+ border:1px solid var(--line)!important;border-radius:12px!important;
+ background:rgba(255,255,255,.035)!important;
+}
+.app .searchbar input{background:transparent!important;outline:none!important}
+.app input,.app textarea,.app select{
+ border:1px solid var(--line);
+ border-radius:11px;
+ background:rgba(255,255,255,.035);
+ padding:11px 13px;
+ outline:none;
+}
+.app input:focus,.app textarea:focus,.app select:focus{
+ border-color:rgba(216,184,121,.72)!important;
+ box-shadow:0 0 0 3px rgba(216,184,121,.10);
+}
+.app .settings-group{padding:clamp(16px,2.2vw,24px)!important}
+.app .setting-row{min-height:62px!important;padding:13px 0!important;border-bottom:1px solid var(--line)!important}
+.app .setting-row:last-child{border-bottom:0!important}
+.app .setting-row b,.app .settings-account-card b{font-weight:700}
+.app .setting-switch{
+ min-width:62px!important;min-height:34px!important;border-radius:99px!important;
+ border:1px solid var(--line)!important;background:rgba(255,255,255,.05)!important;
+ color:var(--muted)!important;
+}
+.app .setting-switch.on{background:rgba(216,184,121,.18)!important;border-color:var(--gold)!important;color:var(--gold)!important}
+.app .community-hero,.app .explore-hero,.app .settings-hero,.app .membership-intro,
+.app .earn-hero,.app .about-hero{
+ border:1px solid var(--line)!important;border-radius:22px!important;
+ box-shadow:var(--sh-shadow);
+}
+.app .community-hero{background:linear-gradient(120deg,rgba(12,34,49,.96),rgba(24,40,49,.82))!important}
+.app.light .community-hero{background:linear-gradient(120deg,#e5e9e0,#f7f0e3)!important}
+.app .community-toolbar,.app .community-feed-tabs,.app .notification-toolbar,
+.app .marketplace-tools,.app .marketplace-view-tabs,.app .membership-billing-switch{
+ gap:8px;
+}
+.app .community-feed-tabs button,.app .notification-filters button,
+.app .marketplace-categories button,.app .explore-genres button{
+ border:1px solid var(--line)!important;border-radius:999px!important;
+ background:rgba(255,255,255,.025)!important;color:var(--muted)!important;
+ padding:9px 13px!important;font-size:11px!important;font-weight:700!important;
+}
+.app .community-feed-tabs button.active,.app .notification-filters button.active,
+.app .marketplace-categories button.active,.app .explore-genres button.active{
+ color:var(--gold)!important;border-color:rgba(216,184,121,.55)!important;
+ background:rgba(216,184,121,.12)!important;
+}
+.app .notification-card{padding:16px!important}
+.app .notification-card.unread{border-color:rgba(216,184,121,.44)!important;background:linear-gradient(100deg,rgba(216,184,121,.09),transparent),var(--panel)!important}
+.app .profile-cover{border-radius:19px!important;overflow:hidden}
+.app .profile-avatar,.app .settings-account-avatar{border:2px solid rgba(216,184,121,.7)!important;box-shadow:0 0 0 5px rgba(216,184,121,.08)}
+.app .marketplace-page .shop-grid,.app .shop-grid{
+ grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))!important;
+ gap:18px!important;
+}
+.app .shop-item{min-width:0!important}
+.app .membership-plan-grid,.app .membership-plans,.app .tier-plan-grid{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))!important;
+ gap:16px!important;
+}
+.app .membership-page .membership-plan-grid>*,
+.app .membership-page .membership-plans>*,
+.app .membership-page .tier-plan-grid>*{min-width:0}
+.app .admin-dashboard{min-width:0}
+.app .admin-panel{overflow:hidden}
+.app .footer{
+ width:100%;max-width:1440px;margin:0 auto!important;
+ padding:24px 0!important;border-top:1px solid var(--line)!important;
+ color:var(--muted)!important;gap:14px;
+}
+.app .footer a{color:var(--muted);text-decoration:none}
+.app .footer a:hover{color:var(--gold)}
+.app .toast{
+ bottom:calc(24px + env(safe-area-inset-bottom))!important;
+ right:20px!important;max-width:min(92vw,420px);
+ padding:13px 17px!important;border:1px solid rgba(216,184,121,.45)!important;
+ border-radius:13px!important;background:rgba(13,29,43,.96)!important;
+ box-shadow:0 18px 50px rgba(0,0,0,.3);backdrop-filter:blur(18px);
+}
+.app .mobile-bottom-nav{
+ display:none;
+}
+@media(max-width:1100px){
+ .app .topbar{gap:16px!important}
+ .app .toplinks{gap:13px!important}
+ .app .toplinks a{font-size:9px!important;letter-spacing:.08em!important}
+ .app .sidebar{width:220px!important}
+ .app .main{margin-left:220px!important;width:calc(100% - 220px)!important}
+}
+@media(max-width:760px){
+ .app .topbar{height:62px!important;padding:0 14px!important;gap:10px!important}
+ .app .brandmark{width:36px!important;height:36px!important}
+ .app .brand{font-size:10px!important;letter-spacing:.12em!important}
+ .app .brand small{font-size:7px!important;letter-spacing:.18em!important}
+ .app .toplinks,.app .topbar .sign{display:none!important}
+ .app .top-actions{margin-left:auto;gap:6px!important}
+ .app .top-actions .iconbtn{min-width:35px;min-height:35px;padding:7px!important}
+ .app .sidebar{top:62px!important;left:-270px!important;width:255px!important}
+ .app .main{margin:0!important;width:100%!important;padding:0 15px calc(92px + env(safe-area-inset-bottom))!important}
+ .app .main>.mobile-search{display:flex!important;min-height:46px!important}
+ .app .page{padding:22px 0 38px!important}
+ .app .section-head{align-items:flex-start!important;flex-direction:column!important;gap:12px!important}
+ .app .section-head h2{font-size:clamp(27px,8vw,35px)!important}
+ .app .footer{padding:18px 0 100px!important;font-size:9px!important}
+ .app .mobile-bottom-nav{
+  position:fixed!important;display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  left:10px!important;right:10px!important;bottom:calc(7px + env(safe-area-inset-bottom))!important;
+  z-index:80!important;min-height:62px!important;
+  padding:6px 7px!important;gap:3px!important;
+  border:1px solid rgba(216,184,121,.22)!important;border-radius:19px!important;
+  background:rgba(7,17,27,.94)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  backdrop-filter:blur(24px) saturate(150%);
+  box-shadow:0 14px 40px rgba(0,0,0,.38);
+ }
+ .app.light .mobile-bottom-nav{background:rgba(255,253,248,.96)!important;border-color:rgba(112,86,48,.2)!important}
+ .app .mobile-bottom-nav a{
+  display:flex!important;min-width:0!important;min-height:48px!important;
+  flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:3px!important;border-radius:12px!important;text-decoration:none!important;
+  color:var(--muted)!important;font-size:9px!important;font-weight:600!important;
+ }
+ .app .mobile-bottom-nav a.active{background:rgba(216,184,121,.12)!important;color:var(--gold)!important}
+ .app .mobile-bottom-nav a svg{width:18px!important;height:18px!important}
+ .app .explore-page .explore-toolbar{grid-template-columns:minmax(0,1fr)!important}
+ .app .community-layout,.app .community-main-feed,.app .community-side,
+ .app .detail-content-grid,.app .profile-detail-grid{grid-template-columns:minmax(0,1fr)!important}
+ .app .community-side{display:grid!important}
+ .app .community-compose-box,.app .community-post-card{min-width:0!important}
+ .app .settings-list{grid-template-columns:minmax(0,1fr)!important}
+ .app .settings-hero{grid-template-columns:minmax(0,1fr)!important}
+ .app .settings-account-card{min-width:0!important}
+ .app .notifications-page{gap:12px!important}
+ .app .notification-toolbar{align-items:flex-start!important;flex-direction:column!important}
+ .app .membership-page .membership-plan-grid,.app .membership-page .membership-plans,
+ .app .membership-page .tier-plan-grid{grid-template-columns:minmax(0,1fr)!important}
+ .app .marketplace-page .shop-grid,.app .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+ .app .shop-item{min-width:0!important}
+ .app .shop-item-copy{min-width:0!important}
+ .app .shop-item h3{overflow-wrap:anywhere}
+ .app .admin-workspace{min-width:0!important}
+}
+@media(max-width:390px){
+ .app .main{padding-left:11px!important;padding-right:11px!important}
+ .app .topbar{padding-inline:11px!important}
+ .app .top-actions{gap:4px!important}
+ .app .brand{gap:7px!important}
+ .app .brandmark{width:33px!important;height:33px!important}
+ .app .explore-page .explore-anime-grid{gap:9px!important}
+ .app .explore-page .explore-anime-grid>.anime-card .anime-info{padding:9px!important}
+ .app .marketplace-page .shop-grid,.app .shop-grid{gap:9px!important}
+ .app .footer{font-size:8px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .app *, .app *:before, .app *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+html[data-reduced-motion="true"] .app *,html[data-reduced-motion="true"] .app *:before,html[data-reduced-motion="true"] .app *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html[data-compact-layout="true"] .app .page{padding-top:24px!important}
