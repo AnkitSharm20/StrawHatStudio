@@ -55,3 +55,16 @@
  .app .auth-password-policy-head b{font-size:10px!important}
  .app .auth-password-policy-head span{font-size:8px!important}
 }
+
+
+/* Phase 3 — account security and session controls */
+.settings-security-group .settings-security-value{flex:0 0 auto;color:var(--gold);font-size:11px;font-weight:750;letter-spacing:.04em}
+.settings-security-group .setting-row small{max-width:560px;overflow-wrap:anywhere}
+.settings-revoke-button{flex:0 0 auto;min-height:40px;border-color:color-mix(in srgb,#d86b61 38%,var(--line));color:color-mix(in srgb,#e58b83 78%,var(--text))}
+.settings-revoke-button:hover:not(:disabled){border-color:#d86b61;background:color-mix(in srgb,#d86b61 10%,var(--panel))}
+.settings-revoke-button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:620px){
+ .settings-security-group .setting-row{align-items:flex-start;flex-wrap:wrap;gap:10px}
+ .settings-security-group .settings-revoke-button{width:100%;justify-content:center}
+ .settings-security-group .settings-security-value{margin-left:auto}
+}
