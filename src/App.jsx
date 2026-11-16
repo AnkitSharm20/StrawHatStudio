@@ -301,12 +301,13 @@ function ProviderLogo({provider}){
 function AuthPage({mode='signin',notify=()=>{}}){
  const navigate=useNavigate();const[view,setView]=useState(mode);const recoveryFlow=new URLSearchParams(window.location.search).get('flow')==='recovery';const[recoveryMode,setRecoveryMode]=useState(recoveryFlow);const[email,setEmail]=useState('');const[displayName,setDisplayName]=useState('');const[password,setPassword]=useState('');const[confirm,setConfirm]=useState('');const[showPassword,setShowPassword]=useState(false);const[busy,setBusy]=useState('');const[message,setMessage]=useState('');
  const passwordPolicyApplies=view==='signup'||recoveryMode;
+ const passwordSymbols="!@#$%^&*()_+-=[]{};':\"\\\\|<>?,./`~";
  const passwordRules=[
   {id:'length',label:'At least 8 characters',valid:password.length>=8},
   {id:'lower',label:'One lowercase letter',valid:/[a-z]/.test(password)},
   {id:'upper',label:'One uppercase letter',valid:/[A-Z]/.test(password)},
   {id:'number',label:'One number',valid:/[0-9]/.test(password)},
-  {id:'symbol',label:'One special character',valid:/[^A-Za-z0-9\\s]/.test(password)},
+  {id:'symbol',label:'One special character',valid:[...password].some(character=>passwordSymbols.includes(character))},
  ];
  const passwordPolicyValid=passwordRules.every(rule=>rule.valid);
  const friendlyAuthError=error=>{
