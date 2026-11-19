@@ -55,3 +55,29 @@
  .app .auth-password-policy-head b{font-size:10px!important}
  .app .auth-password-policy-head span{font-size:8px!important}
 }
+
+
+/* Phase 3: TOTP MFA setup and sign-in challenge */
+.app .mfa-gate{min-height:65vh;display:grid;place-items:center;padding:28px 16px}
+.app .mfa-gate-card{width:min(100%,460px);padding:clamp(22px,5vw,34px);border:1px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:0 24px 70px rgba(0,0,0,.24)}
+.app .mfa-gate-card h1{margin:10px 0;font-size:clamp(25px,5vw,36px);line-height:1.08}
+.app .mfa-gate-card p{color:var(--muted);font-size:13px;line-height:1.65}
+.app .mfa-gate-card form,.app .mfa-enroll form{display:grid;gap:10px;margin-top:16px}
+.app .mfa-gate-card label,.app .mfa-enroll label{font-size:11px;color:var(--muted);font-weight:700}
+.app .mfa-gate-card input,.app .mfa-enroll input{width:100%;min-width:0;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--text);font:inherit;letter-spacing:.16em}
+.app .mfa-gate-card .primary,.app .mfa-enroll .primary{width:100%;justify-content:center}
+.app .mfa-gate-card>small,.app .mfa-security>small{display:block;margin-top:13px;color:var(--muted);font-size:10px;line-height:1.55}
+.app .mfa-error{padding:10px 12px;border:1px solid rgba(218,117,105,.38);border-radius:10px;background:rgba(218,117,105,.08);color:#e49a8f;font-size:11px;line-height:1.5}
+.app .mfa-security-intro{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.app .mfa-security-intro>span:first-child{display:grid;gap:4px;min-width:0}
+.app .mfa-security-intro b{font-size:13px}
+.app .mfa-security-intro small,.app .mfa-factor small{color:var(--muted);font-size:10px;line-height:1.5}
+.app .mfa-status{flex:0 0 auto;padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:9px;font-weight:700}
+.app .mfa-status.enabled{border-color:rgba(98,201,154,.4);background:rgba(98,201,154,.1);color:#62c99a}
+.app .mfa-factor{display:grid;gap:3px;margin-top:12px;padding:11px 12px;border:1px solid var(--line);border-radius:10px}
+.app .mfa-enroll{display:grid;gap:10px;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--bg)}
+.app .mfa-enroll p{margin:0;color:var(--muted);font-size:11px;line-height:1.55}
+.app .mfa-qr{display:block;width:min(190px,100%);aspect-ratio:1;object-fit:contain;margin:2px auto;padding:9px;border-radius:12px;background:#fff}
+.app .mfa-enroll code{display:block;overflow-wrap:anywhere;padding:10px;border-radius:9px;background:var(--panel);color:var(--text);font-size:11px;letter-spacing:.08em}
+.app .mfa-security>.secondary,.app .mfa-enroll>.secondary{margin-top:12px}
+@media(max-width:520px){.app .mfa-gate{padding:18px 12px}.app .mfa-gate-card{border-radius:17px}.app .mfa-security-intro{align-items:flex-start;flex-direction:column}.app .mfa-status{align-self:flex-start}}
