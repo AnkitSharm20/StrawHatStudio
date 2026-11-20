@@ -372,7 +372,8 @@ function ShopArtwork({item}){
  const id=String(item?.id||item?.name||'item').replace(/[^a-z0-9]/gi,'').slice(0,22)||'item';
  const title=String(item?.name||'Crew collectible');
  const rarity=String(item?.metadata?.rarity||'CREW COLLECTIBLE');
- const productMedia=getShopProductMedia(item);\n const externalImage=String(item?.metadata?.image_url||item?.metadata?.artwork_url||item?.metadata?.image||productMedia.images[0]||'');
+ const productMedia=getShopProductMedia(item);
+ const externalImage=String(item?.metadata?.image_url||item?.metadata?.artwork_url||item?.metadata?.image||productMedia.images[0]||'');
  const [imageFailed,setImageFailed]=useState(false);
  const imageUrl=/^https:\/\//i.test(externalImage)?externalImage:'';
  const palette=type.includes('gif')||type.includes('video')?['#f06b50','#f7bd70','#63d5ca']:type.includes('theme')?['#8c7df1','#56c7d7','#e5bd73']:type.includes('badge')?['#e1b65f','#f27d6b','#75d1b1']:type.includes('frame')||type.includes('effect')?['#e8c47c','#c88b59','#8b72d8']:['#5aa6c9','#d7b36d','#cf786c'];
