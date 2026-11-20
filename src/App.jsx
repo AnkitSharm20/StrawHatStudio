@@ -356,7 +356,7 @@ function ShopMediaGallery({item}){
  const [showVideo,setShowVideo]=useState(false);
  useEffect(()=>{setActive(0);setShowVideo(false);setFailed({})},[item?.id]);
  const current=media.images[active];
- const videoId=media.video.match(/(?:youtube(?:-nocookie)?\\.com\/(?:embed\/|watch\\?v=)|youtu\\.be\/)([A-Za-z0-9_-]{6,})/i)?.[1]||'';
+ const videoId=media.video.match(/(?:youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([A-Za-z0-9_-]{6,})/i)?.[1]||'';
  const isYouTube=!!videoId;
  return <div className="shop-media-gallery">
   <div className="shop-media-stage">
