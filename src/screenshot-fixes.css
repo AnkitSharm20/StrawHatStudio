@@ -108,3 +108,12 @@
 .app .marketplace-feature-video-frame iframe{display:block;width:100%;height:100%;border:0}
 @media(max-width:700px){.app .marketplace-feature-video{grid-template-columns:minmax(0,1fr);gap:14px;margin:16px 0;padding:14px;border-radius:16px}.app .marketplace-feature-video-copy h2{font-size:24px}.app .shop-media-stage{aspect-ratio:4/3}.app .shop-media-thumbnails button{flex-basis:58px;width:58px;height:58px}}
 @media(max-width:390px){.app .shop-media-stage{aspect-ratio:1/1}.app .shop-media-credit{font-size:8px}}
+
+
+/* Studio-hosted Marketplace video label and admin media controls */
+.app .shop-media-stage{position:relative}
+.app .shop-media-hoste d-label{display:none}
+.app .shop-media-hosted-label{position:absolute;left:12px;top:12px;z-index:3;padding:6px 9px;border:1px solid rgba(217,182,111,.38);border-radius:999px;background:rgba(7,13,24,.86);color:#e8cf9e;font-size:8px;font-weight:800;letter-spacing:.13em;backdrop-filter:blur(10px)}
+.app .shop-media-stage video{display:block;width:100%;height:100%;min-height:0;object-fit:contain;background:#050a12}
+.app .admin-dropzone:focus-within{outline:2px solid rgba(217,182,111,.65);outline-offset:3px}
+.app .admin-live-status{min-height:1.5em}
