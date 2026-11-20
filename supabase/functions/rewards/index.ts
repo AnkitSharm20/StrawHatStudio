@@ -230,7 +230,11 @@ Deno.serve(async (req: Request) => {
       default:
         return json(400, { error: "Unknown action." });
     }
-  } catch (_error) {
+  } catch (error) {
+    if (error instanceof Error && error.message === "RATE_LIMIT_UNAVAILABLE") {
+      return json(503, { error: "Security rate limiting is temporarily unavailable. Please retry shortly." });
+    }
+    console.error("Rewards action failed", error instanceof Error ? { message: error.message } : {});
     return json(500, { error: "Unexpected server error. Please retry." });
   }
 });
