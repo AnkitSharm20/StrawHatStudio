@@ -94,6 +94,13 @@ async function requireUser(req: Request) {
   });
   const { data, error } = await userClient.auth.getUser();
   if (error || !data.user) throw new Error("AUTH_INVALID");
+  const [{ data: assurance, error: assuranceError }, { data: factors, error: factorsError }] = await Promise.all([
+    userClient.auth.mfa.getAuthenticatorAssuranceLevel(),
+    userClient.auth.mfa.listFactors(),
+  ]);
+  if (assuranceError || factorsError) throw new Error("MFA_CHECK_FAILED");
+  const hasVerifiedFactor = [...(factors?.totp ?? []), ...(factors?.phone ?? [])].some((factor) => factor.status === "verified");
+  if (hasVerifiedFactor && assurance?.currentLevel !== "aal2") throw new Error("MFA_REQUIRED");
   return { user: data.user, service };
 }
 function getRazorpayConfig() {
@@ -470,7 +477,7 @@ Deno.serve(async (req: Request) => {
     return json(400, { error: "Unknown membership payment action." }, h);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unexpected payment error.";
-    const status = message === "AUTH_REQUIRED" ? 401 : message === "AUTH_INVALID" ? 401 : /not configured/.test(message) ? 503 : 500;
+    const status = message === "AUTH_REQUIRED" || message === "AUTH_INVALID" ? 401 : message === "MFA_REQUIRED" ? 403 : message === "MFA_CHECK_FAILED" || message === "RATE_LIMIT_UNAVAILABLE" || /not configured/.test(message) ? 503 : 500;
     return json(status, { error: status === 500 ? "The payment service encountered an error. Please retry." : message }, h);
   }
 });
