@@ -4,7 +4,7 @@ const AnimeMoments=lazy(()=>import('./AnimeMoments.jsx'));
 const PWAInstallPrompt=lazy(()=>import('./PWAInstallPrompt.jsx'));
 const Donations=lazy(()=>import('./Donations.jsx'));
 import{NavLink,Routes,Route,useNavigate,useParams}from'react-router-dom';
-import{Trash2,Anchor,ArrowUpRight,Bell,BookOpen,Check,ChevronRight,Compass,Crown,Flame,Heart,Home,MessageCircle,Search,Settings,Shield,ShoppingBag,Sparkles,Star,Users,X,Play,Plus,Sun,Moon,ExternalLink,Radio,Ship,LogIn,User,MonitorPlay,RefreshCw,WifiOff,Coins,Gift,CalendarCheck,Ticket,ArrowRight,CheckCircle2,Clock,UsersRound,PlayCircle,Volume2,VolumeX,Package}from'lucide-react';
+import{Image as ImageIcon,Trash2,Anchor,ArrowUpRight,Bell,BookOpen,Check,ChevronRight,Compass,Crown,Flame,Heart,Home,MessageCircle,Search,Settings,Shield,ShoppingBag,Sparkles,Star,Users,X,Play,Plus,Sun,Moon,ExternalLink,Radio,Ship,LogIn,User,MonitorPlay,RefreshCw,WifiOff,Coins,Gift,CalendarCheck,Ticket,ArrowRight,CheckCircle2,Clock,UsersRound,PlayCircle,Volume2,VolumeX,Package}from'lucide-react';
 import{backendReady,supabase}from'./lib/supabase.js';
 const safeRead=(key,fallback)=>{try{return window.localStorage.getItem(key)??fallback}catch{return fallback}};
 const safeReadJson=(key,fallback)=>{try{const value=window.localStorage.getItem(key);return value?JSON.parse(value):fallback}catch{return fallback}};
