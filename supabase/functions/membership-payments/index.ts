@@ -42,6 +42,16 @@ async function hmac(secret: string, value: string) {
 async function sha256(value: string) {
   return hex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)));
 }
+async function consumeRateLimit(service: ReturnType<typeof createClient>, scope: string, limit: number, windowSeconds = 60) {
+  const bucketKey = await sha256("straw-hat-studio:" + scope);
+  const { data, error } = await service.rpc("consume_edge_rate_limit", {
+    p_bucket_key: bucketKey, p_limit: limit, p_window_seconds: windowSeconds,
+  });
+  if (error) { console.error("Rate-limit service unavailable", { scope, code: error.code }); throw new Error("RATE_LIMIT_UNAVAILABLE"); }
+  const result = Array.isArray(data) ? data[0] : data;
+  if (!result || typeof result.allowed !== "boolean") throw new Error("RATE_LIMIT_UNAVAILABLE");
+  return result as { allowed: boolean; remaining: number; retry_after_seconds: number };
+}
 function safeEqual(a: string, b: string) {
   if (a.length !== b.length) return false;
   let diff = 0;
@@ -270,6 +280,12 @@ Deno.serve(async (req: Request) => {
   try {
     const { user, service } = await requireUser(req);
     const action = String(body.action ?? "");
+    const actionLimit: Record<string, number> = { get_config: 30, create_donation_order: 5, verify_donation_payment: 12, create_order: 5, verify_payment: 12, refund_payment: 3 };
+    const limit = actionLimit[action];
+    if (limit) {
+      const rate = await consumeRateLimit(service, "membership:" + action + ":" + user.id, limit);
+      if (!rate.allowed) return json(429, { error: "Too many requests. Please wait before trying again.", retry_after_seconds: rate.retry_after_seconds }, h);
+    }
     if (action === "get_config") {
       const mode = Deno.env.get("RAZORPAY_MODE") ?? "disabled";
       let available = false;
