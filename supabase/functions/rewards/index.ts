@@ -79,6 +79,13 @@ Deno.serve(async (req: Request) => {
   });
   const { data: userResult, error: authError } = await userClient.auth.getUser();
   if (authError || !userResult.user) return json(401, { error: "Your session is invalid or expired. Sign in again." });
+  const [{ data: assurance, error: assuranceError }, { data: factors, error: factorsError }] = await Promise.all([
+    userClient.auth.mfa.getAuthenticatorAssuranceLevel(),
+    userClient.auth.mfa.listFactors(),
+  ]);
+  if (assuranceError || factorsError) return json(503, { error: "Could not verify your account security level. Please retry." });
+  const hasVerifiedFactor = [...(factors?.totp ?? []), ...(factors?.phone ?? [])].some((factor) => factor.status === "verified");
+  if (hasVerifiedFactor && assurance?.currentLevel !== "aal2") return json(403, { error: "Complete your authenticator verification before using rewards or marketplace actions.", code: "MFA_REQUIRED" });
 
   const user = userResult.user;
   const isAdmin = user.app_metadata?.role === "admin";
