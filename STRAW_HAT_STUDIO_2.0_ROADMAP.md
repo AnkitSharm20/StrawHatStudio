@@ -50,6 +50,16 @@
 - [ ] Refine profile, public profile, settings, notifications, and account menus.
 - [ ] Verify Discord OAuth and every redirect/callback route.
 
+### Phase 3.2 — Security hardening
+- [x] Add restrictive MFA-aware RLS policies for all 29 public tables and Storage objects; enrolled users require AAL2.
+- [x] Enforce MFA assurance checks in membership/payment and rewards/marketplace Edge Functions.
+- [x] Add a service-role-only atomic database rate limiter; apply it to membership, donation, rewards, coin redemption, marketplace and public watchlist actions.
+- [x] Remove anonymous DML grants and non-application TRUNCATE/REFERENCES/TRIGGER grants.
+- [x] Verify policy coverage, function permissions, rate-limit threshold behavior, Supabase advisors and production build.
+- [ ] Complete authenticated end-to-end OTP enrollment/challenge testing with a real test account.
+- [ ] Add scheduled cleanup/retention for expired rate-limit buckets.
+- [ ] Add server-side file-content sniffing and image re-encoding; bucket MIME and size restrictions are already configured.
+
 ### Phase 4 — Membership and marketplace
 - [ ] Audit pricing copy, billing terms, membership state, and entitlements.
 - [ ] Keep checkout disabled until all payment checks pass.
