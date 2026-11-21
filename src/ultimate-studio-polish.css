@@ -65,3 +65,39 @@ img{color:transparent}
 .watchlist-empty{display:grid;justify-items:center;text-align:center;max-width:560px;margin:40px auto;padding:42px 24px;border:1px solid var(--line);border-radius:17px;background:radial-gradient(ellipse at 50% 0%,var(--glow),transparent 55%),var(--panel)}.watchlist-empty>div{display:grid;place-items:center;width:64px;height:64px;margin-bottom:18px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);box-shadow:0 0 28px var(--glow)}.watchlist-empty h2{margin:10px 0!important}.watchlist-empty p{max-width:390px;color:var(--muted);font-size:13px;line-height:1.75;margin:0 0 20px}
 @media(max-width:760px){.watchlist-summary{padding:20px}.watchlist-grid{grid-template-columns:1fr}.watchlist-tools{flex-wrap:wrap}.watchlist-tools label{width:100%}.watchlist-item{padding:14px}.watchlist-item-copy h3{font-size:16px}}
 @media(max-width:380px){.watchlist-remove{font-size:0;gap:0;padding:9px}.watchlist-remove svg{width:17px;height:17px}.watchlist-item{gap:10px}}
+
+/* Settings preferences are real UI controls: wire their persisted data attributes into the interface. */
+html[data-accent="red"] .app{--gold:#df756b;--gold-bright:#ffaaa0;--gold-soft:#a84b42;--glow:rgba(223,117,107,.17)}
+html[data-accent="ocean"] .app{--gold:#66c7c8;--gold-bright:#9ce9e7;--gold-soft:#368f99;--glow:rgba(75,190,195,.17)}
+html[data-accent="violet"] .app{--gold:#b99aff;--gold-bright:#d4c0ff;--gold-soft:#8060c4;--glow:rgba(160,125,240,.18)}
+html[data-accent="red"] .app.light{--gold:#a84b42;--gold-bright:#a84b42;--gold-soft:#914139}
+html[data-accent="ocean"] .app.light{--gold:#277f86;--gold-bright:#277f86;--gold-soft:#286d73}
+html[data-accent="violet"] .app.light{--gold:#7650b5;--gold-bright:#7650b5;--gold-soft:#65439d}
+html[data-compact-layout="true"] .app .section{padding-top:34px}
+html[data-compact-layout="true"] .app .anime-grid,
+html[data-compact-layout="true"] .app .shop-grid{gap:12px}
+html[data-compact-layout="true"] .app .anime-info,
+html[data-compact-layout="true"] .app .shop-item,
+html[data-compact-layout="true"] .app .post,
+html[data-compact-layout="true"] .app .panel{padding:13px}
+html[data-compact-layout="true"] .app .community-banner{margin-top:38px;padding:22px}
+html[data-compact-layout="true"] .app .page{padding-top:34px;padding-bottom:42px}
+html[data-reduced-motion="true"] .app *,
+html[data-reduced-motion="true"] .app *:before,
+html[data-reduced-motion="true"] .app *:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+html[data-performance-mode="performance"] .app:before{display:none}
+html[data-performance-mode="performance"] .app .topbar,
+html[data-performance-mode="performance"] .app .sidebar,
+html[data-performance-mode="performance"] .app .mobile-bottom-nav,
+html[data-performance-mode="performance"] .app .account-popover{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-performance-mode="performance"] .app .anime-card,
+html[data-performance-mode="performance"] .app .shop-item,
+html[data-performance-mode="performance"] .app .post,
+html[data-performance-mode="performance"] .app .panel{box-shadow:none!important;transition:none!important}
+html[data-performance-mode="performance"] .app .anime-card:hover,
+html[data-performance-mode="performance"] .app .shop-item:hover,
+html[data-performance-mode="performance"] .app .post:hover,
+html[data-performance-mode="performance"] .app .panel:hover{transform:none!important}
+html[data-performance-mode="quality"] .app .anime-card,
+html[data-performance-mode="quality"] .app .shop-item{box-shadow:0 18px 48px rgba(0,0,0,.16),0 0 30px var(--glow)}
+@media(max-width:760px){html[data-compact-layout="true"] .app .page{padding-top:24px;padding-bottom:30px}html[data-compact-layout="true"] .app .section{padding-top:26px}}
